@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emwin.ByteBlaster", "Emwin.ByteBlaster\Emwin.ByteBlaster.csproj", "{0283D198-BEEE-46D8-B903-072036D03BDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emwin.Core", "Emwin.Core\Emwin.Core.csproj", "{070F7869-7271-43B2-ACD1-5CB788F40525}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF8E3AFA-68CF-4A1E-A1A5-8D9DA49E56EA}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0283D198-BEEE-46D8-B903-072036D03BDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0283D198-BEEE-46D8-B903-072036D03BDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0283D198-BEEE-46D8-B903-072036D03BDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0283D198-BEEE-46D8-B903-072036D03BDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{070F7869-7271-43B2-ACD1-5CB788F40525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070F7869-7271-43B2-ACD1-5CB788F40525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070F7869-7271-43B2-ACD1-5CB788F40525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070F7869-7271-43B2-ACD1-5CB788F40525}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
