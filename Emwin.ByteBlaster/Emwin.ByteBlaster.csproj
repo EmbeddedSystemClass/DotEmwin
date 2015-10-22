@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Emwin.ByteBlaster.licenseheader" />
+    <None Include="Emwin.ByteBlaster.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
