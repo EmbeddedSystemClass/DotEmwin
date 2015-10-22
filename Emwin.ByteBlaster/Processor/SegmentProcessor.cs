@@ -24,8 +24,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
@@ -50,23 +48,19 @@ namespace Emwin.ByteBlaster.Processor
 
         #region Protected Fields
 
-        /// <summary>
-        /// The block cache
-        /// </summary>
         protected ObjectCache BlockCache = new MemoryCache("BlockCache");
 
-        /// <summary>
-        /// The dupe cache
-        /// </summary>
-        protected ObjectCache DupeCache = new MemoryCache("DupeCache");
+        protected ObjectCache DupeFilter = new MemoryCache("DupeFilter");
 
         #endregion Protected Fields
 
         #region Private Fields
 
-        private readonly Filters _filters;
-        private readonly Action<WeatherProduct> _output;
         private readonly object _dummyObject = new object();
+
+        private readonly Filters _filters;
+
+        private readonly Action<WeatherProduct> _output;
 
         #endregion Private Fields
 
@@ -96,23 +90,25 @@ namespace Emwin.ByteBlaster.Processor
         {
             try
             {
-                var key = packet.GetKey();
-                if (DupeCache.Contains(key))
+                var segments = PersistSegment(packet);
+                if (segments != null && segments.IsComplete())
                 {
-                    PerformanceCounters.DuplicateProductsTotal.Increment();
-                    ByteBlasterEventSource.Log.Info("Skipped duplicate product", packet.ToString());
-                    return Task.FromResult(false);
-                }
+                    var product = ProcessSegments(segments);
+                    BlockCache.Remove(packet.GetKey());
 
-                var blocks = PersistQuickBlockPacket(packet);
-                if (blocks != null && IsComplete(blocks))
-                {
-                    BlockCache.Remove(key);
-                    var product = ProcessSegments(blocks);
                     if (product != null)
                     {
-                        _output(product);
-                        DupeCache.Add(key, _dummyObject, DateTimeOffset.Now.Add(ExpireTime));
+                        var productKey = string.Concat(product.Filename, product.Hash);
+                        if (DupeFilter.Contains(productKey))
+                        {
+                            PerformanceCounters.DuplicateProductsTotal.Increment();
+                            ByteBlasterEventSource.Log.Info("Skipped duplicate product", product.ToString());
+                        }
+                        else
+                        {
+                            _output(product);
+                            DupeFilter.Add(productKey, _dummyObject, DateTimeOffset.Now.Add(ExpireTime));
+                        }
                     }
                 }
             }
@@ -129,76 +125,13 @@ namespace Emwin.ByteBlaster.Processor
 
         #region Private Methods
 
-        /// <summary>
-        /// Combines the given content arrays.
-        /// </summary>
-        /// <param name="arrays">The arrays to be combined.</param>
-        /// <param name="trimLast">Specifies if the final array should be null trimmed.</param>
-        /// <returns>Combined Byte array.</returns>
-        private static byte[] CombineContent(IList<byte[]> arrays, bool trimLast)
-        {
-            if (trimLast)
-            {
-                var last = arrays[arrays.Count - 1];
-                var pos = last.Length - 1;
-                while (pos > 0 && last[pos] == 0) --pos;
-                if (pos < last.Length)
-                {
-                    Array.Resize(ref last, pos + 1);
-                    arrays[arrays.Count - 1] = last;
-                }
-            }
-
-            var result = new byte[arrays.Sum(a => a.Length)];
-            var offset = 0;
-            foreach (var array in arrays)
-            {
-                Buffer.BlockCopy(array, 0, result, offset, array.Length);
-                offset += array.Length;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Determines whether the segment collection is complete.
-        /// </summary>
-        /// <param name="collection">The collection.</param>
-        /// <returns><c>true</c> if all blocks have been received; otherwise, <c>false</c>.</returns>
-        private static bool IsComplete(IEnumerable<QuickBlockTransferSegment> collection) => collection.All(p => p != null);
-
-        /// <summary>
-        /// Unzips the product and returns the first contained product in the zip. 
-        /// Assumes a single product is contained inside the zip file.
-        /// </summary>
-        /// <param name="product">The compressed product.</param>
-        /// <returns>EmwinWeatherProduct.</returns>
-        private static WeatherProduct UnzipProduct(WeatherProduct product)
-        {
-            using (var zip = new ZipArchive(product.GetStream(), ZipArchiveMode.Read))
-            {
-                var file = zip.Entries.First();
-                using (var ms = new MemoryStream())
-                using (var fileStream = file.Open())
-                {
-                    fileStream.CopyTo(ms);
-                    return new WeatherProduct
-                    {
-                        Filename = file.Name.ToUpperInvariant(),
-                        TimeStamp = file.LastWriteTime,
-                        Content = ms.ToArray(),
-                        ReceivedAt = DateTimeOffset.UtcNow
-                    };
-                }
-            }
-        }
 
         /// <summary>
         /// Persists the quick block packet in the dictionary.
         /// </summary>
         /// <param name="segment">The packet.</param>
         /// <returns>IReadOnlyList&lt;QuickBlockTransferSegment&gt;.</returns>
-        private IReadOnlyList<QuickBlockTransferSegment> PersistQuickBlockPacket(QuickBlockTransferSegment segment)
+        private IReadOnlyList<QuickBlockTransferSegment> PersistSegment(QuickBlockTransferSegment segment)
         {
             var key = segment.GetKey();
             QuickBlockTransferSegment[] collection;
@@ -219,6 +152,7 @@ namespace Emwin.ByteBlaster.Processor
                 return collection;
             }
 
+            // Create a new collection array and add to cache with initial block populated
             collection = new QuickBlockTransferSegment[segment.TotalBlocks];
             collection[segment.BlockNumber - 1] = segment;
             BlockCache.Set(key, collection, DateTimeOffset.Now.Add(ExpireTime));
@@ -226,25 +160,28 @@ namespace Emwin.ByteBlaster.Processor
         }
 
         /// <summary>
-        /// Processes the segments into Emwin Weather Products.
+        /// Processes the segments into Weather Products.
         /// </summary>
         /// <param name="segments">The segments.</param>
-        /// <returns>Emwin.ByteBlaster.Models.EmwinWeatherProduct.</returns>
+        /// <returns>WeatherProduct.</returns>
         private WeatherProduct ProcessSegments(IReadOnlyList<QuickBlockTransferSegment> segments)
         {
             var firstSegment = segments.First(p => p != null);
             var isText = firstSegment.IsText();
+            var content = segments.Select(b => b.Content).ToList().Combine(isText);
+            var hash = content.ComputeHash();
 
             var product = new WeatherProduct
             {
                 Filename = firstSegment.Filename,
                 TimeStamp = firstSegment.TimeStamp,
-                Content = CombineContent(segments.Select(b => b.Content).ToList(), isText),
+                Content = content,
+                Hash = hash,
                 ReceivedAt = DateTimeOffset.UtcNow
             };
 
             if (product.IsCompressed())
-                product = UnzipProduct(product);
+                product = product.Unzip();
 
             // Check PreFilter
             if (_filters?.ProductFilter != null && _filters.ProductFilter(product))

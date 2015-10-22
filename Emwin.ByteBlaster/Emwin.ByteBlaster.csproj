@@ -62,6 +62,7 @@
     <Compile Include="Instrumentation\PerformanceCounters.cs" />
     <Compile Include="Instrumentation\PerformanceCounterCategoryInfo.cs" />
     <Compile Include="Instrumentation\SafePerformanceCounter.cs" />
+    <Compile Include="Processor\ProcessingExtensions.cs" />
     <Compile Include="Protocol\QuickBlockTransferSegment.cs" />
     <Compile Include="Processor\SegmentProcessor.cs" />
     <Compile Include="Processor\Filters.cs" />
