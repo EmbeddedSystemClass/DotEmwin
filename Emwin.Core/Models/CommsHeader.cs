@@ -28,12 +28,21 @@ using System.Runtime.Serialization;
 namespace Emwin.Core.Models
 {
     /// <summary>
-    /// WmoHeader represents the WMO abbreviated heading of the product.
+    /// CommsHeader represents the WMO abbreviated heading of the product.
+    /// 
+    /// PURPOSE of the Abbreviated Heading;
+    ///
+    /// The heading is to provide a means by which communication data managers recognize a bulletin for telecommunication "switching" purposes.
+    /// The heading permits a uniqueness for a bulletin, which is sufficient enough to control the data for selective transmission required to meet the needs of the receiving end.
+    /// The heading is for accountability in the transmission delivery process by the switching system for data management purposes.
+    /// The heading is not intended for the data processing systems, as the first few lines of the text(bulletin content) further defines it for processing. (ref. WMO Codes Manual 306)
+    /// 
     /// http://www.nws.noaa.gov/tg/head.php
+    /// http://www.nws.noaa.gov/tg/headef.php
     /// http://www.nws.noaa.gov/tg/table.php
     /// </summary>
     [DataContract]
-    public class WmoHeading
+    public class CommsHeader
     {
         #region Public Enums
 
@@ -89,11 +98,11 @@ namespace Emwin.Core.Models
         public string Indicator { get; set; }
 
         /// <summary>
-        /// Gets or sets the wmo station.
+        /// Gets or sets the originating station.
         /// </summary>
         /// <value>The wmo station.</value>
         [DataMember]
-        public string Station { get; set; }
+        public string OriginatingOffice { get; set; }
 
         /// <summary>
         /// Gets or sets the wmo time.
@@ -110,7 +119,7 @@ namespace Emwin.Core.Models
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() => $"T1: {DataType} Id: {Id} Station: {Station} Time: {Time:g} Indicator: {Indicator ?? "-"}";
+        public override string ToString() => $"T1: {DataType} Id: {Id} Station: {OriginatingOffice} Time: {Time:g} Indicator: {Indicator ?? "-"}";
 
         #endregion Public Methods
 

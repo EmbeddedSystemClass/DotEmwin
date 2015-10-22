@@ -24,6 +24,7 @@
 
 using System;
 using System.Runtime.Serialization;
+using Emwin.Core.References;
 
 namespace Emwin.Core.Models
 {
@@ -36,13 +37,8 @@ namespace Emwin.Core.Models
     [DataContract]
     public class ValidTimeEventCode
     {
-        public enum TypeCode
-        {
-            Experimental = 'E',
-            Operational = 'O',
-            Test = 'T',
-            ExperimentalOp = 'X'
-        }
+
+        #region Public Enums
 
         public enum SignificanceCode
         {
@@ -55,14 +51,31 @@ namespace Emwin.Core.Models
             Advisory = 'Y'
         }
 
+        public enum TypeCode
+        {
+            Experimental = 'E',
+            Operational = 'O',
+            Test = 'T',
+            ExperimentalOp = 'X'
+        }
+
+        #endregion Public Enums
+
         #region Public Properties
+
+        /// <summary>
+        /// Gets the action.
+        /// </summary>
+        /// <value>The action.</value>
+        [IgnoreDataMember]
+        public string Action => VtecAction.ResourceManager.GetString(ActionCode);
 
         /// <summary>
         /// Gets or sets the action code.
         /// </summary>
-        /// <value>The action.</value>
+        /// <value>The action code.</value>
         [DataMember]
-        public string Action { get; set; }
+        public string ActionCode { get; set; }
 
         /// <summary>
         /// Gets or sets the begin time.
@@ -93,11 +106,18 @@ namespace Emwin.Core.Models
         public string OfficeId { get; set; }
 
         /// <summary>
+        /// Gets the phenomenon.
+        /// </summary>
+        /// <value>The phenomenon.</value>
+        [IgnoreDataMember]
+        public string Phenomenon => VtecPhenomenon.ResourceManager.GetString(PhenomenonCode);
+
+        /// <summary>
         /// Gets or sets the phenomenon code.
         /// </summary>
         /// <value>The phenomenon.</value>
         [DataMember]
-        public string Phenomenon { get; set; }
+        public string PhenomenonCode { get; set; }
 
         /// <summary>
         /// Gets or sets the significance code.
@@ -128,8 +148,9 @@ namespace Emwin.Core.Models
         /// To the string.
         /// </summary>
         /// <returns>System.String.</returns>
-        public override string ToString() => $"Action:{Action} Office:{OfficeId} Phenomenon:{Phenomenon} Significance:{Significance} Number:{EventNumber} Begin:{Begin:g} End:{End:g}";
+        public override string ToString() => $"VTEC: {OfficeId} #{EventNumber} {Action} ({ActionCode}) {Phenomenon} ({PhenomenonCode}) {Significance} ({Begin:g} -> {End:g})";
 
         #endregion Public Methods
+
     }
 }

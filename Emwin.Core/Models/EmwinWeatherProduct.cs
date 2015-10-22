@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-using System;
 using System.IO;
 using System.Runtime.Serialization;
+using Emwin.Core.References;
 
 namespace Emwin.Core.Models
 {
@@ -34,18 +34,48 @@ namespace Emwin.Core.Models
     [DataContract]
     public class WeatherProduct : AbstractContent
     {
+
         #region Public Properties
+
+        /// <summary>
+        /// Gets the description if available.
+        /// </summary>
+        /// <value>The description.</value>
+        [IgnoreDataMember]
+        public string Description
+        {
+            get
+            {
+                switch (ContentType)
+                {
+                    case FileContent.Image:
+                        return GraphicProduct.ResourceManager.GetString(ProductName);
+
+                    default:
+                        return TextProduct.ResourceManager.GetString(ProductCode);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the hash of the content.
+        /// </summary>
+        /// <value>The hash.</value>
+        [DataMember]
+        public string Hash { get; set; }
 
         /// <summary>
         /// Gets the product code from the filename.
         /// </summary>
         /// <value>The product code.</value>
+        [IgnoreDataMember]
         public string ProductCode => Filename?.Substring(0, 3);
 
         /// <summary>
         /// Gets the name of the product from the filename.
         /// </summary>
         /// <value>The name of the product.</value>
+        [IgnoreDataMember]
         public string ProductName => Path.GetFileNameWithoutExtension(Filename);
 
         #endregion Public Properties
@@ -57,7 +87,7 @@ namespace Emwin.Core.Models
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
-            $"{Filename} Date: {TimeStamp.ToString("g")} Size: {Content.Length:N0}";
+            $"{Description} ({Filename}) Date: {TimeStamp.ToString("g")} Size: {Content.Length:N0} Hash: {Hash}";
 
         #endregion Public Methods
 
