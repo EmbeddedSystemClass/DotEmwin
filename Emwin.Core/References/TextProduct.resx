@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="18A" xml:space="preserve"><value>18 Hour Report</value></data>
+  <data name="24A" xml:space="preserve"><value>24 Hour Report</value></data>
+  <data name="30L" xml:space="preserve"><value>Monthly Weather Outlook</value></data>
+  <data name="3HR" xml:space="preserve"><value>3-hourly Space Weather Conditions and Forecast</value></data>
+  <data name="ADA" xml:space="preserve"><value>Alarm/Alert Administrative Message</value></data>
+  <data name="ADM" xml:space="preserve"><value>Alert Administrative Message</value></data>
+  <data name="ADR" xml:space="preserve"><value>Administrative Message</value></data>
+  <data name="ADV" xml:space="preserve"><value>Official Space Weather Advisory</value></data>
+  <data name="ADW" xml:space="preserve"><value>Administrative Message for NWWS</value></data>
+  <data name="ADX" xml:space="preserve"><value>Administrative Alert Non-Receipt</value></data>
+  <data name="AFD" xml:space="preserve"><value>Area Forecast Discussion</value></data>
+  <data name="AFM" xml:space="preserve"><value>Area Forecast Matrices</value></data>
+  <data name="AFP" xml:space="preserve"><value>Area Forecast Product</value></data>
+  <data name="AGF" xml:space="preserve"><value>Agricultural Forecast</value></data>
+  <data name="AGO" xml:space="preserve"><value>Agricultural Observations</value></data>
+  <data name="AHO" xml:space="preserve"><value>Air Force High Density Obs</value></data>
+  <data name="ALT" xml:space="preserve"><value>Space Weather Message Alert</value></data>
+  <data name="APG" xml:space="preserve"><value>Air Stagnation Guidance Narrative</value></data>
+  <data name="APT" xml:space="preserve"><value>Polar Orbiter Images</value></data>
+  <data name="AQA" xml:space="preserve"><value>Air Quality Message</value></data>
+  <data name="AQI" xml:space="preserve"><value>Air Quality Index Statement</value></data>
+  <data name="ASA" xml:space="preserve"><value>Air Stagnation Advisory</value></data>
+  <data name="AVA" xml:space="preserve"><value>Avalanche Watch</value></data>
+  <data name="AVM" xml:space="preserve"><value>Aviation Verification Matrix</value></data>
+  <data name="AVW" xml:space="preserve"><value>Avalanche Warning</value></data>
+  <data name="AWG" xml:space="preserve"><value>National Attack Warning</value></data>
+  <data name="AWS" xml:space="preserve"><value>Area Weather Summary</value></data>
+  <data name="AWU" xml:space="preserve"><value>Area Weather Update</value></data>
+  <data name="AWW" xml:space="preserve"><value>Aviation Weather Warning</value></data>
+  <data name="BOY" xml:space="preserve"><value>Buoy Reports</value></data>
+  <data name="CAE" xml:space="preserve"><value>Child Abduction Emergency</value></data>
+  <data name="CCF" xml:space="preserve"><value>Coded City Forecast</value></data>
+  <data name="CDW" xml:space="preserve"><value>Civil Danger Warning</value></data>
+  <data name="CEM" xml:space="preserve"><value>Civil Emergency Message</value></data>
+  <data name="CF6" xml:space="preserve"><value>Climate F-6 products</value></data>
+  <data name="CFW" xml:space="preserve"><value>Coastal/Lakeshore Hazard Messages</value></data>
+  <data name="CGR" xml:space="preserve"><value>Coast Guard Surface Report</value></data>
+  <data name="CHG" xml:space="preserve"><value>Computer Hurricane Guidance</value></data>
+  <data name="CLA" xml:space="preserve"><value>Climate Report Annual</value></data>
+  <data name="CLI" xml:space="preserve"><value>Climate Report Daily</value></data>
+  <data name="CLM" xml:space="preserve"><value>Climate Report Monthly</value></data>
+  <data name="CLS" xml:space="preserve"><value>Climate Report Seasonal</value></data>
+  <data name="CMM" xml:space="preserve"><value>Coded Climatological Monthly Means</value></data>
+  <data name="COD" xml:space="preserve"><value>Coded Analysis and Forecasts</value></data>
+  <data name="CPF" xml:space="preserve"><value>Coded Port Forecast</value></data>
+  <data name="CSC" xml:space="preserve"><value>Canadian Selected Cities Forecast</value></data>
+  <data name="CUR" xml:space="preserve"><value>Current Space Weather Indices</value></data>
+  <data name="CWA" xml:space="preserve"><value>Center Weather Advisory</value></data>
+  <data name="CWF" xml:space="preserve"><value>Coastal Waters Forecast</value></data>
+  <data name="CWS" xml:space="preserve"><value>Center Weather Statement</value></data>
+  <data name="DAY" xml:space="preserve"><value>Daily Space Weather Summary and Forcast</value></data>
+  <data name="DGT" xml:space="preserve"><value>Drought Information</value></data>
+  <data name="DPA" xml:space="preserve"><value>Radar Hourly Digital Precipitation</value></data>
+  <data name="DSA" xml:space="preserve"><value>Unnumbered Depression</value></data>
+  <data name="DSM" xml:space="preserve"><value>Asos Daily Summary</value></data>
+  <data name="EFP" xml:space="preserve"><value>3 TO 5 Day Extended Forecast</value></data>
+  <data name="EOL" xml:space="preserve"><value>Average 6 TO 10 Day Weather Outlook</value></data>
+  <data name="EON" xml:space="preserve"><value>Average 6 TO 10 Day Weather Outlook</value></data>
+  <data name="EQI" xml:space="preserve"><value>Earthquake Information Bulletin</value></data>
+  <data name="EQR" xml:space="preserve"><value>Earthquake Report</value></data>
+  <data name="EQW" xml:space="preserve"><value>Earthquake Warning</value></data>
+  <data name="ESF" xml:space="preserve"><value>Flood Potential Outlook</value></data>
+  <data name="ESG" xml:space="preserve"><value>Extended Streamflow Guidance</value></data>
+  <data name="ESP" xml:space="preserve"><value>Extended Streamflow Prediction</value></data>
+  <data name="ESS" xml:space="preserve"><value>Water Supply Outlook</value></data>
+  <data name="EVI" xml:space="preserve"><value>Evacuation Immediate</value></data>
+  <data name="EWW" xml:space="preserve"><value>Extreme Wind Warning</value></data>
+  <data name="FA0" xml:space="preserve"><value>Aviation Area Forecast (Pacific)</value></data>
+  <data name="FA1" xml:space="preserve"><value>Aviation Area Forecast (Northeast U.S.)</value></data>
+  <data name="FA2" xml:space="preserve"><value>Aviation Area Forecast (Southeast U.S.)</value></data>
+  <data name="FA3" xml:space="preserve"><value>Aviation Area Forecast (North Cent U.S.)</value></data>
+  <data name="FA4" xml:space="preserve"><value>Aviation Area Forecast (South Cent U.S.)</value></data>
+  <data name="FA5" xml:space="preserve"><value>Aviation Area Forecast (U.S. Rocky Mts.)</value></data>
+  <data name="FA6" xml:space="preserve"><value>Aviation Area Forecast (U.S. West Coast)</value></data>
+  <data name="FA7" xml:space="preserve"><value>Aviation Area Forecast (Juneau)</value></data>
+  <data name="FA8" xml:space="preserve"><value>Aviation Area Forecast (Anchorage)</value></data>
+  <data name="FA9" xml:space="preserve"><value>Aviation Area Forecast (Fairbanks)</value></data>
+  <data name="FDI" xml:space="preserve"><value>Fire Danger Indices</value></data>
+  <data name="FFA" xml:space="preserve"><value>Flash Flood Watch</value></data>
+  <data name="FFG" xml:space="preserve"><value>Flash Flood Guidance</value></data>
+  <data name="FFH" xml:space="preserve"><value>Headwater Guidance</value></data>
+  <data name="FFS" xml:space="preserve"><value>Flash Flood Statement</value></data>
+  <data name="FFW" xml:space="preserve"><value>Flash Flood Warning</value></data>
+  <data name="FLN" xml:space="preserve"><value>National Flood Summary</value></data>
+  <data name="FLS" xml:space="preserve"><value>Flood Statement</value></data>
+  <data name="FLW" xml:space="preserve"><value>Flood Warning</value></data>
+  <data name="FMR" xml:space="preserve"><value>Forecast Medium Range Guidance</value></data>
+  <data name="FOF" xml:space="preserve"><value>Upper Wind Fallout Forecast</value></data>
+  <data name="FOH" xml:space="preserve"><value>ETA FOUS Freezing and Relative Humidity</value></data>
+  <data name="FRW" xml:space="preserve"><value>Fire Warning</value></data>
+  <data name="FSS" xml:space="preserve"><value>Urban and Small Stream Flood Advisory (Obsolete)</value></data>
+  <data name="FTM" xml:space="preserve"><value>WSR-88D Radar Status Notification</value></data>
+  <data name="FWA" xml:space="preserve"><value>Fire Weather Administrative Message</value></data>
+  <data name="FWC" xml:space="preserve"><value>NGM Mos Guidance</value></data>
+  <data name="FWD" xml:space="preserve"><value>Fire Weather Outlook Discussion</value></data>
+  <data name="FWE" xml:space="preserve"><value>Extended Fire Weather Outlook</value></data>
+  <data name="FWF" xml:space="preserve"><value>Routine Fire WX Forecasts</value></data>
+  <data name="FWL" xml:space="preserve"><value>Land Management Forecasts</value></data>
+  <data name="FWM" xml:space="preserve"><value>Miscellaneous Fire Weather Product</value></data>
+  <data name="FWN" xml:space="preserve"><value>Fire Weather Notification</value></data>
+  <data name="FWO" xml:space="preserve"><value>Fire Weather Observation</value></data>
+  <data name="FWS" xml:space="preserve"><value>Suppression Forecast</value></data>
+  <data name="FZL" xml:space="preserve"><value>Freezing Level Data</value></data>
+  <data name="GLF" xml:space="preserve"><value>Great Lakes Forecast</value></data>
+  <data name="GLO" xml:space="preserve"><value>Great Lakes Storm Outlook</value></data>
+  <data name="GLS" xml:space="preserve"><value>Great Lakes Storm Summary</value></data>
+  <data name="GSM" xml:space="preserve"><value>General Status Message</value></data>
+  <data name="HCM" xml:space="preserve"><value>Hydrometeorlogical Coordination Message</value></data>
+  <data name="HLS" xml:space="preserve"><value>Hurricane Local Statement</value></data>
+  <data name="HMD" xml:space="preserve"><value>Hydrometeorological Discussion</value></data>
+  <data name="HMW" xml:space="preserve"><value>Hazardous Materials Warning</value></data>
+  <data name="HRR" xml:space="preserve"><value>Hourly Weather Roundup</value></data>
+  <data name="HSF" xml:space="preserve"><value>High Seas Forecast</value></data>
+  <data name="HWO" xml:space="preserve"><value>Hazardous Weather Outlook</value></data>
+  <data name="HYD" xml:space="preserve"><value>Rainfall Reports</value></data>
+  <data name="HYM" xml:space="preserve"><value>Monthly Hydrometerological Plain Language Product</value></data>
+  <data name="ICE" xml:space="preserve"><value>Ice Forecast</value></data>
+  <data name="IOB" xml:space="preserve"><value>Ice Observation</value></data>
+  <data name="KPA" xml:space="preserve"><value>Keep Alive Message</value></data>
+  <data name="LAE" xml:space="preserve"><value>Local Area Emergency</value></data>
+  <data name="LAW" xml:space="preserve"><value>Great Lakes Weather Observation</value></data>
+  <data name="LCO" xml:space="preserve"><value>Local Cooperative Observation</value></data>
+  <data name="LEW" xml:space="preserve"><value>Law Enforcement Warning</value></data>
+  <data name="LFP" xml:space="preserve"><value>Local Forecast</value></data>
+  <data name="LLS" xml:space="preserve"><value>Low-Level Sounding</value></data>
+  <data name="LSH" xml:space="preserve"><value>Lakeshore Warning or Statement</value></data>
+  <data name="LSR" xml:space="preserve"><value>Local Storm Report</value></data>
+  <data name="LTG" xml:space="preserve"><value>Lightning Data</value></data>
+  <data name="MAV" xml:space="preserve"><value>GFS Based MOS Guidance</value></data>
+  <data name="MET" xml:space="preserve"><value>ETA Based MOS Guidance</value></data>
+  <data name="MEX" xml:space="preserve"><value>GFX Extended Based MOS Guidance</value></data>
+  <data name="MIM" xml:space="preserve"><value>Marine Interpretation Message</value></data>
+  <data name="MIS" xml:space="preserve"><value>Miscellaneous Local Product</value></data>
+  <data name="MON" xml:space="preserve"><value>Test Message</value></data>
+  <data name="MTR" xml:space="preserve"><value>METAR Formatted Surface Weather Observation</value></data>
+  <data name="MWS" xml:space="preserve"><value>Marine Weather Statement</value></data>
+  <data name="MWW" xml:space="preserve"><value>Marine Weather Message</value></data>
+  <data name="NOW" xml:space="preserve"><value>Short Term Forecast</value></data>
+  <data name="NPW" xml:space="preserve"><value>Non-Precipitation Message</value></data>
+  <data name="NSH" xml:space="preserve"><value>Nearshore Marine Forecast / Surf Forecast</value></data>
+  <data name="NUW" xml:space="preserve"><value>Nuclear Power Plant Warning</value></data>
+  <data name="OAV" xml:space="preserve"><value>Other Aviation Products</value></data>
+  <data name="OFF" xml:space="preserve"><value>Offshore Forecast</value></data>
+  <data name="OMR" xml:space="preserve"><value>Other Marine Products</value></data>
+  <data name="OPU" xml:space="preserve"><value>Other Public Products</value></data>
+  <data name="OSO" xml:space="preserve"><value>Other Surface Observations</value></data>
+  <data name="PBF" xml:space="preserve"><value>Prescribed Burn Forecast</value></data>
+  <data name="PFM" xml:space="preserve"><value>Point Forecast Matrices</value></data>
+  <data name="PFW" xml:space="preserve"><value>Point Fire Weather Forecast Matrices</value></data>
+  <data name="PLS" xml:space="preserve"><value>Plain Language Ship Report</value></data>
+  <data name="PMD" xml:space="preserve"><value>Prognostic Meteorological Discussion</value></data>
+  <data name="PNS" xml:space="preserve"><value>Public Information Statement</value></data>
+  <data name="PRE" xml:space="preserve"><value>Preliminary Extended Forecast Discussion</value></data>
+  <data name="PSH" xml:space="preserve"><value>Post Storm Hurricane Report</value></data>
+  <data name="PWO" xml:space="preserve"><value>Public Severe Weather Alert</value></data>
+  <data name="PWS" xml:space="preserve"><value>Probabilistic Tropical Cyclone Wind Speed</value></data>
+  <data name="QPF" xml:space="preserve"><value>Quantitative Precipitation Forecast</value></data>
+  <data name="QPS" xml:space="preserve"><value>Quantitative Precipitation Statement</value></data>
+  <data name="RCM" xml:space="preserve"><value>WSR-88D Radar Coded Message</value></data>
+  <data name="RDF" xml:space="preserve"><value>Revised Digital Forecast</value></data>
+  <data name="RDG" xml:space="preserve"><value>Revised Digital Guidance</value></data>
+  <data name="REC" xml:space="preserve"><value>Recreational Report</value></data>
+  <data name="RER" xml:space="preserve"><value>Record Event Report</value></data>
+  <data name="RFD" xml:space="preserve"><value>Rangeland Fire Danger Forecast</value></data>
+  <data name="RFR" xml:space="preserve"><value>Route Forecast</value></data>
+  <data name="RFW" xml:space="preserve"><value>Red Flag Warning</value></data>
+  <data name="RHW" xml:space="preserve"><value>Radiological Hazard Warning</value></data>
+  <data name="RR1" xml:space="preserve"><value>Hydrology Meteorology Data Report Part 1</value></data>
+  <data name="RR2" xml:space="preserve"><value>Hydrology Meteorology Data Report Part 2</value></data>
+  <data name="RRA" xml:space="preserve"><value>Automated Hydrologic Observation STA Report</value></data>
+  <data name="RRC" xml:space="preserve"><value>SCS Manual Snow Course Data</value></data>
+  <data name="RRM" xml:space="preserve"><value>Miscellaneous Hydrologic Data</value></data>
+  <data name="RRS" xml:space="preserve"><value>Special Automated Hydromet Data Report</value></data>
+  <data name="RTP" xml:space="preserve"><value>Max/Min Temperature and Precipitation Table</value></data>
+  <data name="RVA" xml:space="preserve"><value>River Summary</value></data>
+  <data name="RVD" xml:space="preserve"><value>Daily River Forecast</value></data>
+  <data name="RVF" xml:space="preserve"><value>River Forecast</value></data>
+  <data name="RVI" xml:space="preserve"><value>River Ice Statement</value></data>
+  <data name="RVM" xml:space="preserve"><value>Miscellaneous River Product</value></data>
+  <data name="RVR" xml:space="preserve"><value>River Recreation Statement</value></data>
+  <data name="RVS" xml:space="preserve"><value>River Statement</value></data>
+  <data name="RWR" xml:space="preserve"><value>Weather Roundup</value></data>
+  <data name="RWS" xml:space="preserve"><value>Weather Summary</value></data>
+  <data name="RZF" xml:space="preserve"><value>Regional Zone Forecast</value></data>
+  <data name="SAB" xml:space="preserve"><value>Snow Avalanche Bulletin</value></data>
+  <data name="SAF" xml:space="preserve"><value>Speci Agri WX FCST/Advisory/Flying Farmer FCST Outlook</value></data>
+  <data name="SAW" xml:space="preserve"><value>Prelim Notice of Watch &amp; Cancellation MSG</value></data>
+  <data name="SCC" xml:space="preserve"><value>Storm Summary</value></data>
+  <data name="SCD" xml:space="preserve"><value>Supplementary Climatological Data (ASOS)</value></data>
+  <data name="SCS" xml:space="preserve"><value>Selected Cities Summary</value></data>
+  <data name="SDS" xml:space="preserve"><value>Special Dispersion Statement</value></data>
+  <data name="SEL" xml:space="preserve"><value>Severe Local Storm Watch and Watch Cancellation</value></data>
+  <data name="SEV" xml:space="preserve"><value>SPC Watch Point Information Message</value></data>
+  <data name="SFD" xml:space="preserve"><value>State Forecast Discussion</value></data>
+  <data name="SFP" xml:space="preserve"><value>State Forecast</value></data>
+  <data name="SFT" xml:space="preserve"><value>Tabular State Forecast</value></data>
+  <data name="SHP" xml:space="preserve"><value>Surface Ship Report at Synoptic Time</value></data>
+  <data name="SIM" xml:space="preserve"><value>Satellite Interpretation Message</value></data>
+  <data name="SLS" xml:space="preserve"><value>Severe Local Storm Watch and Areal Outline</value></data>
+  <data name="SMF" xml:space="preserve"><value>Smoke Management Weather Forecast</value></data>
+  <data name="SMW" xml:space="preserve"><value>Special Marine Warning</value></data>
+  <data name="SPE" xml:space="preserve"><value>Satellite Precipitation Estimates</value></data>
+  <data name="SPF" xml:space="preserve"><value>Storm Strike Probability Bulletin</value></data>
+  <data name="SPS" xml:space="preserve"><value>Special Weather Statement</value></data>
+  <data name="SPW" xml:space="preserve"><value>Shelter in Place Warning</value></data>
+  <data name="SRF" xml:space="preserve"><value>Surf Forecast</value></data>
+  <data name="STA" xml:space="preserve"><value>SPC Tornado and Severe Thunderstorm Reports</value></data>
+  <data name="STD" xml:space="preserve"><value>Satellite Tropical Disturbance Summary</value></data>
+  <data name="STO" xml:space="preserve"><value>Road Condition Reports</value></data>
+  <data name="STP" xml:space="preserve"><value>State Max/Min Temperature and Precipitation Table</value></data>
+  <data name="SUM" xml:space="preserve"><value>Space Weather Message Summary</value></data>
+  <data name="SVR" xml:space="preserve"><value>Severe Thunderstorm Warning</value></data>
+  <data name="SVS" xml:space="preserve"><value>Severe Weather Statement</value></data>
+  <data name="SWO" xml:space="preserve"><value>Severe Storm Outlook Narrative</value></data>
+  <data name="SWR" xml:space="preserve"><value>State Weather Roundup</value></data>
+  <data name="SWS" xml:space="preserve"><value>State Weather Summary</value></data>
+  <data name="SYN" xml:space="preserve"><value>Regional Synopsis</value></data>
+  <data name="TAF" xml:space="preserve"><value>Terminal Aerodrome Forecast</value></data>
+  <data name="TAV" xml:space="preserve"><value>Travelers Forecast Table</value></data>
+  <data name="TCA" xml:space="preserve"><value>Tropical Cyclone Advisory</value></data>
+  <data name="TCD" xml:space="preserve"><value>Tropical Cyclone Discussion</value></data>
+  <data name="TCE" xml:space="preserve"><value>Tropical Cyclone Position Estimate</value></data>
+  <data name="TCM" xml:space="preserve"><value>Marine/Aviation Tropical Cyclone Advisory</value></data>
+  <data name="TCP" xml:space="preserve"><value>Public Tropical Cyclone Advisory</value></data>
+  <data name="TCS" xml:space="preserve"><value>Satellite Tropical Cyclone Summary</value></data>
+  <data name="TCU" xml:space="preserve"><value>Tropical Cyclone Update</value></data>
+  <data name="TCV" xml:space="preserve"><value>Tropical Cyclone Watch/Warning</value></data>
+  <data name="TIB" xml:space="preserve"><value>Tsunami Information Bulletin</value></data>
+  <data name="TID" xml:space="preserve"><value>Tide Report</value></data>
+  <data name="TMA" xml:space="preserve"><value>Tsunami Tide/Seismic Message Acknowledgment</value></data>
+  <data name="TOE" xml:space="preserve"><value>911 Telephone Outage Emergency</value></data>
+  <data name="TOR" xml:space="preserve"><value>Tornado Warning</value></data>
+  <data name="TPT" xml:space="preserve"><value>Temperature Precipitation Table</value></data>
+  <data name="TSM" xml:space="preserve"><value>Tsunami Tide/Seismic Message</value></data>
+  <data name="TST" xml:space="preserve"><value>Test Message</value></data>
+  <data name="TSU" xml:space="preserve"><value>Tsunami Watch/Warning</value></data>
+  <data name="TVL" xml:space="preserve"><value>Travelers Forecast</value></data>
+  <data name="TWD" xml:space="preserve"><value>Tropical Weather Discussion</value></data>
+  <data name="TWO" xml:space="preserve"><value>Tropical Weather Outlook and Summary</value></data>
+  <data name="TWS" xml:space="preserve"><value>Tropical Weather Summary</value></data>
+  <data name="UVI" xml:space="preserve"><value>Ultraviolet Index</value></data>
+  <data name="VAA" xml:space="preserve"><value>Volcanic Activity Advisory</value></data>
+  <data name="VOW" xml:space="preserve"><value>Volcano Warning</value></data>
+  <data name="WAR" xml:space="preserve"><value>Space Environment Warning</value></data>
+  <data name="WAT" xml:space="preserve"><value>Space Weather Message Watch</value></data>
+  <data name="WCN" xml:space="preserve"><value>Watch County Notification</value></data>
+  <data name="WCR" xml:space="preserve"><value>Weekly Weather and Crop Report</value></data>
+  <data name="WDA" xml:space="preserve"><value>Weekly Data for Agriculture</value></data>
+  <data name="WEK" xml:space="preserve"><value>27-day Space Weather Forecast</value></data>
+  <data name="WOU" xml:space="preserve"><value>Watch Outline Update</value></data>
+  <data name="WRK" xml:space="preserve"><value>Local Work File</value></data>
+  <data name="WSW" xml:space="preserve"><value>Winter Weather Message</value></data>
+  <data name="WVM" xml:space="preserve"><value>Warning Verification Message</value></data>
+  <data name="WWA" xml:space="preserve"><value>Watch Status Report</value></data>
+  <data name="WWP" xml:space="preserve"><value>Severe Thunderstorm Watch Probabilities</value></data>
+  <data name="ZFP" xml:space="preserve"><value>Zone Forecast Product</value></data>
+</root>

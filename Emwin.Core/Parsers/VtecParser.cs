@@ -37,6 +37,7 @@ namespace Emwin.Core.Parsers
     /// </summary>
     public static class VtecParser
     {
+
         #region Private Fields
 
         /// <summary>
@@ -55,42 +56,32 @@ namespace Emwin.Core.Parsers
         /// <param name="content">The content to be parsed.</param>
         /// <returns>IEnumerable&lt;ValidTimeEventCode&gt;.</returns>
         public static IEnumerable<ValidTimeEventCode> ParseProduct(WeatherProduct content)
-        {
-            return from Match pvtecMatch in PvtecRegex.Matches(content.GetString())
-                   select new ValidTimeEventCode
-                   {
-                       TypeIdentifier = (ValidTimeEventCode.TypeCode) pvtecMatch.Groups["type"].Value[0],
-                       Action = pvtecMatch.Groups["action"].Value,
-                       OfficeId = pvtecMatch.Groups["office"].Value,
-                       Phenomenon = pvtecMatch.Groups["phen"].Value,
-                       Significance = (ValidTimeEventCode.SignificanceCode) pvtecMatch.Groups["sig"].Value[0],
-                       EventNumber = int.Parse(pvtecMatch.Groups["number"].Value),
-                       Begin = TimeParser.ParseDateTime(pvtecMatch.Groups["begin"].Value),
-                       End = TimeParser.ParseDateTime(pvtecMatch.Groups["end"].Value)
-                   };
-        }
+            => PvtecRegex.Matches(content.GetString()).Cast<Match>().Select(Create);
 
         /// <summary>
         /// Parses the vtec string.
         /// </summary>
         /// <param name="vtec">The vtec string.</param>
         /// <returns>ValidTimeEventCode.</returns>
-        public static ValidTimeEventCode ParseVtec(string vtec)
-        {
-            var pvtecMatch = PvtecRegex.Match(vtec);
-            return new ValidTimeEventCode
-            {
-                TypeIdentifier = (ValidTimeEventCode.TypeCode) pvtecMatch.Groups["type"].Value[0],
-                Action = pvtecMatch.Groups["action"].Value,
-                OfficeId = pvtecMatch.Groups["office"].Value,
-                Phenomenon = pvtecMatch.Groups["phen"].Value,
-                Significance = (ValidTimeEventCode.SignificanceCode) pvtecMatch.Groups["sig"].Value[0],
-                EventNumber = int.Parse(pvtecMatch.Groups["number"].Value),
-                Begin = TimeParser.ParseDateTime(pvtecMatch.Groups["begin"].Value),
-                End = TimeParser.ParseDateTime(pvtecMatch.Groups["end"].Value)
-            };
-        }
+        public static ValidTimeEventCode ParseVtec(string vtec) => Create(PvtecRegex.Match(vtec));
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private static ValidTimeEventCode Create(Match pvtecMatch) => new ValidTimeEventCode
+        {
+            TypeIdentifier = (ValidTimeEventCode.TypeCode) pvtecMatch.Groups["type"].Value[0],
+            ActionCode = pvtecMatch.Groups["action"].Value,
+            OfficeId = pvtecMatch.Groups["office"].Value,
+            PhenomenonCode = pvtecMatch.Groups["phen"].Value,
+            Significance = (ValidTimeEventCode.SignificanceCode) pvtecMatch.Groups["sig"].Value[0],
+            EventNumber = int.Parse(pvtecMatch.Groups["number"].Value),
+            Begin = TimeParser.ParseDateTime(pvtecMatch.Groups["begin"].Value),
+            End = TimeParser.ParseDateTime(pvtecMatch.Groups["end"].Value)
+        };
+
+        #endregion Private Methods
+
     }
 }

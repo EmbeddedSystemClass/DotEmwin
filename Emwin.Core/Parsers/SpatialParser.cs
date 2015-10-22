@@ -33,7 +33,7 @@ namespace Emwin.Core.Parsers
     {
         #region Private Fields
 
-        private static readonly Regex PolygonRegex = new Regex(@"^LAT[.]{3}LON(?:\s(?<points>[0-9]{4}\s[0-9]{4}))+", RegexOptions.ExplicitCapture | RegexOptions.Multiline);
+        private static readonly Regex PolygonRegex = new Regex(@"^LAT\.{3}LON(?:\s(?<points>[0-9]{4}\s[0-9]{4}))+", RegexOptions.ExplicitCapture | RegexOptions.Multiline);
 
         #endregion Private Fields
 
@@ -42,30 +42,32 @@ namespace Emwin.Core.Parsers
         /// <summary>
         /// Creates the polygon.
         /// </summary>
-        /// <param name="points">The points.</param>
+        /// <param name="points">The geographical points.</param>
         /// <returns>GeographyLineString.</returns>
         public static GeographyPolygon CreatePolygon(IEnumerable<GeographyPosition> points)
         {
-            // Polygons must be created in reverse so we use a stack
-            var stack = new Stack<GeographyPosition>(points);
-
+            var queue = new Queue<GeographyPosition>(points);
+            var startPoint = queue.Dequeue();
             var builder = SpatialBuilder.Create();
             var pipeline = builder.GeographyPipeline;
             pipeline.SetCoordinateSystem(CoordinateSystem.DefaultGeography);
             pipeline.BeginGeography(SpatialType.Polygon);
+            pipeline.BeginFigure(startPoint);
+            while (queue.Count > 0)
+                pipeline.LineTo(queue.Dequeue());
 
-            var point = stack.Pop();
-            pipeline.BeginFigure(point);
-            while (stack.Count > 0)
-            {
-                point = stack.Pop();
-                pipeline.LineTo(point);
-            }
-
+            pipeline.LineTo(startPoint);
             pipeline.EndFigure();
             pipeline.EndGeography();
             return (GeographyPolygon) builder.ConstructedGeography;
         }
+
+        /// <summary>
+        /// Converts Geography to well known text format.
+        /// </summary>
+        /// <param name="geography">The geography.</param>
+        /// <returns>System.String.</returns>
+        public static string ConvertToWellKnownText(Geography geography) => WellKnownTextSqlFormatter.Create(true).Write(geography);
 
         /// <summary>
         /// Parses the product and creates the polygon.
@@ -79,7 +81,7 @@ namespace Emwin.Core.Parsers
             return polygonMatches.Cast<Match>()
                 .Select(match => match.Groups["points"].Captures.Cast<Capture>()
                 .Select(points => points.Value.Split(' '))
-                .Select(split => new GeographyPosition(double.Parse(split[0]) / 100.0, double.Parse(split[1]) / 100.0)))
+                .Select(split => new GeographyPosition(double.Parse(split[0]) / 100.0, - double.Parse(split[1]) / 100.0)))
                 .Select(CreatePolygon);
         }
 

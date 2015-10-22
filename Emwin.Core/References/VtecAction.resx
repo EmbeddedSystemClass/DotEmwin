@@ -117,7 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Test" xml:space="preserve">
-    <value>Test</value>
+  <data name="CAN" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="CON" xml:space="preserve">
+    <value>Continued</value>
+  </data>
+  <data name="COR" xml:space="preserve">
+    <value>Corrected</value>
+  </data>
+  <data name="EXA" xml:space="preserve">
+    <value>Changed in Area</value>
+  </data>
+  <data name="EXB" xml:space="preserve">
+    <value>Changed in Time and Area</value>
+  </data>
+  <data name="EXP" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="EXT" xml:space="preserve">
+    <value>Changed in Time</value>
+  </data>
+  <data name="NEW" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="ROU" xml:space="preserve">
+    <value>Routine</value>
+  </data>
+  <data name="UPG" xml:space="preserve">
+    <value>Upgraded</value>
   </data>
 </root>

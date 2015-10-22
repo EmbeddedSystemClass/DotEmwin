@@ -33,12 +33,10 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="time">The time.</param>
         /// <returns>DateTimeOffset.</returns>
-        public static DateTimeOffset ParseDateTime(string time)
-        {
-            return time == "000000T0000Z"
-                ? DateTimeOffset.MinValue
-                : DateTimeOffset.ParseExact(time, "yyMMdd'T'HHmm'Z'", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
-        }
+        public static DateTimeOffset ParseDateTime(string time) => time == "000000T0000Z"
+            ? DateTimeOffset.MinValue
+            : DateTimeOffset.ParseExact(time, "yyMMdd'T'HHmm'Z'", CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal);
 
         /// <summary>
         /// Parses the time in day hour minute format..

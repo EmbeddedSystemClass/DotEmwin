@@ -39,11 +39,12 @@
       <HintPath>..\..\..\Users\Administrator\Documents\Visual Studio 2015\Projects\EmwinTest\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ByteBlasterServerList.cs" />
     <Compile Include="Models\AbstractContent.cs" />
-    <Compile Include="Models\WmoHeading.cs" />
+    <Compile Include="Models\CommsHeader.cs" />
     <Compile Include="Models\EmwinWeatherProduct.cs" />
     <Compile Include="Parsers\HeadingParser.cs" />
     <Compile Include="Parsers\SpatialParser.cs" />
@@ -53,10 +54,25 @@
     <Compile Include="Models\UniversalGeographicCode.cs" />
     <Compile Include="Models\ValidTimeEventCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Resource1.Designer.cs">
+    <Compile Include="References\GraphicProduct.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resource1.resx</DependentUpon>
+      <DependentUpon>GraphicProduct.resx</DependentUpon>
+    </Compile>
+    <Compile Include="References\TextProduct.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextProduct.resx</DependentUpon>
+    </Compile>
+    <Compile Include="References\VtecAction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VtecAction.resx</DependentUpon>
+    </Compile>
+    <Compile Include="References\VtecPhenomenon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VtecPhenomenon.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -65,9 +81,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Resource1.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="References\GraphicProduct.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GraphicProduct.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="References\TextProduct.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TextProduct.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="References\VtecAction.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VtecAction.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="References\VtecPhenomenon.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VtecPhenomenon.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

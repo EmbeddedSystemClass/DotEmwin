@@ -43,7 +43,7 @@ namespace Emwin.Core.Parsers
         /// http://www.nws.noaa.gov/tg/head.php
         /// </summary>
         private static readonly Regex WmoAbbreviatedHeaderRegex = new Regex(
-            @"^(?<id>[A-Z]{4}[0-9]{2})\s+(?<station>[A-Z]{4})\s+(?<time>[0-3][0-9]([01]?[0-9]|2[0-3])[0-5][0-9])(\s(?<indicator>[A-Z]{3}))?", 
+            @"^(?<id>[A-Z]{4}[0-9]{2})\s+(?<station>[A-Z]{4})\s+(?<time>[0-9]{6})(\s(?<indicator>[A-Z]{3}))?", 
             RegexOptions.ExplicitCapture | RegexOptions.Multiline);
 
         #endregion Private Fields
@@ -56,16 +56,16 @@ namespace Emwin.Core.Parsers
         /// <param name="content">The content.</param>
         /// <returns>Header.</returns>
         /// <exception cref="System.ArgumentException">Invalid content header</exception>
-        public static WmoHeading ParseProduct(WeatherProduct content)
+        public static CommsHeader ParseProduct(WeatherProduct content)
         {
             var match = WmoAbbreviatedHeaderRegex.Match(content.GetString());
             if (!match.Success) return null;
 
-            return new WmoHeading
+            return new CommsHeader
             {
                 Id = match.Groups["id"].Value,
-                DataType = (WmoHeading.T1Code) match.Groups["id"].Value[0],
-                Station = match.Groups["station"].Value,
+                DataType = (CommsHeader.T1Code) match.Groups["id"].Value[0],
+                OriginatingOffice = match.Groups["station"].Value,
                 Time = TimeParser.ParseDayHourMinute(content.TimeStamp, match.Groups["time"].Value),
                 Indicator = match.Groups["indicator"].Success ? match.Groups["indicator"].Value : null
             };
