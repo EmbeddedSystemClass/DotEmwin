@@ -23,9 +23,9 @@
  */
 
 using System;
-using System.Diagnostics;
 using System.Threading;
 using DotNetty.Transport.Channels;
+using Emwin.ByteBlaster.Instrumentation;
 
 namespace Emwin.ByteBlaster.Protocol
 {
@@ -105,14 +105,14 @@ namespace Emwin.ByteBlaster.Protocol
 
             if (!_isReceiving)
             {
-                Trace.TraceWarning("ByteBlasterWatchdogHandler: No data received in the last 20 seconds, closing channel.");
+                ByteBlasterEventSource.Log.Warning("No data received in the last 20 seconds, closing channel.");
                 context.Channel.CloseAsync();
                 return;
             }
 
             if (_exceptionCount > MaxExceptions)
             {
-                Trace.TraceWarning("ByteBlasterWatchdogHandler: Exception threshold exceeded, closing channel.");
+                ByteBlasterEventSource.Log.Warning("Exception threshold exceeded, closing channel.");
                 context.Channel.CloseAsync();
                 return;
             }
