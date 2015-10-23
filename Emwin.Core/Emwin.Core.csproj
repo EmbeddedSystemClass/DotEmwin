@@ -45,8 +45,10 @@
     <Compile Include="Models\ByteBlasterServerList.cs" />
     <Compile Include="Models\AbstractContent.cs" />
     <Compile Include="Models\CommsHeader.cs" />
-    <Compile Include="Models\EmwinWeatherProduct.cs" />
+    <Compile Include="Models\QuickBlockTransferSegment.cs" />
+    <Compile Include="Models\WeatherProduct.cs" />
     <Compile Include="Parsers\HeadingParser.cs" />
+    <Compile Include="Parsers\ImageParser.cs" />
     <Compile Include="Parsers\SpatialParser.cs" />
     <Compile Include="Parsers\TimeParser.cs" />
     <Compile Include="Parsers\UgcParser.cs" />

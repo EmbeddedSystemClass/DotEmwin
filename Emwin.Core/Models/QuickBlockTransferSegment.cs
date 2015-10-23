@@ -22,10 +22,7 @@
  * SOFTWARE.
  */
 
-using Emwin.Core;
-using Emwin.Core.Models;
-
-namespace Emwin.ByteBlaster.Protocol
+namespace Emwin.Core.Models
 {
     /// <summary>
     /// Class QuickBlockPacket.

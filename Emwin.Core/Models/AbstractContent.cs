@@ -87,6 +87,8 @@ namespace Emwin.Core.Models
                 {
                     case ".TXT":
                         return FileContent.Text;
+
+                    case ".ZIP":
                     case ".ZIS":
                         return FileContent.Compressed;
 

@@ -22,27 +22,42 @@
  * SOFTWARE.
  */
 
-using System;
-using Emwin.Core;
-using Emwin.Core.Models;
+using System.Diagnostics;
 
-namespace Emwin.ByteBlaster.Events
+namespace Emwin.Processor.Instrumentation
 {
-    public class ServerListEventArgs : EventArgs
+    internal sealed class PerformanceCounterCategoryInfo
     {
         /// <summary>
-        /// Gets the server list.
+        /// Initializes a new instance of the <see cref="PerformanceCounterCategoryInfo"/> class.
         /// </summary>
-        /// <value>The server list.</value>
-        public ByteBlasterServerList ServerList { get; }
+        /// <param name="categoryName">Name of the category.</param>
+        /// <param name="categoryType">Type of the category.</param>
+        /// <param name="categoryHelp">The category help.</param>
+        public PerformanceCounterCategoryInfo(string categoryName, PerformanceCounterCategoryType categoryType,
+            string categoryHelp)
+        {
+            CategoryName = categoryName;
+            CategoryType = categoryType;
+            CategoryHelp = categoryHelp;
+        }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ServerListEventArgs"/> class.
+        /// Gets the name of the category.
         /// </summary>
-        /// <param name="serverList">The server list.</param>
-        public ServerListEventArgs(ByteBlasterServerList serverList)
-        {
-            ServerList = serverList;
-        }
+        /// <value>The name of the category.</value>
+        public string CategoryName { get; }
+
+        /// <summary>
+        /// Gets the type of the category.
+        /// </summary>
+        /// <value>The type of the category.</value>
+        public PerformanceCounterCategoryType CategoryType { get; }
+
+        /// <summary>
+        /// Gets the category help.
+        /// </summary>
+        /// <value>The category help.</value>
+        public string CategoryHelp { get; }
     }
 }

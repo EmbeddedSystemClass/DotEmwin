@@ -1,4 +1,4 @@
-﻿/*
+/*
  * The MIT License (MIT)
  * 
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
@@ -22,27 +22,35 @@
  * SOFTWARE.
  */
 
-using System;
-using Emwin.Core;
+using System.Collections.Generic;
 using Emwin.Core.Models;
+using Emwin.Processor.Instrumentation;
 
-namespace Emwin.ByteBlaster.Events
+namespace Emwin.Processor.Processor
 {
-    public class WeatherProductEventArgs : EventArgs
+    internal sealed class ProductFilter
     {
-        /// <summary>
-        /// Gets the Weather Product.
-        /// </summary>
-        /// <value>The Weather Product.</value>
-        public WeatherProduct Product { get; }
+        private readonly Filters _filters;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WeatherProductEventArgs"/> class.
+        /// Initializes a new instance of the <see cref="ProductFilter"/> class.
         /// </summary>
-        /// <param name="product">The weather product.</param>
-        public WeatherProductEventArgs(WeatherProduct product)
+        /// <param name="filters">The filters.</param>
+        public ProductFilter(Filters filters)
         {
-            Product = product;
+            _filters = filters;
+        }
+
+        public IEnumerable<WeatherProduct> Execute(WeatherProduct product)
+        {
+            if (_filters?.ProductFilter != null && _filters.ProductFilter(product))
+            {
+                ProcessorEventSource.Log.Info("Product Filtered", product.ToString());
+                PerformanceCounters.ProductsFilteredTotal.Increment();
+                yield break;
+            }
+
+            yield return product;
         }
     }
 }

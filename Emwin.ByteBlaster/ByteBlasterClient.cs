@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -29,23 +30,27 @@ using System.Threading.Tasks;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
-using Emwin.ByteBlaster.Events;
 using Emwin.ByteBlaster.Instrumentation;
-using Emwin.ByteBlaster.Processor;
 using Emwin.ByteBlaster.Protocol;
-using Emwin.Core;
 using Emwin.Core.Models;
 
 namespace Emwin.ByteBlaster
 {
-    public class ByteBlasterClient
+    /// <summary>
+    /// Class ByteBlasterClient implements a persistent connection to a Byte Blaster Server
+    /// and provides an observable provider of QuickBlockTransferSegment objects for processing.
+    /// </summary>
+    public class ByteBlasterClient : IObservable<QuickBlockTransferSegment>
     {
 
         #region Private Fields
 
         private static readonly IEventLoopGroup ExecutorGroup = new MultithreadEventLoopGroup();
         private readonly Bootstrap _channelBootstrap;
+        private readonly List<IObserver<QuickBlockTransferSegment>> _observers = new List<IObserver<QuickBlockTransferSegment>>();
+        private CancellationTokenSource _cancelSource;
         private IChannel _channel;
+        private Task _task;
 
         #endregion Private Fields
 
@@ -56,12 +61,6 @@ namespace Emwin.ByteBlaster
         /// </summary>
         public ByteBlasterClient(string email)
         {
-            var transformer = new SegmentProcessor(Filters, wx =>
-            {
-                LastReceivedProduct = wx;
-                OnReceive(new WeatherProductEventArgs(wx));
-            });
-
             _channelBootstrap = new Bootstrap()
                 .Group(ExecutorGroup)
                 .Channel<TcpSocketChannel>()
@@ -71,50 +70,23 @@ namespace Emwin.ByteBlaster
                     new ByteBlasterProtocolDecoder(),
                     new ByteBlasterLogonHandler(email),
                     new ByteBlasterWatchdogHandler(),
-                    new ChannelEventHandler<QuickBlockTransferSegment>((ctx,s) => transformer.Post(ctx,s)),
-                    new ChannelEventHandler<ByteBlasterServerList>((ctx, serverList) =>
+                    new ChannelEventHandler<QuickBlockTransferSegment>((ctx, segment) =>
                     {
-                        ServerList = serverList;
-                        OnReceive(new ServerListEventArgs(serverList));
-                    })
+                        lock (_observers) _observers.ForEach(o => o.OnNext(segment));
+                    }),
+                    new ChannelEventHandler<ByteBlasterServerList>((ctx, serverList) => ServerList = serverList)
                 )));
         }
 
         #endregion Public Constructors
 
-        #region Public Events
-
-        /// <summary>
-        /// Occurs when a new server list is received.
-        /// </summary>
-        public event EventHandler<ServerListEventArgs> ServerListReceived;
-
-        /// <summary>
-        /// Occurs when new weather product is received.
-        /// </summary>
-        public event EventHandler<WeatherProductEventArgs> WeatherProductReceived;
-
-        #endregion Public Events
-
         #region Public Properties
-
-        /// <summary>
-        /// Gets the transformer filters.
-        /// </summary>
-        /// <value>The filters.</value>
-        public Filters Filters { get; } = new Filters();
 
         /// <summary>
         /// Gets if the channel is open and active.
         /// </summary>
         /// <value>The channel is open and active.</value>
         public bool IsActive => _channel?.Active ?? false;
-
-        /// <summary>
-        /// Gets the last received product (null if none yet received).
-        /// </summary>
-        /// <value>The last received product (or null).</value>
-        public WeatherProduct LastReceivedProduct { get; private set; }
 
         /// <summary>
         /// Gets or sets the remote address.
@@ -139,57 +111,74 @@ namespace Emwin.ByteBlaster
         public static Task ShutdownGracefullyAsync() => ExecutorGroup.ShutdownGracefullyAsync();
 
         /// <summary>
-        /// Starts the client asynchronously and keeps it connected to an available server until canceled.
+        /// Starts this instance.
         /// </summary>
-        /// <returns>Task.</returns>
-        public Task StartAsync(CancellationToken cancellationToken) => Task.Run(() => DoConnect(cancellationToken), cancellationToken);
+        public void Start()
+        {
+            if (_task != null && _task.IsCompleted == false) return;
+
+            _cancelSource = new CancellationTokenSource();
+            _task = Task.Factory.StartNew(
+                function: ExecuteAsync,
+                cancellationToken: _cancelSource.Token,
+                creationOptions: TaskCreationOptions.LongRunning,
+                scheduler: TaskScheduler.Default).Unwrap();
+        }
+
+        /// <summary>
+        /// Stops this instance.
+        /// </summary>
+        /// <param name="timeout">The timeout (or infinite if not specified).</param>
+        public void Stop(TimeSpan? timeout = null)
+        {
+            _cancelSource?.Cancel();
+            if (_task == null || _task.IsCompleted) return;
+
+            try
+            {
+                _task.Wait(timeout ?? Timeout.InfiniteTimeSpan);
+            }
+            catch (AggregateException)
+            {
+            }
+        }
+
+        /// <summary>
+        /// Subscribes the specified observer.
+        /// </summary>
+        /// <param name="observer">The observer.</param>
+        /// <returns>System.IDisposable.</returns>
+        public IDisposable Subscribe(IObserver<QuickBlockTransferSegment> observer)
+        {
+            if (observer == null) throw new ArgumentNullException(nameof(observer));
+
+            lock (_observers)
+                _observers.Add(observer);
+
+            return new Unsubscriber(() => { lock (_observers) _observers.Remove(observer); });
+        }
 
         #endregion Public Methods
-
-        #region Protected Methods
-
-        /// <summary>
-        /// Handles the <see cref="E:WeatherProductReceived" /> event.
-        /// </summary>
-        /// <param name="e">The <see cref="WeatherProductEventArgs" /> instance containing the event data.</param>
-        protected virtual void OnReceive(WeatherProductEventArgs e)
-        {
-            var handler = WeatherProductReceived;
-            handler?.Invoke(this, e);
-        }
-
-        /// <summary>
-        /// Handles the <see cref="E:ServerListReceived" /> event.
-        /// </summary>
-        /// <param name="e">The <see cref="ServerListEventArgs" /> instance containing the event data.</param>
-        protected virtual void OnReceive(ServerListEventArgs e)
-        {
-            var handler = ServerListReceived;
-            handler?.Invoke(this, e);
-        }
-
-        #endregion Protected Methods
 
         #region Private Methods
 
         /// <summary>
         /// Connects to a round-robin list of servers. If connection is closed or does not succeed, the next server is tried.
         /// </summary>
-        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>System.Threading.Tasks.Task.</returns>
-        private async Task DoConnect(CancellationToken cancellationToken)
+        private async Task ExecuteAsync()
         {
             var index = 0;
-            while (!cancellationToken.IsCancellationRequested)
+            while (!_cancelSource.IsCancellationRequested)
             {
                 if (index > ServerList.Servers.Count) index = 0;
                 var serverAddress = ServerList.Servers[index++];
-                ByteBlasterEventSource.Log.Info("Connecting to server", serverAddress.ToString());
+                ByteBlasterEventSource.Log.Info("Attempting connection to ByteBlaster server", serverAddress.ToString());
 
                 try
                 {
                     _channel = await _channelBootstrap.ConnectAsync(serverAddress);
-                    cancellationToken.Register(() => _channel.CloseAsync());
+                    _cancelSource.Token.Register(() => _channel.CloseAsync());
                     await _channel.CloseCompletion;
                 }
                 catch (SocketException ex)
@@ -197,11 +186,57 @@ namespace Emwin.ByteBlaster
                     ByteBlasterEventSource.Log.Error(ex.GetBaseException().Message, ex.GetBaseException());
                 }
 
-                await Task.Delay(5000, cancellationToken);
+                await Task.Delay(5000, _cancelSource.Token);
+            }
+
+            lock (_observers)
+            {
+                _observers.ForEach(o => o.OnCompleted());
+                _observers.Clear();
             }
         }
 
         #endregion Private Methods
+
+        #region Private Classes
+
+        private class Unsubscriber : IDisposable
+        {
+
+            #region Private Fields
+
+            private readonly Action _action;
+
+            #endregion Private Fields
+
+            #region Public Constructors
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Unsubscriber" /> class.
+            /// </summary>
+            /// <param name="action">The action.</param>
+            public Unsubscriber(Action action)
+            {
+                _action = action;
+            }
+
+            #endregion Public Constructors
+
+            #region Public Methods
+
+            /// <summary>
+            /// Disposes this instance.
+            /// </summary>
+            public void Dispose()
+            {
+                _action();
+            }
+
+            #endregion Public Methods
+
+        }
+
+        #endregion Private Classes
 
     }
 }

@@ -1,4 +1,6 @@
-﻿/*
+﻿extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+/*
  * The MIT License (MIT)
  * 
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
@@ -21,29 +23,3 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-using System;
-using Emwin.ByteBlaster.Protocol;
-using Emwin.Core.Models;
-
-namespace Emwin.ByteBlaster.Processor
-{
-    /// <summary>
-    /// Class Filters.
-    /// </summary>
-    public class Filters
-    {
-        /// <summary>
-        /// Gets or sets the pre-filter called for each segment to be processed.
-        /// </summary>
-        /// <value>The pre transformer filter.</value>
-        public Func<QuickBlockTransferSegment, bool> SegmentFilter { get; set; }
-
-
-        /// <summary>
-        /// Gets or sets the product filter called before each product is released.
-        /// </summary>
-        /// <value>The product filter.</value>
-        public Func<WeatherProduct, bool> ProductFilter { get; set; }
-    }
-}

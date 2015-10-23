@@ -43,7 +43,7 @@ namespace Emwin.ByteBlaster.Protocol
     /// See http://www.nws.noaa.gov/emwin/winpro.htm
     /// and https://github.com/noaaport/npemwin/blob/master/dev-notes/EMWINProtocol.pdf
     /// </summary>
-    public class ByteBlasterProtocolDecoder : ByteToMessageDecoder
+    internal class ByteBlasterProtocolDecoder : ByteToMessageDecoder
     {
         #region Protected Fields
 
@@ -92,18 +92,6 @@ namespace Emwin.ByteBlaster.Protocol
         private static readonly Regex ServerListRegex = new Regex(@"^/ServerList/(?<ServerList>.*?)\\ServerList\\/SatServers/(?<SatServers>.*?)\\SatServers\\$");
 
         #endregion Private Fields
-
-        #region Internal Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ByteBlasterProtocolDecoder" /> class.
-        /// </summary>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        internal ByteBlasterProtocolDecoder()
-        {
-        }
-
-        #endregion Internal Constructors
 
         #region Protected Enums
 
