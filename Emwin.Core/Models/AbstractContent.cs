@@ -92,6 +92,7 @@ namespace Emwin.Core.Models
 
                     case ".JPG":
                     case ".GIF":
+                    case ".PNG":
                         return FileContent.Image;
                 }
 
