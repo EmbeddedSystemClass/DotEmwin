@@ -57,9 +57,11 @@ namespace Emwin.ByteBlaster
         #region Public Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ByteBlasterClient"/> class.
+        /// Initializes a new instance of the <see cref="ByteBlasterClient" /> class.
         /// </summary>
-        public ByteBlasterClient(string email)
+        /// <param name="email">The email.</param>
+        /// <param name="observer">The observer to subscribe.</param>
+        public ByteBlasterClient(string email, IObserver<QuickBlockTransferSegment> observer = null)
         {
             _channelBootstrap = new Bootstrap()
                 .Group(ExecutorGroup)
@@ -76,6 +78,9 @@ namespace Emwin.ByteBlaster
                     }),
                     new ChannelEventHandler<ByteBlasterServerList>((ctx, serverList) => ServerList = serverList)
                 )));
+
+            if (observer != null)
+                Subscribe(observer);
         }
 
         #endregion Public Constructors

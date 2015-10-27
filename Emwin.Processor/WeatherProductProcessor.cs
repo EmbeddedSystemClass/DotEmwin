@@ -44,14 +44,17 @@ namespace Emwin.Processor
         #region Public Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WeatherProductProcessor"/> class.
+        /// Initializes a new instance of the <see cref="WeatherProductProcessor" /> class.
         /// </summary>
-        public WeatherProductProcessor()
+        /// <param name="observable">The observable.</param>
+        public WeatherProductProcessor(IObservable<QuickBlockTransferSegment> observable = null)
         {
             var pipeline = new PipelineBuilder(Filters);
             TextProductObservable = pipeline.TextProductObservable;
             ImageProductObservable = pipeline.ImageProductObservable;
             _observable = pipeline.SegmentObserver;
+
+            observable?.Subscribe(this);
         }
 
         #endregion Public Constructors
