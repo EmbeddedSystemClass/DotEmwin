@@ -179,7 +179,7 @@ namespace Emwin.ByteBlaster.Protocol
 
                 case DecoderState.ServerList:
                     var content = ReadString(input);
-                    if (content == null) break;
+                    if (content.Length == 0) break;
                     context.FireUserEventTriggered(ParseServerList(content));
                     State = DecoderState.StartFrame;
                     goto case DecoderState.StartFrame;
@@ -378,7 +378,7 @@ namespace Emwin.ByteBlaster.Protocol
                 return Encoding.ASCII.GetString(bytes);
             }
 
-            return null;
+            return string.Empty;
         }
 
         /// <summary>

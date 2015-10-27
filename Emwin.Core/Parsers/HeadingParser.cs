@@ -58,7 +58,7 @@ namespace Emwin.Core.Parsers
         public static CommsHeader ParseProduct(ITextProduct product)
         {
             var match = WmoAbbreviatedHeaderRegex.Match(product.Content);
-            if (!match.Success) return null;
+            if (!match.Success) return new CommsHeader();
 
             return new CommsHeader
             {
