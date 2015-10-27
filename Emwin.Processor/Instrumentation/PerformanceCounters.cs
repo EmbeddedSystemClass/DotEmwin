@@ -37,31 +37,18 @@ namespace Emwin.Processor.Instrumentation
 
         public static readonly SafePerformanceCounter TransformerExceptionsTotal = Instance.GetCounter(TransformerExceptionsTotalCounterName);
         public static readonly SafePerformanceCounter ProductsCreatedTotal = Instance.GetCounter(ProductsCreatedTotalCounterName);
-        public static readonly SafePerformanceCounter TransformerQueueCounter = Instance.GetCounter(TransformerQueueCounterName);
-        public static readonly SafePerformanceCounter BlocksFilteredTotal = Instance.GetCounter(BlocksFilteredTotalCounterName);
         public static readonly SafePerformanceCounter ProductsFilteredTotal = Instance.GetCounter(ProductsFilteredTotalCounterName);
-        public static readonly SafePerformanceCounter DuplicateProductsTotal = Instance.GetCounter(DuplicateProductsTotalCounterName);
 
         #endregion Public Performance Counters
 
         #region Private Fields
 
-        private const string CategoryHelp = "EMWIN Byte Blaster Metrics";
-        private const string CategoryName = "Byte Blaster Client";
+        private const string CategoryHelp = "EMWIN Processor Metrics";
+        private const string CategoryName = "EMWIN Processor";
 
-        private const string BlocksReceivedTotalCounterName = "Blocks Received Total";
-        private const string BlocksProcessedPerSecondCounterName = "Blocks Processed/sec";
-        private const string CompressedBlocksReceivedTotalCounterName = "Compressed Blocks Received Total";
-        private const string DecoderExceptionsTotalCounterName = "Decoder Exceptions Total";
-        private const string ChecksumErrorsTotalCounterName = "Block Checksum Errors Total";
-        private const string ServerListReceivedTotalCounterName = "Server List Received Total";
-        private const string FrameSyncTotalCounterName = "Frame Re-Synchronization Total";
+        private const string ProductsFilteredTotalCounterName = "Products Filtered Total";
         private const string ProductsCreatedTotalCounterName = "Products Created Total";
         private const string TransformerExceptionsTotalCounterName = "Transformer Exceptions Total";
-        private const string TransformerQueueCounterName = "Transformer Queue Count";
-        private const string BlocksFilteredTotalCounterName = "Blocks Filtered Total";
-        private const string ProductsFilteredTotalCounterName = "Products Filtered Total";
-        private const string DuplicateProductsTotalCounterName = "Duplicate Products Total";
 
         #endregion Private Fields
 
@@ -78,19 +65,9 @@ namespace Emwin.Processor.Instrumentation
                 new PerformanceCounterCategoryInfo(CategoryName, PerformanceCounterCategoryType.SingleInstance, CategoryHelp),
                 new[]
                 {
-                    new CounterCreationData(BlocksReceivedTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(BlocksProcessedPerSecondCounterName, "", PerformanceCounterType.RateOfCountsPerSecond32),
-                    new CounterCreationData(CompressedBlocksReceivedTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(DecoderExceptionsTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(ChecksumErrorsTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(ServerListReceivedTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(FrameSyncTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
                     new CounterCreationData(ProductsCreatedTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
                     new CounterCreationData(TransformerExceptionsTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(TransformerQueueCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(BlocksFilteredTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
                     new CounterCreationData(ProductsFilteredTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(DuplicateProductsTotalCounterName, "", PerformanceCounterType.NumberOfItems64)
                 }
             ) { }
 

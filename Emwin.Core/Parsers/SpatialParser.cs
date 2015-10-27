@@ -24,8 +24,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Emwin.Core.Models;
 using System.Spatial;
+using Emwin.Core.Interfaces;
 
 namespace Emwin.Core.Parsers
 {
@@ -74,9 +74,9 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;GeographyLineString&gt;.</returns>
-        public static IEnumerable<GeographyPolygon> ParseProduct(WeatherProduct product)
+        public static IEnumerable<GeographyPolygon> ParseProduct(ITextProduct product)
         {
-            var polygonMatches = PolygonRegex.Matches(product.GetString());
+            var polygonMatches = PolygonRegex.Matches(product.Content);
 
             return polygonMatches.Cast<Match>()
                 .Select(match => match.Groups["points"].Captures.Cast<Capture>()

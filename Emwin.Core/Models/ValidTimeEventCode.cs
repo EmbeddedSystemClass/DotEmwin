@@ -25,6 +25,7 @@
 using System;
 using System.Runtime.Serialization;
 using Emwin.Core.References;
+using Emwin.Core.Types;
 
 namespace Emwin.Core.Models
 {
@@ -37,30 +38,6 @@ namespace Emwin.Core.Models
     [DataContract]
     public class ValidTimeEventCode
     {
-
-        #region Public Enums
-
-        public enum SignificanceCode
-        {
-            Watch = 'A',
-            Forecast = 'F',
-            Synopsis = 'N',
-            Outlook = 'O',
-            Statement = 'S',
-            Warning = 'W',
-            Advisory = 'Y'
-        }
-
-        public enum TypeCode
-        {
-            Experimental = 'E',
-            Operational = 'O',
-            Test = 'T',
-            ExperimentalOp = 'X'
-        }
-
-        #endregion Public Enums
-
         #region Public Properties
 
         /// <summary>
@@ -124,14 +101,14 @@ namespace Emwin.Core.Models
         /// </summary>
         /// <value>The significance.</value>
         [DataMember]
-        public SignificanceCode Significance { get; set; }
+        public VtecSignificanceCode Significance { get; set; }
 
         /// <summary>
         /// Gets or sets the type of VTEC.
         /// </summary>
         /// <value>The type of VTEC.</value>
         [DataMember]
-        public TypeCode TypeIdentifier { get; set; }
+        public VtecTypeCode TypeIdentifier { get; set; }
 
         #endregion Public Properties
 

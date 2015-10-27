@@ -24,6 +24,7 @@
 
 using System;
 using System.Runtime.Serialization;
+using Emwin.Core.Types;
 
 namespace Emwin.Core.Models
 {
@@ -44,44 +45,13 @@ namespace Emwin.Core.Models
     [DataContract]
     public class CommsHeader
     {
-        #region Public Enums
-
-        public enum T1Code
-        {
-            Analyses = 'A',
-            AddressedMessage = 'B',
-            ClimaticData = 'C',
-            GridPointInformationD = 'D',
-            SatelliteImagery = 'E',
-            Forecast = 'F',
-            GridPointInformationG = 'G',
-            GridPointInformationH = 'H',
-            ObservationalData = 'I',
-            ForecastData = 'J',
-            Crex = 'K',
-            AviationXmlData = 'L',
-            Notices = 'N',
-            OceanographicInformation = 'O',
-            PictorialInformation = 'P',
-            RegionalPictorialInformation = 'Q',
-            SurfaceData = 'S',
-            SatelliteData = 'T',
-            UpperAirData = 'U',
-            NationalData = 'V',
-            Warnings = 'W',
-            CommonAlertProtocolMessages = 'X',
-            GribRegionalUse = 'Y'
-        }
-
-        #endregion Public Enums
-
         #region Public Properties
 
         /// <summary>
         /// Gets or sets the type of the data.
         /// </summary>
         /// <value>The type of the data.</value>
-        public T1Code DataType { get; set; }
+        public T1DataTypeCode DataType { get; set; }
 
         /// <summary>
         /// Gets the 6 character wmo identifier.
@@ -119,7 +89,7 @@ namespace Emwin.Core.Models
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() => $"T1: {DataType} Id: {Id} Station: {OriginatingOffice} Time: {Time:g} Indicator: {Indicator ?? "-"}";
+        public override string ToString() => $"DataType={DataType} Id={Id} Station={OriginatingOffice} Time={Time:g} Indicator={Indicator}";
 
         #endregion Public Methods
 

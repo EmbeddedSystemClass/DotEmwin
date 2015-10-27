@@ -22,74 +22,67 @@
  * SOFTWARE.
  */
 
+using System;
 using System.IO;
-using System.Runtime.Serialization;
-using Emwin.Core.References;
+using Emwin.Core.Interfaces;
+using Emwin.Core.Models;
+using Emwin.Core.Types;
 
-namespace Emwin.Core.Models
+namespace Emwin.Core.Products
 {
     /// <summary>
-    /// WeatherProduct represents a complete weather product received from the ByteBlaster server.
+    /// Class CompressedProduct. Represents a received compressed (ZIP) file.
     /// </summary>
-    [DataContract]
-    public class WeatherProduct : AbstractContent
+    public class CompressedProduct : ICompressedContent
     {
-
         #region Public Properties
 
         /// <summary>
-        /// Gets the description if available.
+        /// Gets or sets the content.
         /// </summary>
-        /// <value>The description.</value>
-        [IgnoreDataMember]
-        public string Description
-        {
-            get
-            {
-                switch (ContentType)
-                {
-                    case FileContent.Image:
-                        return GraphicProduct.ResourceManager.GetString(ProductName);
-
-                    default:
-                        return TextProduct.ResourceManager.GetString(ProductCode);
-                }
-            }
-        }
+        /// <value>The content.</value>
+        public byte[] Content { get; set; }
 
         /// <summary>
-        /// Gets or sets the hash of the content.
+        /// Gets the type of the content.
+        /// </summary>
+        /// <value>The type of the content.</value>
+        public ContentFileType ContentType { get; set; }
+
+        /// <summary>
+        /// Gets the filename.
+        /// </summary>
+        /// <value>The filename.</value>
+        public string Filename { get; set; }
+
+        /// <summary>
+        /// Gets or sets the hash.
         /// </summary>
         /// <value>The hash.</value>
-        [DataMember]
         public string Hash { get; set; }
 
         /// <summary>
-        /// Gets the product code from the filename.
+        /// Gets the received at time.
         /// </summary>
-        /// <value>The product code.</value>
-        [IgnoreDataMember]
-        public string ProductCode => Filename?.Substring(0, 3);
+        /// <value>The received at.</value>
+        public DateTimeOffset ReceivedAt { get; set; }
 
         /// <summary>
-        /// Gets the name of the product from the filename.
+        /// Gets the content time stamp.
         /// </summary>
-        /// <value>The name of the product.</value>
-        [IgnoreDataMember]
-        public string ProductName => Path.GetFileNameWithoutExtension(Filename);
+        /// <value>The time stamp.</value>
+        public DateTimeOffset TimeStamp { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Gets the stream.
         /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() =>
-            $"{Description} ({Filename}) Date: {TimeStamp.ToString("g")} Size: {Content.Length:N0} Hash: {Hash}";
+        /// <returns>System.IO.Stream.</returns>
+        public Stream GetStream() => new MemoryStream(Content, false);
 
         #endregion Public Methods
-
     }
 }

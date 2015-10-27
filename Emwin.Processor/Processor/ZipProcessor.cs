@@ -23,25 +23,43 @@
  */
 
 using System;
+using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks.Dataflow;
+using Emwin.Core.Interfaces;
 using Emwin.Core.Models;
+using Emwin.Core.Parsers;
+using Emwin.Core.Products;
+using Emwin.Core.Types;
 using Emwin.Processor.Pipeline;
 
 namespace Emwin.Processor.Processor
 {
     internal sealed class ZipProcessor
     {
+        #region Public Properties
+
         /// <summary>
-        /// Unzip the product if required.
+        /// Gets the block.
         /// </summary>
-        /// <param name="product">The product.</param>
-        /// <returns>WeatherProduct.</returns>
-        public WeatherProduct Execute(WeatherProduct product)
-        {
-            return product.IsCompressed() ? Unzip(product) : product;
-        }
+        /// <value>The block.</value>
+        public TransformBlock<IEmwinContent, IEmwinContent> Block { get; } = new TransformBlock<IEmwinContent, IEmwinContent>(
+            product => Unzip((CompressedProduct) product),
+            new ExecutionDataflowBlockOptions {MaxDegreeOfParallelism = -1});
+
+        #endregion Public Properties
+
+        /// <summary>
+        /// Filters the specified content.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <returns>System.Boolean.</returns>
+        public bool Predicate(IEmwinContent content) => content is ICompressedContent;
+
+        #region Private Methods
 
         /// <summary>
         /// Unzips the product and returns the first contained product in the zip. 
@@ -49,28 +67,41 @@ namespace Emwin.Processor.Processor
         /// </summary>
         /// <param name="product">The compressed product.</param>
         /// <returns>WeatherProduct.</returns>
-        private static WeatherProduct Unzip(WeatherProduct product)
+        private static IEmwinContent Unzip(CompressedProduct product)
         {
             using (var zip = new ZipArchive(product.GetStream(), ZipArchiveMode.Read))
             {
                 var file = zip.Entries.First();
-                using (var ms = new MemoryStream())
                 using (var fileStream = file.Open())
                 {
-                    fileStream.CopyTo(ms);
-                    var content = ms.ToArray();
+                    var content = ReadAllBytes(fileStream);
 
-                    return new WeatherProduct
+                    switch (ContentTypeParser.GetFileContentType(file.Name))
                     {
-                        Filename = file.Name.ToUpperInvariant(),
-                        TimeStamp = file.LastWriteTime,
-                        Content = content,
-                        Hash = content.ComputeHash(),
-                        ReceivedAt = DateTimeOffset.UtcNow
-                    };
+                        case ContentFileType.Text:
+                            return ProductFactory.CreateTextProduct(file.Name.ToUpperInvariant(), file.LastWriteTime,
+                                content, DateTimeOffset.UtcNow);
+
+                        case ContentFileType.Image:
+                            return ProductFactory.CreateImageProduct(file.Name.ToUpperInvariant(), file.LastWriteTime,
+                                content, DateTimeOffset.UtcNow);
+                    }
                 }
+            }
+
+            return product;
+        }
+
+        private static byte[] ReadAllBytes(Stream stream)
+        {
+            using (var ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                return ms.ToArray();
             }
         }
 
+
+        #endregion Private Methods
     }
 }

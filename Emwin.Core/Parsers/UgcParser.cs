@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Emwin.Core.Interfaces;
 using Emwin.Core.Models;
 
 namespace Emwin.Core.Parsers
@@ -49,12 +50,12 @@ namespace Emwin.Core.Parsers
         /// <summary>
         /// Parses the content and returns any UGC codes contained.
         /// </summary>
-        /// <param name="content">The content to be parsed for UGC codes.</param>
+        /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;UniversalGeographicCode&gt;.</returns>
-        public static IEnumerable<UniversalGeographicCode> ParseProduct(WeatherProduct content)
+        public static IEnumerable<UniversalGeographicCode> ParseProduct(ITextProduct product)
         {
-            var ugcMatches = UgcRegex.Matches(content.GetString());
-            return ugcMatches.Cast<Match>().SelectMany(ugcMatch => ParseUgc(RemoveWhitespace(ugcMatch.Value), content.TimeStamp));
+            var ugcMatches = UgcRegex.Matches(product.Content);
+            return ugcMatches.Cast<Match>().SelectMany(ugcMatch => ParseUgc(RemoveWhitespace(ugcMatch.Value), product.TimeStamp));
         }
 
         /// <summary>

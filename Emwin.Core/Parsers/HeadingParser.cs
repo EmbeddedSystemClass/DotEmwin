@@ -22,17 +22,16 @@
  * SOFTWARE.
  */
 
-using System;
-using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
+using Emwin.Core.Interfaces;
 using Emwin.Core.Models;
+using Emwin.Core.Types;
 
 namespace Emwin.Core.Parsers
 {
     /// <summary>
     /// AwipsHeader represents the header information on the first line of the product.
     /// </summary>
-    [DataContract]
     public static class HeadingParser
     {
 
@@ -53,20 +52,20 @@ namespace Emwin.Core.Parsers
         /// <summary>
         /// Creates the header from the content.
         /// </summary>
-        /// <param name="content">The content.</param>
+        /// <param name="product">The product.</param>
         /// <returns>Header.</returns>
         /// <exception cref="System.ArgumentException">Invalid content header</exception>
-        public static CommsHeader ParseProduct(WeatherProduct content)
+        public static CommsHeader ParseProduct(ITextProduct product)
         {
-            var match = WmoAbbreviatedHeaderRegex.Match(content.GetString());
+            var match = WmoAbbreviatedHeaderRegex.Match(product.Content);
             if (!match.Success) return null;
 
             return new CommsHeader
             {
                 Id = match.Groups["id"].Value,
-                DataType = (CommsHeader.T1Code) match.Groups["id"].Value[0],
+                DataType = (T1DataTypeCode) match.Groups["id"].Value[0],
                 OriginatingOffice = match.Groups["station"].Value,
-                Time = TimeParser.ParseDayHourMinute(content.TimeStamp, match.Groups["time"].Value),
+                Time = TimeParser.ParseDayHourMinute(product.TimeStamp, match.Groups["time"].Value),
                 Indicator = match.Groups["indicator"].Success ? match.Groups["indicator"].Value : null
             };
         }

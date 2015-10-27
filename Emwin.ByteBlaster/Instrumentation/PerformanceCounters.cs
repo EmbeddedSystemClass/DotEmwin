@@ -18,22 +18,16 @@ namespace Emwin.ByteBlaster.Instrumentation
         public static readonly SafePerformanceCounter BlocksProcessedPerSecond = Instance.GetCounter(BlocksProcessedPerSecondCounterName);
         public static readonly SafePerformanceCounter CompressedBlocksReceivedTotal = Instance.GetCounter(CompressedBlocksReceivedTotalCounterName);
         public static readonly SafePerformanceCounter DecoderExceptionsTotal = Instance.GetCounter(DecoderExceptionsTotalCounterName);
-        public static readonly SafePerformanceCounter TransformerExceptionsTotal = Instance.GetCounter(TransformerExceptionsTotalCounterName);
         public static readonly SafePerformanceCounter ChecksumErrorsTotal = Instance.GetCounter(ChecksumErrorsTotalCounterName);
         public static readonly SafePerformanceCounter ServerListReceivedTotal = Instance.GetCounter(ServerListReceivedTotalCounterName);
         public static readonly SafePerformanceCounter FrameSyncTotal = Instance.GetCounter(FrameSyncTotalCounterName);
-        public static readonly SafePerformanceCounter ProductsCreatedTotal = Instance.GetCounter(ProductsCreatedTotalCounterName);
-        public static readonly SafePerformanceCounter TransformerQueueCounter = Instance.GetCounter(TransformerQueueCounterName);
-        public static readonly SafePerformanceCounter BlocksFilteredTotal = Instance.GetCounter(BlocksFilteredTotalCounterName);
-        public static readonly SafePerformanceCounter ProductsFilteredTotal = Instance.GetCounter(ProductsFilteredTotalCounterName);
-        public static readonly SafePerformanceCounter DuplicateProductsTotal = Instance.GetCounter(DuplicateProductsTotalCounterName);
 
         #endregion Public Performance Counters
 
         #region Private Fields
 
-        private const string CategoryHelp = "EMWIN Byte Blaster Metrics";
-        private const string CategoryName = "Byte Blaster Client";
+        private const string CategoryHelp = "EMWIN Byte Blaster Client Metrics";
+        private const string CategoryName = "EMWIN Byte Blaster Client";
 
         private const string BlocksReceivedTotalCounterName = "Blocks Received Total";
         private const string BlocksProcessedPerSecondCounterName = "Blocks Processed/sec";
@@ -42,12 +36,6 @@ namespace Emwin.ByteBlaster.Instrumentation
         private const string ChecksumErrorsTotalCounterName = "Block Checksum Errors Total";
         private const string ServerListReceivedTotalCounterName = "Server List Received Total";
         private const string FrameSyncTotalCounterName = "Frame Re-Synchronization Total";
-        private const string ProductsCreatedTotalCounterName = "Products Created Total";
-        private const string TransformerExceptionsTotalCounterName = "Transformer Exceptions Total";
-        private const string TransformerQueueCounterName = "Transformer Queue Count";
-        private const string BlocksFilteredTotalCounterName = "Blocks Filtered Total";
-        private const string ProductsFilteredTotalCounterName = "Products Filtered Total";
-        private const string DuplicateProductsTotalCounterName = "Duplicate Products Total";
 
         #endregion Private Fields
 
@@ -71,12 +59,6 @@ namespace Emwin.ByteBlaster.Instrumentation
                     new CounterCreationData(ChecksumErrorsTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
                     new CounterCreationData(ServerListReceivedTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
                     new CounterCreationData(FrameSyncTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(ProductsCreatedTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(TransformerExceptionsTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(TransformerQueueCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(BlocksFilteredTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(ProductsFilteredTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(DuplicateProductsTotalCounterName, "", PerformanceCounterType.NumberOfItems64)
                 }
             ) { }
 

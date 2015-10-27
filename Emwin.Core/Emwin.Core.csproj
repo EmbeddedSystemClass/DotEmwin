@@ -34,6 +34,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\Users\Administrator\Documents\Visual Studio 2015\Projects\EmwinTest\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
@@ -42,14 +43,26 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ICompressedContent.cs" />
+    <Compile Include="Interfaces\IImageProduct.cs" />
+    <Compile Include="Interfaces\ITextProduct.cs" />
     <Compile Include="Models\ByteBlasterServerList.cs" />
-    <Compile Include="Models\AbstractContent.cs" />
     <Compile Include="Models\CommsHeader.cs" />
+    <Compile Include="Interfaces\IEmwinContent.cs" />
+    <Compile Include="Types\ContentFileType.cs" />
+    <Compile Include="Types\VtecSignificanceCode.cs" />
+    <Compile Include="Types\VtecTypeCode.cs" />
+    <Compile Include="Types\T1DataTypeCode.cs" />
+    <Compile Include="Types\ImageFormatType.cs" />
+    <Compile Include="Products\ProductFactory.cs" />
+    <Compile Include="Products\GraphicProduct.cs" />
     <Compile Include="Models\QuickBlockTransferSegment.cs" />
-    <Compile Include="Models\WeatherProduct.cs" />
+    <Compile Include="Products\CompressedProduct.cs" />
+    <Compile Include="Products\TextProduct.cs" />
     <Compile Include="Parsers\HeadingParser.cs" />
     <Compile Include="Parsers\ImageParser.cs" />
     <Compile Include="Parsers\SpatialParser.cs" />
+    <Compile Include="Parsers\ContentTypeParser.cs" />
     <Compile Include="Parsers\TimeParser.cs" />
     <Compile Include="Parsers\UgcParser.cs" />
     <Compile Include="Parsers\VtecParser.cs" />
@@ -100,6 +113,7 @@
       <LastGenOutput>VtecPhenomenon.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release "NuGet.exe" pack "$(ProjectPath)" -Properties Configuration=Release -Verbose</PostBuildEvent>

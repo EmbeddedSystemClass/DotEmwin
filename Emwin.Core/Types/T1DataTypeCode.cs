@@ -1,4 +1,4 @@
-/*
+﻿/*
  * The MIT License (MIT)
  * 
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
@@ -21,36 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-using System.Collections.Generic;
-using Emwin.Core.Models;
-using Emwin.Processor.Instrumentation;
-
-namespace Emwin.Processor.Processor
+namespace Emwin.Core.Types
 {
-    internal sealed class SegmentFilter
+    public enum T1DataTypeCode
     {
-        private readonly Filters _filters;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SegmentFilter"/> class.
-        /// </summary>
-        /// <param name="filters">The filters.</param>
-        public SegmentFilter(Filters filters)
-        {
-            _filters = filters;
-        }
-
-        public IEnumerable<QuickBlockTransferSegment> Execute(QuickBlockTransferSegment segment)
-        {
-            if (_filters?.SegmentFilter != null && _filters.SegmentFilter(segment))
-            {
-                ProcessorEventSource.Log.Info("Segment Filtered", segment.ToString());
-                PerformanceCounters.BlocksFilteredTotal.Increment();
-                yield break;
-            }
-
-            yield return segment;
-        }
+        Analyses = 'A',
+        AddressedMessage = 'B',
+        ClimaticData = 'C',
+        GridPointInformationD = 'D',
+        SatelliteImagery = 'E',
+        Forecast = 'F',
+        GridPointInformationG = 'G',
+        GridPointInformationH = 'H',
+        ObservationalData = 'I',
+        ForecastData = 'J',
+        Crex = 'K',
+        AviationXmlData = 'L',
+        Notices = 'N',
+        OceanographicInformation = 'O',
+        PictorialInformation = 'P',
+        RegionalPictorialInformation = 'Q',
+        SurfaceData = 'S',
+        SatelliteData = 'T',
+        UpperAirData = 'U',
+        NationalData = 'V',
+        Warnings = 'W',
+        CommonAlertProtocolMessages = 'X',
+        GribRegionalUse = 'Y'
     }
 }

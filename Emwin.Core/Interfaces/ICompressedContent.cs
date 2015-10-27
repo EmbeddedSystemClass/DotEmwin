@@ -1,4 +1,4 @@
-﻿/*
+/*
  * The MIT License (MIT)
  * 
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
@@ -21,28 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-using System;
-using Emwin.Core.Models;
-
-namespace Emwin.Processor.Processor
+namespace Emwin.Core.Interfaces
 {
-    /// <summary>
-    /// Class Filters.
-    /// </summary>
-    public class Filters
+    public interface ICompressedContent : IEmwinContent<byte[]>
     {
         /// <summary>
-        /// Gets or sets the pre-filter called for each segment to be processed.
+        /// Gets or sets the hash.
         /// </summary>
-        /// <value>The pre transformer filter.</value>
-        public Func<QuickBlockTransferSegment, bool> SegmentFilter { get; set; }
-
-
-        /// <summary>
-        /// Gets or sets the product filter called before each product is released.
-        /// </summary>
-        /// <value>The product filter.</value>
-        public Func<WeatherProduct, bool> ProductFilter { get; set; }
+        /// <value>The hash.</value>
+        string Hash { get; }
     }
 }

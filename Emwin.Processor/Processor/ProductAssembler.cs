@@ -24,32 +24,30 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Caching;
 using System.Threading.Tasks.Dataflow;
-using Emwin.Core.Interfaces;
+using Emwin.Core.Models;
 using Emwin.Processor.Instrumentation;
-using Emwin.Processor.Pipeline;
+using Emwin.Core.Interfaces;
+using Emwin.Core.Products;
 
 namespace Emwin.Processor.Processor
 {
-    internal sealed class ProductFilter
+    /// <summary>
+    /// Class ProductAssembler. Assembles bundles of segments into a product by combining all the bytes from each segment.
+    /// </summary>
+    internal sealed class ProductAssembler
     {
-        #region Private Fields
-
-        private readonly PipelineFilters _filters;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductFilter"/> class.
+        /// Initializes a new instance of the <see cref="ProductAssembler"/> class.
         /// </summary>
-        /// <param name="filters">The filters.</param>
-        public ProductFilter(PipelineFilters filters)
+        public ProductAssembler()
         {
-            _filters = filters;
-            Block = new TransformManyBlock<IEmwinContent, IEmwinContent>(x => Execute(x));
+            Block = new TransformManyBlock<QuickBlockTransferSegment[], IEmwinContent>(x => Execute(x),
+                new ExecutionDataflowBlockOptions {MaxDegreeOfParallelism = -1});
         }
 
         #endregion Public Constructors
@@ -60,31 +58,37 @@ namespace Emwin.Processor.Processor
         /// Gets the block.
         /// </summary>
         /// <value>The block.</value>
-        public TransformManyBlock<IEmwinContent, IEmwinContent> Block { get; }
+        public TransformManyBlock<QuickBlockTransferSegment[], IEmwinContent> Block { get; }
 
         #endregion Public Properties
 
+        #region Public Methods
+
+        /// <summary>
+        /// Filters the specified bundle.
+        /// </summary>
+        /// <param name="bundle">The bundle.</param>
+        /// <returns>System.Boolean.</returns>
+        public bool Predicate(QuickBlockTransferSegment[] bundle) => bundle.All(s => s != null);
+
+        #endregion Public Methods
+
         #region Private Methods
 
-        private IEnumerable<IEmwinContent> Execute(IEmwinContent product)
+        private IEnumerable<IEmwinContent> Execute(QuickBlockTransferSegment[] segments)
         {
-            try
-            {
-                if (_filters.ContentFilter != null && _filters.ContentFilter(product))
-                {
-                    ProcessorEventSource.Log.Info("Product Filtered", product.ToString());
-                    PerformanceCounters.ProductsFilteredTotal.Increment();
-                    yield break;
-                }
-            }
-            catch (Exception ex)
-            {
-                ProcessorEventSource.Log.Error("Product Filter", ex);
-            }
+            var product = ProductFactory.Create(segments);
+
+            if (product == null)
+                yield break;
+
+            ProcessorEventSource.Log.Verbose("Product", product.ToString());
+            PerformanceCounters.ProductsCreatedTotal.Increment();
 
             yield return product;
         }
 
         #endregion Private Methods
+
     }
 }

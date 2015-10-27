@@ -21,36 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-using System;
-using System.Runtime.Caching;
-using Emwin.Core.Models;
-
-namespace Emwin.Processor.Processor
+namespace Emwin.Core.Types
 {
-    internal sealed class PersistSegmentStep
+    /// <summary>
+    /// Data Content File Type
+    /// </summary>
+    public enum ContentFileType
     {
-        public static TimeSpan ExpireTime = TimeSpan.FromMinutes(2);
-
-        private readonly ObjectCache _blockCache = new MemoryCache("_blockCache");
-
-        public QuickBlockTransferSegment[] Execute(QuickBlockTransferSegment segment)
-        {
-            var key = segment.GetKey();
-            QuickBlockTransferSegment[] collection;
-
-            if (_blockCache.Contains(key))
-            {
-                collection = (QuickBlockTransferSegment[])_blockCache.Get(key);
-                collection[segment.BlockNumber - 1] = segment;
-                return collection;
-            }
-
-            // Create a new collection array and add to cache with initial block populated
-            collection = new QuickBlockTransferSegment[segment.TotalBlocks];
-            collection[segment.BlockNumber - 1] = segment;
-            _blockCache.Set(key, collection, DateTimeOffset.Now.Add(ExpireTime));
-            return collection;
-        }
+        Unknown,
+        Text,
+        Image,
+        Compressed
     }
 }

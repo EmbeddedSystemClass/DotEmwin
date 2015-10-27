@@ -25,7 +25,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Emwin.Core.Interfaces;
 using Emwin.Core.Models;
+using Emwin.Core.Types;
 
 namespace Emwin.Core.Parsers
 {
@@ -53,10 +55,10 @@ namespace Emwin.Core.Parsers
         /// <summary>
         /// Parses the content and returns any VTEC items contained.
         /// </summary>
-        /// <param name="content">The content to be parsed.</param>
+        /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;ValidTimeEventCode&gt;.</returns>
-        public static IEnumerable<ValidTimeEventCode> ParseProduct(WeatherProduct content)
-            => PvtecRegex.Matches(content.GetString()).Cast<Match>().Select(Create);
+        public static IEnumerable<ValidTimeEventCode> ParseProduct(ITextProduct product)
+            => PvtecRegex.Matches(product.Content).Cast<Match>().Select(Create);
 
         /// <summary>
         /// Parses the vtec string.
@@ -71,11 +73,11 @@ namespace Emwin.Core.Parsers
 
         private static ValidTimeEventCode Create(Match pvtecMatch) => new ValidTimeEventCode
         {
-            TypeIdentifier = (ValidTimeEventCode.TypeCode) pvtecMatch.Groups["type"].Value[0],
+            TypeIdentifier = (VtecTypeCode) pvtecMatch.Groups["type"].Value[0],
             ActionCode = pvtecMatch.Groups["action"].Value,
             OfficeId = pvtecMatch.Groups["office"].Value,
             PhenomenonCode = pvtecMatch.Groups["phen"].Value,
-            Significance = (ValidTimeEventCode.SignificanceCode) pvtecMatch.Groups["sig"].Value[0],
+            Significance = (VtecSignificanceCode) pvtecMatch.Groups["sig"].Value[0],
             EventNumber = int.Parse(pvtecMatch.Groups["number"].Value),
             Begin = TimeParser.ParseDateTime(pvtecMatch.Groups["begin"].Value),
             End = TimeParser.ParseDateTime(pvtecMatch.Groups["end"].Value)

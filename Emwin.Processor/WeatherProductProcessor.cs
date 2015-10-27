@@ -23,21 +23,21 @@
  */
 
 using System;
-using System.Collections.Generic;
+using Emwin.Core.Interfaces;
 using Emwin.Core.Models;
 using Emwin.Processor.Pipeline;
-using Emwin.Processor.Processor;
 
 namespace Emwin.Processor
 {
-    public class WeatherProductProcessor : IObserver<QuickBlockTransferSegment>, IObservable<WeatherProduct>
+    public class WeatherProductProcessor : IObserver<QuickBlockTransferSegment>
     {
 
         #region Private Fields
 
-        private readonly List<IObserver<WeatherProduct>> _observers = new List<IObserver<WeatherProduct>>();
-
-        private readonly ProcessingPipeline _pipeline;
+        /// <summary>
+        /// The Quick Block Transfer Segment Pipeline observable
+        /// </summary>
+        private readonly IObserver<QuickBlockTransferSegment> _observable;
 
         #endregion Private Fields
 
@@ -48,7 +48,10 @@ namespace Emwin.Processor
         /// </summary>
         public WeatherProductProcessor()
         {
-            _pipeline = new ProcessingPipeline(Filters, product => _observers.ForEach(x => x.OnNext(product)));
+            var pipeline = new PipelineBuilder(Filters);
+            TextProductObservable = pipeline.TextProductObservable;
+            ImageProductObservable = pipeline.ImageProductObservable;
+            _observable = pipeline.SegmentObserver;
         }
 
         #endregion Public Constructors
@@ -59,7 +62,19 @@ namespace Emwin.Processor
         /// Gets the transformer filters.
         /// </summary>
         /// <value>The filters.</value>
-        public Filters Filters { get; } = new Filters();
+        public PipelineFilters Filters { get; } = new PipelineFilters();
+
+        /// <summary>
+        /// Gets the image product observable.
+        /// </summary>
+        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.IImageProduct&gt;.</returns>
+        public IObservable<IImageProduct> ImageProductObservable { get; }
+
+        /// <summary>
+        /// Gets the text product observable.
+        /// </summary>
+        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.ITextProduct&gt;.</returns>
+        public IObservable<ITextProduct> TextProductObservable { get; }
 
         #endregion Public Properties
 
@@ -68,76 +83,20 @@ namespace Emwin.Processor
         /// <summary>
         /// Called when input is completed.
         /// </summary>
-        public void OnCompleted()
-        {
-            _pipeline.Complete();
-        }
+        public void OnCompleted() => _observable.OnCompleted();
 
         /// <summary>
         /// Called when error occurs.
         /// </summary>
         /// <param name="error">The error.</param>
-        public void OnError(Exception error)
-        {
-            _pipeline.Fault(error);
-        }
+        public void OnError(Exception error) => _observable.OnError(error);
 
         /// <summary>
         /// Called when next block segment is available for processing.
         /// </summary>
         /// <param name="blockSegment">The value.</param>
-        public void OnNext(QuickBlockTransferSegment blockSegment)
-        {
-            _pipeline.Post(blockSegment);
-        }
-
-        public IDisposable Subscribe(IObserver<WeatherProduct> observer)
-        {
-            _observers.Add(observer);
-            return new Unsubscriber(() => _observers.Remove(observer));
-        }
+        public void OnNext(QuickBlockTransferSegment blockSegment) => _observable.OnNext(blockSegment);
 
         #endregion Public Methods
-
-        #region Private Classes
-
-        private class Unsubscriber : IDisposable
-        {
-
-            #region Private Fields
-
-            private readonly Action _action;
-
-            #endregion Private Fields
-
-            #region Public Constructors
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="Unsubscriber" /> class.
-            /// </summary>
-            /// <param name="action">The action.</param>
-            public Unsubscriber(Action action)
-            {
-                _action = action;
-            }
-
-            #endregion Public Constructors
-
-            #region Public Methods
-
-            /// <summary>
-            /// Disposes this instance.
-            /// </summary>
-            public void Dispose()
-            {
-                _action();
-            }
-
-            #endregion Public Methods
-
-        }
-
-        #endregion Private Classes
-
     }
 }

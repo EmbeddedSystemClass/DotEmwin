@@ -200,6 +200,12 @@ namespace Emwin.ByteBlaster.Protocol
                     goto case DecoderState.Validate;
 
                 case DecoderState.Validate:
+                    if (Packet.TotalBlocks == 0 || Packet.BlockNumber == 0 || Packet.Checksum == 0)
+                    {
+                        PerformanceCounters.ChecksumErrorsTotal.Increment();
+                        throw new InvalidDataException("Header values out of range. " + Packet);
+                    }
+
                     if (VerifyChecksum(Packet.Content, Packet.Checksum))
                     {
                         ByteBlasterEventSource.Log.Verbose("Packet", Packet.ToString());
@@ -257,6 +263,8 @@ namespace Emwin.ByteBlaster.Protocol
             packet.TotalBlocks = int.Parse(groups["PT"].Value);
             packet.Checksum = int.Parse(groups["CS"].Value);
 
+            if (packet.Checksum == 0) System.Diagnostics.Debugger.Break();
+
             DateTimeOffset ts;
             var dateText = groups["FD"].Value;
             if (DateTimeOffset.TryParseExact(dateText, HeaderDateTimeFormat, CultureInfo.InvariantCulture,
@@ -299,7 +307,7 @@ namespace Emwin.ByteBlaster.Protocol
             var match = HeaderRegex.Match(header);
             if (match.Success)
             {
-                var packet = new QuickBlockTransferSegment { ReceivedAt = DateTimeOffset.UtcNow };
+                var packet = new QuickBlockTransferSegment { ReceivedAt = DateTimeOffset.UtcNow, Header = header };
                 ParseHeaderV1(match.Groups, packet);
                 ParseHeaderV2(match.Groups, packet);
                 return packet;

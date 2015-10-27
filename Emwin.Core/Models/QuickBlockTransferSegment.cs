@@ -22,44 +22,99 @@
  * SOFTWARE.
  */
 
+using System;
+using System.Runtime.Serialization;
+using Emwin.Core.Interfaces;
+using Emwin.Core.Parsers;
+using Emwin.Core.Types;
+
 namespace Emwin.Core.Models
 {
     /// <summary>
-    /// Class QuickBlockPacket.
+    /// Class QuickBlockTransferSegment. A method dividing messages into small pieces to allow the interruption of large, 
+    /// low priority messages by messages of a more immediate nature. The use of this protocol insures timely notification 
+    /// of impending severe weather events, even at a very low data rate.
     /// </summary>
-    public class QuickBlockTransferSegment : AbstractContent
+    [DataContract]
+    public sealed class QuickBlockTransferSegment : IEmwinContent<byte[]>
     {
 
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the block.
+        /// Gets or sets the block number.
         /// </summary>
         /// <value>The block.</value>
+        [DataMember]
         public int BlockNumber { get; set; }
 
         /// <summary>
-        /// Gets or sets the checksum.
+        /// Gets or sets the checksum of the individual block.
         /// </summary>
         /// <value>The checksum.</value>
+        [DataMember]
         public int Checksum { get; set; }
 
         /// <summary>
-        /// Gets or sets the original (before uncompressing) length.
+        /// Gets or sets the raw content of the block.
+        /// </summary>
+        /// <value>The content.</value>
+        [DataMember]
+        public byte[] Content { get; set; }
+
+        /// <summary>
+        /// Gets the type of the file the block is part of.
+        /// </summary>
+        /// <returns>WeatherProductFileType.</returns>
+        [DataMember]
+        public ContentFileType ContentType => ContentTypeParser.GetFileContentType(Filename);
+
+        /// <summary>
+        /// Gets or sets the filename of the file the block is part of.
+        /// </summary>
+        /// <value>The filename.</value>
+        [DataMember]
+        public string Filename { get; set; }
+
+        /// <summary>
+        /// Gets or sets the raw header.
+        /// </summary>
+        /// <value>The header.</value>
+        public string Header { get; set; }
+
+        /// <summary>
+        /// Gets or sets the original (before uncompressing) length of the block.
         /// </summary>
         /// <value>The length.</value>
+        [DataMember]
         public int Length { get; set; }
 
         /// <summary>
-        /// Gets or sets the total blocks.
+        /// Gets or sets the received at time for the block.
+        /// </summary>
+        /// <value>The received at.</value>
+        [DataMember]
+        public DateTimeOffset ReceivedAt { get; set; }
+
+        /// <summary>
+        /// Gets or sets the time stamp of the file the block is part of.
+        /// </summary>
+        /// <value>The time stamp.</value>
+        [DataMember]
+        public DateTimeOffset TimeStamp { get; set; }
+
+        /// <summary>
+        /// Gets or sets the total blocks for the file.
         /// </summary>
         /// <value>The total blocks.</value>
+        [DataMember]
         public int TotalBlocks { get; set; }
 
         /// <summary>
-        /// Gets or sets the version.
+        /// Gets or sets the version of the transfer protocol used.
         /// </summary>
         /// <value>The version.</value>
+        [DataMember]
         public byte Version { get; set; }
 
         #endregion Public Properties
@@ -77,8 +132,9 @@ namespace Emwin.Core.Models
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
-            $"{Filename} Date: {TimeStamp:g} Block #{BlockNumber}/{TotalBlocks} V{Version} Length={Length}";
+            $"[QuickBlockTransferSegment] Filename={Filename} Date={TimeStamp:g} Block#{BlockNumber}/{TotalBlocks} V{Version} Length={Length}";
 
         #endregion Public Methods
+
     }
 }
