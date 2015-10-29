@@ -23,74 +23,82 @@
  */
 
 using System;
+using System.Linq;
 using System.Runtime.Caching;
-using System.Threading.Tasks.Dataflow;
-using Emwin.Core.Models;
+using Emwin.Core.DataObjects;
+using Emwin.Core.EventAggregator;
+using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
 {
     /// <summary>
     /// Class SegmentBundler. Uses a Memory Cache to bundle the segments of a file together.
     /// </summary>
-    internal sealed class SegmentBundler
+    internal sealed class SegmentBundler : IListener<QuickBlockTransferSegment>
     {
-        #region Public Fields
-
-        public static TimeSpan ExpireTime = TimeSpan.FromMinutes(2);
-
-        #endregion Public Fields
 
         #region Private Fields
 
         private readonly ObjectCache _blockCache = new MemoryCache("BlockCache");
+        private readonly IEventPublisher _publisher;
+        private readonly TimeSpan _expireTime;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SegmentBundler"/> class.
+        /// Initializes a new instance of the <see cref="SegmentBundler" /> class.
         /// </summary>
-        public SegmentBundler()
+        /// <param name="publisher">The publisher.</param>
+        /// <param name="expireTime">The expire time.</param>
+        public SegmentBundler(IEventPublisher publisher, TimeSpan? expireTime = null)
         {
-            Block = new TransformBlock<QuickBlockTransferSegment, QuickBlockTransferSegment[]>(x => Execute(x));
+            _publisher = publisher;
+            _expireTime = expireTime ?? TimeSpan.FromMinutes(10);
         }
 
         #endregion Public Constructors
 
-        #region Public Properties
+        #region Public Methods
 
         /// <summary>
-        /// Gets the block.
+        /// This will be called every time a QuickBlockTransferSegment is published through the event aggregator
         /// </summary>
-        /// <value>The block.</value>
-        public TransformBlock<QuickBlockTransferSegment, QuickBlockTransferSegment[]> Block { get; }
-
-        #endregion Public Properties
-
-        #region Private Methods
-
-        private QuickBlockTransferSegment[] Execute(QuickBlockTransferSegment segment)
+        /// <param name="blockSegment">The segment.</param>
+        public void Handle(QuickBlockTransferSegment blockSegment)
         {
-            var key = segment.GetKey();
+            var key = blockSegment.GetKey();
             QuickBlockTransferSegment[] bundle;
 
             // If there is already a bundle in the cache, put the segment into it. 
             if (_blockCache.Contains(key))
             {
                 bundle = (QuickBlockTransferSegment[])_blockCache.Get(key);
-                if (segment.BlockNumber > 0 && segment.BlockNumber <= bundle.Length)
-                    bundle[segment.BlockNumber - 1] = segment;
-                return bundle;
+                if (blockSegment.BlockNumber > 0 && blockSegment.BlockNumber <= bundle.Length)
+                    bundle[blockSegment.BlockNumber - 1] = blockSegment;
+                ProcessorEventSource.Log.Verbose("SegmentBundler",
+                    $"Added segment {blockSegment.BlockNumber} of {blockSegment.TotalBlocks} to existing bundle {blockSegment.Filename}");
+            }
+            else
+            {
+                // Create a new bundle array with the initial segment and add to cache.
+                bundle = new QuickBlockTransferSegment[blockSegment.TotalBlocks];
+                bundle[blockSegment.BlockNumber - 1] = blockSegment;
+                _blockCache.Set(key, bundle, DateTimeOffset.Now.Add(_expireTime));
+                ProcessorEventSource.Log.Verbose("SegmentBundler",
+                    $"Added segment {blockSegment.BlockNumber} of {blockSegment.TotalBlocks} to new bundle {blockSegment.Filename}");
             }
 
-            // Create a new bundle array with the initial segment and add to cache.
-            bundle = new QuickBlockTransferSegment[segment.TotalBlocks];
-            bundle[segment.BlockNumber - 1] = segment;
-            _blockCache.Set(key, bundle, DateTimeOffset.Now.Add(ExpireTime));
-            return bundle;
+            // If all segments are complete, publish the bundle
+            if (bundle.All(s => s != null))
+            {
+                ProcessorEventSource.Log.Info("SegmentBundler", 
+                    $"Completed assembling {blockSegment.TotalBlocks} blocks for bundle {blockSegment.Filename}");
+                _publisher.SendMessage(bundle);
+            }
         }
 
-        #endregion Private Methods
+        #endregion Public Methods
     }
 }

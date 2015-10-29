@@ -28,7 +28,7 @@ using Emwin.Core.Interfaces;
 using Emwin.Core.Parsers;
 using Emwin.Core.Types;
 
-namespace Emwin.Core.Models
+namespace Emwin.Core.DataObjects
 {
     /// <summary>
     /// Class QuickBlockTransferSegment. A method dividing messages into small pieces to allow the interruption of large, 

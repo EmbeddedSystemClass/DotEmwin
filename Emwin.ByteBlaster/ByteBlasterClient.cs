@@ -32,7 +32,7 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Emwin.ByteBlaster.Instrumentation;
 using Emwin.ByteBlaster.Protocol;
-using Emwin.Core.Models;
+using Emwin.Core.DataObjects;
 
 namespace Emwin.ByteBlaster
 {

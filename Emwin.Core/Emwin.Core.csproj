@@ -43,11 +43,14 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventAggregator\ObservableListener.cs" />
+    <Compile Include="EventAggregator\EventAggregator.cs" />
+    <Compile Include="EventAggregator\EventAggregatorExtensions.cs" />
     <Compile Include="Interfaces\ICompressedContent.cs" />
     <Compile Include="Interfaces\IImageProduct.cs" />
     <Compile Include="Interfaces\ITextProduct.cs" />
-    <Compile Include="Models\ByteBlasterServerList.cs" />
-    <Compile Include="Models\CommsHeader.cs" />
+    <Compile Include="DataObjects\ByteBlasterServerList.cs" />
+    <Compile Include="DataObjects\CommsHeader.cs" />
     <Compile Include="Interfaces\IEmwinContent.cs" />
     <Compile Include="Types\ContentFileType.cs" />
     <Compile Include="Types\VtecSignificanceCode.cs" />
@@ -56,7 +59,7 @@
     <Compile Include="Types\ImageFormatType.cs" />
     <Compile Include="Products\ProductFactory.cs" />
     <Compile Include="Products\GraphicProduct.cs" />
-    <Compile Include="Models\QuickBlockTransferSegment.cs" />
+    <Compile Include="DataObjects\QuickBlockTransferSegment.cs" />
     <Compile Include="Products\CompressedProduct.cs" />
     <Compile Include="Products\TextProduct.cs" />
     <Compile Include="Parsers\HeadingParser.cs" />
@@ -66,8 +69,8 @@
     <Compile Include="Parsers\TimeParser.cs" />
     <Compile Include="Parsers\UgcParser.cs" />
     <Compile Include="Parsers\VtecParser.cs" />
-    <Compile Include="Models\UniversalGeographicCode.cs" />
-    <Compile Include="Models\ValidTimeEventCode.cs" />
+    <Compile Include="DataObjects\UniversalGeographicCode.cs" />
+    <Compile Include="DataObjects\ValidTimeEventCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="References\GraphicProduct.Designer.cs">
       <AutoGen>True</AutoGen>

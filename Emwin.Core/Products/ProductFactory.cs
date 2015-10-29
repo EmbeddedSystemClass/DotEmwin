@@ -28,7 +28,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Emwin.Core.Models;
+using Emwin.Core.DataObjects;
 using Emwin.Core.Interfaces;
 using Emwin.Core.Parsers;
 using Emwin.Core.Types;
@@ -42,58 +42,6 @@ namespace Emwin.Core.Products
     {
 
         #region Public Methods
-
-        /// <summary>
-        /// Creates product from the segments.
-        /// </summary>
-        /// <param name="segments">The segments.</param>
-        /// <returns>IEmwinContent.</returns>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        public static IEmwinContent Create(QuickBlockTransferSegment[] segments)
-        {
-            if (segments == null) throw new ArgumentNullException(nameof(segments));
-
-            var contentType = segments.First(x => x != null).ContentType;
-            switch (contentType)
-            {
-                case ContentFileType.Text:
-                    return CreateTextProduct(segments);
-
-                case ContentFileType.Image:
-                    return CreateImageProduct(segments);
-
-                case ContentFileType.Compressed:
-                    return CreateCompressedContent(segments);
-            }
-
-            throw new ArgumentException("Content Type '" + contentType + "' not valid for method", nameof(segments));
-        }
-
-        /// <summary>
-        /// Creates product content.
-        /// </summary>
-        /// <param name="filename">The filename.</param>
-        /// <param name="timeStamp">The time stamp.</param>
-        /// <param name="content">The content.</param>
-        /// <param name="receivedAt">The received at.</param>
-        /// <returns>IEmwinContent.</returns>
-        public static IEmwinContent Create(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt)
-        {
-            var contentType = ContentTypeParser.GetFileContentType(filename);
-            switch (contentType)
-            {
-                case ContentFileType.Text:
-                    return CreateTextProduct(filename, timeStamp, content, receivedAt);
-
-                case ContentFileType.Image:
-                    return CreateImageProduct(filename, timeStamp, content, receivedAt);
-
-                case ContentFileType.Compressed:
-                    return CreateCompressedContent(filename, timeStamp, content, receivedAt);
-            }
-
-            throw new ArgumentException("Content Type '" + contentType + "' not valid for method", nameof(filename));
-        }
 
         /// <summary>
         /// Creates the compressed.

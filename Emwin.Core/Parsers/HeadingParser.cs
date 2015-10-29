@@ -23,8 +23,8 @@
  */
 
 using System.Text.RegularExpressions;
+using Emwin.Core.DataObjects;
 using Emwin.Core.Interfaces;
-using Emwin.Core.Models;
 using Emwin.Core.Types;
 
 namespace Emwin.Core.Parsers

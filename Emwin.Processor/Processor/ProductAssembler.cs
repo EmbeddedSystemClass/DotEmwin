@@ -23,72 +23,71 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Caching;
-using System.Threading.Tasks.Dataflow;
-using Emwin.Core.Models;
+using Emwin.Core.DataObjects;
+using Emwin.Core.EventAggregator;
 using Emwin.Processor.Instrumentation;
-using Emwin.Core.Interfaces;
 using Emwin.Core.Products;
+using Emwin.Core.Types;
 
 namespace Emwin.Processor.Processor
 {
     /// <summary>
     /// Class ProductAssembler. Assembles bundles of segments into a product by combining all the bytes from each segment.
     /// </summary>
-    internal sealed class ProductAssembler
+    internal sealed class ProductAssembler : IListener<QuickBlockTransferSegment[]>
     {
-        #region Public Constructors
+        private readonly IEventPublisher _publisher;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductAssembler"/> class.
         /// </summary>
-        public ProductAssembler()
+        /// <param name="publisher">The publisher.</param>
+        public ProductAssembler(IEventPublisher publisher)
         {
-            Block = new TransformManyBlock<QuickBlockTransferSegment[], IEmwinContent>(x => Execute(x),
-                new ExecutionDataflowBlockOptions {MaxDegreeOfParallelism = -1});
+            _publisher = publisher;
         }
 
-        #endregion Public Constructors
-
-        #region Public Properties
-
         /// <summary>
-        /// Gets the block.
-        /// </summary>
-        /// <value>The block.</value>
-        public TransformManyBlock<QuickBlockTransferSegment[], IEmwinContent> Block { get; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Filters the specified bundle.
+        /// This will be called every time a QuickBlockTransferSegment[] bundle is published through the event aggregator
         /// </summary>
         /// <param name="bundle">The bundle.</param>
-        /// <returns>System.Boolean.</returns>
-        public bool Predicate(QuickBlockTransferSegment[] bundle) => bundle.All(s => s != null);
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private IEnumerable<IEmwinContent> Execute(QuickBlockTransferSegment[] segments)
+        public void Handle(QuickBlockTransferSegment[] bundle)
         {
-            var product = ProductFactory.Create(segments);
+            try
+            {
+                var contentType = bundle.First(x => x != null).ContentType;
+                switch (contentType)
+                {
+                    case ContentFileType.Text:
+                        var textProduct = ProductFactory.CreateTextProduct(bundle);
+                        _publisher.SendMessage(textProduct);
+                        ProcessorEventSource.Log.Info("ProductAssembler", textProduct.ToString());
+                        break;
 
-            if (product == null)
-                yield break;
+                    case ContentFileType.Image:
+                        var imageProduct = ProductFactory.CreateImageProduct(bundle);
+                        _publisher.SendMessage(imageProduct);
+                        ProcessorEventSource.Log.Info("ProductAssembler", imageProduct.ToString());
+                        break;
 
-            ProcessorEventSource.Log.Verbose("Product", product.ToString());
-            PerformanceCounters.ProductsCreatedTotal.Increment();
+                    case ContentFileType.Compressed:
+                        var compressedProduct = ProductFactory.CreateCompressedContent(bundle);
+                        _publisher.SendMessage(compressedProduct);
+                        ProcessorEventSource.Log.Info("ProductAssembler", compressedProduct.ToString());
+                        break;
 
-            yield return product;
+                    default:
+                        ProcessorEventSource.Log.Warning("ProductAssembler", "Unknown content file type: " + contentType);
+                        return;
+                };
+
+                PerformanceCounters.ProductsCreatedTotal.Increment();
+            }
+            catch (Exception ex)
+            {
+                ProcessorEventSource.Log.Error("ProductAssembler", ex.ToString());
+            }
         }
-
-        #endregion Private Methods
-
     }
 }

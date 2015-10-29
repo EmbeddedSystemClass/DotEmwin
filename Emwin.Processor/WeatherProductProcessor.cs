@@ -23,9 +23,11 @@
  */
 
 using System;
+using Emwin.Core.DataObjects;
+using Emwin.Core.EventAggregator;
 using Emwin.Core.Interfaces;
-using Emwin.Core.Models;
-using Emwin.Processor.Pipeline;
+using Emwin.Processor.Instrumentation;
+using Emwin.Processor.Processor;
 
 namespace Emwin.Processor
 {
@@ -34,10 +36,9 @@ namespace Emwin.Processor
 
         #region Private Fields
 
-        /// <summary>
-        /// The Quick Block Transfer Segment Pipeline observable
-        /// </summary>
-        private readonly IObserver<QuickBlockTransferSegment> _observable;
+        private readonly EventAggregator _eventAggregator = new EventAggregator();
+        private readonly ObservableListener<IImageProduct> _imageObservable = new ObservableListener<IImageProduct>();
+        private readonly ObservableListener<ITextProduct> _textObservable = new ObservableListener<ITextProduct>();
 
         #endregion Private Fields
 
@@ -49,10 +50,12 @@ namespace Emwin.Processor
         /// <param name="observable">The observable.</param>
         public WeatherProductProcessor(IObservable<QuickBlockTransferSegment> observable = null)
         {
-            var pipeline = new PipelineBuilder(Filters);
-            TextProductObservable = pipeline.TextProductObservable;
-            ImageProductObservable = pipeline.ImageProductObservable;
-            _observable = pipeline.SegmentObserver;
+            _eventAggregator
+                .AddListener(new SegmentBundler(_eventAggregator))
+                .AddListener(new ProductAssembler(_eventAggregator))
+                .AddListener(new ZipProcessor(_eventAggregator))
+                .AddListener(_textObservable)
+                .AddListener(_imageObservable);
 
             observable?.Subscribe(this);
         }
@@ -62,44 +65,54 @@ namespace Emwin.Processor
         #region Public Properties
 
         /// <summary>
-        /// Gets the transformer filters.
+        /// Gets the pipeline event subscription manager.
         /// </summary>
-        /// <value>The filters.</value>
-        public PipelineFilters Filters { get; } = new PipelineFilters();
-
-        /// <summary>
-        /// Gets the image product observable.
-        /// </summary>
-        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.IImageProduct&gt;.</returns>
-        public IObservable<IImageProduct> ImageProductObservable { get; }
-
-        /// <summary>
-        /// Gets the text product observable.
-        /// </summary>
-        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.ITextProduct&gt;.</returns>
-        public IObservable<ITextProduct> TextProductObservable { get; }
+        /// <value>The pipeline.</value>
+        public IEventSubscriptionManager Pipeline => _eventAggregator;
 
         #endregion Public Properties
 
         #region Public Methods
 
         /// <summary>
+        /// Gets the image observable.
+        /// </summary>
+        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.ITextProduct&gt;.</returns>
+        public IObservable<IImageProduct> GetImageObservable() => _imageObservable;
+
+        /// <summary>
+        /// Gets the text observable.
+        /// </summary>
+        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.ITextProduct&gt;.</returns>
+        public IObservable<ITextProduct> GetTextObservable() => _textObservable;
+
+        /// <summary>
         /// Called when input is completed.
         /// </summary>
-        public void OnCompleted() => _observable.OnCompleted();
+        public void OnCompleted()
+        {
+            ProcessorEventSource.Log.Info("WeatherProductProcessor", "Observable source indicated completion");
+        }
 
         /// <summary>
         /// Called when error occurs.
         /// </summary>
         /// <param name="error">The error.</param>
-        public void OnError(Exception error) => _observable.OnError(error);
+        public void OnError(Exception error)
+        {
+            ProcessorEventSource.Log.Error("WeatherProductProcessor", "Observable source error: " + error);
+        }
 
         /// <summary>
         /// Called when next block segment is available for processing.
         /// </summary>
         /// <param name="blockSegment">The value.</param>
-        public void OnNext(QuickBlockTransferSegment blockSegment) => _observable.OnNext(blockSegment);
+        public void OnNext(QuickBlockTransferSegment blockSegment)
+        {
+            _eventAggregator.SendMessage(blockSegment);
+        }
 
         #endregion Public Methods
+
     }
 }

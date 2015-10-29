@@ -27,7 +27,7 @@ using System.Runtime.Serialization;
 using Emwin.Core.References;
 using Emwin.Core.Types;
 
-namespace Emwin.Core.Models
+namespace Emwin.Core.DataObjects
 {
     /// <summary>
     /// Valid Time Event Code (VTEC).

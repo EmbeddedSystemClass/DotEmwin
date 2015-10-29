@@ -23,51 +23,60 @@
  */
 
 using System;
-using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks.Dataflow;
-using Emwin.Core.Interfaces;
-using Emwin.Core.Models;
+using Emwin.Core.EventAggregator;
 using Emwin.Core.Parsers;
 using Emwin.Core.Products;
 using Emwin.Core.Types;
-using Emwin.Processor.Pipeline;
+using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
 {
-    internal sealed class ZipProcessor
+    internal sealed class ZipProcessor : IListener<CompressedProduct>
     {
-        #region Public Properties
+        #region Private Fields
+
+        private readonly IEventPublisher _publisher;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         /// <summary>
-        /// Gets the block.
+        /// Initializes a new instance of the <see cref="ZipProcessor"/> class.
         /// </summary>
-        /// <value>The block.</value>
-        public TransformBlock<IEmwinContent, IEmwinContent> Block { get; } = new TransformBlock<IEmwinContent, IEmwinContent>(
-            product => Unzip((CompressedProduct) product),
-            new ExecutionDataflowBlockOptions {MaxDegreeOfParallelism = -1});
+        /// <param name="publisher">The publisher.</param>
+        public ZipProcessor(IEventPublisher publisher)
+        {
+            _publisher = publisher;
+        }
 
-        #endregion Public Properties
+        #endregion Public Constructors
 
-        /// <summary>
-        /// Filters the specified content.
-        /// </summary>
-        /// <param name="content">The content.</param>
-        /// <returns>System.Boolean.</returns>
-        public bool Predicate(IEmwinContent content) => content is ICompressedContent;
-
-        #region Private Methods
+        #region Public Methods
 
         /// <summary>
+        /// This will be called every time a CompressedProduct is published through the event aggregator
         /// Unzips the product and returns the first contained product in the zip. 
         /// Assumes a single product is contained inside the zip file.
         /// </summary>
-        /// <param name="product">The compressed product.</param>
-        /// <returns>WeatherProduct.</returns>
-        private static IEmwinContent Unzip(CompressedProduct product)
+        /// <param name="product">The product.</param>
+        public void Handle(CompressedProduct product)
+        {
+            try
+            {
+                UnZip(product);
+                ProcessorEventSource.Log.Info("ZipProcessor", "Completed unzipping " + product.Filename);
+            }
+            catch (Exception ex)
+            {
+                ProcessorEventSource.Log.Error("ZipProcessor", ex.ToString());
+            }
+        }
+
+        private void UnZip(CompressedProduct product)
         {
             using (var zip = new ZipArchive(product.GetStream(), ZipArchiveMode.Read))
             {
@@ -75,22 +84,34 @@ namespace Emwin.Processor.Processor
                 using (var fileStream = file.Open())
                 {
                     var content = ReadAllBytes(fileStream);
-
-                    switch (ContentTypeParser.GetFileContentType(file.Name))
+                    var contentType = ContentTypeParser.GetFileContentType(file.Name);
+                    switch (contentType)
                     {
                         case ContentFileType.Text:
-                            return ProductFactory.CreateTextProduct(file.Name.ToUpperInvariant(), file.LastWriteTime,
-                                content, DateTimeOffset.UtcNow);
+                            var textProduct = ProductFactory.CreateTextProduct(
+                                file.Name.ToUpperInvariant(),file.LastWriteTime, content, DateTimeOffset.UtcNow);
+                            _publisher.SendMessage(textProduct);
+                            ProcessorEventSource.Log.Info("ZipProcessor", textProduct.ToString());
+                            break;
 
                         case ContentFileType.Image:
-                            return ProductFactory.CreateImageProduct(file.Name.ToUpperInvariant(), file.LastWriteTime,
-                                content, DateTimeOffset.UtcNow);
+                            var imageProduct = ProductFactory.CreateImageProduct(
+                                file.Name.ToUpperInvariant(), file.LastWriteTime, content, DateTimeOffset.UtcNow);
+                            _publisher.SendMessage(imageProduct);
+                            ProcessorEventSource.Log.Info("ZipProcessor", imageProduct.ToString());
+                            break;
+
+                        default:
+                            ProcessorEventSource.Log.Warning("ZipProcessor", "Unknown content file type: " + contentType);
+                            return;
                     }
                 }
             }
-
-            return product;
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private static byte[] ReadAllBytes(Stream stream)
         {
@@ -100,7 +121,6 @@ namespace Emwin.Processor.Processor
                 return ms.ToArray();
             }
         }
-
 
         #endregion Private Methods
     }

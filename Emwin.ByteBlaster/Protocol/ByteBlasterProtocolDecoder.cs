@@ -34,7 +34,7 @@ using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
 using Emwin.ByteBlaster.Instrumentation;
-using Emwin.Core.Models;
+using Emwin.Core.DataObjects;
 
 namespace Emwin.ByteBlaster.Protocol
 {

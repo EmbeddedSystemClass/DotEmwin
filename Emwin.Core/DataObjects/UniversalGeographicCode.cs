@@ -1,4 +1,4 @@
-﻿/*
+/*
  * The MIT License (MIT)
  * 
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
@@ -24,62 +24,44 @@
 
 using System;
 using System.Runtime.Serialization;
-using Emwin.Core.Types;
 
-namespace Emwin.Core.Models
+namespace Emwin.Core.DataObjects
 {
     /// <summary>
-    /// CommsHeader represents the WMO abbreviated heading of the product.
-    /// 
-    /// PURPOSE of the Abbreviated Heading;
-    ///
-    /// The heading is to provide a means by which communication data managers recognize a bulletin for telecommunication "switching" purposes.
-    /// The heading permits a uniqueness for a bulletin, which is sufficient enough to control the data for selective transmission required to meet the needs of the receiving end.
-    /// The heading is for accountability in the transmission delivery process by the switching system for data management purposes.
-    /// The heading is not intended for the data processing systems, as the first few lines of the text(bulletin content) further defines it for processing. (ref. WMO Codes Manual 306)
-    /// 
-    /// http://www.nws.noaa.gov/tg/head.php
-    /// http://www.nws.noaa.gov/tg/headef.php
-    /// http://www.nws.noaa.gov/tg/table.php
+    /// Universal Geographic Code.
     /// </summary>
     [DataContract]
-    public class CommsHeader
+    public class UniversalGeographicCode
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the type of the data.
+        /// Gets or sets the zone or county element.
         /// </summary>
-        /// <value>The type of the data.</value>
-        public T1DataTypeCode DataType { get; set; }
-
-        /// <summary>
-        /// Gets the 6 character wmo identifier.
-        /// </summary>
-        /// <value>The wmo identifier.</value>
+        /// <value>The element.</value>
         [DataMember]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets the indicator.
+        /// Gets or sets the purge time.
         /// </summary>
-        /// <value>The indicator.</value>
+        /// <value>The purge time.</value>
         [DataMember]
-        public string Indicator { get; set; }
+        public DateTimeOffset PurgeTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the originating station.
+        /// Gets or sets the state.
         /// </summary>
-        /// <value>The wmo station.</value>
+        /// <value>The state.</value>
         [DataMember]
-        public string OriginatingOffice { get; set; }
+        public string State { get; set; }
 
         /// <summary>
-        /// Gets or sets the wmo time.
+        /// Gets or sets the type.
         /// </summary>
-        /// <value>The wmo time.</value>
+        /// <value>The type.</value>
         [DataMember]
-        public DateTimeOffset Time { get; set; }
+        public char Type { get; set; }
 
         #endregion Public Properties
 
@@ -89,9 +71,8 @@ namespace Emwin.Core.Models
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() => $"DataType={DataType} Id={Id} Station={OriginatingOffice} Time={Time:g} Indicator={Indicator}";
+        public override string ToString() => $"Type: {Type} State: {State} Id: {Id} PurgeTime: {PurgeTime:g}";
 
         #endregion Public Methods
-
     }
 }

@@ -25,7 +25,6 @@
 using System;
 using System.Drawing;
 using Emwin.Core.Interfaces;
-using Emwin.Core.Models;
 using Emwin.Core.Types;
 
 namespace Emwin.Core.Products

@@ -23,7 +23,7 @@
  */
 
 using System.Collections.Generic;
-using Emwin.Core.Models;
+using Emwin.Core.DataObjects;
 
 namespace Emwin.Core.Interfaces
 {

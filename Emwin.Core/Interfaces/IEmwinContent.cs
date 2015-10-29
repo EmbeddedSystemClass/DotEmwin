@@ -23,7 +23,6 @@
  */
 
 using System;
-using Emwin.Core.Models;
 using Emwin.Core.Types;
 
 namespace Emwin.Core.Interfaces

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 using System.IO;
-using Emwin.Core.Models;
 using Emwin.Core.Types;
 
 namespace Emwin.Core.Parsers

@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-namespace Emwin.Core.Models
+namespace Emwin.Core.DataObjects
 {
     /// <summary>
     /// Class ByteBlasterServerList.
