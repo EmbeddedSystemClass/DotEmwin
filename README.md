@@ -19,6 +19,7 @@ using System.Linq;
 using Emwin.ByteBlaster;
 using Emwin.ByteBlaster.Instrumentation;
 using Emwin.Processor;
+using Emwin.Processor.Instrumentation;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 
 namespace EmwinTest
