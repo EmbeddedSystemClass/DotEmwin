@@ -33,7 +33,7 @@ namespace Emwin.Core.Parsers
     {
         public static ContentFileType GetFileContentType(string filename)
         {
-            switch (Path.GetExtension(filename))
+            switch (Path.GetExtension(filename.ToUpperInvariant()))
             {
                 case ".TXT":
                     return ContentFileType.Text;

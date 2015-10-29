@@ -102,7 +102,7 @@ namespace Emwin.Processor.Processor
                             break;
 
                         default:
-                            ProcessorEventSource.Log.Warning("ZipProcessor", "Unknown content file type: " + contentType);
+                            ProcessorEventSource.Log.Warning("ZipProcessor", "Unknown content file type: " + file.Name);
                             return;
                     }
                 }
