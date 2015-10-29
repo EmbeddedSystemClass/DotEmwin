@@ -29,9 +29,10 @@ namespace EmwinTest
         {
             var listener = ConsoleLog.CreateListener();
             listener.EnableEvents(ByteBlasterEventSource.Log, EventLevel.Verbose);
+            listener.EnableEvents(ProcessorEventSource.Log, EventLevel.Verbose);
 
             var processor = new WeatherProductProcessor();
-            processor.TextProductObservable.Subscribe(product =>
+            processor.GetTextObservable().Subscribe(product =>
             {
                 Console.WriteLine(product);
                 Console.WriteLine(product.Header);
