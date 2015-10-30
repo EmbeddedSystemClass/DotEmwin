@@ -43,6 +43,12 @@ namespace Emwin.Core.Products
         public Image Content { get; set; }
 
         /// <summary>
+        /// Gets the content.
+        /// </summary>
+        /// <value>The content.</value>
+        object IEmwinContent.Content => Content;
+
+        /// <summary>
         /// Gets the type of the content.
         /// </summary>
         /// <value>The type of the content.</value>

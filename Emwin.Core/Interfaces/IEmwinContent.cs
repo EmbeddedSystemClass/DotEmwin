@@ -35,6 +35,12 @@ namespace Emwin.Core.Interfaces
         #region Public Properties
 
         /// <summary>
+        /// Gets the content.
+        /// </summary>
+        /// <value>The content.</value>
+        object Content { get; }
+
+        /// <summary>
         /// Gets the type of the content.
         /// </summary>
         /// <value>The type of the content.</value>
@@ -73,7 +79,7 @@ namespace Emwin.Core.Interfaces
         /// Gets the content.
         /// </summary>
         /// <value>The content.</value>
-        T Content { get; }
+        new T Content { get; }
 
         #endregion Public Properties
     }

@@ -43,6 +43,10 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventAggregator\IEventAggregator.cs" />
+    <Compile Include="EventAggregator\IEventPublisher.cs" />
+    <Compile Include="EventAggregator\IEventSubscriptionManager.cs" />
+    <Compile Include="EventAggregator\IHandle.cs" />
     <Compile Include="EventAggregator\ObservableListener.cs" />
     <Compile Include="EventAggregator\EventAggregator.cs" />
     <Compile Include="EventAggregator\EventAggregatorExtensions.cs" />

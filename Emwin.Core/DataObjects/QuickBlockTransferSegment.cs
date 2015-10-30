@@ -63,6 +63,12 @@ namespace Emwin.Core.DataObjects
         public byte[] Content { get; set; }
 
         /// <summary>
+        /// Gets the content.
+        /// </summary>
+        /// <value>The content.</value>
+        object IEmwinContent.Content => Content;
+
+        /// <summary>
         /// Gets the type of the file the block is part of.
         /// </summary>
         /// <returns>WeatherProductFileType.</returns>
