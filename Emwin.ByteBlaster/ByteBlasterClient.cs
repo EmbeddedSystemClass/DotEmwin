@@ -48,6 +48,7 @@ namespace Emwin.ByteBlaster
         private static readonly IEventLoopGroup ExecutorGroup = new MultithreadEventLoopGroup();
         private readonly Bootstrap _channelBootstrap;
         private readonly List<IObserver<QuickBlockTransferSegment>> _observers = new List<IObserver<QuickBlockTransferSegment>>();
+        private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
         private CancellationTokenSource _cancelSource;
         private IChannel _channel;
         private Task _task;
@@ -74,7 +75,15 @@ namespace Emwin.ByteBlaster
                     new ByteBlasterWatchdogHandler(),
                     new ChannelEventHandler<QuickBlockTransferSegment>((ctx, segment) =>
                     {
-                        lock (_observers) _observers.ForEach(o => o.OnNext(segment));
+                        try
+                        {
+                            _lock.EnterReadLock();
+                            _observers.ForEach(o => o.OnNext(segment));
+                        }
+                        finally
+                        {
+                            _lock.ExitReadLock();
+                        }
                     }),
                     new ChannelEventHandler<ByteBlasterServerList>((ctx, serverList) => ServerList = serverList)
                 )));
@@ -157,10 +166,28 @@ namespace Emwin.ByteBlaster
         {
             if (observer == null) throw new ArgumentNullException(nameof(observer));
 
-            lock (_observers)
+            try
+            {
+                _lock.EnterWriteLock();
                 _observers.Add(observer);
+            }
+            finally
+            {
+                _lock.ExitWriteLock();
+            }
 
-            return new Unsubscriber(() => { lock (_observers) _observers.Remove(observer); });
+            return new Unsubscriber(() =>
+            {
+                try
+                {
+                    _lock.EnterWriteLock();
+                    _observers.Remove(observer);
+                }
+                finally
+                {
+                    _lock.ExitWriteLock();
+                }
+            });
         }
 
         #endregion Public Methods
@@ -194,10 +221,15 @@ namespace Emwin.ByteBlaster
                 await Task.Delay(5000, _cancelSource.Token);
             }
 
-            lock (_observers)
+            try
             {
+                _lock.EnterReadLock();
                 _observers.ForEach(o => o.OnCompleted());
                 _observers.Clear();
+            }
+            finally
+            {
+                _lock.ExitWriteLock();
             }
         }
 
