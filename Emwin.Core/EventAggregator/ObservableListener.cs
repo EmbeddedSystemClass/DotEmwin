@@ -23,6 +23,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Emwin.Core.EventAggregator
 {
@@ -31,6 +32,7 @@ namespace Emwin.Core.EventAggregator
         #region Private Fields
 
         private readonly List<IObserver<T>> _observers = new List<IObserver<T>>();
+        private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
         #endregion Private Fields
 
@@ -45,14 +47,16 @@ namespace Emwin.Core.EventAggregator
         {
             try
             {
-                lock (_observers)
-                {
-                    _observers.ForEach(o => o.OnNext(message));
-                }
+                _lock.EnterReadLock();
+                _observers.ForEach(o => o.OnNext(message));
             }
             catch
             {
-                // ignored
+                // Ignore errors
+            }
+            finally
+            {
+                _lock.ExitReadLock();
             }
         }
 
@@ -66,13 +70,27 @@ namespace Emwin.Core.EventAggregator
             if (observer == null)
                 throw new ArgumentNullException(nameof(observer));
 
-            lock (_observers)
+            try
+            {
+                _lock.EnterWriteLock();
                 _observers.Add(observer);
+            }
+            finally
+            {
+                _lock.ExitWriteLock();
+            }
 
             return new DisposeAction(() =>
             {
-                lock (_observers) 
+                try
+                {
+                    _lock.EnterWriteLock();
                     _observers.Remove(observer);
+                }
+                finally
+                {
+                    _lock.ExitWriteLock();
+                }
             });
         }
 
