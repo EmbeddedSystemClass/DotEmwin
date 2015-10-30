@@ -56,6 +56,8 @@
     <Compile Include="DataObjects\ByteBlasterServerList.cs" />
     <Compile Include="DataObjects\CommsHeader.cs" />
     <Compile Include="Contracts\IEmwinContent.cs" />
+    <Compile Include="EventAggregator\Pipeline.cs" />
+    <Compile Include="EventAggregator\IPipelineFilter.cs" />
     <Compile Include="Types\ContentFileType.cs" />
     <Compile Include="Types\VtecSignificanceCode.cs" />
     <Compile Include="Types\VtecTypeCode.cs" />
