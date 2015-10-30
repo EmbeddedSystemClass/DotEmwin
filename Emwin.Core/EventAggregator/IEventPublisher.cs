@@ -1,4 +1,4 @@
-﻿/*
+/*
  * 
  * License: 
  * 
@@ -24,72 +24,33 @@
  *     (C) If you distribute any portion of the software, you must retain all copyright, patent, trademark, and attribution notices that are present in the software.
  *     (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
- * 
- * Little bit of history:
- *     EventAggregator origins based on work from StatLight's EventAggregator. Which 
- *     is based on original work by Jermey Miller's EventAggregator in StoryTeller 
- *     with some concepts pulled from Rob Eisenberg in caliburnmicro.
- * 
- * TODO:
- *     - Possibly provide well defined initial thread marshalling actions (depending on platform (WinForm, WPF, Silverlight, WP7???)
- *     - Document the public API better.
- *		
- * Thanks to:
- *     - Jermey Miller - initial implementation
- *     - Rob Eisenberg - pulled some ideas from the caliburn micro event aggregator
- *     - Jake Ginnivan - https://github.com/JakeGinnivan - thanks for the pull requests
- * 
  */
-
 using System;
 
-// ReSharper disable InconsistentNaming
 namespace Emwin.Core.EventAggregator
 {
-    public static class EventAggregatorExtensions
+    /// <summary>
+    /// Interface IEventPublisher
+    /// </summary>
+    public interface IEventPublisher
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-        public static IDisposable AddListenerAction<T>(this IEventSubscriptionManager eventAggregator, Action<T> listener)
-        {
-            if (eventAggregator == null) throw new ArgumentNullException(nameof(eventAggregator));
-            if (listener == null) throw new ArgumentNullException(nameof(listener));
+        /// <summary>
+        /// Sends the message.
+        /// </summary>
+        /// <typeparam name="TMessage">The type of the t message.</typeparam>
+        /// <param name="message">The message.</param>
+        /// <param name="marshal">The marshal.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        void SendMessage<TMessage>(TMessage message, Action<Action> marshal = null);
 
-            var delegateListener = new DelegateListener<T>(listener, eventAggregator);
-            eventAggregator.AddListener(delegateListener);
-
-            return delegateListener;
-        }
-    }
-
-    public class DelegateListener<T> : IHandle<T>, IDisposable
-    {
-        private readonly Action<T> _listener;
-        private readonly IEventSubscriptionManager _eventSubscriptionManager;
-
-        public DelegateListener(Action<T> listener, IEventSubscriptionManager eventSubscriptionManager)
-        {
-            _listener = listener;
-            _eventSubscriptionManager = eventSubscriptionManager;
-        }
-
-        public void Handle(T message)
-        {
-            _listener(message);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _eventSubscriptionManager.RemoveListener(this);
-            }
-        }
+        /// <summary>
+        /// Sends the message.
+        /// </summary>
+        /// <typeparam name="TMessage">The type of the t message.</typeparam>
+        /// <param name="marshal">The marshal.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter"),
+         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        void SendMessage<TMessage>(Action<Action> marshal = null)
+            where TMessage : new();
     }
 }
-// ReSharper enable InconsistentNaming

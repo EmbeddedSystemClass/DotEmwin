@@ -1,4 +1,4 @@
-﻿/*
+/*
  * 
  * License: 
  * 
@@ -24,72 +24,24 @@
  *     (C) If you distribute any portion of the software, you must retain all copyright, patent, trademark, and attribution notices that are present in the software.
  *     (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
- * 
- * Little bit of history:
- *     EventAggregator origins based on work from StatLight's EventAggregator. Which 
- *     is based on original work by Jermey Miller's EventAggregator in StoryTeller 
- *     with some concepts pulled from Rob Eisenberg in caliburnmicro.
- * 
- * TODO:
- *     - Possibly provide well defined initial thread marshalling actions (depending on platform (WinForm, WPF, Silverlight, WP7???)
- *     - Document the public API better.
- *		
- * Thanks to:
- *     - Jermey Miller - initial implementation
- *     - Rob Eisenberg - pulled some ideas from the caliburn micro event aggregator
- *     - Jake Ginnivan - https://github.com/JakeGinnivan - thanks for the pull requests
- * 
  */
-
-using System;
-
-// ReSharper disable InconsistentNaming
 namespace Emwin.Core.EventAggregator
 {
-    public static class EventAggregatorExtensions
+    /// <summary>
+    /// Specifies a class that would like to receive particular messages.
+    /// </summary>
+    /// <typeparam name="TMessage">The type of message object to subscribe to.</typeparam>
+#if WINDOWS_PHONE
+    public interface IHandle<TMessage>
+#else
+    public interface IHandle<in TMessage>
+#endif
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-        public static IDisposable AddListenerAction<T>(this IEventSubscriptionManager eventAggregator, Action<T> listener)
-        {
-            if (eventAggregator == null) throw new ArgumentNullException(nameof(eventAggregator));
-            if (listener == null) throw new ArgumentNullException(nameof(listener));
-
-            var delegateListener = new DelegateListener<T>(listener, eventAggregator);
-            eventAggregator.AddListener(delegateListener);
-
-            return delegateListener;
-        }
-    }
-
-    public class DelegateListener<T> : IHandle<T>, IDisposable
-    {
-        private readonly Action<T> _listener;
-        private readonly IEventSubscriptionManager _eventSubscriptionManager;
-
-        public DelegateListener(Action<T> listener, IEventSubscriptionManager eventSubscriptionManager)
-        {
-            _listener = listener;
-            _eventSubscriptionManager = eventSubscriptionManager;
-        }
-
-        public void Handle(T message)
-        {
-            _listener(message);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _eventSubscriptionManager.RemoveListener(this);
-            }
-        }
+        /// <summary>
+        /// This will be called every time a TMessage is published through the event aggregator
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="ctx">The Event Aggregator context.</param>
+        void Handle(TMessage message, IEventAggregator ctx);
     }
 }
-// ReSharper enable InconsistentNaming

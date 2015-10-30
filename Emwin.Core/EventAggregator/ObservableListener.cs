@@ -26,7 +26,7 @@ using System.Collections.Generic;
 
 namespace Emwin.Core.EventAggregator
 {
-    public class ObservableListener<T> : IListener<T>, IObservable<T>
+    public class ObservableListener<T> : IHandle<T>, IObservable<T>
     {
         #region Private Fields
 

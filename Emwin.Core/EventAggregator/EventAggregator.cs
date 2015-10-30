@@ -52,77 +52,32 @@ using System.Reflection;
 namespace Emwin.Core.EventAggregator
 {
     /// <summary>
-    /// Specifies a class that would like to receive particular messages.
+    /// Class EventAggregator.
     /// </summary>
-    /// <typeparam name="TMessage">The type of message object to subscribe to.</typeparam>
-#if WINDOWS_PHONE
-    public interface IListener<TMessage>
-#else
-    public interface IListener<in TMessage>
-#endif
-    {
-        /// <summary>
-        /// This will be called every time a TMessage is published through the event aggregator
-        /// </summary>
-        void Handle(TMessage message);
-    }
-
-    /// <summary>
-    /// Provides a way to add and remove a listener object from the EventAggregator
-    /// </summary>
-    public interface IEventSubscriptionManager
-    {
-        /// <summary>
-        /// Adds the given listener object to the EventAggregator.
-        /// </summary>
-        /// <param name="listener">Object that should be implementing IListener(of T's), this overload is used when your listeners to multiple message types</param>
-        /// <param name="holdStrongReference">determines if the EventAggregator should hold a weak or strong reference to the listener object. If null it will use the Config level option unless overriden by the parameter.</param>
-        /// <returns>Returns the current IEventSubscriptionManager to allow for easy fluent additions.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        IEventSubscriptionManager AddListener(object listener, bool? holdStrongReference = null);
-
-        /// <summary>
-        /// Adds the given listener object to the EventAggregator.
-        /// </summary>
-        /// <typeparam name="T">Listener Message type</typeparam>
-        /// <param name="listener"></param>
-        /// <param name="holdStrongReference">determines if the EventAggregator should hold a weak or strong reference to the listener object. If null it will use the Config level option unless overriden by the parameter.</param>
-        /// <returns>Returns the current IEventSubscriptionManager to allow for easy fluent additions.</returns>
-        IEventSubscriptionManager AddListener<T>(IListener<T> listener, bool? holdStrongReference = null);
-
-        /// <summary>
-        /// Removes the listener object from the EventAggregator
-        /// </summary>
-        /// <param name="listener">The object to be removed</param>
-        /// <returns>Returnes the current IEventSubscriptionManager for fluent removals.</returns>
-        IEventSubscriptionManager RemoveListener(object listener);
-    }
-
-    public interface IEventPublisher
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        void SendMessage<TMessage>(TMessage message, Action<Action> marshal = null);
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter"),
-         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        void SendMessage<TMessage>(Action<Action> marshal = null)
-            where TMessage : new();
-    }
-
-    public interface IEventAggregator : IEventPublisher, IEventSubscriptionManager
-    {
-    }
-
     public class EventAggregator : IEventAggregator
     {
+        /// <summary>
+        /// The _listeners
+        /// </summary>
         private readonly ListenerWrapperCollection _listeners;
+
+        /// <summary>
+        /// The _config
+        /// </summary>
         private readonly Config _config;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EventAggregator"/> class.
+        /// </summary>
         public EventAggregator()
             : this(new Config())
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EventAggregator"/> class.
+        /// </summary>
+        /// <param name="config">The configuration.</param>
         public EventAggregator(Config config)
         {
             _config = config;
@@ -141,7 +96,7 @@ namespace Emwin.Core.EventAggregator
             if (marshal == null)
                 marshal = _config.DefaultThreadMarshaler;
 
-            Call<IListener<TMessage>>(message, marshal);
+            Call<IHandle<TMessage>>(message, marshal);
         }
 
         /// <summary>
@@ -158,16 +113,22 @@ namespace Emwin.Core.EventAggregator
             SendMessage(new TMessage(), marshal);
         }
 
+        /// <summary>
+        /// Calls the specified message.
+        /// </summary>
+        /// <typeparam name="TListener">The type of the t listener.</typeparam>
+        /// <param name="message">The message.</param>
+        /// <param name="marshaller">The marshaller.</param>
         private void Call<TListener>(object message, Action<Action> marshaller)
             where TListener : class
         {
-            int listenerCalledCount = 0;
+            var listenerCalledCount = 0;
             marshaller(() =>
             {
-                foreach (ListenerWrapper o in _listeners.Where(o => o.Handles<TListener>() || o.HandlesMessage(message)))
+                foreach (var o in _listeners.Where(o => o.Handles<TListener>() || o.HandlesMessage(message)))
                 {
                     bool wasThisOneCalled;
-                    o.TryHandle<TListener>(message, out wasThisOneCalled);
+                    o.TryHandle<TListener>(this, message, out wasThisOneCalled);
                     if (wasThisOneCalled)
                         listenerCalledCount++;
                 }
@@ -181,31 +142,63 @@ namespace Emwin.Core.EventAggregator
             }
         }
 
-        public IEventSubscriptionManager AddListener(object listener)
+        /// <summary>
+        /// Adds the listener.
+        /// </summary>
+        /// <param name="listener">The listener.</param>
+        /// <returns>Emwin.Core.EventAggregator.IEventSubscriptionManager.</returns>
+        public IEventSubscriptionManager AddListener(object listener) => AddListener(listener, null);
+
+        /// <summary>
+        /// Adds the listener.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>Emwin.Core.EventAggregator.IEventSubscriptionManager.</returns>
+        public IEventSubscriptionManager AddListener<T>()
         {
-            return AddListener(listener, null);
+            AddListener(Activator.CreateInstance<T>(), true);
+
+            return this;
         }
 
+        /// <summary>
+        /// Adds the listener.
+        /// </summary>
+        /// <param name="listener">The listener.</param>
+        /// <param name="holdStrongReference">The hold strong reference.</param>
+        /// <returns>Emwin.Core.EventAggregator.IEventSubscriptionManager.</returns>
         public IEventSubscriptionManager AddListener(object listener, bool? holdStrongReference)
         {
-            if (listener == null) throw new ArgumentNullException("listener");
+            if (listener == null) throw new ArgumentNullException(nameof(listener));
 
-            bool holdRef = _config.HoldReferences;
+            var holdRef = _config.HoldReferences;
             if (holdStrongReference.HasValue)
                 holdRef = holdStrongReference.Value;
-            bool supportMessageInheritance = _config.SupportMessageInheritance;
+            var supportMessageInheritance = _config.SupportMessageInheritance;
             _listeners.AddListener(listener, holdRef, supportMessageInheritance);
 
             return this;
         }
 
-        public IEventSubscriptionManager AddListener<T>(IListener<T> listener, bool? holdStrongReference)
+        /// <summary>
+        /// Adds the listener.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="listener">The listener.</param>
+        /// <param name="holdStrongReference">The hold strong reference.</param>
+        /// <returns>Emwin.Core.EventAggregator.IEventSubscriptionManager.</returns>
+        public IEventSubscriptionManager AddListener<T>(IHandle<T> listener, bool? holdStrongReference)
         {
             AddListener((object)listener, holdStrongReference);
 
             return this;
         }
 
+        /// <summary>
+        /// Removes the listener.
+        /// </summary>
+        /// <param name="listener">The listener.</param>
+        /// <returns>Emwin.Core.EventAggregator.IEventSubscriptionManager.</returns>
         public IEventSubscriptionManager RemoveListener(object listener)
         {
             _listeners.RemoveListener(listener);
@@ -298,17 +291,12 @@ namespace Emwin.Core.EventAggregator
 
         private class StrongReferenceImpl : IReference
         {
-            private readonly object _target;
-
             public StrongReferenceImpl(object target)
             {
-                _target = target;
+                Target = target;
             }
 
-            public object Target
-            {
-                get { return _target; }
-            }
+            public object Target { get; }
         }
 
         #endregion
@@ -330,34 +318,27 @@ namespace Emwin.Core.EventAggregator
                     _reference = new WeakReferenceImpl(listener);
 
                 var listenerInterfaces = TypeHelper.GetBaseInterfaceType(listener.GetType())
-                                                   .Where(w => TypeHelper.DirectlyClosesGeneric(w, typeof(IListener<>)));
+                                                   .Where(w => TypeHelper.DirectlyClosesGeneric(w, typeof(IHandle<>)));
 
                 foreach (var listenerInterface in listenerInterfaces)
                 {
                     var messageType = TypeHelper.GetFirstGenericType(listenerInterface);
                     var handleMethod = TypeHelper.GetMethod(listenerInterface, HandleMethodName);
 
-                    HandleMethodWrapper handler = new HandleMethodWrapper(handleMethod, listenerInterface, messageType, supportMessageInheritance);
+                    var handler = new HandleMethodWrapper(handleMethod, listenerInterface, messageType, supportMessageInheritance);
                     _handlers.Add(handler);
                 }
             }
 
-            public object ListenerInstance
-            {
-                get { return _reference.Target; }
-            }
+            public object ListenerInstance => _reference.Target;
 
-            public bool Handles<TListener>() where TListener : class
-            {
-                return _handlers.Aggregate(false, (current, handler) => current | handler.Handles<TListener>());
-            }
+            public bool Handles<TListener>() where TListener : class =>
+                _handlers.Aggregate(false, (current, handler) => current | handler.Handles<TListener>());
 
-            public bool HandlesMessage(object message)
-            {
-                return message != null && _handlers.Aggregate(false, (current, handler) => current | handler.HandlesMessage(message));
-            }
+            public bool HandlesMessage(object message) => 
+                message != null && _handlers.Aggregate(false, (current, handler) => current | handler.HandlesMessage(message));
 
-            public void TryHandle<TListener>(object message, out bool wasHandled)
+            public void TryHandle<TListener>(IEventAggregator eventAggregator, object message, out bool wasHandled)
                 where TListener : class
             {
                 var target = _reference.Target;
@@ -371,7 +352,7 @@ namespace Emwin.Core.EventAggregator
                 foreach (var handler in _handlers)
                 {
                     bool thisOneHandled;
-                    handler.TryHandle<TListener>(target, message, out thisOneHandled);
+                    handler.TryHandle<TListener>(eventAggregator, target, message, out thisOneHandled);
                     wasHandled |= thisOneHandled;
                 }
             }
@@ -396,10 +377,7 @@ namespace Emwin.Core.EventAggregator
                 supportedMessageTypes[messageType] = true;
             }
 
-            public bool Handles<TListener>() where TListener : class
-            {
-                return _listenerInterface == typeof(TListener);
-            }
+            public bool Handles<TListener>() where TListener : class => _listenerInterface == typeof(TListener);
 
             public bool HandlesMessage(object message)
             {
@@ -409,8 +387,8 @@ namespace Emwin.Core.EventAggregator
                 }
 
                 bool handled;
-                Type messageType = message.GetType();
-                bool previousMessageType = supportedMessageTypes.TryGetValue(messageType, out handled);
+                var messageType = message.GetType();
+                var previousMessageType = supportedMessageTypes.TryGetValue(messageType, out handled);
                 if (!previousMessageType && _supportMessageInheritance)
                 {
                     handled = TypeHelper.IsAssignableFrom(_messageType, messageType);
@@ -419,7 +397,7 @@ namespace Emwin.Core.EventAggregator
                 return handled;
             }
 
-            public void TryHandle<TListener>(object target, object message, out bool wasHandled)
+            public void TryHandle<TListener>(IEventAggregator eventAggregator, object target, object message, out bool wasHandled)
                 where TListener : class
             {
                 wasHandled = false;
@@ -430,7 +408,7 @@ namespace Emwin.Core.EventAggregator
 
                 if (!Handles<TListener>() && !HandlesMessage(message)) return;
 
-                _handlerMethod.Invoke(target, new[] { message });
+                _handlerMethod.Invoke(target, new[] { message, eventAggregator });
                 wasHandled = true;
             }
         }
