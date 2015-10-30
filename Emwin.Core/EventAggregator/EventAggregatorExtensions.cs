@@ -49,7 +49,7 @@ namespace Emwin.Core.EventAggregator
     public static class EventAggregatorExtensions
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-        public static IDisposable AddListenerAction<T>(this IEventSubscriptionManager eventAggregator, Action<T> listener)
+        public static IDisposable AddListenerAction<T>(this IEventSubscriptionManager eventAggregator, Action<T, IEventAggregator> listener)
         {
             if (eventAggregator == null) throw new ArgumentNullException(nameof(eventAggregator));
             if (listener == null) throw new ArgumentNullException(nameof(listener));
@@ -63,18 +63,18 @@ namespace Emwin.Core.EventAggregator
 
     public class DelegateListener<T> : IHandle<T>, IDisposable
     {
-        private readonly Action<T> _listener;
+        private readonly Action<T, IEventAggregator> _listener;
         private readonly IEventSubscriptionManager _eventSubscriptionManager;
 
-        public DelegateListener(Action<T> listener, IEventSubscriptionManager eventSubscriptionManager)
+        public DelegateListener(Action<T, IEventAggregator> listener, IEventSubscriptionManager eventSubscriptionManager)
         {
             _listener = listener;
             _eventSubscriptionManager = eventSubscriptionManager;
         }
 
-        public void Handle(T message)
+        public void Handle(T message, IEventAggregator ctx)
         {
-            _listener(message);
+            _listener(message, ctx);
         }
 
         public void Dispose()

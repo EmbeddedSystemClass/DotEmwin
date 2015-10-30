@@ -40,7 +40,8 @@ namespace Emwin.Core.EventAggregator
         /// This will be called every time a TMessage is published through the event aggregator
         /// </summary>
         /// <param name="message">The message.</param>
-        public void Handle(T message)
+        /// <param name="ctx">The Event Aggregator context.</param>
+        public void Handle(T message, IEventAggregator ctx)
         {
             try
             {
