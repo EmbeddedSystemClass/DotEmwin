@@ -51,9 +51,9 @@ namespace Emwin.Processor
         public WeatherProductProcessor(IObservable<QuickBlockTransferSegment> observable = null)
         {
             _eventAggregator
-                .AddListener(new SegmentBundler(_eventAggregator), true)
-                .AddListener(new ProductAssembler(_eventAggregator), true)
-                .AddListener(new ZipProcessor(_eventAggregator), true)
+                .AddListener<SegmentBundler>()
+                .AddListener<ProductAssembler>()
+                .AddListener<ZipProcessor>()
                 .AddListener(_textObservable)
                 .AddListener(_imageObservable);
 

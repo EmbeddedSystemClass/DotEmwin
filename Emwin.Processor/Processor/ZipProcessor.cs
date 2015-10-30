@@ -34,40 +34,22 @@ using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
 {
-    internal sealed class ZipProcessor : IListener<CompressedProduct>
+    internal sealed class ZipProcessor : IHandle<CompressedProduct>
     {
-        #region Private Fields
-
-        private readonly IEventPublisher _publisher;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZipProcessor"/> class.
-        /// </summary>
-        /// <param name="publisher">The publisher.</param>
-        public ZipProcessor(IEventPublisher publisher)
-        {
-            _publisher = publisher;
-        }
-
-        #endregion Public Constructors
-
         #region Public Methods
 
         /// <summary>
         /// This will be called every time a CompressedProduct is published through the event aggregator
-        /// Unzips the product and returns the first contained product in the zip. 
+        /// Unzips the product and returns the first contained product in the zip.
         /// Assumes a single product is contained inside the zip file.
         /// </summary>
         /// <param name="product">The product.</param>
-        public void Handle(CompressedProduct product)
+        /// <param name="ctx">The CTX.</param>
+        public void Handle(CompressedProduct product, IEventAggregator ctx)
         {
             try
             {
-                UnZip(product);
+                UnZip(product, ctx);
                 ProcessorEventSource.Log.Info("ZipProcessor", "Completed unzipping " + product.Filename);
             }
             catch (Exception ex)
@@ -76,7 +58,7 @@ namespace Emwin.Processor.Processor
             }
         }
 
-        private void UnZip(CompressedProduct product)
+        private static void UnZip(CompressedProduct product, IEventPublisher ctx)
         {
             using (var zip = new ZipArchive(product.GetStream(), ZipArchiveMode.Read))
             {
@@ -90,14 +72,14 @@ namespace Emwin.Processor.Processor
                         case ContentFileType.Text:
                             var textProduct = ProductFactory.CreateTextProduct(
                                 file.Name.ToUpperInvariant(),file.LastWriteTime, content, DateTimeOffset.UtcNow);
-                            _publisher.SendMessage(textProduct);
+                            ctx.SendMessage(textProduct);
                             ProcessorEventSource.Log.Info("ZipProcessor", textProduct.ToString());
                             break;
 
                         case ContentFileType.Image:
                             var imageProduct = ProductFactory.CreateImageProduct(
                                 file.Name.ToUpperInvariant(), file.LastWriteTime, content, DateTimeOffset.UtcNow);
-                            _publisher.SendMessage(imageProduct);
+                            ctx.SendMessage(imageProduct);
                             ProcessorEventSource.Log.Info("ZipProcessor", imageProduct.ToString());
                             break;
 
