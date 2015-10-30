@@ -24,7 +24,7 @@
 
 using System;
 using System.IO;
-using Emwin.Core.Interfaces;
+using Emwin.Core.Contracts;
 using Emwin.Core.Types;
 
 namespace Emwin.Core.Products

@@ -22,19 +22,12 @@
  * SOFTWARE.
  */
 
-using System.Collections.Generic;
-using Emwin.Core.DataObjects;
+using System.Drawing;
 
-namespace Emwin.Core.Interfaces
+namespace Emwin.Core.Contracts
 {
-    public interface ITextProduct : IEmwinContent<string>
+    public interface IImageProduct : IEmwinContent<Image>
     {
-        /// <summary>
-        /// Gets any Universal Geographic Codes.
-        /// </summary>
-        /// <value>The geo codes.</value>
-        IEnumerable<UniversalGeographicCode> GeoCodes { get; }
-
         /// <summary>
         /// Gets or sets the hash.
         /// </summary>
@@ -42,21 +35,15 @@ namespace Emwin.Core.Interfaces
         string Hash { get; }
 
         /// <summary>
-        /// Gets the header.
+        /// Gets or sets the height.
         /// </summary>
-        /// <value>The header.</value>
-        CommsHeader Header { get; }
+        /// <value>The height.</value>
+        int Height { get; }
 
         /// <summary>
-        /// Gets or sets the polygons.
+        /// Gets or sets the width.
         /// </summary>
-        /// <value>The polygons.</value>
-        IEnumerable<string> Polygons { get; set; }
-
-            /// <summary>
-        /// Gets any vtec codes.
-        /// </summary>
-        /// <value>The vtec codes.</value>
-        IEnumerable<ValidTimeEventCode> VtecCodes { get; } 
+        /// <value>The width.</value>
+        int Width { get; }
     }
 }

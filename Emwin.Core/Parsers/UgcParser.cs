@@ -26,8 +26,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
-using Emwin.Core.Interfaces;
 
 namespace Emwin.Core.Parsers
 {

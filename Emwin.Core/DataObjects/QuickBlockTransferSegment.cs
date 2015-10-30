@@ -24,7 +24,7 @@
 
 using System;
 using System.Runtime.Serialization;
-using Emwin.Core.Interfaces;
+using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
 using Emwin.Core.Types;
 

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-namespace Emwin.Core.Interfaces
+namespace Emwin.Core.Contracts
 {
     public interface ICompressedContent : IEmwinContent<byte[]>
     {

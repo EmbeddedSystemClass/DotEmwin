@@ -50,12 +50,12 @@
     <Compile Include="EventAggregator\ObservableListener.cs" />
     <Compile Include="EventAggregator\EventAggregator.cs" />
     <Compile Include="EventAggregator\EventAggregatorExtensions.cs" />
-    <Compile Include="Interfaces\ICompressedContent.cs" />
-    <Compile Include="Interfaces\IImageProduct.cs" />
-    <Compile Include="Interfaces\ITextProduct.cs" />
+    <Compile Include="Contracts\ICompressedContent.cs" />
+    <Compile Include="Contracts\IImageProduct.cs" />
+    <Compile Include="Contracts\ITextProduct.cs" />
     <Compile Include="DataObjects\ByteBlasterServerList.cs" />
     <Compile Include="DataObjects\CommsHeader.cs" />
-    <Compile Include="Interfaces\IEmwinContent.cs" />
+    <Compile Include="Contracts\IEmwinContent.cs" />
     <Compile Include="Types\ContentFileType.cs" />
     <Compile Include="Types\VtecSignificanceCode.cs" />
     <Compile Include="Types\VtecTypeCode.cs" />

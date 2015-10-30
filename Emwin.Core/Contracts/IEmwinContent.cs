@@ -25,7 +25,7 @@
 using System;
 using Emwin.Core.Types;
 
-namespace Emwin.Core.Interfaces
+namespace Emwin.Core.Contracts
 {
     /// <summary>
     /// Interface IEmwinContent. Represents the base interface for all received content from EMWIN.

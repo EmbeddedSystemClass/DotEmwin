@@ -28,8 +28,8 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
-using Emwin.Core.Interfaces;
 using Emwin.Core.Parsers;
 using Emwin.Core.Types;
 

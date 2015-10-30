@@ -23,9 +23,9 @@
  */
 
 using System;
+using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
 using Emwin.Core.EventAggregator;
-using Emwin.Core.Interfaces;
 using Emwin.Processor.Instrumentation;
 using Emwin.Processor.Processor;
 

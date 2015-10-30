@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Spatial;
-using Emwin.Core.Interfaces;
+using Emwin.Core.Contracts;
 
 namespace Emwin.Core.Parsers
 {

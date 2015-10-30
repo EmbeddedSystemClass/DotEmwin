@@ -21,12 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-using System.Drawing;
 
-namespace Emwin.Core.Interfaces
+using System.Collections.Generic;
+using Emwin.Core.DataObjects;
+
+namespace Emwin.Core.Contracts
 {
-    public interface IImageProduct : IEmwinContent<Image>
+    public interface ITextProduct : IEmwinContent<string>
     {
+        /// <summary>
+        /// Gets any Universal Geographic Codes.
+        /// </summary>
+        /// <value>The geo codes.</value>
+        IEnumerable<UniversalGeographicCode> GeoCodes { get; }
+
         /// <summary>
         /// Gets or sets the hash.
         /// </summary>
@@ -34,15 +42,21 @@ namespace Emwin.Core.Interfaces
         string Hash { get; }
 
         /// <summary>
-        /// Gets or sets the height.
+        /// Gets the header.
         /// </summary>
-        /// <value>The height.</value>
-        int Height { get; }
+        /// <value>The header.</value>
+        CommsHeader Header { get; }
 
         /// <summary>
-        /// Gets or sets the width.
+        /// Gets or sets the polygons.
         /// </summary>
-        /// <value>The width.</value>
-        int Width { get; }
+        /// <value>The polygons.</value>
+        IEnumerable<string> Polygons { get; set; }
+
+            /// <summary>
+        /// Gets any vtec codes.
+        /// </summary>
+        /// <value>The vtec codes.</value>
+        IEnumerable<ValidTimeEventCode> VtecCodes { get; } 
     }
 }

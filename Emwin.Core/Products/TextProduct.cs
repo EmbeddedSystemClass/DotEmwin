@@ -24,8 +24,8 @@
 
 using System;
 using System.Collections.Generic;
+using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
-using Emwin.Core.Interfaces;
 using Emwin.Core.Types;
 
 namespace Emwin.Core.Products

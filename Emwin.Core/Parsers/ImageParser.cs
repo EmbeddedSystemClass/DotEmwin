@@ -24,7 +24,7 @@
 
 using System.Linq;
 using System.Text;
-using Emwin.Core.Interfaces;
+using Emwin.Core.Contracts;
 using Emwin.Core.Types;
 
 namespace Emwin.Core.Parsers
