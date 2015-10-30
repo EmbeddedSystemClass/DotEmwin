@@ -200,10 +200,10 @@ namespace Emwin.ByteBlaster.Protocol
                     goto case DecoderState.Validate;
 
                 case DecoderState.Validate:
-                    if (Packet.TotalBlocks == 0 || Packet.BlockNumber == 0 || Packet.Checksum == 0)
+                    if (Packet.TotalBlocks <= 0 || Packet.BlockNumber <= 0)
                     {
                         PerformanceCounters.ChecksumErrorsTotal.Increment();
-                        throw new InvalidDataException("Header values out of range. " + Packet);
+                        throw new InvalidDataException("Header block values out of range. " + Packet);
                     }
 
                     if (VerifyChecksum(Packet.Content, Packet.Checksum))
@@ -262,8 +262,6 @@ namespace Emwin.ByteBlaster.Protocol
             packet.BlockNumber = int.Parse(groups["PN"].Value);
             packet.TotalBlocks = int.Parse(groups["PT"].Value);
             packet.Checksum = int.Parse(groups["CS"].Value);
-
-            if (packet.Checksum == 0) System.Diagnostics.Debugger.Break();
 
             DateTimeOffset ts;
             var dateText = groups["FD"].Value;
