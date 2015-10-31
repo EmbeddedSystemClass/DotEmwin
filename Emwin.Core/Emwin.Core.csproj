@@ -43,6 +43,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IBulletinProduct.cs" />
     <Compile Include="EventAggregator\IEventAggregator.cs" />
     <Compile Include="EventAggregator\IEventPublisher.cs" />
     <Compile Include="EventAggregator\IEventSubscriptionManager.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="Contracts\IEmwinContent.cs" />
     <Compile Include="EventAggregator\Pipeline.cs" />
     <Compile Include="EventAggregator\IPipelineFilter.cs" />
+    <Compile Include="Parsers\BulletinParser.cs" />
+    <Compile Include="Products\BulletinProduct.cs" />
     <Compile Include="Types\ContentFileType.cs" />
     <Compile Include="Types\VtecSignificanceCode.cs" />
     <Compile Include="Types\VtecTypeCode.cs" />
@@ -66,7 +69,7 @@
     <Compile Include="Products\ProductFactory.cs" />
     <Compile Include="Products\GraphicProduct.cs" />
     <Compile Include="DataObjects\QuickBlockTransferSegment.cs" />
-    <Compile Include="Products\CompressedProduct.cs" />
+    <Compile Include="Products\CompressedContent.cs" />
     <Compile Include="Products\TextProduct.cs" />
     <Compile Include="Parsers\HeadingParser.cs" />
     <Compile Include="Parsers\ImageParser.cs" />

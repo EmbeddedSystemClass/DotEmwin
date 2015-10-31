@@ -235,10 +235,7 @@ namespace Emwin.Core.EventAggregator
                     return _listeners.ToList().GetEnumerator();
             }
 
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
             private bool ContainsListener(object listener)
             {
@@ -459,10 +456,7 @@ namespace Emwin.Core.EventAggregator
                 return false;
             }
 
-            internal static Type GetFirstGenericType<T>() where T : class
-            {
-                return GetFirstGenericType(typeof(T));
-            }
+            internal static Type GetFirstGenericType<T>() where T : class => GetFirstGenericType(typeof(T));
 
             internal static Type GetFirstGenericType(Type type)
             {
@@ -486,6 +480,7 @@ namespace Emwin.Core.EventAggregator
                 return handleMethod;
             }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Language", "CSE0003:Use expression-bodied members")]
             internal static bool IsAssignableFrom(Type type, Type specifiedType)
             {
 #if NETFX_CORE
