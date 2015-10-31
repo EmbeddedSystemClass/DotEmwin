@@ -26,7 +26,7 @@
 
 using System;
 using System.Linq;
-using Emwin.Core.DataObjects;
+using Emwin.Core.Contracts;
 using Emwin.Core.EventAggregator;
 using Emwin.Processor.Instrumentation;
 using Emwin.Core.Products;
@@ -37,14 +37,14 @@ namespace Emwin.Processor.Processor
     /// <summary>
     /// Class ProductAssembler. Assembles bundles of segments into a product by combining all the bytes from each segment.
     /// </summary>
-    internal sealed class ProductAssembler : IHandle<QuickBlockTransferSegment[]>
+    internal sealed class ProductAssembler : IHandle<IQuickBlockTransferSegment[]>
     {
         /// <summary>
         /// This will be called every time a QuickBlockTransferSegment[] bundle is published through the event aggregator
         /// </summary>
         /// <param name="bundle">The bundle.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(QuickBlockTransferSegment[] bundle, IEventAggregator ctx)
+        public void Handle(IQuickBlockTransferSegment[] bundle, IEventAggregator ctx)
         {
             try
             {
@@ -52,19 +52,19 @@ namespace Emwin.Processor.Processor
                 switch (contentType)
                 {
                     case ContentFileType.Text:
-                        var textProduct = ProductFactory.CreateTextProduct(bundle);
+                        var textProduct = ProductFactory.ConvertTo<ITextProduct>(bundle);
                         ctx.SendMessage(textProduct);
                         ProcessorEventSource.Log.Verbose("ProductAssembler", textProduct.ToString());
                         break;
 
                     case ContentFileType.Image:
-                        var imageProduct = ProductFactory.CreateImageProduct(bundle);
+                        var imageProduct = ProductFactory.ConvertTo<IImageProduct>(bundle);
                         ctx.SendMessage(imageProduct);
                         ProcessorEventSource.Log.Verbose("ProductAssembler", imageProduct.ToString());
                         break;
 
                     case ContentFileType.Compressed:
-                        var compressedProduct = ProductFactory.CreateCompressedContent(bundle);
+                        var compressedProduct = ProductFactory.ConvertTo<ICompressedContent>(bundle);
                         ctx.SendMessage(compressedProduct);
                         ProcessorEventSource.Log.Verbose("ProductAssembler", compressedProduct.ToString());
                         break;

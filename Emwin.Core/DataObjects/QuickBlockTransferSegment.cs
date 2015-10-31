@@ -25,6 +25,7 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Runtime.Serialization;
 using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
@@ -38,7 +39,7 @@ namespace Emwin.Core.DataObjects
     /// of impending severe weather events, even at a very low data rate.
     /// </summary>
     [DataContract]
-    public sealed class QuickBlockTransferSegment : IEmwinContent<byte[]>
+    public sealed class QuickBlockTransferSegment : IQuickBlockTransferSegment
     {
 
         #region Public Properties
@@ -102,7 +103,7 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The received at.</value>
         [DataMember]
-        public long ReceivedAt { get; set; }
+        public DateTimeOffset ReceivedAt { get; set; } = new DateTimeOffset(Stopwatch.GetTimestamp(), TimeSpan.Zero);
 
         /// <summary>
         /// Gets or sets the time stamp of the file the block is part of.

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -24,74 +24,50 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System;
-using System.Linq;
-using System.Runtime.Caching;
-using Emwin.Core.Contracts;
-using Emwin.Core.EventAggregator;
-using Emwin.Processor.Instrumentation;
-
-namespace Emwin.Processor.Processor
+namespace Emwin.Core.Contracts
 {
-    /// <summary>
-    /// Class SegmentBundler. Uses a Memory Cache to bundle the segments of a file together.
-    /// </summary>
-    internal sealed class SegmentBundler : IHandle<IQuickBlockTransferSegment>
+    public interface IQuickBlockTransferSegment : IEmwinContent<byte[]>
     {
-
-        #region Public Fields
-
-        public static TimeSpan SegmentExpireTime = TimeSpan.FromMinutes(10);
-
-        #endregion Public Fields
-
-        #region Private Fields
-
-        private readonly ObjectCache _blockCache = new MemoryCache("BlockCache");
-
-        #endregion Private Fields
-
-        #region Public Methods
+        /// <summary>
+        /// Gets the block number.
+        /// </summary>
+        /// <value>The block number.</value>
+        int BlockNumber { get; }
 
         /// <summary>
-        /// This will be called every time a QuickBlockTransferSegment is published through the event aggregator
+        /// Gets the checksum.
         /// </summary>
-        /// <param name="blockSegment">The segment.</param>
-        /// <param name="ctx">The CTX.</param>
-        public void Handle(IQuickBlockTransferSegment blockSegment, IEventAggregator ctx)
-        {
-            var key = blockSegment.GetKey();
-            IQuickBlockTransferSegment[] bundle = null;
+        /// <value>The checksum.</value>
+        int Checksum { get; }
 
-            // If there is already a bundle in the cache, put the segment into it. 
-            if (_blockCache.Contains(key))
-            {
-                bundle = (IQuickBlockTransferSegment[])_blockCache.Get(key);
-                if (blockSegment.BlockNumber > 0 && blockSegment.BlockNumber <= bundle.Length)
-                    bundle[blockSegment.BlockNumber - 1] = blockSegment;
-                ProcessorEventSource.Log.Verbose("SegmentBundler",
-                    $"Added segment {blockSegment.BlockNumber} of {blockSegment.TotalBlocks} to existing bundle {blockSegment.Filename}");
-            }
-            else if (blockSegment.BlockNumber == 1)
-            {
-                // Create a new bundle array with the initial segment and add to cache.
-                bundle = new IQuickBlockTransferSegment[blockSegment.TotalBlocks];
-                bundle[blockSegment.BlockNumber - 1] = blockSegment;
-                _blockCache.Set(key, bundle, DateTimeOffset.Now.Add(SegmentExpireTime));
-                ProcessorEventSource.Log.Verbose("SegmentBundler",
-                    $"Added segment {blockSegment.BlockNumber} of {blockSegment.TotalBlocks} to new bundle {blockSegment.Filename}");
-            }
+        /// <summary>
+        /// Gets the header.
+        /// </summary>
+        /// <value>The header.</value>
+        string Header { get; }
 
-            // If all segments are complete, publish the bundle
-            if (bundle != null && bundle.All(s => s != null))
-            {
-                ProcessorEventSource.Log.Info("SegmentBundler", 
-                    $"Completed assembling {blockSegment.TotalBlocks} blocks for bundle {blockSegment.Filename}");
-                ctx.SendMessage(bundle);
-            }
-        }
+        /// <summary>
+        /// Gets the length.
+        /// </summary>
+        /// <value>The length.</value>
+        int Length { get; }
 
-        #endregion Public Methods
+        /// <summary>
+        /// Gets the total blocks.
+        /// </summary>
+        /// <value>The total blocks.</value>
+        int TotalBlocks { get; }
 
+        /// <summary>
+        /// Gets the version.
+        /// </summary>
+        /// <value>The version.</value>
+        byte Version { get; }
+
+        /// <summary>
+        /// Gets the key.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        string GetKey();
     }
 }

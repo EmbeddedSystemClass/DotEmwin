@@ -85,7 +85,7 @@ namespace Emwin.Core.EventAggregator
         }
 
         /// <summary>
-        /// This will send the message to each IListener that is subscribing to TMessage.
+        /// This will send the message to each IHandle that is subscribed to TMessage.
         /// </summary>
         /// <typeparam name="TMessage">The type of message being sent</typeparam>
         /// <param name="message">The message instance</param>
@@ -100,7 +100,7 @@ namespace Emwin.Core.EventAggregator
         }
 
         /// <summary>
-        /// This will create a new default instance of TMessage and send the message to each IListener that is subscribing to TMessage.
+        /// This will create a new default instance of TMessage and send the message to each IHandle that is subscribed to TMessage.
         /// </summary>
         /// <typeparam name="TMessage">The type of message being sent</typeparam>
         /// <param name="marshal">You can optionally override how the message publication action is marshalled</param>

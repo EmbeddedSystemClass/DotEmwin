@@ -25,15 +25,15 @@
  */
 
 using System;
+using System.Threading.Tasks;
 using Emwin.Core.Contracts;
-using Emwin.Core.DataObjects;
 using Emwin.Core.EventAggregator;
 using Emwin.Processor.Instrumentation;
 using Emwin.Processor.Processor;
 
 namespace Emwin.Processor
 {
-    public class WeatherProductProcessor : IObserver<QuickBlockTransferSegment>
+    public class WeatherProductProcessor : IObserver<IQuickBlockTransferSegment>
     {
 
         #region Private Fields
@@ -51,7 +51,7 @@ namespace Emwin.Processor
         /// Initializes a new instance of the <see cref="WeatherProductProcessor" /> class.
         /// </summary>
         /// <param name="observable">The observable.</param>
-        public WeatherProductProcessor(IObservable<QuickBlockTransferSegment> observable = null)
+        public WeatherProductProcessor(IObservable<IQuickBlockTransferSegment> observable = null)
         {
             _eventAggregator
                 .AddListener<SegmentBundler>()
@@ -118,9 +118,9 @@ namespace Emwin.Processor
         /// Called when next block segment is available for processing.
         /// </summary>
         /// <param name="blockSegment">The value.</param>
-        public void OnNext(QuickBlockTransferSegment blockSegment)
+        public void OnNext(IQuickBlockTransferSegment blockSegment)
         {
-            _eventAggregator.SendMessage(blockSegment);
+            _eventAggregator.SendMessage(blockSegment, action => Task.Run(action));
         }
 
         #endregion Public Methods

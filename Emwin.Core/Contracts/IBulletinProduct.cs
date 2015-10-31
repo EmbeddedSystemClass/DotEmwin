@@ -36,5 +36,23 @@ namespace Emwin.Core.Contracts
         /// </summary>
         /// <value>The sequence number.</value>
         int SequenceNumber { get; }
+
+        /// <summary>
+        /// Gets the Universal Geographic Codes.
+        /// </summary>
+        /// <value>The geo codes.</value>
+        IEnumerable<UniversalGeographicCode> GeoCodes { get; }
+
+        /// <summary>
+        /// Gets or sets the polygons.
+        /// </summary>
+        /// <value>The polygons.</value>
+        IEnumerable<string> Polygons { get; set; }
+
+        /// <summary>
+        /// Gets any VTEC codes.
+        /// </summary>
+        /// <value>The VTEC codes.</value>
+        IEnumerable<ValidTimeEventCode> VtecCodes { get; }
     }
 }

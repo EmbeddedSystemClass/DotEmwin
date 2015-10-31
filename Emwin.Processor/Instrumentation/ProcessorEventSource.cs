@@ -30,6 +30,7 @@ namespace Emwin.Processor.Instrumentation
     [EventSource(Name = "EmwinProcessor")]
     public class ProcessorEventSource : EventSource
     {
+
         #region Public Fields
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace Emwin.Processor.Instrumentation
 
         #endregion Private Constructors
 
-        #region Public Properties
+        #region Internal Properties
 
         internal bool IsErrorEnabled => IsEnabled(EventLevel.Error, EventKeywords.None);
 
@@ -69,9 +70,9 @@ namespace Emwin.Processor.Instrumentation
 
         internal bool IsWarningEnabled => IsEnabled(EventLevel.Warning, EventKeywords.None);
 
-        #endregion Public Properties
+        #endregion Internal Properties
 
-        #region Public Methods
+        #region Internal Methods
 
         [NonEvent]
         internal void Error(string message, Exception exception)
@@ -80,21 +81,21 @@ namespace Emwin.Processor.Instrumentation
                 Error(message, exception?.ToString() ?? string.Empty);
         }
 
-        [Event(ErrorEventId, Level = EventLevel.Error)]
+        [Event(ErrorEventId, Level = EventLevel.Error, Message = "Error: {0}")]
         internal void Error(string message, string exception)
         {
             if (IsErrorEnabled)
                 WriteEvent(ErrorEventId, message, exception);
         }
 
-        [Event(InfoEventId, Level = EventLevel.Informational)]
+        [Event(InfoEventId, Level = EventLevel.Informational, Message = "Info: {0}")]
         internal void Info(string message, string info)
         {
             if (IsInfoEnabled)
                 WriteEvent(InfoEventId, message, info);
         }
 
-        [Event(VerboseEventId, Level = EventLevel.Verbose)]
+        [Event(VerboseEventId, Level = EventLevel.Verbose, Message = "{0}")]
         internal void Verbose(string message, string info)
         {
             if (IsVerboseEnabled)
@@ -114,13 +115,14 @@ namespace Emwin.Processor.Instrumentation
                 Warning(message, exception?.ToString() ?? string.Empty);
         }
 
-        [Event(WarningEventId, Level = EventLevel.Warning)]
+        [Event(WarningEventId, Level = EventLevel.Warning, Message = "Warning: {0}")]
         internal void Warning(string message, string exception)
         {
             if (IsWarningEnabled)
                 WriteEvent(WarningEventId, message, exception);
         }
 
-        #endregion Public Methods
+        #endregion Internal Methods
+
     }
 }

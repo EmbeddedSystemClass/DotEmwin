@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -35,6 +36,7 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Emwin.ByteBlaster.Instrumentation;
 using Emwin.ByteBlaster.Protocol;
+using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
 
 namespace Emwin.ByteBlaster
@@ -43,14 +45,14 @@ namespace Emwin.ByteBlaster
     /// Class ByteBlasterClient implements a persistent connection to a Byte Blaster Server
     /// and provides an observable provider of QuickBlockTransferSegment objects for processing.
     /// </summary>
-    public class ByteBlasterClient : IObservable<QuickBlockTransferSegment>
+    public class ByteBlasterClient : IObservable<IQuickBlockTransferSegment>
     {
 
         #region Private Fields
 
         private static readonly IEventLoopGroup ExecutorGroup = new MultithreadEventLoopGroup();
         private readonly Bootstrap _channelBootstrap;
-        private readonly List<IObserver<QuickBlockTransferSegment>> _observers = new List<IObserver<QuickBlockTransferSegment>>();
+        private readonly List<IObserver<IQuickBlockTransferSegment>> _observers = new List<IObserver<IQuickBlockTransferSegment>>();
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
         private CancellationTokenSource _cancelSource;
         private IChannel _channel;
@@ -65,7 +67,7 @@ namespace Emwin.ByteBlaster
         /// </summary>
         /// <param name="email">The email.</param>
         /// <param name="observer">The observer to subscribe.</param>
-        public ByteBlasterClient(string email, IObserver<QuickBlockTransferSegment> observer = null)
+        public ByteBlasterClient(string email, IObserver<IQuickBlockTransferSegment> observer = null)
         {
             _channelBootstrap = new Bootstrap()
                 .Group(ExecutorGroup)
@@ -87,6 +89,9 @@ namespace Emwin.ByteBlaster
                         {
                             _lock.ExitReadLock();
                         }
+
+                        var delay = (Stopwatch.GetTimestamp() - segment.ReceivedAt.Ticks) / (Stopwatch.Frequency / 1000);
+                        PerformanceCounters.BlockProcessingCounterTotal.RawValue = delay;
                     }),
                     new ChannelEventHandler<ByteBlasterServerList>((ctx, serverList) => ServerList = serverList)
                 )));
@@ -165,7 +170,7 @@ namespace Emwin.ByteBlaster
         /// </summary>
         /// <param name="observer">The observer.</param>
         /// <returns>System.IDisposable.</returns>
-        public IDisposable Subscribe(IObserver<QuickBlockTransferSegment> observer)
+        public IDisposable Subscribe(IObserver<IQuickBlockTransferSegment> observer)
         {
             if (observer == null) throw new ArgumentNullException(nameof(observer));
 
@@ -208,7 +213,7 @@ namespace Emwin.ByteBlaster
             {
                 if (index > ServerList.Servers.Count) index = 0;
                 var serverAddress = ServerList.Servers[index++];
-                ByteBlasterEventSource.Log.Info("Attempting connection to ByteBlaster server", serverAddress.ToString());
+                ByteBlasterEventSource.Log.Connect(serverAddress.ToString());
 
                 try
                 {

@@ -63,7 +63,7 @@ namespace Emwin.ByteBlaster.Instrumentation
             }
             catch (Exception ex)
             {
-                ByteBlasterEventSource.Log.Verbose("Failed to decrement performance counter", ex.ToString());
+                ByteBlasterEventSource.Log.Warning("Failed to decrement performance counter", ex.ToString());
             }
         }
 
@@ -78,7 +78,7 @@ namespace Emwin.ByteBlaster.Instrumentation
             }
             catch (Exception ex)
             {
-                ByteBlasterEventSource.Log.Verbose("Failed to increment performance counter", ex.ToString());
+                ByteBlasterEventSource.Log.Warning("Failed to increment performance counter", ex.ToString());
             }
         }
 
@@ -94,7 +94,7 @@ namespace Emwin.ByteBlaster.Instrumentation
             }
             catch (Exception ex)
             {
-                ByteBlasterEventSource.Log.Verbose("Failed to increment performance counter", ex.ToString());
+                ByteBlasterEventSource.Log.Warning("Failed to increment performance counter", ex.ToString());
             }
         }
 

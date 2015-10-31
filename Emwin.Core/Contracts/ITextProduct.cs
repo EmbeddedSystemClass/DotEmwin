@@ -32,12 +32,6 @@ namespace Emwin.Core.Contracts
     public interface ITextProduct : IEmwinContent<string>
     {
         /// <summary>
-        /// Gets any Universal Geographic Codes.
-        /// </summary>
-        /// <value>The geo codes.</value>
-        IEnumerable<UniversalGeographicCode> GeoCodes { get; }
-
-        /// <summary>
         /// Gets or sets the hash.
         /// </summary>
         /// <value>The hash.</value>
@@ -48,17 +42,5 @@ namespace Emwin.Core.Contracts
         /// </summary>
         /// <value>The header.</value>
         CommsHeader Header { get; }
-
-        /// <summary>
-        /// Gets or sets the polygons.
-        /// </summary>
-        /// <value>The polygons.</value>
-        IEnumerable<string> Polygons { get; set; }
-
-            /// <summary>
-        /// Gets any vtec codes.
-        /// </summary>
-        /// <value>The vtec codes.</value>
-        IEnumerable<ValidTimeEventCode> VtecCodes { get; } 
     }
 }

@@ -58,7 +58,7 @@ namespace Emwin.Core.Contracts
         /// Gets the received at time.
         /// </summary>
         /// <value>The received at.</value>
-        long ReceivedAt { get; }
+        DateTimeOffset ReceivedAt { get; }
 
         /// <summary>
         /// Gets the content time stamp.

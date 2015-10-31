@@ -72,7 +72,7 @@ namespace Emwin.Core.Products
         /// Gets the received at time.
         /// </summary>
         /// <value>The received at.</value>
-        public long ReceivedAt { get; set; }
+        public DateTimeOffset ReceivedAt { get; set; }
 
         /// <summary>
         /// Gets the content time stamp.

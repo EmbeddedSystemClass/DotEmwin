@@ -65,12 +65,6 @@ namespace Emwin.Core.Products
         public string Filename { get; set; }
 
         /// <summary>
-        /// Gets or sets the geo codes.
-        /// </summary>
-        /// <value>The geo codes.</value>
-        public IEnumerable<UniversalGeographicCode> GeoCodes { get; set; } 
-
-        /// <summary>
         /// Gets or sets the hash.
         /// </summary>
         /// <value>The hash.</value>
@@ -86,25 +80,13 @@ namespace Emwin.Core.Products
         /// Gets the received at time.
         /// </summary>
         /// <value>The received at.</value>
-        public long ReceivedAt { get; set; }
+        public DateTimeOffset ReceivedAt { get; set; }
 
         /// <summary>
         /// Gets the content time stamp.
         /// </summary>
         /// <value>The time stamp.</value>
         public DateTimeOffset TimeStamp { get; set; }
-
-        /// <summary>
-        /// Gets or sets the polygons.
-        /// </summary>
-        /// <value>The polygons.</value>
-        public IEnumerable<string> Polygons { get; set; } 
-
-        /// <summary>
-        /// Gets any vtec codes.
-        /// </summary>
-        /// <value>The vtec codes.</value>
-        public IEnumerable<ValidTimeEventCode> VtecCodes { get; set; } 
 
         #endregion Public Properties
 

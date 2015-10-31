@@ -24,7 +24,9 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
+using System.Collections.Generic;
 using Emwin.Core.Contracts;
+using Emwin.Core.DataObjects;
 
 namespace Emwin.Core.Products
 {
@@ -35,6 +37,23 @@ namespace Emwin.Core.Products
     {
         public int SequenceNumber { get; set; }
 
+        /// <summary>
+        /// Gets or sets the geo codes.
+        /// </summary>
+        /// <value>The geo codes.</value>
+        public IEnumerable<UniversalGeographicCode> GeoCodes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the polygons.
+        /// </summary>
+        /// <value>The polygons.</value>
+        public IEnumerable<string> Polygons { get; set; }
+
+        /// <summary>
+        /// Gets any vtec codes.
+        /// </summary>
+        /// <value>The vtec codes.</value>
+        public IEnumerable<ValidTimeEventCode> VtecCodes { get; set; }
 
         #region Public Methods
 

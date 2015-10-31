@@ -211,7 +211,7 @@ namespace Emwin.ByteBlaster.Protocol
 
                     if (VerifyChecksum(Packet.Content, Packet.Checksum))
                     {
-                        ByteBlasterEventSource.Log.Verbose("Packet", Packet.ToString());
+                        ByteBlasterEventSource.Log.PacketCreated(Packet.ToString());
                         context.FireUserEventTriggered(Packet);
                     }
                     else
@@ -275,7 +275,7 @@ namespace Emwin.ByteBlaster.Protocol
             }
             else
             {
-                ByteBlasterEventSource.Log.Warning("Unable to parse header date " + dateText);
+                ByteBlasterEventSource.Log.ParserWarning("Unable to parse header date", dateText);
             }
         }
 
@@ -304,11 +304,11 @@ namespace Emwin.ByteBlaster.Protocol
         {
             var header = ReadString(input, QuickBlockHeaderSize);
 
-            ByteBlasterEventSource.Log.Verbose("Header", header);
+            ByteBlasterEventSource.Log.HeaderReceived(header);
             var match = HeaderRegex.Match(header);
             if (match.Success)
             {
-                var packet = new QuickBlockTransferSegment { ReceivedAt = Stopwatch.GetTimestamp(), Header = header };
+                var packet = new QuickBlockTransferSegment { Header = header };
                 ParseHeaderV1(match.Groups, packet);
                 ParseHeaderV2(match.Groups, packet);
                 return packet;
@@ -328,7 +328,7 @@ namespace Emwin.ByteBlaster.Protocol
             if (!match.Success)
                 throw new InvalidDataException("QuickBlockPacketDecoder: Unable to parse server List: " + content);
 
-            ByteBlasterEventSource.Log.Info("Server List", content);
+            ByteBlasterEventSource.Log.ServerList(content);
             var serverList = match.Groups["ServerList"].Value.Split(new [] {'|'}, StringSplitOptions.RemoveEmptyEntries);
             var satServers = match.Groups["SatServers"].Value.Split(new[] {'+'}, StringSplitOptions.RemoveEmptyEntries);
             return new ByteBlasterServerList(serverList, satServers) { ReceivedAt = DateTimeOffset.UtcNow };
@@ -412,7 +412,7 @@ namespace Emwin.ByteBlaster.Protocol
                 if (count >= FrameSyncBytes) return true;
             }
 
-            ByteBlasterEventSource.Log.Warning("Unable to synchronize stream");
+            ByteBlasterEventSource.Log.SynchronizationWarning(count);
             return false;
         }
 

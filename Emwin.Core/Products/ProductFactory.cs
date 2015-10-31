@@ -32,7 +32,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Emwin.Core.Contracts;
-using Emwin.Core.DataObjects;
 using Emwin.Core.Parsers;
 using Emwin.Core.Types;
 
@@ -47,140 +46,36 @@ namespace Emwin.Core.Products
         #region Public Methods
 
         /// <summary>
-        /// Creates the compressed.
+        /// Converts bundle of segments to desired product type contract.
         /// </summary>
-        /// <param name="filename">The filename.</param>
-        /// <param name="timeStamp">The time stamp.</param>
-        /// <param name="content">The content.</param>
-        /// <param name="receivedAt">The received at.</param>
-        /// <returns>ICompressedContent.</returns>
-        public static ICompressedContent CreateCompressedContent(string filename, DateTimeOffset timeStamp, byte[] content,
-            long receivedAt)
-        {
-            var product = new CompressedContent
-            {
-                Filename = filename,
-                TimeStamp = timeStamp,
-                Content = content,
-                Hash = content.ComputeHash(),
-                ReceivedAt = receivedAt
-            };
-
-            return product;
-        }
-
-        /// <summary>
-        /// Creates compressed content from a completed bundle of segments.
-        /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="segments">The segments.</param>
-        /// <returns>ICompressedContent.</returns>
+        /// <returns>T.</returns>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public static ICompressedContent CreateCompressedContent(QuickBlockTransferSegment[] segments)
+        /// <exception cref="System.ArgumentException">@At least one segment is not complete (is null).</exception>
+        /// <exception cref="System.InvalidCastException">Unable to convert to specified type.</exception>
+        public static T ConvertTo<T>(IQuickBlockTransferSegment[] segments) where T : IEmwinContent
         {
             if (segments == null) throw new ArgumentNullException(nameof(segments));
 
             // Ensure all the segments have been completed.
             if (segments.Any(p => p == null))
-                throw new ArgumentException(@"At least one segment is not complete (is null).", nameof(segments));
+                throw new ArgumentException(@"Unable to convert if bundle segments are not complete (found null)", nameof(segments));
 
-            var firstSegment = segments.First(p => p != null);
-            var isText = firstSegment.ContentType == ContentFileType.Text;
+            var lastSegment = segments.Last();
+            var isText = lastSegment.ContentType == ContentFileType.Text;
             var content = segments.Select(b => b.Content).ToList().Combine(isText);
 
-            return CreateCompressedContent(firstSegment.Filename, firstSegment.TimeStamp, content, firstSegment.ReceivedAt);
-        }
+            if (typeof(T) == typeof(ITextProduct))
+                return (T)CreateTextProduct(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt);
 
-        /// <summary>
-        /// Creates the image product from a completed bundle of segments.
-        /// </summary>
-        /// <param name="segments">The segments.</param>
-        /// <returns>ImageProduct.</returns>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        public static IImageProduct CreateImageProduct(QuickBlockTransferSegment[] segments)
-        {
-            if (segments == null) throw new ArgumentNullException(nameof(segments));
+            if (typeof(T) == typeof(IImageProduct))
+                return (T)CreateImageProduct(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt);
 
-            // Ensure all the segments have been completed.
-            if (segments.Any(p => p == null))
-                throw new ArgumentException(@"At least one segment is not complete (is null).", nameof(segments));
+            if (typeof(T) == typeof(ICompressedContent))
+                return (T)CreateCompressedContent(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt);
 
-            var firstSegment = segments.First(p => p != null);
-            var isText = firstSegment.ContentType == ContentFileType.Text;
-            var content = segments.Select(b => b.Content).ToList().Combine(isText);
-
-            return CreateImageProduct(firstSegment.Filename, firstSegment.TimeStamp, content, firstSegment.ReceivedAt);
-        }
-
-        /// <summary>
-        /// Creates the image product.
-        /// </summary>
-        /// <param name="filename">The filename.</param>
-        /// <param name="timeStamp">The time stamp.</param>
-        /// <param name="content">The content.</param>
-        /// <param name="receivedAt">The received at.</param>
-        /// <returns>ITextProduct.</returns>
-        public static IImageProduct CreateImageProduct(string filename, DateTimeOffset timeStamp, byte[] content, long receivedAt)
-        {
-            var image = Image.FromStream(new MemoryStream(content));
-
-            var product = new ImageProduct
-            {
-                Filename = filename,
-                TimeStamp = timeStamp,
-                Content = image,
-                Height = image.Height,
-                Width = image.Width,
-                Hash = content.ComputeHash(),
-                ReceivedAt = receivedAt
-            };
-
-            return product;
-        }
-
-        /// <summary>
-        /// Creates the text product from a completed bundle of segments.
-        /// </summary>
-        /// <returns>TextProduct.</returns>
-        public static ITextProduct CreateTextProduct(QuickBlockTransferSegment[] segments)
-        {
-            if (segments == null) throw new ArgumentNullException(nameof(segments));
-
-            // Ensure all the segments have been completed.
-            if (segments.Any(p => p == null))
-                throw new ArgumentException(@"At least one segment is not complete (is null).", nameof(segments));
-
-            var firstSegment = segments.First(p => p != null);
-            var isText = firstSegment.ContentType == ContentFileType.Text;
-            var content = segments.Select(b => b.Content).ToList().Combine(isText);
-
-            return CreateTextProduct(firstSegment.Filename, firstSegment.TimeStamp, content, firstSegment.ReceivedAt);
-        }
-
-        /// <summary>
-        /// Creates the text product.
-        /// </summary>
-        /// <param name="filename">The filename.</param>
-        /// <param name="timeStamp">The time stamp.</param>
-        /// <param name="content">The content.</param>
-        /// <param name="receivedAt">The received at.</param>
-        /// <returns>ITextProduct.</returns>
-        public static ITextProduct CreateTextProduct(string filename, DateTimeOffset timeStamp, byte[] content, long receivedAt)
-        {
-            var product = new TextProduct
-            {
-                Filename = filename,
-                TimeStamp = timeStamp,
-                Content = Encoding.ASCII.GetString(content),
-                Hash = content.ComputeHash(),
-                ReceivedAt = receivedAt
-            };
-
-            product.Header = HeadingParser.ParseProduct(product);
-            product.GeoCodes = UgcParser.ParseProduct(product);
-            product.VtecCodes = VtecParser.ParseProduct(product);
-            product.Polygons = SpatialParser.ParseProduct(product).Select(SpatialParser.ConvertToWellKnownText);
-
-            return product;
+            throw new InvalidCastException("Unable to convert to specified type");
         }
 
         /// <summary>
@@ -192,7 +87,7 @@ namespace Emwin.Core.Products
         /// <param name="receivedAt">The received at.</param>
         /// <param name="seq">The seq.</param>
         /// <returns>ITextProduct.</returns>
-        public static IBulletinProduct CreateBulletinProduct(string filename, DateTimeOffset timeStamp, byte[] content, long receivedAt, int seq)
+        public static IBulletinProduct CreateBulletinProduct(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt, int seq)
         {
             var product = new BulletinProduct
             {
@@ -204,7 +99,6 @@ namespace Emwin.Core.Products
                 SequenceNumber = seq
             };
 
-            product.Header = HeadingParser.ParseProduct(product);
             product.GeoCodes = UgcParser.ParseProduct(product);
             product.VtecCodes = VtecParser.ParseProduct(product);
             product.Polygons = SpatialParser.ParseProduct(product).Select(SpatialParser.ConvertToWellKnownText);
@@ -212,6 +106,80 @@ namespace Emwin.Core.Products
             return product;
         }
 
+        /// <summary>
+        /// Creates the compressed.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <returns>ICompressedContent.</returns>
+        public static ICompressedContent CreateCompressedContent(string filename, DateTimeOffset timeStamp, byte[] content,
+            DateTimeOffset receivedAt)
+        {
+            var hash = content.ComputeHash();
+
+            return new CompressedContent
+            {
+                Filename = filename,
+                TimeStamp = timeStamp,
+                Content = content,
+                Hash = hash,
+                ReceivedAt = receivedAt
+            };
+        }
+
+        /// <summary>
+        /// Creates the image product.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <returns>ITextProduct.</returns>
+        public static IImageProduct CreateImageProduct(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt)
+        {
+            var image = Image.FromStream(new MemoryStream(content));
+            var hash = content.ComputeHash();
+
+            return new ImageProduct
+            {
+                Filename = filename,
+                TimeStamp = timeStamp,
+                Content = image,
+                Height = image.Height,
+                Width = image.Width,
+                Hash = hash,
+                ReceivedAt = receivedAt
+            };
+        }
+
+
+        /// <summary>
+        /// Creates the text product.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <returns>ITextProduct.</returns>
+        public static ITextProduct CreateTextProduct(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt)
+        {
+            var hash = content.ComputeHash();
+
+            var product = new TextProduct
+            {
+                Filename = filename,
+                TimeStamp = timeStamp,
+                Content = Encoding.ASCII.GetString(content),
+                Hash = hash,
+                ReceivedAt = receivedAt,
+            };
+
+            product.Header = HeadingParser.ParseProduct(product);
+
+            return product;
+        }
 
         #endregion Public Methods
 

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IBulletinProduct.cs" />
+    <Compile Include="Contracts\IQuickBlockTransferSegment.cs" />
     <Compile Include="EventAggregator\IEventAggregator.cs" />
     <Compile Include="EventAggregator\IEventPublisher.cs" />
     <Compile Include="EventAggregator\IEventSubscriptionManager.cs" />

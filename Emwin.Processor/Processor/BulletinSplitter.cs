@@ -25,6 +25,7 @@
  */
 
 using System.Linq;
+using System.Threading.Tasks;
 using Emwin.Core.Contracts;
 using Emwin.Core.EventAggregator;
 using Emwin.Core.Parsers;
@@ -52,7 +53,7 @@ namespace Emwin.Processor.Processor
             foreach (var bulletin in bulletins)
             {
                 ProcessorEventSource.Log.Verbose("BulletinSplitter", bulletin.ToString());
-                ctx.SendMessage(bulletin);
+                ctx.SendMessage(bulletin, action => Task.Run(action));
             }
         }
 
