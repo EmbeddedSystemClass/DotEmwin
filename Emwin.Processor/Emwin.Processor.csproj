@@ -66,14 +66,15 @@
     <None Include="Emwin.Processor.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\Repos\DotEmwin\Emwin.Core\Emwin.Core.csproj">
+    <ProjectReference Include="..\Emwin.Core\Emwin.Core.csproj">
       <Project>{070f7869-7271-43b2-acd1-5cb788f40525}</Project>
       <Name>Emwin.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release "NuGet.exe" pack "$(ProjectPath)" -Properties Configuration=Release -Verbose</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
