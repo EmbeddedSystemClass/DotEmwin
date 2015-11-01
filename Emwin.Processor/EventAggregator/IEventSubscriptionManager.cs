@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -24,46 +24,43 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System.Collections.Generic;
-using Emwin.Core.Contracts;
-using Emwin.Core.DataObjects;
-
-namespace Emwin.Core.Products
+namespace Emwin.Processor.EventAggregator
 {
     /// <summary>
-    /// Class TextProduct. Represents a received text file.
+    /// Provides a way to add and remove a listener object from the EventAggregator
     /// </summary>
-    public class BulletinProduct : TextProduct, IBulletinProduct
+    public interface IEventSubscriptionManager
     {
-        public int SequenceNumber { get; set; }
+        /// <summary>
+        /// Adds the given listener object to the EventAggregator.
+        /// </summary>
+        /// <param name="listener">Object that should be implementing IListener(of T's), this overload is used when your listeners to multiple message types</param>
+        /// <param name="holdStrongReference">determines if the EventAggregator should hold a weak or strong reference to the listener object. If null it will use the Config level option unless overriden by the parameter.</param>
+        /// <returns>Returns the current IEventSubscriptionManager to allow for easy fluent additions.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        IEventSubscriptionManager AddListener(object listener, bool? holdStrongReference = null);
 
         /// <summary>
-        /// Gets or sets the geo codes.
+        /// Adds the given listener object to the EventAggregator.
         /// </summary>
-        /// <value>The geo codes.</value>
-        public IEnumerable<IUniversalGeographicCode> GeoCodes { get; set; }
+        /// <typeparam name="T">Listener Message type</typeparam>
+        /// <returns>Returns the current IEventSubscriptionManager to allow for easy fluent additions.</returns>
+        IEventSubscriptionManager AddListener<T>();
 
         /// <summary>
-        /// Gets or sets the polygons.
+        /// Adds the given listener object to the EventAggregator.
         /// </summary>
-        /// <value>The polygons.</value>
-        public IEnumerable<string> Polygons { get; set; }
+        /// <typeparam name="T">Listener Message type</typeparam>
+        /// <param name="listener">The listener.</param>
+        /// <param name="holdStrongReference">determines if the EventAggregator should hold a weak or strong reference to the listener object. If null it will use the Config level option unless overriden by the parameter.</param>
+        /// <returns>Returns the current IEventSubscriptionManager to allow for easy fluent additions.</returns>
+        IEventSubscriptionManager AddListener<T>(IHandle<T> listener, bool? holdStrongReference = null);
 
         /// <summary>
-        /// Gets any vtec codes.
+        /// Removes the listener object from the EventAggregator
         /// </summary>
-        /// <value>The vtec codes.</value>
-        public IEnumerable<IValidTimeEventCode> PrimaryVtecCodes { get; set; }
-
-        #region Public Methods
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() =>
-            $"[BulletinProduct] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {Header}";
-
-        #endregion Public Methods
+        /// <param name="listener">The object to be removed</param>
+        /// <returns>Returnes the current IEventSubscriptionManager for fluent removals.</returns>
+        IEventSubscriptionManager RemoveListener(object listener);
     }
 }

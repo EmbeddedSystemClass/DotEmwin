@@ -23,47 +23,53 @@
  *     (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
-
-using System.Collections.Generic;
-using Emwin.Core.Contracts;
+using System;
 using Emwin.Core.DataObjects;
+using Emwin.Core.Types;
 
-namespace Emwin.Core.Products
+namespace Emwin.Core.Extensions
 {
-    /// <summary>
-    /// Class TextProduct. Represents a received text file.
-    /// </summary>
-    public class BulletinProduct : TextProduct, IBulletinProduct
+    public static class VtecExtensions
     {
-        public int SequenceNumber { get; set; }
+        /// <summary>
+        /// Determines whether the specified vtec is active.
+        /// </summary>
+        /// <param name="vtec">The vtec.</param>
+        /// <returns><c>true</c> if the specified vtec is active; otherwise, <c>false</c>.</returns>
+        public static bool IsActive(this ValidTimeEventCode vtec)
+        {
+            return DateTimeOffset.UtcNow >= vtec.Begin &&
+                   DateTimeOffset.UtcNow <= vtec.End && vtec.Action != "CAN" && vtec.Action != "EXP";
+        }
 
         /// <summary>
-        /// Gets or sets the geo codes.
+        /// Gets the significance level.
         /// </summary>
-        /// <value>The geo codes.</value>
-        public IEnumerable<IUniversalGeographicCode> GeoCodes { get; set; }
+        /// <param name="vtec">The vtec.</param>
+        /// <returns>VtecSignificanceLevel.</returns>
+        public static VtecSignificanceLevel GetSignificanceLevel(this ValidTimeEventCode vtec)
+        {
+            switch (vtec.SignificanceCode)
+            {
+                case 'Y': return VtecSignificanceLevel.Advisory;
+                case 'F': return VtecSignificanceLevel.Forecast;
+                case 'O': return VtecSignificanceLevel.Outlook;
+                case 'S': return VtecSignificanceLevel.Statement;
+                case 'N': return VtecSignificanceLevel.Synopsis;
+                case 'W': return VtecSignificanceLevel.Warning;
+                case 'A': return VtecSignificanceLevel.Watch;
+            }
+
+            return VtecSignificanceLevel.None;
+        }
 
         /// <summary>
-        /// Gets or sets the polygons.
+        /// Determines whether the specified vtec is operational.
         /// </summary>
-        /// <value>The polygons.</value>
-        public IEnumerable<string> Polygons { get; set; }
+        /// <param name="vtec">The vtec.</param>
+        /// <returns>System.Boolean.</returns>
+        public static bool IsOperational(this ValidTimeEventCode vtec)
+                    => vtec.TypeIdentifier == (char)VtecTypeCode.Operational;
 
-        /// <summary>
-        /// Gets any vtec codes.
-        /// </summary>
-        /// <value>The vtec codes.</value>
-        public IEnumerable<IValidTimeEventCode> PrimaryVtecCodes { get; set; }
-
-        #region Public Methods
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() =>
-            $"[BulletinProduct] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {Header}";
-
-        #endregion Public Methods
     }
 }

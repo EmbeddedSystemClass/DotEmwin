@@ -36,7 +36,7 @@ namespace Emwin.Core.Parsers
     {
         #region Private Fields
 
-        private static readonly Regex PolygonRegex = new Regex(@"^LAT\.{3}LON(?:\s(?<points>[0-9]{4}\s[0-9]{4}))+", RegexOptions.ExplicitCapture | RegexOptions.Multiline);
+        private static readonly Regex PolygonRegex = new Regex(@"^LAT\.{3}LON(?:\s(?<points>[0-9]{4}\s[0-9]{4}))+", RegexOptions.ExplicitCapture | RegexOptions.Multiline | RegexOptions.Compiled);
 
         #endregion Private Fields
 

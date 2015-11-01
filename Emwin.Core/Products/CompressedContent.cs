@@ -58,12 +58,6 @@ namespace Emwin.Core.Products
         public string Filename { get; set; }
 
         /// <summary>
-        /// Gets or sets the hash.
-        /// </summary>
-        /// <value>The hash.</value>
-        public string Hash { get; set; }
-
-        /// <summary>
         /// Gets the content.
         /// </summary>
         /// <value>The content.</value>

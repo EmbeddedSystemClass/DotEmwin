@@ -38,6 +38,16 @@
     <Reference Include="System.Runtime.Caching" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventAggregator\EventAggregator.cs" />
+    <Compile Include="EventAggregator\EventAggregatorExtensions.cs" />
+    <Compile Include="EventAggregator\IEventAggregator.cs" />
+    <Compile Include="EventAggregator\IEventPublisher.cs" />
+    <Compile Include="EventAggregator\IEventSubscriptionManager.cs" />
+    <Compile Include="EventAggregator\IHandle.cs" />
+    <Compile Include="EventAggregator\IPipelineFilter.cs" />
+    <Compile Include="EventAggregator\ObservableListener.cs" />
+    <Compile Include="EventAggregator\Pipeline.cs" />
+    <Compile Include="Instrumentation\DisposableStopwatch.cs" />
     <Compile Include="Processor\ProductAssembler.cs" />
     <Compile Include="Processor\SegmentBundler.cs" />
     <Compile Include="Processor\BulletinSplitter.cs" />
@@ -49,6 +59,7 @@
     <Compile Include="Instrumentation\PerformanceCounters.cs" />
     <Compile Include="Instrumentation\SafePerformanceCounter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProcessorBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Emwin.Processor.licenseheader" />

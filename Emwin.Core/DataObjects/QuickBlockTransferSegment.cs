@@ -103,7 +103,7 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The received at.</value>
         [DataMember]
-        public DateTimeOffset ReceivedAt { get; set; } = new DateTimeOffset(Stopwatch.GetTimestamp(), TimeSpan.Zero);
+        public DateTimeOffset ReceivedAt { get; } = DateTimeOffset.UtcNow;
 
         /// <summary>
         /// Gets or sets the time stamp of the file the block is part of.

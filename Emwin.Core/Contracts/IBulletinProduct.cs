@@ -25,7 +25,6 @@
  */
 
 using System.Collections.Generic;
-using Emwin.Core.DataObjects;
 
 namespace Emwin.Core.Contracts
 {
@@ -41,7 +40,7 @@ namespace Emwin.Core.Contracts
         /// Gets the Universal Geographic Codes.
         /// </summary>
         /// <value>The geo codes.</value>
-        IEnumerable<UniversalGeographicCode> GeoCodes { get; }
+        IEnumerable<IUniversalGeographicCode> GeoCodes { get; }
 
         /// <summary>
         /// Gets or sets the polygons.
@@ -53,6 +52,6 @@ namespace Emwin.Core.Contracts
         /// Gets any VTEC codes.
         /// </summary>
         /// <value>The VTEC codes.</value>
-        IEnumerable<ValidTimeEventCode> VtecCodes { get; }
+        IEnumerable<IValidTimeEventCode> PrimaryVtecCodes { get; }
     }
 }

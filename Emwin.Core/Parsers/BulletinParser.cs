@@ -39,8 +39,8 @@ namespace Emwin.Core.Parsers
 
         #region Private Fields
 
-        private static readonly Regex BulletinRegex = new Regex(@"[\r\n]+(?<bulletin>[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+.+?[\r\n]+\$\$)", RegexOptions.Singleline | RegexOptions.ExplicitCapture);
-        private static readonly Regex HeaderRegex = new Regex(@"^(?<header>.+?)[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+.+?[\r\n]+\$\$", RegexOptions.Singleline | RegexOptions.ExplicitCapture);
+        private static readonly Regex BulletinRegex = new Regex(@"[\r\n]+(?<bulletin>[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+.+?[\r\n]+\$\$)", RegexOptions.Singleline | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+        private static readonly Regex HeaderRegex = new Regex(@"^(?<header>.+?)[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+.+?[\r\n]+\$\$", RegexOptions.Singleline | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
         #endregion Private Fields
 
@@ -63,14 +63,15 @@ namespace Emwin.Core.Parsers
             {
                 var newFilename = string.Concat(
                     Path.GetFileNameWithoutExtension(product.Filename), 
-                    '.', seq.ToString("00"),
+                    '-', seq.ToString("00"),
                     Path.GetExtension(product.Filename));
 
                 yield return ProductFactory.CreateBulletinProduct(
                     newFilename, 
                     product.TimeStamp, 
-                    Encoding.ASCII.GetBytes(header + bulletin), 
+                    string.Concat(header, bulletin), 
                     product.ReceivedAt,
+                    product.Header,
                     seq++);
             }
         }

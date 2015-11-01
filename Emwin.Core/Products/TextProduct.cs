@@ -25,7 +25,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
 using Emwin.Core.Types;
@@ -65,16 +64,10 @@ namespace Emwin.Core.Products
         public string Filename { get; set; }
 
         /// <summary>
-        /// Gets or sets the hash.
-        /// </summary>
-        /// <value>The hash.</value>
-        public string Hash { get; set; }
-
-        /// <summary>
         /// Gets or sets the header.
         /// </summary>
         /// <value>The header.</value>
-        public CommsHeader Header { get; set; }
+        public ICommsHeader Header { get; set; }
 
         /// <summary>
         /// Gets the received at time.

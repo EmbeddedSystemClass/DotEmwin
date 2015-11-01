@@ -27,8 +27,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Emwin.Core.Contracts;
-using Emwin.Core.EventAggregator;
 using Emwin.Core.Parsers;
+using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
@@ -48,13 +48,9 @@ namespace Emwin.Processor.Processor
         {
             var bulletins = BulletinParser.ParseProduct(product).ToList();
             if (bulletins.Count == 0) return;
-            ProcessorEventSource.Log.Info("BulletinSplitter", "Split text product into " + bulletins.Count + " bulletins");
 
-            foreach (var bulletin in bulletins)
-            {
-                ProcessorEventSource.Log.Verbose("BulletinSplitter", bulletin.ToString());
-                ctx.SendMessage(bulletin, action => Task.Run(action));
-            }
+            ProcessorEventSource.Log.Info("BulletinSplitter", "Splitting product into " + bulletins.Count + " bulletins");
+            Parallel.ForEach(bulletins, bulletin => ctx.SendMessage(bulletin));
         }
 
         #endregion Public Methods

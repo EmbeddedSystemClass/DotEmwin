@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -24,32 +24,32 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-namespace Emwin.Core.Types
+using System;
+
+namespace Emwin.Processor.EventAggregator
 {
-    public enum T1DataTypeCode
+    /// <summary>
+    /// Interface IEventPublisher
+    /// </summary>
+    public interface IEventPublisher
     {
-        Analyses = 'A',
-        AddressedMessage = 'B',
-        ClimaticData = 'C',
-        GridPointInformationD = 'D',
-        SatelliteImagery = 'E',
-        Forecast = 'F',
-        GridPointInformationG = 'G',
-        GridPointInformationH = 'H',
-        ObservationalData = 'I',
-        ForecastData = 'J',
-        Crex = 'K',
-        AviationXmlData = 'L',
-        Notices = 'N',
-        OceanographicInformation = 'O',
-        PictorialInformation = 'P',
-        RegionalPictorialInformation = 'Q',
-        SurfaceData = 'S',
-        SatelliteData = 'T',
-        UpperAirData = 'U',
-        NationalData = 'V',
-        Warnings = 'W',
-        CommonAlertProtocolMessages = 'X',
-        GribRegionalUse = 'Y'
+        /// <summary>
+        /// Sends the message.
+        /// </summary>
+        /// <typeparam name="TMessage">The type of the t message.</typeparam>
+        /// <param name="message">The message.</param>
+        /// <param name="marshal">The marshal.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        void SendMessage<TMessage>(TMessage message, Action<Action> marshal = null);
+
+        /// <summary>
+        /// Sends the message.
+        /// </summary>
+        /// <typeparam name="TMessage">The type of the t message.</typeparam>
+        /// <param name="marshal">The marshal.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter"),
+         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        void SendMessage<TMessage>(Action<Action> marshal = null)
+            where TMessage : new();
     }
 }

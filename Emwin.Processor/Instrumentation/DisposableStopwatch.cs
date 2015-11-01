@@ -23,47 +23,39 @@
  *     (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
+using System;
+using System.Diagnostics;
 
-using System.Collections.Generic;
-using Emwin.Core.Contracts;
-using Emwin.Core.DataObjects;
-
-namespace Emwin.Core.Products
+namespace Emwin.Processor.Instrumentation
 {
-    /// <summary>
-    /// Class TextProduct. Represents a received text file.
-    /// </summary>
-    public class BulletinProduct : TextProduct, IBulletinProduct
+    internal sealed class DisposableStopwatch : IDisposable
     {
-        public int SequenceNumber { get; set; }
+        private readonly Action<Stopwatch> _action;
 
         /// <summary>
-        /// Gets or sets the geo codes.
+        /// Initializes a new instance of the <see cref="DisposableStopwatch" /> class.
         /// </summary>
-        /// <value>The geo codes.</value>
-        public IEnumerable<IUniversalGeographicCode> GeoCodes { get; set; }
+        /// <param name="name">The name.</param>
+        /// <param name="action">The action.</param>
+        public DisposableStopwatch(string name, Action<Stopwatch> action = null)
+        {
+            _action = action ?? (s => Trace.WriteLine($"{name}={s.ElapsedMilliseconds}"));
+            Watch = Stopwatch.StartNew();
+        }
 
         /// <summary>
-        /// Gets or sets the polygons.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        /// <value>The polygons.</value>
-        public IEnumerable<string> Polygons { get; set; }
+        public void Dispose()
+        {
+            Watch.Stop();
+            _action(Watch);
+        }
 
         /// <summary>
-        /// Gets any vtec codes.
+        /// Gets the Stopwatch.
         /// </summary>
-        /// <value>The vtec codes.</value>
-        public IEnumerable<IValidTimeEventCode> PrimaryVtecCodes { get; set; }
-
-        #region Public Methods
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() =>
-            $"[BulletinProduct] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {Header}";
-
-        #endregion Public Methods
+        /// <value>The watch.</value>
+        public Stopwatch Watch { get; }
     }
 }

@@ -25,12 +25,11 @@
  */
 
 using System;
-using System.Linq;
 using Emwin.Core.Contracts;
-using Emwin.Core.EventAggregator;
 using Emwin.Processor.Instrumentation;
 using Emwin.Core.Products;
 using Emwin.Core.Types;
+using Emwin.Processor.EventAggregator;
 
 namespace Emwin.Processor.Processor
 {
@@ -48,31 +47,32 @@ namespace Emwin.Processor.Processor
         {
             try
             {
-                var contentType = bundle.First(x => x != null).ContentType;
+                var contentType = bundle[0].ContentType;
                 switch (contentType)
                 {
                     case ContentFileType.Text:
                         var textProduct = ProductFactory.ConvertTo<ITextProduct>(bundle);
-                        ctx.SendMessage(textProduct);
                         ProcessorEventSource.Log.Verbose("ProductAssembler", textProduct.ToString());
+                        ctx.SendMessage(textProduct);
                         break;
 
                     case ContentFileType.Image:
                         var imageProduct = ProductFactory.ConvertTo<IImageProduct>(bundle);
-                        ctx.SendMessage(imageProduct);
                         ProcessorEventSource.Log.Verbose("ProductAssembler", imageProduct.ToString());
+                        ctx.SendMessage(imageProduct);
                         break;
 
                     case ContentFileType.Compressed:
                         var compressedProduct = ProductFactory.ConvertTo<ICompressedContent>(bundle);
-                        ctx.SendMessage(compressedProduct);
                         ProcessorEventSource.Log.Verbose("ProductAssembler", compressedProduct.ToString());
+                        ctx.SendMessage(compressedProduct);
                         break;
 
                     default:
-                        ProcessorEventSource.Log.Warning("ProductAssembler", "Unknown content file type: " + contentType);
+                        ProcessorEventSource.Log.Warning("ProductAssembler",
+                            "Unknown content file type: " + contentType);
                         return;
-                };
+                }
 
                 PerformanceCounters.ProductsCreatedTotal.Increment();
             }

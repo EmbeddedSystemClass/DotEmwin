@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -24,16 +24,34 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-namespace Emwin.Core.Types
+using System;
+
+namespace Emwin.Core.Contracts
 {
-    public enum VtecSignificanceCode
+    public interface IUniversalGeographicCode
     {
-        Watch = 'A',
-        Forecast = 'F',
-        Synopsis = 'N',
-        Outlook = 'O',
-        Statement = 'S',
-        Warning = 'W',
-        Advisory = 'Y'
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        string Id { get; }
+
+        /// <summary>
+        /// Gets the purge time.
+        /// </summary>
+        /// <value>The purge time.</value>
+        DateTimeOffset PurgeTime { get; }
+
+        /// <summary>
+        /// Gets the state.
+        /// </summary>
+        /// <value>The state.</value>
+        string State { get; }
+
+        /// <summary>
+        /// Gets the type.
+        /// </summary>
+        /// <value>The type.</value>
+        char Type { get; }
     }
 }

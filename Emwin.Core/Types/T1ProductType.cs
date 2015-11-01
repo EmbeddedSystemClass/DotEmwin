@@ -24,46 +24,32 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System.Collections.Generic;
-using Emwin.Core.Contracts;
-using Emwin.Core.DataObjects;
-
-namespace Emwin.Core.Products
+namespace Emwin.Core.Types
 {
-    /// <summary>
-    /// Class TextProduct. Represents a received text file.
-    /// </summary>
-    public class BulletinProduct : TextProduct, IBulletinProduct
+    public enum T1ProductType
     {
-        public int SequenceNumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets the geo codes.
-        /// </summary>
-        /// <value>The geo codes.</value>
-        public IEnumerable<IUniversalGeographicCode> GeoCodes { get; set; }
-
-        /// <summary>
-        /// Gets or sets the polygons.
-        /// </summary>
-        /// <value>The polygons.</value>
-        public IEnumerable<string> Polygons { get; set; }
-
-        /// <summary>
-        /// Gets any vtec codes.
-        /// </summary>
-        /// <value>The vtec codes.</value>
-        public IEnumerable<IValidTimeEventCode> PrimaryVtecCodes { get; set; }
-
-        #region Public Methods
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() =>
-            $"[BulletinProduct] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {Header}";
-
-        #endregion Public Methods
+        Analyses = 'A',
+        AddressedMessage = 'B',
+        ClimaticData = 'C',
+        GridPointInformationD = 'D',
+        SatelliteImagery = 'E',
+        Forecast = 'F',
+        GridPointInformationG = 'G',
+        GridPointInformationH = 'H',
+        ObservationalData = 'I',
+        ForecastData = 'J',
+        Crex = 'K',
+        AviationXmlData = 'L',
+        Notices = 'N',
+        OceanographicInformation = 'O',
+        PictorialInformation = 'P',
+        RegionalPictorialInformation = 'Q',
+        SurfaceData = 'S',
+        SatelliteData = 'T',
+        UpperAirData = 'U',
+        NationalData = 'V',
+        Warnings = 'W',
+        CommonAlertProtocolMessages = 'X',
+        GribRegionalUse = 'Y'
     }
 }

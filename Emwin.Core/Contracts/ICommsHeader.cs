@@ -24,46 +24,46 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System.Collections.Generic;
-using Emwin.Core.Contracts;
-using Emwin.Core.DataObjects;
+using System;
 
-namespace Emwin.Core.Products
+namespace Emwin.Core.Contracts
 {
-    /// <summary>
-    /// Class TextProduct. Represents a received text file.
-    /// </summary>
-    public class BulletinProduct : TextProduct, IBulletinProduct
+    public interface ICommsHeader
     {
-        public int SequenceNumber { get; set; }
+        /// <summary>
+        /// Gets the AFOS Product Identification List.
+        /// </summary>
+        /// <value>The AFOS Product Identification List.</value>
+        string AfosPil { get; }
 
         /// <summary>
-        /// Gets or sets the geo codes.
+        /// Gets the AWIPS product identifier.
         /// </summary>
-        /// <value>The geo codes.</value>
-        public IEnumerable<IUniversalGeographicCode> GeoCodes { get; set; }
+        /// <value>The identifier.</value>
+        string Id { get; }
 
         /// <summary>
-        /// Gets or sets the polygons.
+        /// Gets the extension indicator.
         /// </summary>
-        /// <value>The polygons.</value>
-        public IEnumerable<string> Polygons { get; set; }
+        /// <value>The indicator.</value>
+        string Indicator { get; }
 
         /// <summary>
-        /// Gets any vtec codes.
+        /// Gets the office identifier.
         /// </summary>
-        /// <value>The vtec codes.</value>
-        public IEnumerable<IValidTimeEventCode> PrimaryVtecCodes { get; set; }
-
-        #region Public Methods
+        /// <value>The office identifier.</value>
+        string OfficeId { get; }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Gets the type of the product.
         /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() =>
-            $"[BulletinProduct] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {Header}";
+        /// <value>The type of the product.</value>
+        char ProductType { get; }
 
-        #endregion Public Methods
+        /// <summary>
+        /// Gets the time.
+        /// </summary>
+        /// <value>The time.</value>
+        DateTimeOffset Time { get; }
     }
 }

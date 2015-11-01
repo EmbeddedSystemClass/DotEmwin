@@ -89,9 +89,6 @@ namespace Emwin.ByteBlaster
                         {
                             _lock.ExitReadLock();
                         }
-
-                        var delay = (Stopwatch.GetTimestamp() - segment.ReceivedAt.Ticks) / (Stopwatch.Frequency / 1000);
-                        PerformanceCounters.BlockProcessingCounterTotal.RawValue = delay;
                     }),
                     new ChannelEventHandler<ByteBlasterServerList>((ctx, serverList) => ServerList = serverList)
                 )));

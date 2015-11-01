@@ -30,6 +30,7 @@ using System.Text.RegularExpressions;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
 using Emwin.Core.Types;
+using Emwin.Core.References;
 
 namespace Emwin.Core.Parsers
 {
@@ -48,7 +49,7 @@ namespace Emwin.Core.Parsers
         /// The Primary VTEC Pattern
         /// </summary>
         private static readonly Regex PvtecRegex = new Regex(@"^/(?<type>[TO])\.(?<action>[A-Z]{3})\.(?<office>[A-Z]{4})\.(?<phen>[A-Z]{2})\.(?<sig>[A-Z])\.(?<number>[0-9]{4})\.(?<begin>[0-9]{6}T[0-9]{4}Z)-(?<end>[0-9]{6}T[0-9]{4}Z)/\r", 
-            RegexOptions.Multiline | RegexOptions.ExplicitCapture);
+            RegexOptions.Multiline | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
         #endregion Private Fields
 
@@ -59,27 +60,29 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;ValidTimeEventCode&gt;.</returns>
-        public static IEnumerable<ValidTimeEventCode> ParseProduct(ITextProduct product)
+        public static IEnumerable<IValidTimeEventCode> ParseProduct(ITextProduct product)
             => PvtecRegex.Matches(product.Content).Cast<Match>().Select(Create);
 
         /// <summary>
-        /// Parses the vtec string.
+        /// Parses the VTEC string.
         /// </summary>
-        /// <param name="vtec">The vtec string.</param>
+        /// <param name="vtec">The VTEC.</param>
         /// <returns>ValidTimeEventCode.</returns>
-        public static ValidTimeEventCode ParseVtec(string vtec) => Create(PvtecRegex.Match(vtec));
+        public static IValidTimeEventCode ParseVtec(string vtec) => Create(PvtecRegex.Match(vtec));
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private static ValidTimeEventCode Create(Match pvtecMatch) => new ValidTimeEventCode
+        private static IValidTimeEventCode Create(Match pvtecMatch) => new ValidTimeEventCode
         {
-            TypeIdentifier = (VtecTypeCode) pvtecMatch.Groups["type"].Value[0],
+            TypeIdentifier = pvtecMatch.Groups["type"].Value[0],
+            Action = VtecAction.ResourceManager.GetString(pvtecMatch.Groups["action"].Value),
             ActionCode = pvtecMatch.Groups["action"].Value,
             OfficeId = pvtecMatch.Groups["office"].Value,
+            Phenomenon = VtecPhenomenon.ResourceManager.GetString(pvtecMatch.Groups["phen"].Value),
             PhenomenonCode = pvtecMatch.Groups["phen"].Value,
-            Significance = (VtecSignificanceCode) pvtecMatch.Groups["sig"].Value[0],
+            SignificanceCode = pvtecMatch.Groups["sig"].Value[0],
             EventNumber = int.Parse(pvtecMatch.Groups["number"].Value),
             Begin = TimeParser.ParseDateTime(pvtecMatch.Groups["begin"].Value),
             End = TimeParser.ParseDateTime(pvtecMatch.Groups["end"].Value)

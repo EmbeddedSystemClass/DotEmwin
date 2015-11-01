@@ -26,8 +26,7 @@
 
 using System;
 using System.Runtime.Serialization;
-using Emwin.Core.References;
-using Emwin.Core.Types;
+using Emwin.Core.Contracts;
 
 namespace Emwin.Core.DataObjects
 {
@@ -38,7 +37,7 @@ namespace Emwin.Core.DataObjects
     /// There are two types of VTEC, the P-(Primary) VTEC, and an H-(Hydrologic) VTEC.
     /// </summary>
     [DataContract]
-    public class ValidTimeEventCode
+    public class ValidTimeEventCode : IValidTimeEventCode
     {
         #region Public Properties
 
@@ -46,8 +45,8 @@ namespace Emwin.Core.DataObjects
         /// Gets the action.
         /// </summary>
         /// <value>The action.</value>
-        [IgnoreDataMember]
-        public string Action => VtecAction.ResourceManager.GetString(ActionCode);
+        [DataMember]
+        public string Action { get; set; }
 
         /// <summary>
         /// Gets or sets the action code.
@@ -88,8 +87,8 @@ namespace Emwin.Core.DataObjects
         /// Gets the phenomenon.
         /// </summary>
         /// <value>The phenomenon.</value>
-        [IgnoreDataMember]
-        public string Phenomenon => VtecPhenomenon.ResourceManager.GetString(PhenomenonCode);
+        [DataMember]
+        public string Phenomenon { get; set; }
 
         /// <summary>
         /// Gets or sets the phenomenon code.
@@ -103,31 +102,24 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The significance.</value>
         [DataMember]
-        public VtecSignificanceCode Significance { get; set; }
+        public char SignificanceCode { get; set; }
 
         /// <summary>
         /// Gets or sets the type of VTEC.
         /// </summary>
         /// <value>The type of VTEC.</value>
         [DataMember]
-        public VtecTypeCode TypeIdentifier { get; set; }
+        public char TypeIdentifier { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
         /// <summary>
-        /// Determines whether this event is currently active based on current UTC time and action field.
-        /// </summary>
-        /// <returns><c>true</c> if this instance is active; otherwise, <c>false</c>.</returns>
-        public bool IsActive() => DateTimeOffset.UtcNow >= Begin && 
-                                  DateTimeOffset.UtcNow <= End && Action != "CAN" && Action != "EXP";
-
-        /// <summary>
         /// To the string.
         /// </summary>
         /// <returns>System.String.</returns>
-        public override string ToString() => $"VTEC: {OfficeId} #{EventNumber} {Action} ({ActionCode}) {Phenomenon} ({PhenomenonCode}) {Significance} ({Begin:g} -> {End:g})";
+        public override string ToString() => $"VTEC: {OfficeId} #{EventNumber} {Action} ({ActionCode}) {Phenomenon} ({PhenomenonCode}) {SignificanceCode} ({Begin:g} -> {End:g})";
 
         #endregion Public Methods
 

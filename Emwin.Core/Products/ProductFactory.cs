@@ -29,9 +29,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using Emwin.Core.Contracts;
+using Emwin.Core.DataObjects;
 using Emwin.Core.Parsers;
 using Emwin.Core.Types;
 
@@ -58,11 +58,7 @@ namespace Emwin.Core.Products
         {
             if (segments == null) throw new ArgumentNullException(nameof(segments));
 
-            // Ensure all the segments have been completed.
-            if (segments.Any(p => p == null))
-                throw new ArgumentException(@"Unable to convert if bundle segments are not complete (found null)", nameof(segments));
-
-            var lastSegment = segments.Last();
+            var lastSegment = segments[segments.Length - 1];
             var isText = lastSegment.ContentType == ContentFileType.Text;
             var content = segments.Select(b => b.Content).ToList().Combine(isText);
 
@@ -85,22 +81,24 @@ namespace Emwin.Core.Products
         /// <param name="timeStamp">The time stamp.</param>
         /// <param name="content">The content.</param>
         /// <param name="receivedAt">The received at.</param>
+        /// <param name="header">The header.</param>
         /// <param name="seq">The seq.</param>
         /// <returns>ITextProduct.</returns>
-        public static IBulletinProduct CreateBulletinProduct(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt, int seq)
+        public static IBulletinProduct CreateBulletinProduct(string filename, DateTimeOffset timeStamp, string content, DateTimeOffset receivedAt, ICommsHeader header, int seq)
         {
             var product = new BulletinProduct
             {
                 Filename = filename,
                 TimeStamp = timeStamp,
-                Content = Encoding.ASCII.GetString(content),
-                Hash = content.ComputeHash(),
+                Content = content,
+                ContentType = ContentFileType.Text,
                 ReceivedAt = receivedAt,
-                SequenceNumber = seq
+                Header = header,
+                SequenceNumber = seq,
             };
 
             product.GeoCodes = UgcParser.ParseProduct(product);
-            product.VtecCodes = VtecParser.ParseProduct(product);
+            product.PrimaryVtecCodes = VtecParser.ParseProduct(product);
             product.Polygons = SpatialParser.ParseProduct(product).Select(SpatialParser.ConvertToWellKnownText);
 
             return product;
@@ -117,15 +115,13 @@ namespace Emwin.Core.Products
         public static ICompressedContent CreateCompressedContent(string filename, DateTimeOffset timeStamp, byte[] content,
             DateTimeOffset receivedAt)
         {
-            var hash = content.ComputeHash();
-
             return new CompressedContent
             {
                 Filename = filename,
                 TimeStamp = timeStamp,
                 Content = content,
-                Hash = hash,
-                ReceivedAt = receivedAt
+                ReceivedAt = receivedAt,
+                ContentType = ContentFileType.Compressed
             };
         }
 
@@ -140,7 +136,7 @@ namespace Emwin.Core.Products
         public static IImageProduct CreateImageProduct(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt)
         {
             var image = Image.FromStream(new MemoryStream(content));
-            var hash = content.ComputeHash();
+            var key = Path.GetFileNameWithoutExtension(filename) ?? "";
 
             return new ImageProduct
             {
@@ -149,11 +145,11 @@ namespace Emwin.Core.Products
                 Content = image,
                 Height = image.Height,
                 Width = image.Width,
-                Hash = hash,
-                ReceivedAt = receivedAt
+                ReceivedAt = receivedAt,
+                ContentType = ContentFileType.Image,
+                Description = References.GraphicProduct.ResourceManager.GetString(key.ToUpperInvariant())
             };
         }
-
 
         /// <summary>
         /// Creates the text product.
@@ -165,15 +161,16 @@ namespace Emwin.Core.Products
         /// <returns>ITextProduct.</returns>
         public static ITextProduct CreateTextProduct(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt)
         {
-            var hash = content.ComputeHash();
+            var count = Array.LastIndexOf(content, (byte)03); // Trim to ETX
+            if (count < 0) count = content.Length;
 
             var product = new TextProduct
             {
                 Filename = filename,
                 TimeStamp = timeStamp,
-                Content = Encoding.ASCII.GetString(content),
-                Hash = hash,
+                Content = Encoding.ASCII.GetString(content, 0, count),
                 ReceivedAt = receivedAt,
+                ContentType = ContentFileType.Text
             };
 
             product.Header = HeadingParser.ParseProduct(product);
@@ -208,17 +205,6 @@ namespace Emwin.Core.Products
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Computes the hash of the source bytes and returns as Base 64 string.
-        /// </summary>
-        /// <param name="sourceBytes">The source bytes.</param>
-        /// <returns>System.String.</returns>
-        private static string ComputeHash(this byte[] sourceBytes)
-        {
-            using (var hashAlg = SHA1.Create())
-                return Convert.ToBase64String(hashAlg.ComputeHash(sourceBytes));
         }
 
         #endregion Private Methods

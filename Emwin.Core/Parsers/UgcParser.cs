@@ -43,7 +43,7 @@ namespace Emwin.Core.Parsers
         /// <summary>
         /// The Universal Geographic Code Pattern
         /// </summary>
-        private static readonly Regex UgcRegex = new Regex(@"[\r\n]*[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+", RegexOptions.Singleline);
+        private static readonly Regex UgcRegex = new Regex(@"[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-\r\r\n", RegexOptions.Compiled);
 
         #endregion Private Fields
 
@@ -54,7 +54,7 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;UniversalGeographicCode&gt;.</returns>
-        public static IEnumerable<UniversalGeographicCode> ParseProduct(ITextProduct product)
+        public static IEnumerable<IUniversalGeographicCode> ParseProduct(ITextProduct product)
         {
             var ugcMatches = UgcRegex.Matches(product.Content);
             return ugcMatches.Cast<Match>().SelectMany(ugcMatch => ParseUgc(ugcMatch.Value, product.TimeStamp));
@@ -66,7 +66,7 @@ namespace Emwin.Core.Parsers
         /// <param name="ugc">The Universal Geographic Code string.</param>
         /// <param name="referenceTime">The reference time used for dates.</param>
         /// <returns>IEnumerable&lt;UniversalGeographicCode&gt;.</returns>
-        public static IEnumerable<UniversalGeographicCode> ParseUgc(string ugc, DateTimeOffset referenceTime)
+        public static IEnumerable<IUniversalGeographicCode> ParseUgc(string ugc, DateTimeOffset referenceTime)
         {
             // WIZ001-002-006>008-014>016-023>028-212300-
             string state = null;

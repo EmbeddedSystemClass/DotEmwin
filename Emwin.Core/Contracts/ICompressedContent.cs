@@ -31,12 +31,6 @@ namespace Emwin.Core.Contracts
     public interface ICompressedContent : IEmwinContent<byte[]>
     {
         /// <summary>
-        /// Gets or sets the hash.
-        /// </summary>
-        /// <value>The hash.</value>
-        string Hash { get; }
-
-        /// <summary>
         /// Gets the stream.
         /// </summary>
         /// <returns>Stream.</returns>

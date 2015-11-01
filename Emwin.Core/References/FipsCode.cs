@@ -23,108 +23,122 @@
  *     (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
-
 using System;
-using Emwin.Core.Contracts;
-using Emwin.Processor.EventAggregator;
-using Emwin.Processor.Instrumentation;
-using Emwin.Processor.Processor;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
-namespace Emwin.Processor
+namespace Emwin.Core.References
 {
-    public class WeatherProductProcessor : ProcessorBase<IQuickBlockTransferSegment>, IObserver<IQuickBlockTransferSegment>
+    public sealed class FipsCode
     {
 
         #region Private Fields
 
-        private readonly ObservableListener<IBulletinProduct> _bulletinObservable = new ObservableListener<IBulletinProduct>();
-        private readonly ObservableListener<IImageProduct> _imageObservable = new ObservableListener<IImageProduct>();
-        private readonly ObservableListener<ITextProduct> _textObservable = new ObservableListener<ITextProduct>();
+        private const string ResourceName = "Emwin.Core.Resources.FipsCodes.txt";
+        private static readonly Lazy<Dictionary<string, FipsCode>> LookupTable = new Lazy<Dictionary<string, FipsCode>>(GetTable);
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WeatherProductProcessor" /> class.
+        /// Initializes a new instance of the <see cref="FipsCode" /> class.
         /// </summary>
-        /// <param name="observable">The observable.</param>
-        public WeatherProductProcessor(IObservable<IQuickBlockTransferSegment> observable = null)
+        /// <param name="state">The state.</param>
+        /// <param name="stateFips">The state fips.</param>
+        /// <param name="countyFips">The county fips.</param>
+        /// <param name="county">The county.</param>
+        /// <param name="classFips">The class fips.</param>
+        private FipsCode(string state, string stateFips, string countyFips, string county, string classFips)
         {
-            observable?.Subscribe(this);
+            State = state;
+            StateFipsCode = stateFips;
+            CountyFipsCode = countyFips;
+            CountyName = county;
+            ClassFipsCode = classFips;
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the class fips code.
+        /// </summary>
+        /// <value>The class fips code.</value>
+        public string ClassFipsCode { get; }
+
+        /// <summary>
+        /// Gets the county code.
+        /// </summary>
+        /// <value>The county code.</value>
+        public string CountyFipsCode { get; }
+
+        /// <summary>
+        /// Gets the county name.
+        /// </summary>
+        /// <value>The county.</value>
+        public string CountyName { get; }
+        /// <summary>
+        /// Gets the 2 letter state.
+        /// </summary>
+        /// <value>The state.</value>
+        public string State { get; }
+
+        /// <summary>
+        /// Gets the state FIPS code.
+        /// </summary>
+        /// <value>The state code.</value>
+        public string StateFipsCode { get; }
+
+        #endregion Public Properties
 
         #region Public Methods
 
         /// <summary>
-        /// Gets the bulletin observable.
+        /// Gets the FIPS code.
         /// </summary>
-        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.IBulletinProduct&gt;.</returns>
-        public IObservable<IBulletinProduct> GetBulletinObservable() => _bulletinObservable;
-
-        /// <summary>
-        /// Gets the image observable.
-        /// </summary>
-        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.ITextProduct&gt;.</returns>
-        public IObservable<IImageProduct> GetImageObservable() => _imageObservable;
-
-        /// <summary>
-        /// Gets the text observable.
-        /// </summary>
-        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.ITextProduct&gt;.</returns>
-        public IObservable<ITextProduct> GetTextObservable() => _textObservable;
-
-        /// <summary>
-        /// Called when input is completed.
-        /// </summary>
-        public void OnCompleted()
+        /// <param name="state">The state.</param>
+        /// <param name="countyFips">The county fips.</param>
+        /// <returns>Emwin.Core.References.SameCode.</returns>
+        public static FipsCode Get(string state, string countyFips)
         {
-            ProcessorEventSource.Log.Info("WeatherProductProcessor", "Observable source indicated completion");
-            Stop();
-        }
-
-        /// <summary>
-        /// Called when error occurs.
-        /// </summary>
-        /// <param name="error">The error.</param>
-        public void OnError(Exception error)
-        {
-            ProcessorEventSource.Log.Error("WeatherProductProcessor", "Observable source error: " + error);
-            Stop();
-        }
-
-        /// <summary>
-        /// Called when next block segment is available for processing.
-        /// </summary>
-        /// <param name="blockSegment">The value.</param>
-        public void OnNext(IQuickBlockTransferSegment blockSegment)
-        {
-            SegmentQueue.Add(blockSegment);
+            FipsCode result;
+            return LookupTable.Value.TryGetValue(state + countyFips, out result) ? result : null;
         }
 
         #endregion Public Methods
 
-        #region Protected Methods
+        #region Private Methods
 
-        protected override IEventAggregator GetAggregator()
+        /// <summary>
+        /// Gets the table from the resource file.
+        /// </summary>
+        /// <returns>System.Collections.Generic.Dictionary&lt;System.String, Emwin.Core.References.SameCode&gt;.</returns>
+        private static Dictionary<string, FipsCode> GetTable()
         {
-            var aggregator = new EventAggregator.EventAggregator();
+            var assembly = Assembly.GetExecutingAssembly();
+            var table = new Dictionary<string, FipsCode>();
 
-            aggregator
-                .AddListener<SegmentBundler>()
-                .AddListener<ProductAssembler>()
-                .AddListener<ZipProcessor>()
-                .AddListener<BulletinSplitter>()
-                .AddListener(_textObservable)
-                .AddListener(_imageObservable)
-                .AddListener(_bulletinObservable);
+            using (var stream = assembly.GetManifestResourceStream(ResourceName))
+            using (var reader = new StreamReader(stream ?? Stream.Null))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var columns = reader.ReadLine()?.Split(',');
+                    if (columns != null && columns.Length == 5)
+                    {
+                        table.Add(columns[0] + columns[2], 
+                            new FipsCode(columns[0], columns[1], columns[2], columns[3], columns[4]));
+                    }
+                }
+            }
 
-            return aggregator;
+            return table;
         }
 
-        #endregion Protected Methods
+        #endregion Private Methods
 
     }
 }

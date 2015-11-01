@@ -21,7 +21,6 @@ namespace Emwin.ByteBlaster.Instrumentation
         public static readonly SafePerformanceCounter ChecksumErrorsTotal = Instance.GetCounter(ChecksumErrorsTotalCounterName);
         public static readonly SafePerformanceCounter ServerListReceivedTotal = Instance.GetCounter(ServerListReceivedTotalCounterName);
         public static readonly SafePerformanceCounter FrameSyncTotal = Instance.GetCounter(FrameSyncTotalCounterName);
-        public static readonly SafePerformanceCounter BlockProcessingCounterTotal = Instance.GetCounter(BlockProcessingCounterName);
 
         #endregion Public Performance Counters
 
@@ -37,7 +36,6 @@ namespace Emwin.ByteBlaster.Instrumentation
         private const string ChecksumErrorsTotalCounterName = "Block Checksum Errors Total";
         private const string ServerListReceivedTotalCounterName = "Server List Received Total";
         private const string FrameSyncTotalCounterName = "Frame Re-Synchronization Total";
-        private const string BlockProcessingCounterName = "Block Segment Processing time (ms)";
 
         #endregion Private Fields
 
@@ -61,7 +59,6 @@ namespace Emwin.ByteBlaster.Instrumentation
                     new CounterCreationData(ChecksumErrorsTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
                     new CounterCreationData(ServerListReceivedTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
                     new CounterCreationData(FrameSyncTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(BlockProcessingCounterName, "", PerformanceCounterType.NumberOfItems64),
                 }
             ) { }
 

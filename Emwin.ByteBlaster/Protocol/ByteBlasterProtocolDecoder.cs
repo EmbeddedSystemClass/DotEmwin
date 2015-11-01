@@ -26,7 +26,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
@@ -87,12 +86,12 @@ namespace Emwin.ByteBlaster.Protocol
         /// <summary>
         /// The header regex (works with both V1 and V2 headers)
         /// </summary>
-        private static readonly Regex HeaderRegex = new Regex(@"^/PF(?<PF>[A-Za-z0-9\-._]+)\s*/PN\s*(?<PN>[0-9]+)\s*/PT\s*(?<PT>[0-9]+)\s*/CS\s*(?<CS>[0-9]+)\s*/FD(?<FD>[0-9/: ]+[AP]M)\s*(/DL(?<DL>[0-9]+)\s*)?\r\n$", RegexOptions.ExplicitCapture);
+        private static readonly Regex HeaderRegex = new Regex(@"^/PF(?<PF>[A-Za-z0-9\-._]+)\s*/PN\s*(?<PN>[0-9]+)\s*/PT\s*(?<PT>[0-9]+)\s*/CS\s*(?<CS>[0-9]+)\s*/FD(?<FD>[0-9/: ]+[AP]M)\s*(/DL(?<DL>[0-9]+)\s*)?\r\n$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
         /// <summary>
         /// The server list regex which is sent periodically
         /// </summary>
-        private static readonly Regex ServerListRegex = new Regex(@"^/ServerList/(?<ServerList>.*?)\\ServerList\\/SatServers/(?<SatServers>.*?)\\SatServers\\$");
+        private static readonly Regex ServerListRegex = new Regex(@"^/ServerList/(?<ServerList>.*?)\\ServerList\\/SatServers/(?<SatServers>.*?)\\SatServers\\$", RegexOptions.Compiled);
 
         #endregion Private Fields
 

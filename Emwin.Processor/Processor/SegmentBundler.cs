@@ -28,7 +28,7 @@ using System;
 using System.Linq;
 using System.Runtime.Caching;
 using Emwin.Core.Contracts;
-using Emwin.Core.EventAggregator;
+using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
@@ -38,16 +38,10 @@ namespace Emwin.Processor.Processor
     /// </summary>
     internal sealed class SegmentBundler : IHandle<IQuickBlockTransferSegment>
     {
-
-        #region Public Fields
-
-        public static TimeSpan SegmentExpireTime = TimeSpan.FromMinutes(10);
-
-        #endregion Public Fields
-
         #region Private Fields
 
-        private readonly ObjectCache _blockCache = new MemoryCache("BlockCache");
+        private static readonly CacheItemPolicy CacheItemPolicy = new CacheItemPolicy { SlidingExpiration = TimeSpan.FromMinutes(1) };
+        private static readonly ObjectCache BlockCache = new MemoryCache("BlockCache");
 
         #endregion Private Fields
 
@@ -64,20 +58,20 @@ namespace Emwin.Processor.Processor
             IQuickBlockTransferSegment[] bundle = null;
 
             // If there is already a bundle in the cache, put the segment into it. 
-            if (_blockCache.Contains(key))
+            if (BlockCache.Contains(key))
             {
-                bundle = (IQuickBlockTransferSegment[])_blockCache.Get(key);
+                bundle = (IQuickBlockTransferSegment[])BlockCache.Get(key);
                 if (blockSegment.BlockNumber > 0 && blockSegment.BlockNumber <= bundle.Length)
                     bundle[blockSegment.BlockNumber - 1] = blockSegment;
                 ProcessorEventSource.Log.Verbose("SegmentBundler",
                     $"Added segment {blockSegment.BlockNumber} of {blockSegment.TotalBlocks} to existing bundle {blockSegment.Filename}");
             }
-            else if (blockSegment.BlockNumber == 1)
+            else
             {
                 // Create a new bundle array with the initial segment and add to cache.
                 bundle = new IQuickBlockTransferSegment[blockSegment.TotalBlocks];
                 bundle[blockSegment.BlockNumber - 1] = blockSegment;
-                _blockCache.Set(key, bundle, DateTimeOffset.Now.Add(SegmentExpireTime));
+                BlockCache.Set(key, bundle, CacheItemPolicy);
                 ProcessorEventSource.Log.Verbose("SegmentBundler",
                     $"Added segment {blockSegment.BlockNumber} of {blockSegment.TotalBlocks} to new bundle {blockSegment.Filename}");
             }
@@ -87,6 +81,7 @@ namespace Emwin.Processor.Processor
             {
                 ProcessorEventSource.Log.Info("SegmentBundler", 
                     $"Completed assembling {blockSegment.TotalBlocks} blocks for bundle {blockSegment.Filename}");
+                BlockCache.Remove(key);
                 ctx.SendMessage(bundle);
             }
         }

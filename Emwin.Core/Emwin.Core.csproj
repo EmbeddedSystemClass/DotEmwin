@@ -45,27 +45,23 @@
   <ItemGroup>
     <Compile Include="Contracts\IBulletinProduct.cs" />
     <Compile Include="Contracts\IQuickBlockTransferSegment.cs" />
-    <Compile Include="EventAggregator\IEventAggregator.cs" />
-    <Compile Include="EventAggregator\IEventPublisher.cs" />
-    <Compile Include="EventAggregator\IEventSubscriptionManager.cs" />
-    <Compile Include="EventAggregator\IHandle.cs" />
-    <Compile Include="EventAggregator\ObservableListener.cs" />
-    <Compile Include="EventAggregator\EventAggregator.cs" />
-    <Compile Include="EventAggregator\EventAggregatorExtensions.cs" />
     <Compile Include="Contracts\ICompressedContent.cs" />
     <Compile Include="Contracts\IImageProduct.cs" />
     <Compile Include="Contracts\ITextProduct.cs" />
     <Compile Include="DataObjects\ByteBlasterServerList.cs" />
     <Compile Include="DataObjects\CommsHeader.cs" />
     <Compile Include="Contracts\IEmwinContent.cs" />
-    <Compile Include="EventAggregator\Pipeline.cs" />
-    <Compile Include="EventAggregator\IPipelineFilter.cs" />
+    <Compile Include="Contracts\IUniversalGeographicCode.cs" />
+    <Compile Include="Contracts\IValidTimeEventCode.cs" />
+    <Compile Include="Contracts\ICommsHeader.cs" />
+    <Compile Include="Extensions\VtecExtensions.cs" />
     <Compile Include="Parsers\BulletinParser.cs" />
     <Compile Include="Products\BulletinProduct.cs" />
+    <Compile Include="References\FipsCode.cs" />
     <Compile Include="Types\ContentFileType.cs" />
-    <Compile Include="Types\VtecSignificanceCode.cs" />
+    <Compile Include="Types\VtecSignificanceLevel.cs" />
     <Compile Include="Types\VtecTypeCode.cs" />
-    <Compile Include="Types\T1DataTypeCode.cs" />
+    <Compile Include="Types\T1ProductType.cs" />
     <Compile Include="Types\ImageFormatType.cs" />
     <Compile Include="Products\ProductFactory.cs" />
     <Compile Include="Products\GraphicProduct.cs" />
@@ -126,7 +122,12 @@
       <LastGenOutput>VtecPhenomenon.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FipsCodes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\GraphicProducts.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release "NuGet.exe" pack "$(ProjectPath)" -Properties Configuration=Release -Verbose</PostBuildEvent>

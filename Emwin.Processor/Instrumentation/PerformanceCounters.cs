@@ -37,7 +37,6 @@ namespace Emwin.Processor.Instrumentation
 
         public static readonly SafePerformanceCounter TransformerExceptionsTotal = Instance.GetCounter(TransformerExceptionsTotalCounterName);
         public static readonly SafePerformanceCounter ProductsCreatedTotal = Instance.GetCounter(ProductsCreatedTotalCounterName);
-        public static readonly SafePerformanceCounter ProductsFilteredTotal = Instance.GetCounter(ProductsFilteredTotalCounterName);
 
         #endregion Public Performance Counters
 
@@ -46,7 +45,6 @@ namespace Emwin.Processor.Instrumentation
         private const string CategoryHelp = "EMWIN Processor Metrics";
         private const string CategoryName = "EMWIN Processor";
 
-        private const string ProductsFilteredTotalCounterName = "Products Filtered Total";
         private const string ProductsCreatedTotalCounterName = "Products Created Total";
         private const string TransformerExceptionsTotalCounterName = "Transformer Exceptions Total";
 
@@ -67,7 +65,6 @@ namespace Emwin.Processor.Instrumentation
                 {
                     new CounterCreationData(ProductsCreatedTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
                     new CounterCreationData(TransformerExceptionsTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
-                    new CounterCreationData(ProductsFilteredTotalCounterName, "", PerformanceCounterType.NumberOfItems64),
                 }
             ) { }
 

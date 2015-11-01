@@ -26,7 +26,7 @@
 
 using System;
 using System.Runtime.Serialization;
-using Emwin.Core.Types;
+using Emwin.Core.Contracts;
 
 namespace Emwin.Core.DataObjects
 {
@@ -45,18 +45,26 @@ namespace Emwin.Core.DataObjects
     /// http://www.nws.noaa.gov/tg/table.php
     /// </summary>
     [DataContract]
-    public class CommsHeader
+    public class CommsHeader : ICommsHeader
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the type of the data.
+        /// Gets or sets the AFOS Product Identification List.
         /// </summary>
-        /// <value>The type of the data.</value>
-        public T1DataTypeCode DataType { get; set; }
+        /// <value>The AFOS Product Identification List.</value>
+        [DataMember]
+        public string AfosPil { get; set; }
 
         /// <summary>
-        /// Gets the 6 character wmo identifier.
+        /// Gets or sets the type of the product.
+        /// </summary>
+        /// <value>The type of the data.</value>
+        [DataMember]
+        public char ProductType { get; set; }
+
+        /// <summary>
+        /// Gets the 6 character AWIPS identifier.
         /// </summary>
         /// <value>The wmo identifier.</value>
         [DataMember]
@@ -74,7 +82,7 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The wmo station.</value>
         [DataMember]
-        public string OriginatingOffice { get; set; }
+        public string OfficeId { get; set; }
 
         /// <summary>
         /// Gets or sets the wmo time.
@@ -91,7 +99,7 @@ namespace Emwin.Core.DataObjects
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() => $"DataType={DataType} Id={Id} Station={OriginatingOffice} Time={Time:g} Indicator={Indicator}";
+        public override string ToString() => $"DataType={ProductType} Id={Id} Office={OfficeId} Time={Time:g} Indicator={Indicator}";
 
         #endregion Public Methods
 

@@ -43,9 +43,9 @@ namespace Emwin.Core.Parsers
         /// The WMO Abbreviated Header
         /// http://www.nws.noaa.gov/tg/head.php
         /// </summary>
-        private static readonly Regex WmoAbbreviatedHeaderRegex = new Regex(
-            @"^(?<id>[A-Z]{4}[0-9]{2})\s+(?<station>[A-Z]{4})\s+(?<time>[0-9]{6})(\s(?<indicator>[A-Z]{3}))?", 
-            RegexOptions.ExplicitCapture | RegexOptions.Multiline);
+        private static readonly Regex WmoHeaderRegex = new Regex(
+            @"^(?<id>[A-Z]{4}[0-9]{2})\s(?<station>[A-Z]{4})\s(?<time>[0-9]{6})(\s(?<indicator>[A-Z]{3}))?(\r\r\n(?<pil>[A-Z ]{6}))?\r\r\n", 
+            RegexOptions.ExplicitCapture | RegexOptions.Singleline | RegexOptions.Compiled);
 
         #endregion Private Fields
 
@@ -57,18 +57,19 @@ namespace Emwin.Core.Parsers
         /// <param name="product">The product.</param>
         /// <returns>Header.</returns>
         /// <exception cref="System.ArgumentException">Invalid content header</exception>
-        public static CommsHeader ParseProduct(ITextProduct product)
+        public static ICommsHeader ParseProduct(ITextProduct product)
         {
-            var match = WmoAbbreviatedHeaderRegex.Match(product.Content);
+            var match = WmoHeaderRegex.Match(product.Content);
             if (!match.Success) return new CommsHeader();
 
             return new CommsHeader
             {
                 Id = match.Groups["id"].Value,
-                DataType = (T1DataTypeCode) match.Groups["id"].Value[0],
-                OriginatingOffice = match.Groups["station"].Value,
+                ProductType = match.Groups["id"].Value[0],
+                OfficeId = match.Groups["station"].Value,
                 Time = TimeParser.ParseDayHourMinute(product.TimeStamp, match.Groups["time"].Value),
-                Indicator = match.Groups["indicator"].Success ? match.Groups["indicator"].Value : null
+                Indicator = match.Groups["indicator"].Success ? match.Groups["indicator"].Value : null,
+                AfosPil = match.Groups["pil"].Success ? match.Groups["pil"].Value.TrimEnd() : null
             };
         }
 

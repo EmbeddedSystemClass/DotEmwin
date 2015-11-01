@@ -28,24 +28,17 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Emwin.Core.Contracts;
-using Emwin.Core.EventAggregator;
 using Emwin.Core.Parsers;
 using Emwin.Core.Products;
 using Emwin.Core.Types;
+using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
 {
     internal sealed class ZipProcessor : IHandle<ICompressedContent>
     {
-        /// <summary>
-        /// The semaphore limits total number of concurrent unzip operations to the number of system processors
-        /// </summary>
-        private readonly SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(Environment.ProcessorCount);
-
         #region Public Methods
 
         /// <summary>
@@ -57,58 +50,47 @@ namespace Emwin.Processor.Processor
         /// <param name="ctx">The CTX.</param>
         public void Handle(ICompressedContent product, IEventAggregator ctx)
         {
-            Task.Run(async () =>
+            try
             {
-                if (!await _semaphoreSlim.WaitAsync(TimeSpan.FromSeconds(20)))
-                {
-                    ProcessorEventSource.Log.Error("ZipProcessor", "Unable to acquire semaphore for Unzip processing within 20 seconds");
-                    return;
-                };
-
-                try
-                {
-                    UnZip(product, ctx);
-                    ProcessorEventSource.Log.Verbose("ZipProcessor", "Completed unzipping " + product.Filename);
-                }
-                catch (Exception ex)
-                {
-                    ProcessorEventSource.Log.Error("ZipProcessor", ex.ToString());
-                }
-                finally
-                {
-                    _semaphoreSlim.Release();
-                }
-            });
+                UnZip(product, ctx);
+            }
+            catch (Exception ex)
+            {
+                ProcessorEventSource.Log.Error("ZipProcessor", ex.ToString());
+            }
         }
 
         private static void UnZip(ICompressedContent product, IEventPublisher ctx)
         {
             using (var zip = new ZipArchive(product.GetStream(), ZipArchiveMode.Read))
             {
-                var file = zip.Entries.First();
-                using (var fileStream = file.Open())
+                foreach (var file in zip.Entries)
                 {
-                    var content = ReadAllBytes(fileStream);
-                    var contentType = ContentTypeParser.GetFileContentType(file.Name);
-                    switch (contentType)
+                    using (var fileStream = file.Open())
                     {
-                        case ContentFileType.Text:
-                            var textProduct = ProductFactory.CreateTextProduct(
-                                file.Name.ToUpperInvariant(),file.LastWriteTime, content, product.ReceivedAt);
-                            ctx.SendMessage(textProduct);
-                            ProcessorEventSource.Log.Verbose("ZipProcessor", textProduct.ToString());
-                            break;
+                        var content = ReadAllBytes(fileStream);
+                        var contentType = ContentTypeParser.GetFileContentType(file.Name);
+                        switch (contentType)
+                        {
+                            case ContentFileType.Text:
+                                var textProduct = ProductFactory.CreateTextProduct(
+                                    file.Name.ToUpperInvariant(), file.LastWriteTime, content, product.ReceivedAt);
+                                ctx.SendMessage(textProduct);
+                                ProcessorEventSource.Log.Info("ZipProcessor", textProduct.ToString());
+                                break;
 
-                        case ContentFileType.Image:
-                            var imageProduct = ProductFactory.CreateImageProduct(
-                                file.Name.ToUpperInvariant(), file.LastWriteTime, content, product.ReceivedAt);
-                            ctx.SendMessage(imageProduct);
-                            ProcessorEventSource.Log.Verbose("ZipProcessor", imageProduct.ToString());
-                            break;
+                            case ContentFileType.Image:
+                                var imageProduct = ProductFactory.CreateImageProduct(
+                                    file.Name.ToUpperInvariant(), file.LastWriteTime, content, product.ReceivedAt);
+                                ctx.SendMessage(imageProduct);
+                                ProcessorEventSource.Log.Info("ZipProcessor", imageProduct.ToString());
+                                break;
 
-                        default:
-                            ProcessorEventSource.Log.Warning("ZipProcessor", "Unknown content file type: " + file.Name);
-                            return;
+                            default:
+                                ProcessorEventSource.Log.Warning("ZipProcessor",
+                                    "Unknown content file type: " + file.Name);
+                                return;
+                        }
                     }
                 }
             }

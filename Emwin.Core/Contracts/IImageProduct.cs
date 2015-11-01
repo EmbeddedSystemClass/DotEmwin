@@ -31,12 +31,6 @@ namespace Emwin.Core.Contracts
     public interface IImageProduct : IEmwinContent<Image>
     {
         /// <summary>
-        /// Gets or sets the hash.
-        /// </summary>
-        /// <value>The hash.</value>
-        string Hash { get; }
-
-        /// <summary>
         /// Gets or sets the height.
         /// </summary>
         /// <value>The height.</value>
@@ -47,5 +41,11 @@ namespace Emwin.Core.Contracts
         /// </summary>
         /// <value>The width.</value>
         int Width { get; }
+
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>The description.</value>
+        string Description { get; set; }
     }
 }
