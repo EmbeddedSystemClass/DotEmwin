@@ -33,7 +33,9 @@ namespace EmwinTest
             listener.EnableEvents(ProcessorEventSource.Log, EventLevel.Verbose);
 
             var processor = new WeatherProductProcessor();
-            processor.GetTextObservable().Subscribe(product =>
+
+            // Can subscribe to Images, Text or Bulletin observables
+            processor.GetBulletinObservable().Subscribe(product =>
             {
                 Console.WriteLine(product);
                 Console.WriteLine(product.Header);
@@ -45,13 +47,16 @@ namespace EmwinTest
                     file.Write(product.Content);
             });
 
+            processor.Start();
+
             var client = new ByteBlasterClient("user@example.com");
             client.Subscribe(processor);
-
             client.Start();
 
             Console.ReadKey();
+
             client.Stop();
+            processor.Stop();
             ByteBlasterClient.ShutdownGracefullyAsync().Wait(5000);
         }
     }
