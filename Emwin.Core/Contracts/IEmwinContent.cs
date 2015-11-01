@@ -25,7 +25,6 @@
  */
 
 using System;
-using Emwin.Core.Types;
 
 namespace Emwin.Core.Contracts
 {
@@ -41,12 +40,6 @@ namespace Emwin.Core.Contracts
         /// </summary>
         /// <value>The content.</value>
         object Content { get; }
-
-        /// <summary>
-        /// Gets the type of the content.
-        /// </summary>
-        /// <value>The type of the content.</value>
-        ContentFileType ContentType { get; }
 
         /// <summary>
         /// Gets the filename.

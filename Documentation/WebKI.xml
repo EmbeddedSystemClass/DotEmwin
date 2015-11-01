@@ -1,63 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpKI>
-  <HelpKINode Title="Action field" Url="html/632154546.htm" />
-  <HelpKINode Title="ADA property" Url="html/1057709371.htm" />
-  <HelpKINode Title="AddListener method" Url="html/1630355451.htm" />
-  <HelpKINode Title="AddListenerAction(Of T) method" Url="html/259002385.htm" />
-  <HelpKINode Title="AddListenerAction&lt;T&gt; method" Url="html/259002385.htm" />
-  <HelpKINode Title="AddressedMessage enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="AddressedMessage field" Url="html/773008880.htm" />
-  <HelpKINode Title="ADM property" Url="html/911659097.htm" />
-  <HelpKINode Title="ADR property" Url="html/58035876.htm" />
-  <HelpKINode Title="ADV property" Url="html/1911332592.htm" />
-  <HelpKINode Title="Advisory enumeration member" Url="html/186638211.htm" />
-  <HelpKINode Title="Advisory field" Url="html/1213116110.htm" />
-  <HelpKINode Title="ADW property" Url="html/817550763.htm" />
-  <HelpKINode Title="ADX property" Url="html/864604930.htm" />
-  <HelpKINode Title="AF property" Url="html/2098642458.htm" />
-  <HelpKINode Title="AFD property" Url="html/1461124970.htm" />
-  <HelpKINode Title="AFM property" Url="html/911528025.htm" />
-  <HelpKINode Title="AFP property" Url="html/1220704218.htm" />
-  <HelpKINode Title="AGF property" Url="html/1671108448.htm" />
-  <HelpKINode Title="AGO property" Url="html/251205853.htm" />
-  <HelpKINode Title="AHO property" Url="html/251926749.htm" />
-  <HelpKINode Title="ALT property" Url="html/749057466.htm" />
-  <HelpKINode Title="Analyses enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="Analyses field" Url="html/925355178.htm" />
-  <HelpKINode Title="APG property" Url="html/103779323.htm" />
-  <HelpKINode Title="APT property" Url="html/749843898.htm" />
-  <HelpKINode Title="AQA property" Url="html/1058954555.htm" />
-  <HelpKINode Title="AQI property" Url="html/1415184915.htm" />
-  <HelpKINode Title="AS property" Url="html/2098642445.htm" />
-  <HelpKINode Title="ASA property" Url="html/1059085627.htm" />
+  <HelpKINode Title="ActionCode property">
+    <HelpKINode Title="ActionCode Property " Url="html/1401856537.htm" />
+    <HelpKINode Title="ActionCode Property " Url="html/1281395170.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AddListener method" Url="html/1614415490.htm" />
+  <HelpKINode Title="AddListenerAction(Of T) method" Url="html/1608706032.htm" />
+  <HelpKINode Title="AddListenerAction&lt;T&gt; method" Url="html/1608706032.htm" />
+  <HelpKINode Title="Advisory enumeration member" Url="html/126689395.htm" />
+  <HelpKINode Title="Advisory field" Url="html/733083080.htm" />
+  <HelpKINode Title="AfosPil property">
+    <HelpKINode Title="AfosPil Property " Url="html/283385598.htm" />
+    <HelpKINode Title="AfosPil Property " Url="html/1018575021.htm" />
+  </HelpKINode>
   <HelpKINode Title="ATPATHUS property" Url="html/1989514949.htm" />
-  <HelpKINode Title="AV property" Url="html/2098642442.htm" />
-  <HelpKINode Title="AVA property" Url="html/1058889019.htm" />
-  <HelpKINode Title="AviationXmlData enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="AviationXmlData field" Url="html/1176532794.htm" />
-  <HelpKINode Title="AVM property" Url="html/910479449.htm" />
-  <HelpKINode Title="AVW property" Url="html/816371115.htm" />
-  <HelpKINode Title="AWG property" Url="html/103975931.htm" />
-  <HelpKINode Title="AWS property" Url="html/1509162177.htm" />
-  <HelpKINode Title="AWU property" Url="html/1979236065.htm" />
-  <HelpKINode Title="AWW property" Url="html/816436651.htm" />
-  <HelpKINode Title="BH property" Url="html/240009688.htm" />
-  <HelpKINode Title="BlockNumber property" Url="html/66094203.htm" />
-  <HelpKINode Title="Bmp enumeration member" Url="html/1257192578.htm" />
-  <HelpKINode Title="Bmp field" Url="html/1175344087.htm" />
-  <HelpKINode Title="BOY property" Url="html/702068838.htm" />
-  <HelpKINode Title="BS property" Url="html/240009715.htm" />
-  <HelpKINode Title="BW property" Url="html/240009719.htm" />
+  <HelpKINode Title="AwipsId property">
+    <HelpKINode Title="AwipsId Property " Url="html/619608531.htm" />
+    <HelpKINode Title="AwipsId Property " Url="html/1502311667.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Begin property">
+    <HelpKINode Title="Begin Property " Url="html/1114073979.htm" />
+    <HelpKINode Title="Begin Property " Url="html/193093934.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Blah method" Url="html/1965222916.htm" />
+  <HelpKINode Title="BlockNumber property">
+    <HelpKINode Title="BlockNumber Property " Url="html/66094203.htm" />
+    <HelpKINode Title="BlockNumber Property " Url="html/1161241495.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BulletinParser class">
+    <HelpKINode Title="BulletinParser Class" Url="html/683068779.htm" />
+    <HelpKINode Title="BulletinParser Members" Url="html/442220222.htm" />
+    <HelpKINode Title="about BulletinParser class" Url="html/683068779.htm" />
+    <HelpKINode Title="all members" Url="html/442220222.htm" />
+    <HelpKINode Title="methods" Url="html/1628309918.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BulletinParser.ParseProduct method" Url="html/1656146467.htm" />
+  <HelpKINode Title="BulletinProduct class">
+    <HelpKINode Title="BulletinProduct Class" Url="html/1817262784.htm" />
+    <HelpKINode Title="BulletinProduct Members" Url="html/1273852217.htm" />
+    <HelpKINode Title="about BulletinProduct class" Url="html/1817262784.htm" />
+    <HelpKINode Title="all members" Url="html/1273852217.htm" />
+    <HelpKINode Title="methods" Url="html/828334514.htm" />
+    <HelpKINode Title="properties" Url="html/681553256.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BulletinProduct.GeoCodes property" Url="html/304078575.htm" />
+  <HelpKINode Title="BulletinProduct.Polygons property" Url="html/6023692.htm" />
+  <HelpKINode Title="BulletinProduct.PrimaryVtecCodes property" Url="html/484296569.htm" />
+  <HelpKINode Title="BulletinProduct.SequenceNumber property" Url="html/1176111350.htm" />
   <HelpKINode Title="ByteBlasterClient class">
     <HelpKINode Title="ByteBlasterClient Class" Url="html/1212748953.htm" />
     <HelpKINode Title="ByteBlasterClient Members" Url="html/967163186.htm" />
     <HelpKINode Title="about ByteBlasterClient class" Url="html/1212748953.htm" />
     <HelpKINode Title="all members" Url="html/967163186.htm" />
-    <HelpKINode Title="constructor" Url="html/2120349478.htm" />
+    <HelpKINode Title="constructor" Url="html/890171345.htm" />
     <HelpKINode Title="fields" Url="html/966463377.htm" />
     <HelpKINode Title="methods" Url="html/1689463548.htm" />
   </HelpKINode>
-  <HelpKINode Title="ByteBlasterClient.ByteBlasterClient constructor" Url="html/2120349478.htm" />
+  <HelpKINode Title="ByteBlasterClient.ByteBlasterClient constructor" Url="html/890171345.htm" />
   <HelpKINode Title="ByteBlasterClient.IsActive field" Url="html/373722024.htm" />
   <HelpKINode Title="ByteBlasterEventSource class">
     <HelpKINode Title="ByteBlasterEventSource Class" Url="html/1271618976.htm" />
@@ -83,29 +82,11 @@
   <HelpKINode Title="ByteBlasterServerList.DefaultServers field" Url="html/1072576130.htm" />
   <HelpKINode Title="ByteBlasterServerList.ReceivedAt property" Url="html/544393613.htm" />
   <HelpKINode Title="ByteBlasterServerList.SatServers field" Url="html/227786446.htm" />
-  <HelpKINode Title="BZ property" Url="html/240009706.htm" />
-  <HelpKINode Title="CAE property" Url="html/1267692847.htm" />
-  <HelpKINode Title="CAN property" Url="html/1823938.htm" />
-  <HelpKINode Title="CCF property" Url="html/1670846302.htm" />
-  <HelpKINode Title="CDW property" Url="html/817550761.htm" />
-  <HelpKINode Title="CEM property" Url="html/911724631.htm" />
-  <HelpKINode Title="CF property" Url="html/1716305434.htm" />
-  <HelpKINode Title="CF6 property" Url="html/1891260690.htm" />
-  <HelpKINode Title="CFW property" Url="html/817419689.htm" />
-  <HelpKINode Title="CGR property" Url="html/57970338.htm" />
-  <HelpKINode Title="Checksum property" Url="html/1518265226.htm" />
-  <HelpKINode Title="CHG property" Url="html/104303609.htm" />
-  <HelpKINode Title="CLA property" Url="html/1058233661.htm" />
-  <HelpKINode Title="CLI property" Url="html/1414464021.htm" />
-  <HelpKINode Title="ClimaticData enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="ClimaticData field" Url="html/1402025208.htm" />
-  <HelpKINode Title="CLM property" Url="html/911134807.htm" />
-  <HelpKINode Title="CLS property" Url="html/1508572355.htm" />
-  <HelpKINode Title="CMM property" Url="html/911200343.htm" />
+  <HelpKINode Title="Checksum property">
+    <HelpKINode Title="Checksum Property " Url="html/1518265226.htm" />
+    <HelpKINode Title="Checksum Property " Url="html/725703933.htm" />
+  </HelpKINode>
   <HelpKINode Title="CMPWLDUS property" Url="html/182491776.htm" />
-  <HelpKINode Title="COD property" Url="html/1461583724.htm" />
-  <HelpKINode Title="CommonAlertProtocolMessages enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="CommonAlertProtocolMessages field" Url="html/1060661682.htm" />
   <HelpKINode Title="CommsHeader class">
     <HelpKINode Title="CommsHeader Class" Url="html/33324122.htm" />
     <HelpKINode Title="CommsHeader Members" Url="html/2098610405.htm" />
@@ -114,47 +95,36 @@
     <HelpKINode Title="methods" Url="html/1305057589.htm" />
     <HelpKINode Title="properties" Url="html/248073223.htm" />
   </HelpKINode>
-  <HelpKINode Title="CommsHeader.DataType property" Url="html/264266743.htm" />
-  <HelpKINode Title="CommsHeader.Id property" Url="html/941616523.htm" />
+  <HelpKINode Title="CommsHeader.AfosPil property" Url="html/1018575021.htm" />
+  <HelpKINode Title="CommsHeader.AwipsId property" Url="html/1502311667.htm" />
   <HelpKINode Title="CommsHeader.Indicator property" Url="html/1449039466.htm" />
-  <HelpKINode Title="CommsHeader.OriginatingOffice property" Url="html/1608912733.htm" />
   <HelpKINode Title="CommsHeader.Time property" Url="html/266712574.htm" />
+  <HelpKINode Title="CommsHeader.WmoId property" Url="html/1862591358.htm" />
   <HelpKINode Title="Compressed enumeration member" Url="html/1000439498.htm" />
   <HelpKINode Title="Compressed field" Url="html/320079995.htm" />
-  <HelpKINode Title="CompressedProduct class">
-    <HelpKINode Title="CompressedProduct Class" Url="html/2123012163.htm" />
-    <HelpKINode Title="CompressedProduct Members" Url="html/375434445.htm" />
-    <HelpKINode Title="about CompressedProduct class" Url="html/2123012163.htm" />
-    <HelpKINode Title="all members" Url="html/375434445.htm" />
-    <HelpKINode Title="methods" Url="html/674307950.htm" />
-    <HelpKINode Title="properties" Url="html/69873455.htm" />
+  <HelpKINode Title="CompressedContent class">
+    <HelpKINode Title="CompressedContent Class" Url="html/478199329.htm" />
+    <HelpKINode Title="CompressedContent Members" Url="html/1689908743.htm" />
+    <HelpKINode Title="about CompressedContent class" Url="html/478199329.htm" />
+    <HelpKINode Title="all members" Url="html/1689908743.htm" />
+    <HelpKINode Title="methods" Url="html/200671798.htm" />
+    <HelpKINode Title="properties" Url="html/1874032289.htm" />
   </HelpKINode>
-  <HelpKINode Title="CompressedProduct.Content property" Url="html/1904176704.htm" />
-  <HelpKINode Title="CompressedProduct.ContentType property" Url="html/132694481.htm" />
-  <HelpKINode Title="CompressedProduct.Filename property" Url="html/1385107625.htm" />
-  <HelpKINode Title="CompressedProduct.Hash property" Url="html/751646617.htm" />
-  <HelpKINode Title="CompressedProduct.ReceivedAt property" Url="html/2110749399.htm" />
-  <HelpKINode Title="CompressedProduct.TimeStamp property" Url="html/1423132368.htm" />
-  <HelpKINode Title="CON property" Url="html/1823936.htm" />
+  <HelpKINode Title="CompressedContent.Content property" Url="html/973943430.htm" />
+  <HelpKINode Title="CompressedContent.Filename property" Url="html/728769933.htm" />
   <HelpKINode Title="Content property">
-    <HelpKINode Title="Content Property " Url="html/1722157037.htm" />
-    <HelpKINode Title="Content Property " Url="html/722774447.htm" />
-    <HelpKINode Title="Content Property " Url="html/1904176704.htm" />
-    <HelpKINode Title="Content Property " Url="html/1549383619.htm" />
     <HelpKINode Title="Content Property " Url="html/1149980370.htm" />
+    <HelpKINode Title="Content Property " Url="html/973943430.htm" />
+    <HelpKINode Title="Content Property " Url="html/722774447.htm" />
+    <HelpKINode Title="Content Property " Url="html/1549383619.htm" />
+    <HelpKINode Title="Content Property " Url="html/999476429.htm" />
+    <HelpKINode Title="Content Property " Url="html/2087113040.htm" />
   </HelpKINode>
   <HelpKINode Title="ContentFileType enumeration" Url="html/1000439498.htm" />
   <HelpKINode Title="ContentFileType.Compressed field" Url="html/320079995.htm" />
   <HelpKINode Title="ContentFileType.Image field" Url="html/344727118.htm" />
   <HelpKINode Title="ContentFileType.Text field" Url="html/2013012847.htm" />
   <HelpKINode Title="ContentFileType.Unknown field" Url="html/55951343.htm" />
-  <HelpKINode Title="ContentType field" Url="html/1869399282.htm" />
-  <HelpKINode Title="ContentType property">
-    <HelpKINode Title="ContentType Property " Url="html/308206470.htm" />
-    <HelpKINode Title="ContentType Property " Url="html/487233693.htm" />
-    <HelpKINode Title="ContentType Property " Url="html/1907843730.htm" />
-    <HelpKINode Title="ContentType Property " Url="html/132694481.htm" />
-  </HelpKINode>
   <HelpKINode Title="ContentTypeParser class">
     <HelpKINode Title="ContentTypeParser Class" Url="html/251528657.htm" />
     <HelpKINode Title="ContentTypeParser Members" Url="html/1537966303.htm" />
@@ -163,63 +133,48 @@
     <HelpKINode Title="methods" Url="html/1069711479.htm" />
   </HelpKINode>
   <HelpKINode Title="ContentTypeParser.GetFileContentType method" Url="html/989308377.htm" />
-  <HelpKINode Title="COR property" Url="html/1561792.htm" />
-  <HelpKINode Title="CPF property" Url="html/1669863262.htm" />
+  <HelpKINode Title="ConvertTo(Of T) method" Url="html/233717549.htm" />
+  <HelpKINode Title="ConvertTo&lt;T&gt; method" Url="html/233717549.htm" />
+  <HelpKINode Title="Count field" Url="html/1876250598.htm" />
   <HelpKINode Title="CRB1WBCA property" Url="html/809002905.htm" />
   <HelpKINode Title="CRB2WBCA property" Url="html/1899677474.htm" />
   <HelpKINode Title="CRB3WBCA property" Url="html/1798920925.htm" />
-  <HelpKINode Title="CreateCompressedContent method" Url="html/1608244431.htm" />
-  <HelpKINode Title="CreateImageProduct method" Url="html/513978576.htm" />
+  <HelpKINode Title="CreateBulletinProduct method" Url="html/1767264478.htm" />
+  <HelpKINode Title="CreateCompressedContent method" Url="html/1329753049.htm" />
+  <HelpKINode Title="CreateImageProduct method" Url="html/1139016852.htm" />
   <HelpKINode Title="CreatePolygon method" Url="html/696999046.htm" />
-  <HelpKINode Title="CreateTextProduct method" Url="html/1293056182.htm" />
-  <HelpKINode Title="Crex enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="Crex field" Url="html/1497270298.htm" />
+  <HelpKINode Title="CreateTextProduct method" Url="html/772594498.htm" />
   <HelpKINode Title="CSA001US property" Url="html/1037093530.htm" />
-  <HelpKINode Title="CSC property" Url="html/2073082253.htm" />
   <HelpKINode Title="CUBARADR property" Url="html/307289644.htm" />
-  <HelpKINode Title="Culture property">
-    <HelpKINode Title="Culture Property " Url="html/997807204.htm" />
-    <HelpKINode Title="Culture Property " Url="html/521958957.htm" />
-    <HelpKINode Title="Culture Property " Url="html/733744547.htm" />
-    <HelpKINode Title="Culture Property " Url="html/1478683607.htm" />
-  </HelpKINode>
-  <HelpKINode Title="CUR property" Url="html/57052834.htm" />
-  <HelpKINode Title="CWA property" Url="html/1058823485.htm" />
-  <HelpKINode Title="CWF property" Url="html/1670059870.htm" />
-  <HelpKINode Title="CWS property" Url="html/1509162179.htm" />
-  <HelpKINode Title="DataType property" Url="html/264266743.htm" />
-  <HelpKINode Title="DAY property" Url="html/701675616.htm" />
+  <HelpKINode Title="Culture property" Url="html/997807204.htm" />
   <HelpKINode Title="DefaultSatServers field" Url="html/947571888.htm" />
   <HelpKINode Title="DefaultServers field" Url="html/1072576130.htm" />
+  <HelpKINode Title="DefaultWorkers field" Url="html/756867395.htm" />
   <HelpKINode Title="DelegateListener(Of T) class">
-    <HelpKINode Title="DelegateListener(T) Class" Url="html/282975893.htm" />
-    <HelpKINode Title="DelegateListener(T) Members" Url="html/115675223.htm" />
-    <HelpKINode Title="about DelegateListener(Of T) class" Url="html/282975893.htm" />
-    <HelpKINode Title="all members" Url="html/115675223.htm" />
-    <HelpKINode Title="constructor" Url="html/1152906862.htm" />
-    <HelpKINode Title="methods" Url="html/147000666.htm" />
+    <HelpKINode Title="DelegateListener(T) Class" Url="html/241974211.htm" />
+    <HelpKINode Title="DelegateListener(T) Members" Url="html/227302899.htm" />
+    <HelpKINode Title="about DelegateListener(Of T) class" Url="html/241974211.htm" />
+    <HelpKINode Title="all members" Url="html/227302899.htm" />
+    <HelpKINode Title="constructor" Url="html/499102167.htm" />
+    <HelpKINode Title="methods" Url="html/1727560413.htm" />
   </HelpKINode>
-  <HelpKINode Title="DelegateListener(Of T).DelegateListener constructor" Url="html/1152906862.htm" />
-  <HelpKINode Title="DelegateListener(Of T).Handle method" Url="html/2070034550.htm" />
+  <HelpKINode Title="DelegateListener(Of T).DelegateListener constructor" Url="html/499102167.htm" />
+  <HelpKINode Title="DelegateListener(Of T).Handle method" Url="html/1591546563.htm" />
   <HelpKINode Title="DelegateListener&lt;T&gt; class">
-    <HelpKINode Title="DelegateListener(T) Class" Url="html/282975893.htm" />
-    <HelpKINode Title="DelegateListener(T) Members" Url="html/115675223.htm" />
-    <HelpKINode Title="about DelegateListener&lt;T&gt; class" Url="html/282975893.htm" />
-    <HelpKINode Title="all members" Url="html/115675223.htm" />
-    <HelpKINode Title="constructor" Url="html/1152906862.htm" />
-    <HelpKINode Title="methods" Url="html/147000666.htm" />
+    <HelpKINode Title="DelegateListener(T) Class" Url="html/241974211.htm" />
+    <HelpKINode Title="DelegateListener(T) Members" Url="html/227302899.htm" />
+    <HelpKINode Title="about DelegateListener&lt;T&gt; class" Url="html/241974211.htm" />
+    <HelpKINode Title="all members" Url="html/227302899.htm" />
+    <HelpKINode Title="constructor" Url="html/499102167.htm" />
+    <HelpKINode Title="methods" Url="html/1727560413.htm" />
   </HelpKINode>
-  <HelpKINode Title="DelegateListener&lt;T&gt;.DelegateListener constructor" Url="html/1152906862.htm" />
-  <HelpKINode Title="DelegateListener&lt;T&gt;.Handle method" Url="html/2070034550.htm" />
-  <HelpKINode Title="DGT property" Url="html/748598711.htm" />
-  <HelpKINode Title="DPA property" Url="html/1059020088.htm" />
-  <HelpKINode Title="DS property" Url="html/622346739.htm" />
-  <HelpKINode Title="DSA property" Url="html/1059085624.htm" />
-  <HelpKINode Title="DSM property" Url="html/910282844.htm" />
-  <HelpKINode Title="DU property" Url="html/622346741.htm" />
-  <HelpKINode Title="EC property" Url="html/1333968413.htm" />
-  <HelpKINode Title="EFP property" Url="html/1220704222.htm" />
-  <HelpKINode Title="EH property" Url="html/1333968424.htm" />
+  <HelpKINode Title="DelegateListener&lt;T&gt;.DelegateListener constructor" Url="html/499102167.htm" />
+  <HelpKINode Title="DelegateListener&lt;T&gt;.Handle method" Url="html/1591546563.htm" />
+  <HelpKINode Title="Description property">
+    <HelpKINode Title="Description Property " Url="html/1885067423.htm" />
+    <HelpKINode Title="Description Property " Url="html/1022973982.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Dispose method" Url="html/1025252062.htm" />
   <HelpKINode Title="Emwin.ByteBlaster namespace" Url="html/912953025.htm" />
   <HelpKINode Title="Emwin.ByteBlaster.ByteBlasterClient class">
     <HelpKINode Title="ByteBlasterClient Class" Url="html/1212748953.htm" />
@@ -229,6 +184,46 @@
   <HelpKINode Title="Emwin.ByteBlaster.Instrumentation.ByteBlasterEventSource class">
     <HelpKINode Title="ByteBlasterEventSource Class" Url="html/1271618976.htm" />
     <HelpKINode Title="ByteBlasterEventSource Members" Url="html/1359285054.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Core.Contracts namespace" Url="html/1406335976.htm" />
+  <HelpKINode Title="Emwin.Core.Contracts.IBulletinProduct interface">
+    <HelpKINode Title="IBulletinProduct Interface" Url="html/1757430985.htm" />
+    <HelpKINode Title="IBulletinProduct Members" Url="html/140612421.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Core.Contracts.ICommsHeader interface">
+    <HelpKINode Title="ICommsHeader Interface" Url="html/1816882701.htm" />
+    <HelpKINode Title="ICommsHeader Members" Url="html/860492719.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Core.Contracts.ICompressedContent interface">
+    <HelpKINode Title="ICompressedContent Interface" Url="html/465636687.htm" />
+    <HelpKINode Title="ICompressedContent Members" Url="html/51756687.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Core.Contracts.IEmwinContent interface">
+    <HelpKINode Title="IEmwinContent Interface" Url="html/1436336560.htm" />
+    <HelpKINode Title="IEmwinContent Members" Url="html/2049196139.htm" />
+    <HelpKINode Title="IEmwinContent Members" Url="html/199650600.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Core.Contracts.IEmwinContent(Of T) interface" Url="html/1558971958.htm" />
+  <HelpKINode Title="Emwin.Core.Contracts.IEmwinContent&lt;T&gt; interface" Url="html/1558971958.htm" />
+  <HelpKINode Title="Emwin.Core.Contracts.IImageProduct interface">
+    <HelpKINode Title="IImageProduct Interface" Url="html/1660566863.htm" />
+    <HelpKINode Title="IImageProduct Members" Url="html/855925443.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Core.Contracts.IQuickBlockTransferSegment interface">
+    <HelpKINode Title="IQuickBlockTransferSegment Interface" Url="html/1580295705.htm" />
+    <HelpKINode Title="IQuickBlockTransferSegment Members" Url="html/117628096.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Core.Contracts.ITextProduct interface">
+    <HelpKINode Title="ITextProduct Interface" Url="html/843918162.htm" />
+    <HelpKINode Title="ITextProduct Members" Url="html/338282731.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Core.Contracts.IUniversalGeographicCode interface">
+    <HelpKINode Title="IUniversalGeographicCode Interface" Url="html/1897214817.htm" />
+    <HelpKINode Title="IUniversalGeographicCode Members" Url="html/405973995.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Core.Contracts.IValidTimeEventCode interface">
+    <HelpKINode Title="IValidTimeEventCode Interface" Url="html/559422286.htm" />
+    <HelpKINode Title="IValidTimeEventCode Members" Url="html/268032474.htm" />
   </HelpKINode>
   <HelpKINode Title="Emwin.Core.DataObjects namespace" Url="html/570598424.htm" />
   <HelpKINode Title="Emwin.Core.DataObjects.ByteBlasterServerList class">
@@ -251,67 +246,20 @@
     <HelpKINode Title="ValidTimeEventCode Class" Url="html/347320636.htm" />
     <HelpKINode Title="ValidTimeEventCode Members" Url="html/417898899.htm" />
   </HelpKINode>
-  <HelpKINode Title="Emwin.Core.EventAggregator namespace" Url="html/1557031932.htm" />
-  <HelpKINode Title="Emwin.Core.EventAggregator.DelegateListener(Of T) class">
-    <HelpKINode Title="DelegateListener(T) Class" Url="html/282975893.htm" />
-    <HelpKINode Title="DelegateListener(T) Members" Url="html/115675223.htm" />
+  <HelpKINode Title="Emwin.Core.Extensions namespace" Url="html/396279797.htm" />
+  <HelpKINode Title="Emwin.Core.Extensions.HeaderExtensions class">
+    <HelpKINode Title="HeaderExtensions Class" Url="html/302507068.htm" />
+    <HelpKINode Title="HeaderExtensions Members" Url="html/1525732.htm" />
   </HelpKINode>
-  <HelpKINode Title="Emwin.Core.EventAggregator.DelegateListener&lt;T&gt; class">
-    <HelpKINode Title="DelegateListener(T) Class" Url="html/282975893.htm" />
-    <HelpKINode Title="DelegateListener(T) Members" Url="html/115675223.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.EventAggregator.EventAggregator class">
-    <HelpKINode Title="EventAggregator Class" Url="html/819525132.htm" />
-    <HelpKINode Title="EventAggregator Members" Url="html/355706774.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.EventAggregator.EventAggregatorExtensions class">
-    <HelpKINode Title="EventAggregatorExtensions Class" Url="html/1243205521.htm" />
-    <HelpKINode Title="EventAggregatorExtensions Members" Url="html/311340872.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.EventAggregator.IEventAggregator interface">
-    <HelpKINode Title="IEventAggregator Interface" Url="html/913982832.htm" />
-    <HelpKINode Title="IEventAggregator Members" Url="html/1549073581.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.EventAggregator.IEventPublisher interface">
-    <HelpKINode Title="IEventPublisher Interface" Url="html/1478294082.htm" />
-    <HelpKINode Title="IEventPublisher Members" Url="html/265132487.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.EventAggregator.IEventSubscriptionManager interface">
-    <HelpKINode Title="IEventSubscriptionManager Interface" Url="html/1515180006.htm" />
-    <HelpKINode Title="IEventSubscriptionManager Members" Url="html/1245008540.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.EventAggregator.IListener interface" Url="html/730591252.htm" />
-  <HelpKINode Title="Emwin.Core.EventAggregator.IListener(Of TMessage) interface" Url="html/256403783.htm" />
-  <HelpKINode Title="Emwin.Core.EventAggregator.IListener&lt;TMessage&gt; interface" Url="html/256403783.htm" />
-  <HelpKINode Title="Emwin.Core.EventAggregator.ObservableListener(Of T) class">
-    <HelpKINode Title="ObservableListener(T) Class" Url="html/134668408.htm" />
-    <HelpKINode Title="ObservableListener(T) Members" Url="html/1714252857.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.EventAggregator.ObservableListener&lt;T&gt; class">
-    <HelpKINode Title="ObservableListener(T) Class" Url="html/134668408.htm" />
-    <HelpKINode Title="ObservableListener(T) Members" Url="html/1714252857.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.Interfaces namespace" Url="html/2094297904.htm" />
-  <HelpKINode Title="Emwin.Core.Interfaces.ICompressedContent interface">
-    <HelpKINode Title="ICompressedContent Interface" Url="html/184703559.htm" />
-    <HelpKINode Title="ICompressedContent Members" Url="html/1519543645.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.Interfaces.IEmwinContent interface">
-    <HelpKINode Title="IEmwinContent Interface" Url="html/2132799135.htm" />
-    <HelpKINode Title="IEmwinContent Members" Url="html/1044760957.htm" />
-    <HelpKINode Title="IEmwinContent Members" Url="html/1873335545.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.Interfaces.IEmwinContent(Of T) interface" Url="html/916302382.htm" />
-  <HelpKINode Title="Emwin.Core.Interfaces.IEmwinContent&lt;T&gt; interface" Url="html/916302382.htm" />
-  <HelpKINode Title="Emwin.Core.Interfaces.IImageProduct interface">
-    <HelpKINode Title="IImageProduct Interface" Url="html/1210651447.htm" />
-    <HelpKINode Title="IImageProduct Members" Url="html/1843783986.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.Interfaces.ITextProduct interface">
-    <HelpKINode Title="ITextProduct Interface" Url="html/236160202.htm" />
-    <HelpKINode Title="ITextProduct Members" Url="html/202722208.htm" />
+  <HelpKINode Title="Emwin.Core.Extensions.VtecExtensions class">
+    <HelpKINode Title="VtecExtensions Class" Url="html/1881989404.htm" />
+    <HelpKINode Title="VtecExtensions Members" Url="html/406451076.htm" />
   </HelpKINode>
   <HelpKINode Title="Emwin.Core.Parsers namespace" Url="html/1648609939.htm" />
+  <HelpKINode Title="Emwin.Core.Parsers.BulletinParser class">
+    <HelpKINode Title="BulletinParser Class" Url="html/683068779.htm" />
+    <HelpKINode Title="BulletinParser Members" Url="html/442220222.htm" />
+  </HelpKINode>
   <HelpKINode Title="Emwin.Core.Parsers.ContentTypeParser class">
     <HelpKINode Title="ContentTypeParser Class" Url="html/251528657.htm" />
     <HelpKINode Title="ContentTypeParser Members" Url="html/1537966303.htm" />
@@ -319,10 +267,6 @@
   <HelpKINode Title="Emwin.Core.Parsers.HeadingParser class">
     <HelpKINode Title="HeadingParser Class" Url="html/526647829.htm" />
     <HelpKINode Title="HeadingParser Members" Url="html/1677603271.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.Parsers.ImageParser class">
-    <HelpKINode Title="ImageParser Class" Url="html/467010943.htm" />
-    <HelpKINode Title="ImageParser Members" Url="html/1543925507.htm" />
   </HelpKINode>
   <HelpKINode Title="Emwin.Core.Parsers.SpatialParser class">
     <HelpKINode Title="SpatialParser Class" Url="html/621143206.htm" />
@@ -337,9 +281,13 @@
     <HelpKINode Title="VtecParser Members" Url="html/506110020.htm" />
   </HelpKINode>
   <HelpKINode Title="Emwin.Core.Products namespace" Url="html/812884526.htm" />
-  <HelpKINode Title="Emwin.Core.Products.CompressedProduct class">
-    <HelpKINode Title="CompressedProduct Class" Url="html/2123012163.htm" />
-    <HelpKINode Title="CompressedProduct Members" Url="html/375434445.htm" />
+  <HelpKINode Title="Emwin.Core.Products.BulletinProduct class">
+    <HelpKINode Title="BulletinProduct Class" Url="html/1817262784.htm" />
+    <HelpKINode Title="BulletinProduct Members" Url="html/1273852217.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Core.Products.CompressedContent class">
+    <HelpKINode Title="CompressedContent Class" Url="html/478199329.htm" />
+    <HelpKINode Title="CompressedContent Members" Url="html/1689908743.htm" />
   </HelpKINode>
   <HelpKINode Title="Emwin.Core.Products.ImageProduct class">
     <HelpKINode Title="ImageProduct Class" Url="html/1247217555.htm" />
@@ -358,153 +306,127 @@
     <HelpKINode Title="GraphicProduct Class" Url="html/1325037884.htm" />
     <HelpKINode Title="GraphicProduct Members" Url="html/896882220.htm" />
   </HelpKINode>
-  <HelpKINode Title="Emwin.Core.References.TextProduct class">
-    <HelpKINode Title="TextProduct Class" Url="html/641897895.htm" />
-    <HelpKINode Title="TextProduct Members" Url="html/127724555.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.References.VtecAction class">
-    <HelpKINode Title="VtecAction Class" Url="html/871599505.htm" />
-    <HelpKINode Title="VtecAction Members" Url="html/740282156.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Emwin.Core.References.VtecPhenomenon class">
-    <HelpKINode Title="VtecPhenomenon Class" Url="html/531256769.htm" />
-    <HelpKINode Title="VtecPhenomenon Members" Url="html/914083886.htm" />
-  </HelpKINode>
   <HelpKINode Title="Emwin.Core.Types namespace" Url="html/1337149015.htm" />
   <HelpKINode Title="Emwin.Core.Types.ContentFileType enumeration" Url="html/1000439498.htm" />
-  <HelpKINode Title="Emwin.Core.Types.ImageFormatType enumeration" Url="html/1257192578.htm" />
-  <HelpKINode Title="Emwin.Core.Types.T1DataTypeCode enumeration" Url="html/1622348640.htm" />
-  <HelpKINode Title="Emwin.Core.Types.VtecSignificanceCode enumeration" Url="html/186638211.htm" />
-  <HelpKINode Title="Emwin.Core.Types.VtecTypeCode enumeration" Url="html/1952166643.htm" />
+  <HelpKINode Title="Emwin.Core.Types.VtecSignificanceLevel enumeration" Url="html/126689395.htm" />
   <HelpKINode Title="Emwin.Processor namespace" Url="html/1962556211.htm" />
+  <HelpKINode Title="Emwin.Processor.EventAggregator namespace" Url="html/677453684.htm" />
+  <HelpKINode Title="Emwin.Processor.EventAggregator.DelegateListener(Of T) class">
+    <HelpKINode Title="DelegateListener(T) Class" Url="html/241974211.htm" />
+    <HelpKINode Title="DelegateListener(T) Members" Url="html/227302899.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.EventAggregator.DelegateListener&lt;T&gt; class">
+    <HelpKINode Title="DelegateListener(T) Class" Url="html/241974211.htm" />
+    <HelpKINode Title="DelegateListener(T) Members" Url="html/227302899.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.EventAggregator.EventAggregator class">
+    <HelpKINode Title="EventAggregator Class" Url="html/1045826446.htm" />
+    <HelpKINode Title="EventAggregator Members" Url="html/1089215434.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.EventAggregator.EventAggregatorExtensions class">
+    <HelpKINode Title="EventAggregatorExtensions Class" Url="html/1804367056.htm" />
+    <HelpKINode Title="EventAggregatorExtensions Members" Url="html/1112311089.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.EventAggregator.IEventAggregator interface">
+    <HelpKINode Title="IEventAggregator Interface" Url="html/1415188875.htm" />
+    <HelpKINode Title="IEventAggregator Members" Url="html/537587869.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.EventAggregator.IEventPublisher interface">
+    <HelpKINode Title="IEventPublisher Interface" Url="html/795945077.htm" />
+    <HelpKINode Title="IEventPublisher Members" Url="html/378613239.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.EventAggregator.IEventSubscriptionManager interface">
+    <HelpKINode Title="IEventSubscriptionManager Interface" Url="html/1070109034.htm" />
+    <HelpKINode Title="IEventSubscriptionManager Members" Url="html/1518112076.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.EventAggregator.IHandle interface" Url="html/1744048321.htm" />
+  <HelpKINode Title="Emwin.Processor.EventAggregator.IHandle(Of TMessage) interface" Url="html/1144448659.htm" />
+  <HelpKINode Title="Emwin.Processor.EventAggregator.IHandle&lt;TMessage&gt; interface" Url="html/1144448659.htm" />
+  <HelpKINode Title="Emwin.Processor.EventAggregator.IPipelineFilter interface" Url="html/539896774.htm" />
+  <HelpKINode Title="Emwin.Processor.EventAggregator.IPipelineFilter(Of T) interface" Url="html/835473370.htm" />
+  <HelpKINode Title="Emwin.Processor.EventAggregator.IPipelineFilter&lt;T&gt; interface" Url="html/835473370.htm" />
+  <HelpKINode Title="Emwin.Processor.EventAggregator.ObservableListener(Of T) class">
+    <HelpKINode Title="ObservableListener(T) Class" Url="html/1189446265.htm" />
+    <HelpKINode Title="ObservableListener(T) Members" Url="html/76859900.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.EventAggregator.ObservableListener&lt;T&gt; class">
+    <HelpKINode Title="ObservableListener(T) Class" Url="html/1189446265.htm" />
+    <HelpKINode Title="ObservableListener(T) Members" Url="html/76859900.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.EventAggregator.Pipeline(Of T) class">
+    <HelpKINode Title="Pipeline(T) Class" Url="html/656183413.htm" />
+    <HelpKINode Title="Pipeline(T) Members" Url="html/1874120759.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.EventAggregator.Pipeline&lt;T&gt; class">
+    <HelpKINode Title="Pipeline(T) Class" Url="html/656183413.htm" />
+    <HelpKINode Title="Pipeline(T) Members" Url="html/1874120759.htm" />
+  </HelpKINode>
   <HelpKINode Title="Emwin.Processor.Instrumentation namespace" Url="html/778636501.htm" />
   <HelpKINode Title="Emwin.Processor.Instrumentation.ProcessorEventSource class">
     <HelpKINode Title="ProcessorEventSource Class" Url="html/862454943.htm" />
     <HelpKINode Title="ProcessorEventSource Members" Url="html/1904710522.htm" />
   </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.ProcessorBase(Of T) class">
+    <HelpKINode Title="ProcessorBase(T) Class" Url="html/109248198.htm" />
+    <HelpKINode Title="ProcessorBase(T) Members" Url="html/337815059.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Emwin.Processor.ProcessorBase&lt;T&gt; class">
+    <HelpKINode Title="ProcessorBase(T) Class" Url="html/109248198.htm" />
+    <HelpKINode Title="ProcessorBase(T) Members" Url="html/337815059.htm" />
+  </HelpKINode>
   <HelpKINode Title="Emwin.Processor.WeatherProductProcessor class">
     <HelpKINode Title="WeatherProductProcessor Class" Url="html/554940934.htm" />
     <HelpKINode Title="WeatherProductProcessor Members" Url="html/1182624834.htm" />
   </HelpKINode>
-  <HelpKINode Title="EOL property" Url="html/1817814078.htm" />
-  <HelpKINode Title="EON property" Url="html/1314353804.htm" />
-  <HelpKINode Title="EQI property" Url="html/1415184911.htm" />
-  <HelpKINode Title="EQR property" Url="html/56790696.htm" />
-  <HelpKINode Title="EQW property" Url="html/816305583.htm" />
-  <HelpKINode Title="ESF property" Url="html/1669797732.htm" />
-  <HelpKINode Title="ESG property" Url="html/103713791.htm" />
-  <HelpKINode Title="ESP property" Url="html/1219459038.htm" />
-  <HelpKINode Title="ESS property" Url="html/1509424317.htm" />
+  <HelpKINode Title="End property">
+    <HelpKINode Title="End Property " Url="html/223128702.htm" />
+    <HelpKINode Title="End Property " Url="html/859802547.htm" />
+  </HelpKINode>
   <HelpKINode Title="EventAggregator class">
-    <HelpKINode Title="EventAggregator Class" Url="html/819525132.htm" />
-    <HelpKINode Title="EventAggregator Members" Url="html/355706774.htm" />
-    <HelpKINode Title="about EventAggregator class" Url="html/819525132.htm" />
-    <HelpKINode Title="all members" Url="html/355706774.htm" />
-    <HelpKINode Title="constructor" Url="html/1293095526.htm" />
-    <HelpKINode Title="methods" Url="html/1211869667.htm" />
+    <HelpKINode Title="EventAggregator Class" Url="html/1045826446.htm" />
+    <HelpKINode Title="EventAggregator Members" Url="html/1089215434.htm" />
+    <HelpKINode Title="about EventAggregator class" Url="html/1045826446.htm" />
+    <HelpKINode Title="all members" Url="html/1089215434.htm" />
+    <HelpKINode Title="constructor" Url="html/1921558311.htm" />
+    <HelpKINode Title="methods" Url="html/1168984718.htm" />
   </HelpKINode>
-  <HelpKINode Title="EventAggregator.AddListener method" Url="html/1630355451.htm" />
-  <HelpKINode Title="EventAggregator.EventAggregator constructor" Url="html/1293095526.htm" />
-  <HelpKINode Title="EventAggregator.RemoveListener method" Url="html/836127075.htm" />
-  <HelpKINode Title="EventAggregator.SendMessage method" Url="html/317592013.htm" />
+  <HelpKINode Title="EventAggregator.EventAggregator constructor" Url="html/1921558311.htm" />
+  <HelpKINode Title="EventAggregator.SendMessage method" Url="html/1407072706.htm" />
   <HelpKINode Title="EventAggregatorExtensions class">
-    <HelpKINode Title="EventAggregatorExtensions Class" Url="html/1243205521.htm" />
-    <HelpKINode Title="EventAggregatorExtensions Members" Url="html/311340872.htm" />
-    <HelpKINode Title="about EventAggregatorExtensions class" Url="html/1243205521.htm" />
-    <HelpKINode Title="all members" Url="html/311340872.htm" />
-    <HelpKINode Title="methods" Url="html/284684254.htm" />
+    <HelpKINode Title="EventAggregatorExtensions Class" Url="html/1804367056.htm" />
+    <HelpKINode Title="EventAggregatorExtensions Members" Url="html/1112311089.htm" />
+    <HelpKINode Title="about EventAggregatorExtensions class" Url="html/1804367056.htm" />
+    <HelpKINode Title="all members" Url="html/1112311089.htm" />
+    <HelpKINode Title="methods" Url="html/1764849648.htm" />
   </HelpKINode>
-  <HelpKINode Title="EventAggregatorExtensions.AddListenerAction(Of T) method" Url="html/259002385.htm" />
-  <HelpKINode Title="EventAggregatorExtensions.AddListenerAction&lt;T&gt; method" Url="html/259002385.htm" />
-  <HelpKINode Title="EVI property" Url="html/1415119375.htm" />
-  <HelpKINode Title="EW property" Url="html/1333968393.htm" />
-  <HelpKINode Title="EWW property" Url="html/816436655.htm" />
-  <HelpKINode Title="EXA property" Url="html/1144597303.htm" />
-  <HelpKINode Title="EXB property" Url="html/1144400695.htm" />
-  <HelpKINode Title="EXP property" Url="html/1145580343.htm" />
-  <HelpKINode Title="Experimental enumeration member" Url="html/1952166643.htm" />
-  <HelpKINode Title="Experimental field" Url="html/1860783611.htm" />
-  <HelpKINode Title="ExperimentalOp enumeration member" Url="html/1952166643.htm" />
-  <HelpKINode Title="ExperimentalOp field" Url="html/189057211.htm" />
-  <HelpKINode Title="EXT property" Url="html/1145842487.htm" />
-  <HelpKINode Title="FA property" Url="html/1004683745.htm" />
-  <HelpKINode Title="FA0 property" Url="html/1240841659.htm" />
-  <HelpKINode Title="FA1 property" Url="html/325242282.htm" />
-  <HelpKINode Title="FA2 property" Url="html/78042245.htm" />
-  <HelpKINode Title="FA3 property" Url="html/1488041696.htm" />
-  <HelpKINode Title="FA4 property" Url="html/728526809.htm" />
-  <HelpKINode Title="FA5 property" Url="html/2000356546.htm" />
-  <HelpKINode Title="FA6 property" Url="html/1891326223.htm" />
-  <HelpKINode Title="FA7 property" Url="html/837557132.htm" />
-  <HelpKINode Title="FA8 property" Url="html/884611299.htm" />
-  <HelpKINode Title="FA9 property" Url="html/681472642.htm" />
-  <HelpKINode Title="FDI property" Url="html/1413939730.htm" />
-  <HelpKINode Title="FF property" Url="html/1004683750.htm" />
-  <HelpKINode Title="FFA property" Url="html/1057840442.htm" />
-  <HelpKINode Title="FFG property" Url="html/104958972.htm" />
+  <HelpKINode Title="EventAggregatorExtensions.AddListenerAction(Of T) method" Url="html/1608706032.htm" />
+  <HelpKINode Title="EventAggregatorExtensions.AddListenerAction&lt;T&gt; method" Url="html/1608706032.htm" />
+  <HelpKINode Title="EventNumber property">
+    <HelpKINode Title="EventNumber Property " Url="html/1728862152.htm" />
+    <HelpKINode Title="EventNumber Property " Url="html/75759071.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Execute method" Url="html/165315016.htm" />
   <HelpKINode Title="FFG001US property" Url="html/395560931.htm" />
   <HelpKINode Title="FFG003US property" Url="html/395560929.htm" />
   <HelpKINode Title="FFG006US property" Url="html/395560926.htm" />
-  <HelpKINode Title="FFH property" Url="html/152013139.htm" />
-  <HelpKINode Title="FFS property" Url="html/1508179136.htm" />
-  <HelpKINode Title="FFW property" Url="html/817419692.htm" />
-  <HelpKINode Title="FG property" Url="html/1004683751.htm" />
   <HelpKINode Title="Filename property">
-    <HelpKINode Title="Filename Property " Url="html/2071343574.htm" />
-    <HelpKINode Title="Filename Property " Url="html/1385107625.htm" />
-    <HelpKINode Title="Filename Property " Url="html/431354989.htm" />
-    <HelpKINode Title="Filename Property " Url="html/92166559.htm" />
+    <HelpKINode Title="Filename Property " Url="html/901380501.htm" />
+    <HelpKINode Title="Filename Property " Url="html/728769933.htm" />
   </HelpKINode>
-  <HelpKINode Title="FL property" Url="html/1004683740.htm" />
-  <HelpKINode Title="FLN property" Url="html/1314419337.htm" />
-  <HelpKINode Title="FLS property" Url="html/1508572352.htm" />
-  <HelpKINode Title="FLW property" Url="html/817026476.htm" />
-  <HelpKINode Title="FMR property" Url="html/57577125.htm" />
-  <HelpKINode Title="FOF property" Url="html/1670584161.htm" />
-  <HelpKINode Title="FOH property" Url="html/151554387.htm" />
-  <HelpKINode Title="Forecast enumeration member">
-    <HelpKINode Title="T1DataTypeCode Enumeration" Url="html/1622348640.htm" />
-    <HelpKINode Title="VtecSignificanceCode Enumeration" Url="html/186638211.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Forecast field">
-    <HelpKINode Title="Forecast Field" Url="html/631466068.htm" />
-    <HelpKINode Title="Forecast Field" Url="html/246967908.htm" />
-  </HelpKINode>
-  <HelpKINode Title="ForecastData enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="ForecastData field" Url="html/2016466512.htm" />
-  <HelpKINode Title="FR property" Url="html/1004683762.htm" />
-  <HelpKINode Title="FRW property" Url="html/816108972.htm" />
-  <HelpKINode Title="FSS property" Url="html/1509424320.htm" />
-  <HelpKINode Title="FTM property" Url="html/910610522.htm" />
-  <HelpKINode Title="FW property" Url="html/1004683767.htm" />
-  <HelpKINode Title="FWA property" Url="html/1058823482.htm" />
-  <HelpKINode Title="FWC property" Url="html/2073344400.htm" />
-  <HelpKINode Title="FWD property" Url="html/1462108009.htm" />
-  <HelpKINode Title="FWE property" Url="html/1266775346.htm" />
-  <HelpKINode Title="FWF property" Url="html/1670059873.htm" />
-  <HelpKINode Title="FWL property" Url="html/1818338369.htm" />
-  <HelpKINode Title="FWM property" Url="html/910544986.htm" />
-  <HelpKINode Title="FWN property" Url="html/1313829513.htm" />
-  <HelpKINode Title="FWO property" Url="html/252254428.htm" />
-  <HelpKINode Title="FWS property" Url="html/1509162176.htm" />
-  <HelpKINode Title="FZ property" Url="html/1004683754.htm" />
-  <HelpKINode Title="FZL property" Url="html/1819190337.htm" />
+  <HelpKINode Title="Forecast enumeration member" Url="html/126689395.htm" />
+  <HelpKINode Title="Forecast field" Url="html/1709302044.htm" />
   <HelpKINode Title="G08CIRUS property" Url="html/321296667.htm" />
   <HelpKINode Title="G08HURUS property" Url="html/1609465200.htm" />
   <HelpKINode Title="G10CIRUS property" Url="html/336500990.htm" />
   <HelpKINode Title="G10FDIUS property" Url="html/2137040818.htm" />
   <HelpKINode Title="GeoCodes property">
-    <HelpKINode Title="GeoCodes Property " Url="html/1776802666.htm" />
-    <HelpKINode Title="GeoCodes Property " Url="html/1752912425.htm" />
+    <HelpKINode Title="GeoCodes Property " Url="html/304078575.htm" />
+    <HelpKINode Title="GeoCodes Property " Url="html/1712284555.htm" />
   </HelpKINode>
   <HelpKINode Title="GetFileContentType method" Url="html/989308377.htm" />
-  <HelpKINode Title="GetImageFormat method" Url="html/550051930.htm" />
-  <HelpKINode Title="Gif enumeration member" Url="html/1257192578.htm" />
-  <HelpKINode Title="Gif field" Url="html/17738789.htm" />
-  <HelpKINode Title="GL property" Url="html/951631396.htm" />
-  <HelpKINode Title="GLF property" Url="html/1670649698.htm" />
-  <HelpKINode Title="GLO property" Url="html/251664603.htm" />
-  <HelpKINode Title="GLS property" Url="html/1508572351.htm" />
+  <HelpKINode Title="GetKey method" Url="html/40359766.htm" />
+  <HelpKINode Title="GetSignificanceLevel method" Url="html/1315892736.htm" />
+  <HelpKINode Title="GetStream method" Url="html/1835189106.htm" />
   <HelpKINode Title="GMS005US property" Url="html/567462120.htm" />
   <HelpKINode Title="GPHJ88US property" Url="html/157722040.htm" />
   <HelpKINode Title="GraphicProduct class">
@@ -577,33 +499,23 @@
   <HelpKINode Title="GraphicProduct.TRKSINUS property" Url="html/103171919.htm" />
   <HelpKINode Title="GraphicProduct.TRKSWPUS property" Url="html/370951989.htm" />
   <HelpKINode Title="GraphicProduct.TRKWLDUS property" Url="html/863148235.htm" />
-  <HelpKINode Title="GribRegionalUse enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="GribRegionalUse field" Url="html/1801718648.htm" />
-  <HelpKINode Title="GridPointInformationD enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="GridPointInformationD field" Url="html/1428040651.htm" />
-  <HelpKINode Title="GridPointInformationG enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="GridPointInformationG field" Url="html/1024756124.htm" />
-  <HelpKINode Title="GridPointInformationH enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="GridPointInformationH field" Url="html/897558177.htm" />
-  <HelpKINode Title="GSM property" Url="html/910282843.htm" />
   <HelpKINode Title="Handle method">
-    <HelpKINode Title="Handle Method " Url="html/2070034550.htm" />
-    <HelpKINode Title="Handle Method " Url="html/1364799639.htm" />
-    <HelpKINode Title="Handle Method " Url="html/1173705513.htm" />
+    <HelpKINode Title="Handle Method " Url="html/1591546563.htm" />
+    <HelpKINode Title="Handle Method " Url="html/989823877.htm" />
+    <HelpKINode Title="Handle Method " Url="html/1300586377.htm" />
   </HelpKINode>
-  <HelpKINode Title="Hash property">
-    <HelpKINode Title="Hash Property " Url="html/751646617.htm" />
-    <HelpKINode Title="Hash Property " Url="html/923483923.htm" />
-    <HelpKINode Title="Hash Property " Url="html/1759979011.htm" />
-    <HelpKINode Title="Hash Property " Url="html/1679848020.htm" />
-    <HelpKINode Title="Hash Property " Url="html/1971566618.htm" />
-    <HelpKINode Title="Hash Property " Url="html/143981404.htm" />
-  </HelpKINode>
-  <HelpKINode Title="HCM property" Url="html/911331408.htm" />
   <HelpKINode Title="Header property">
-    <HelpKINode Title="Header Property " Url="html/1565576674.htm" />
-    <HelpKINode Title="Header Property " Url="html/1382830956.htm" />
+    <HelpKINode Title="Header Property " Url="html/1755524288.htm" />
+    <HelpKINode Title="Header Property " Url="html/66179320.htm" />
   </HelpKINode>
+  <HelpKINode Title="HeaderExtensions class">
+    <HelpKINode Title="HeaderExtensions Class" Url="html/302507068.htm" />
+    <HelpKINode Title="HeaderExtensions Members" Url="html/1525732.htm" />
+    <HelpKINode Title="about HeaderExtensions class" Url="html/302507068.htm" />
+    <HelpKINode Title="all members" Url="html/1525732.htm" />
+    <HelpKINode Title="methods" Url="html/971337607.htm" />
+  </HelpKINode>
+  <HelpKINode Title="HeaderExtensions.Blah method" Url="html/1965222916.htm" />
   <HelpKINode Title="HeadingParser class">
     <HelpKINode Title="HeadingParser Class" Url="html/526647829.htm" />
     <HelpKINode Title="HeadingParser Members" Url="html/1677603271.htm" />
@@ -612,132 +524,122 @@
     <HelpKINode Title="methods" Url="html/2109858549.htm" />
   </HelpKINode>
   <HelpKINode Title="HeadingParser.ParseProduct method" Url="html/1778459226.htm" />
-  <HelpKINode Title="Height property">
-    <HelpKINode Title="Height Property " Url="html/745451164.htm" />
-    <HelpKINode Title="Height Property " Url="html/439929508.htm" />
+  <HelpKINode Title="Height property" Url="html/1657419638.htm" />
+  <HelpKINode Title="IBulletinProduct interface">
+    <HelpKINode Title="IBulletinProduct Interface" Url="html/1757430985.htm" />
+    <HelpKINode Title="IBulletinProduct Members" Url="html/140612421.htm" />
+    <HelpKINode Title="about IBulletinProduct interface" Url="html/1757430985.htm" />
+    <HelpKINode Title="all members" Url="html/140612421.htm" />
+    <HelpKINode Title="methods" Url="html/1053389067.htm" />
+    <HelpKINode Title="properties" Url="html/1799167308.htm" />
   </HelpKINode>
-  <HelpKINode Title="HF property" Url="html/1671675418.htm" />
-  <HelpKINode Title="HI property" Url="html/1671675431.htm" />
-  <HelpKINode Title="HLS property" Url="html/1508572362.htm" />
-  <HelpKINode Title="HMD property" Url="html/1461452659.htm" />
-  <HelpKINode Title="HMW property" Url="html/817092002.htm" />
-  <HelpKINode Title="HRR property" Url="html/56594075.htm" />
-  <HelpKINode Title="HS property" Url="html/1671675405.htm" />
-  <HelpKINode Title="HSF property" Url="html/1669797719.htm" />
-  <HelpKINode Title="HT property" Url="html/1671675404.htm" />
-  <HelpKINode Title="HU property" Url="html/1671675403.htm" />
-  <HelpKINode Title="HW property" Url="html/1671675401.htm" />
-  <HelpKINode Title="HWO property" Url="html/252254438.htm" />
-  <HelpKINode Title="HY property" Url="html/1671675415.htm" />
-  <HelpKINode Title="HYD property" Url="html/1462763379.htm" />
-  <HelpKINode Title="HYM property" Url="html/909889616.htm" />
-  <HelpKINode Title="HZ property" Url="html/1671675414.htm" />
-  <HelpKINode Title="ICE property" Url="html/1267561769.htm" />
+  <HelpKINode Title="IBulletinProduct.GeoCodes property" Url="html/1712284555.htm" />
+  <HelpKINode Title="IBulletinProduct.Polygons property" Url="html/1487876468.htm" />
+  <HelpKINode Title="IBulletinProduct.PrimaryVtecCodes property" Url="html/633719507.htm" />
+  <HelpKINode Title="IBulletinProduct.SequenceNumber property" Url="html/975670560.htm" />
+  <HelpKINode Title="ICommsHeader interface">
+    <HelpKINode Title="ICommsHeader Interface" Url="html/1816882701.htm" />
+    <HelpKINode Title="ICommsHeader Members" Url="html/860492719.htm" />
+    <HelpKINode Title="about ICommsHeader interface" Url="html/1816882701.htm" />
+    <HelpKINode Title="all members" Url="html/860492719.htm" />
+    <HelpKINode Title="methods" Url="html/1079692591.htm" />
+    <HelpKINode Title="properties" Url="html/1713818935.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ICommsHeader.AfosPil property" Url="html/283385598.htm" />
+  <HelpKINode Title="ICommsHeader.AwipsId property" Url="html/619608531.htm" />
+  <HelpKINode Title="ICommsHeader.Indicator property" Url="html/1960229788.htm" />
+  <HelpKINode Title="ICommsHeader.Time property" Url="html/1183181481.htm" />
+  <HelpKINode Title="ICommsHeader.WmoId property" Url="html/2068126550.htm" />
   <HelpKINode Title="ICompressedContent interface">
-    <HelpKINode Title="ICompressedContent Interface" Url="html/184703559.htm" />
-    <HelpKINode Title="ICompressedContent Members" Url="html/1519543645.htm" />
-    <HelpKINode Title="about ICompressedContent interface" Url="html/184703559.htm" />
-    <HelpKINode Title="all members" Url="html/1519543645.htm" />
-    <HelpKINode Title="methods" Url="html/1804033731.htm" />
-    <HelpKINode Title="properties" Url="html/1072472990.htm" />
+    <HelpKINode Title="ICompressedContent Interface" Url="html/465636687.htm" />
+    <HelpKINode Title="ICompressedContent Members" Url="html/51756687.htm" />
+    <HelpKINode Title="about ICompressedContent interface" Url="html/465636687.htm" />
+    <HelpKINode Title="all members" Url="html/51756687.htm" />
+    <HelpKINode Title="methods" Url="html/1546795596.htm" />
   </HelpKINode>
-  <HelpKINode Title="ICompressedContent.Hash property" Url="html/143981404.htm" />
+  <HelpKINode Title="ICompressedContent.GetStream method" Url="html/1835189106.htm" />
   <HelpKINode Title="Id property">
-    <HelpKINode Title="Id Property " Url="html/941616523.htm" />
+    <HelpKINode Title="Id Property " Url="html/1630770145.htm" />
     <HelpKINode Title="Id Property " Url="html/211566964.htm" />
   </HelpKINode>
   <HelpKINode Title="IEmwinContent interface">
-    <HelpKINode Title="IEmwinContent Interface" Url="html/2132799135.htm" />
-    <HelpKINode Title="IEmwinContent Members" Url="html/1873335545.htm" />
-    <HelpKINode Title="IEmwinContent Members" Url="html/1044760957.htm" />
-    <HelpKINode Title="about IEmwinContent interface" Url="html/2132799135.htm" />
-    <HelpKINode Title="all members" Url="html/1044760957.htm" />
-    <HelpKINode Title="all members" Url="html/1873335545.htm" />
-    <HelpKINode Title="methods" Url="html/429520884.htm" />
-    <HelpKINode Title="methods" Url="html/524653225.htm" />
-    <HelpKINode Title="properties" Url="html/2125561957.htm" />
-    <HelpKINode Title="properties" Url="html/1186840454.htm" />
+    <HelpKINode Title="IEmwinContent Interface" Url="html/1436336560.htm" />
+    <HelpKINode Title="IEmwinContent Members" Url="html/2049196139.htm" />
+    <HelpKINode Title="IEmwinContent Members" Url="html/199650600.htm" />
+    <HelpKINode Title="about IEmwinContent interface" Url="html/1436336560.htm" />
+    <HelpKINode Title="all members" Url="html/199650600.htm" />
+    <HelpKINode Title="all members" Url="html/2049196139.htm" />
+    <HelpKINode Title="methods" Url="html/977387490.htm" />
+    <HelpKINode Title="methods" Url="html/1820189239.htm" />
+    <HelpKINode Title="properties" Url="html/913802979.htm" />
+    <HelpKINode Title="properties" Url="html/1691235843.htm" />
   </HelpKINode>
   <HelpKINode Title="IEmwinContent(Of T) interface">
-    <HelpKINode Title="IEmwinContent(T) Interface" Url="html/916302382.htm" />
-    <HelpKINode Title="about IEmwinContent(Of T) interface" Url="html/916302382.htm" />
+    <HelpKINode Title="IEmwinContent(T) Interface" Url="html/1558971958.htm" />
+    <HelpKINode Title="about IEmwinContent(Of T) interface" Url="html/1558971958.htm" />
   </HelpKINode>
-  <HelpKINode Title="IEmwinContent(Of T).Content property" Url="html/1722157037.htm" />
-  <HelpKINode Title="IEmwinContent.ContentType property" Url="html/1907843730.htm" />
-  <HelpKINode Title="IEmwinContent.Filename property" Url="html/431354989.htm" />
-  <HelpKINode Title="IEmwinContent.ReceivedAt property" Url="html/1306991834.htm" />
-  <HelpKINode Title="IEmwinContent.TimeStamp property" Url="html/64400527.htm" />
+  <HelpKINode Title="IEmwinContent(Of T).Content property" Url="html/999476429.htm" />
+  <HelpKINode Title="IEmwinContent.Content property" Url="html/2087113040.htm" />
+  <HelpKINode Title="IEmwinContent.Filename property" Url="html/901380501.htm" />
+  <HelpKINode Title="IEmwinContent.ReceivedAt property" Url="html/1569301654.htm" />
+  <HelpKINode Title="IEmwinContent.TimeStamp property" Url="html/1269729860.htm" />
   <HelpKINode Title="IEmwinContent&lt;T&gt; interface">
-    <HelpKINode Title="IEmwinContent(T) Interface" Url="html/916302382.htm" />
-    <HelpKINode Title="about IEmwinContent&lt;T&gt; interface" Url="html/916302382.htm" />
+    <HelpKINode Title="IEmwinContent(T) Interface" Url="html/1558971958.htm" />
+    <HelpKINode Title="about IEmwinContent&lt;T&gt; interface" Url="html/1558971958.htm" />
   </HelpKINode>
-  <HelpKINode Title="IEmwinContent&lt;T&gt;.Content property" Url="html/1722157037.htm" />
+  <HelpKINode Title="IEmwinContent&lt;T&gt;.Content property" Url="html/999476429.htm" />
   <HelpKINode Title="IEventAggregator interface">
-    <HelpKINode Title="IEventAggregator Interface" Url="html/913982832.htm" />
-    <HelpKINode Title="IEventAggregator Members" Url="html/1549073581.htm" />
-    <HelpKINode Title="about IEventAggregator interface" Url="html/913982832.htm" />
-    <HelpKINode Title="all members" Url="html/1549073581.htm" />
-    <HelpKINode Title="methods" Url="html/483342975.htm" />
+    <HelpKINode Title="IEventAggregator Interface" Url="html/1415188875.htm" />
+    <HelpKINode Title="IEventAggregator Members" Url="html/537587869.htm" />
+    <HelpKINode Title="about IEventAggregator interface" Url="html/1415188875.htm" />
+    <HelpKINode Title="all members" Url="html/537587869.htm" />
+    <HelpKINode Title="methods" Url="html/857048656.htm" />
   </HelpKINode>
   <HelpKINode Title="IEventPublisher interface">
-    <HelpKINode Title="IEventPublisher Interface" Url="html/1478294082.htm" />
-    <HelpKINode Title="IEventPublisher Members" Url="html/265132487.htm" />
-    <HelpKINode Title="about IEventPublisher interface" Url="html/1478294082.htm" />
-    <HelpKINode Title="all members" Url="html/265132487.htm" />
-    <HelpKINode Title="methods" Url="html/1334050400.htm" />
+    <HelpKINode Title="IEventPublisher Interface" Url="html/795945077.htm" />
+    <HelpKINode Title="IEventPublisher Members" Url="html/378613239.htm" />
+    <HelpKINode Title="about IEventPublisher interface" Url="html/795945077.htm" />
+    <HelpKINode Title="all members" Url="html/378613239.htm" />
+    <HelpKINode Title="methods" Url="html/1313069108.htm" />
   </HelpKINode>
-  <HelpKINode Title="IEventPublisher.SendMessage method" Url="html/1168896791.htm" />
+  <HelpKINode Title="IEventPublisher.SendMessage method" Url="html/680543732.htm" />
   <HelpKINode Title="IEventSubscriptionManager interface">
-    <HelpKINode Title="IEventSubscriptionManager Interface" Url="html/1515180006.htm" />
-    <HelpKINode Title="IEventSubscriptionManager Members" Url="html/1245008540.htm" />
-    <HelpKINode Title="about IEventSubscriptionManager interface" Url="html/1515180006.htm" />
-    <HelpKINode Title="all members" Url="html/1245008540.htm" />
-    <HelpKINode Title="methods" Url="html/879309397.htm" />
+    <HelpKINode Title="IEventSubscriptionManager Interface" Url="html/1070109034.htm" />
+    <HelpKINode Title="IEventSubscriptionManager Members" Url="html/1518112076.htm" />
+    <HelpKINode Title="about IEventSubscriptionManager interface" Url="html/1070109034.htm" />
+    <HelpKINode Title="all members" Url="html/1518112076.htm" />
+    <HelpKINode Title="methods" Url="html/777827228.htm" />
   </HelpKINode>
-  <HelpKINode Title="IEventSubscriptionManager.RemoveListener method" Url="html/354906451.htm" />
+  <HelpKINode Title="IEventSubscriptionManager.AddListener method" Url="html/1614415490.htm" />
+  <HelpKINode Title="IEventSubscriptionManager.RemoveListener method" Url="html/2051471236.htm" />
+  <HelpKINode Title="IHandle interface">
+    <HelpKINode Title="IHandle Members" Url="html/1744048321.htm" />
+    <HelpKINode Title="all members" Url="html/1744048321.htm" />
+    <HelpKINode Title="methods" Url="html/1482453010.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IHandle(Of TMessage) interface">
+    <HelpKINode Title="IHandle(TMessage) Interface" Url="html/1144448659.htm" />
+    <HelpKINode Title="about IHandle(Of TMessage) interface" Url="html/1144448659.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IHandle(Of TMessage).Handle method" Url="html/989823877.htm" />
+  <HelpKINode Title="IHandle&lt;TMessage&gt; interface">
+    <HelpKINode Title="IHandle(TMessage) Interface" Url="html/1144448659.htm" />
+    <HelpKINode Title="about IHandle&lt;TMessage&gt; interface" Url="html/1144448659.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IHandle&lt;TMessage&gt;.Handle method" Url="html/989823877.htm" />
   <HelpKINode Title="IImageProduct interface">
-    <HelpKINode Title="IImageProduct Interface" Url="html/1210651447.htm" />
-    <HelpKINode Title="IImageProduct Members" Url="html/1843783986.htm" />
-    <HelpKINode Title="about IImageProduct interface" Url="html/1210651447.htm" />
-    <HelpKINode Title="all members" Url="html/1843783986.htm" />
-    <HelpKINode Title="methods" Url="html/1191193282.htm" />
-    <HelpKINode Title="properties" Url="html/233551358.htm" />
+    <HelpKINode Title="IImageProduct Interface" Url="html/1660566863.htm" />
+    <HelpKINode Title="IImageProduct Members" Url="html/855925443.htm" />
+    <HelpKINode Title="about IImageProduct interface" Url="html/1660566863.htm" />
+    <HelpKINode Title="all members" Url="html/855925443.htm" />
+    <HelpKINode Title="methods" Url="html/101041794.htm" />
+    <HelpKINode Title="properties" Url="html/1619439570.htm" />
   </HelpKINode>
-  <HelpKINode Title="IImageProduct.Hash property" Url="html/923483923.htm" />
-  <HelpKINode Title="IImageProduct.Height property" Url="html/439929508.htm" />
-  <HelpKINode Title="IImageProduct.Width property" Url="html/1008184558.htm" />
-  <HelpKINode Title="IListener interface">
-    <HelpKINode Title="IListener Members" Url="html/730591252.htm" />
-    <HelpKINode Title="all members" Url="html/730591252.htm" />
-    <HelpKINode Title="methods" Url="html/565807128.htm" />
-  </HelpKINode>
-  <HelpKINode Title="IListener(Of TMessage) interface">
-    <HelpKINode Title="IListener(TMessage) Interface" Url="html/256403783.htm" />
-    <HelpKINode Title="about IListener(Of TMessage) interface" Url="html/256403783.htm" />
-  </HelpKINode>
-  <HelpKINode Title="IListener(Of TMessage).Handle method" Url="html/1173705513.htm" />
-  <HelpKINode Title="IListener&lt;TMessage&gt; interface">
-    <HelpKINode Title="IListener(TMessage) Interface" Url="html/256403783.htm" />
-    <HelpKINode Title="about IListener&lt;TMessage&gt; interface" Url="html/256403783.htm" />
-  </HelpKINode>
-  <HelpKINode Title="IListener&lt;TMessage&gt;.Handle method" Url="html/1173705513.htm" />
+  <HelpKINode Title="IImageProduct.Description property" Url="html/1022973982.htm" />
+  <HelpKINode Title="IImageProduct.Height property" Url="html/1657419638.htm" />
+  <HelpKINode Title="IImageProduct.Width property" Url="html/959572620.htm" />
   <HelpKINode Title="Image enumeration member" Url="html/1000439498.htm" />
   <HelpKINode Title="Image field" Url="html/344727118.htm" />
-  <HelpKINode Title="ImageFormatType enumeration" Url="html/1257192578.htm" />
-  <HelpKINode Title="ImageFormatType.Bmp field" Url="html/1175344087.htm" />
-  <HelpKINode Title="ImageFormatType.Gif field" Url="html/17738789.htm" />
-  <HelpKINode Title="ImageFormatType.JPeg field" Url="html/1109067167.htm" />
-  <HelpKINode Title="ImageFormatType.Png field" Url="html/444771372.htm" />
-  <HelpKINode Title="ImageFormatType.Tiff field" Url="html/356743731.htm" />
-  <HelpKINode Title="ImageFormatType.Unknown field" Url="html/1209370773.htm" />
-  <HelpKINode Title="ImageParser class">
-    <HelpKINode Title="ImageParser Class" Url="html/467010943.htm" />
-    <HelpKINode Title="ImageParser Members" Url="html/1543925507.htm" />
-    <HelpKINode Title="about ImageParser class" Url="html/467010943.htm" />
-    <HelpKINode Title="all members" Url="html/1543925507.htm" />
-    <HelpKINode Title="methods" Url="html/1882744833.htm" />
-  </HelpKINode>
-  <HelpKINode Title="ImageParser.GetImageFormat method" Url="html/550051930.htm" />
   <HelpKINode Title="ImageProduct class">
     <HelpKINode Title="ImageProduct Class" Url="html/1247217555.htm" />
     <HelpKINode Title="ImageProduct Members" Url="html/761668315.htm" />
@@ -747,13 +649,7 @@
     <HelpKINode Title="properties" Url="html/739711297.htm" />
   </HelpKINode>
   <HelpKINode Title="ImageProduct.Content property" Url="html/722774447.htm" />
-  <HelpKINode Title="ImageProduct.ContentType property" Url="html/308206470.htm" />
-  <HelpKINode Title="ImageProduct.Filename property" Url="html/92166559.htm" />
-  <HelpKINode Title="ImageProduct.Hash property" Url="html/1971566618.htm" />
-  <HelpKINode Title="ImageProduct.Height property" Url="html/745451164.htm" />
-  <HelpKINode Title="ImageProduct.ReceivedAt property" Url="html/1192272773.htm" />
-  <HelpKINode Title="ImageProduct.TimeStamp property" Url="html/1340115407.htm" />
-  <HelpKINode Title="ImageProduct.Width property" Url="html/1445408614.htm" />
+  <HelpKINode Title="ImageProduct.Description property" Url="html/1885067423.htm" />
   <HelpKINode Title="IMGFNT00 property" Url="html/942903146.htm" />
   <HelpKINode Title="IMGFNT06 property" Url="html/219896268.htm" />
   <HelpKINode Title="IMGFNT12 property" Url="html/2105637024.htm" />
@@ -763,54 +659,85 @@
   <HelpKINode Title="IMGSWPUS property" Url="html/407979432.htm" />
   <HelpKINode Title="IMGWWAUS property" Url="html/156670587.htm" />
   <HelpKINode Title="INDCIRUS property" Url="html/1214555945.htm" />
-  <HelpKINode Title="Indicator property" Url="html/1449039466.htm" />
-  <HelpKINode Title="IOB property" Url="html/655014676.htm" />
-  <HelpKINode Title="IP property" Url="html/666976752.htm" />
-  <HelpKINode Title="IS property" Url="html/666976755.htm" />
+  <HelpKINode Title="Indicator property">
+    <HelpKINode Title="Indicator Property " Url="html/1960229788.htm" />
+    <HelpKINode Title="Indicator Property " Url="html/1449039466.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPipelineFilter interface">
+    <HelpKINode Title="IPipelineFilter Members" Url="html/539896774.htm" />
+    <HelpKINode Title="all members" Url="html/539896774.htm" />
+    <HelpKINode Title="methods" Url="html/162612761.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPipelineFilter(Of T) interface">
+    <HelpKINode Title="IPipelineFilter(T) Interface" Url="html/835473370.htm" />
+    <HelpKINode Title="about IPipelineFilter(Of T) interface" Url="html/835473370.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPipelineFilter(Of T).Execute method" Url="html/165315016.htm" />
+  <HelpKINode Title="IPipelineFilter&lt;T&gt; interface">
+    <HelpKINode Title="IPipelineFilter(T) Interface" Url="html/835473370.htm" />
+    <HelpKINode Title="about IPipelineFilter&lt;T&gt; interface" Url="html/835473370.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPipelineFilter&lt;T&gt;.Execute method" Url="html/165315016.htm" />
+  <HelpKINode Title="IQuickBlockTransferSegment interface">
+    <HelpKINode Title="IQuickBlockTransferSegment Interface" Url="html/1580295705.htm" />
+    <HelpKINode Title="IQuickBlockTransferSegment Members" Url="html/117628096.htm" />
+    <HelpKINode Title="about IQuickBlockTransferSegment interface" Url="html/1580295705.htm" />
+    <HelpKINode Title="all members" Url="html/117628096.htm" />
+    <HelpKINode Title="methods" Url="html/799846322.htm" />
+    <HelpKINode Title="properties" Url="html/674330990.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IQuickBlockTransferSegment.BlockNumber property" Url="html/1161241495.htm" />
+  <HelpKINode Title="IQuickBlockTransferSegment.Checksum property" Url="html/725703933.htm" />
+  <HelpKINode Title="IQuickBlockTransferSegment.GetKey method" Url="html/40359766.htm" />
+  <HelpKINode Title="IQuickBlockTransferSegment.Header property" Url="html/66179320.htm" />
+  <HelpKINode Title="IQuickBlockTransferSegment.Length property" Url="html/882125564.htm" />
+  <HelpKINode Title="IQuickBlockTransferSegment.TotalBlocks property" Url="html/141297528.htm" />
+  <HelpKINode Title="IQuickBlockTransferSegment.Version property" Url="html/1602853182.htm" />
   <HelpKINode Title="IsActive field" Url="html/373722024.htm" />
+  <HelpKINode Title="IsActive method" Url="html/1726488458.htm" />
   <HelpKINode Title="ITextProduct interface">
-    <HelpKINode Title="ITextProduct Interface" Url="html/236160202.htm" />
-    <HelpKINode Title="ITextProduct Members" Url="html/202722208.htm" />
-    <HelpKINode Title="about ITextProduct interface" Url="html/236160202.htm" />
-    <HelpKINode Title="all members" Url="html/202722208.htm" />
-    <HelpKINode Title="methods" Url="html/1912889068.htm" />
-    <HelpKINode Title="properties" Url="html/201176994.htm" />
+    <HelpKINode Title="ITextProduct Interface" Url="html/843918162.htm" />
+    <HelpKINode Title="ITextProduct Members" Url="html/338282731.htm" />
+    <HelpKINode Title="about ITextProduct interface" Url="html/843918162.htm" />
+    <HelpKINode Title="all members" Url="html/338282731.htm" />
+    <HelpKINode Title="methods" Url="html/215854928.htm" />
+    <HelpKINode Title="properties" Url="html/1812873425.htm" />
   </HelpKINode>
-  <HelpKINode Title="ITextProduct.GeoCodes property" Url="html/1776802666.htm" />
-  <HelpKINode Title="ITextProduct.Hash property" Url="html/1759979011.htm" />
-  <HelpKINode Title="ITextProduct.Header property" Url="html/1565576674.htm" />
-  <HelpKINode Title="ITextProduct.Polygons property" Url="html/1772149055.htm" />
-  <HelpKINode Title="ITextProduct.VtecCodes property" Url="html/864815760.htm" />
-  <HelpKINode Title="JPeg enumeration member" Url="html/1257192578.htm" />
-  <HelpKINode Title="JPeg field" Url="html/1109067167.htm" />
-  <HelpKINode Title="KPA property" Url="html/1059020101.htm" />
-  <HelpKINode Title="LAE property" Url="html/1267692844.htm" />
-  <HelpKINode Title="LAW property" Url="html/817354150.htm" />
-  <HelpKINode Title="LB property" Url="html/907001374.htm" />
-  <HelpKINode Title="LCO property" Url="html/251468002.htm" />
-  <HelpKINode Title="LE property" Url="html/907001371.htm" />
-  <HelpKINode Title="LEW property" Url="html/817616294.htm" />
-  <HelpKINode Title="LFP property" Url="html/1220704213.htm" />
-  <HelpKINode Title="LLS property" Url="html/1508572358.htm" />
-  <HelpKINode Title="LO property" Url="html/907001377.htm" />
+  <HelpKINode Title="ITextProduct.Header property" Url="html/1755524288.htm" />
+  <HelpKINode Title="IUniversalGeographicCode interface">
+    <HelpKINode Title="IUniversalGeographicCode Interface" Url="html/1897214817.htm" />
+    <HelpKINode Title="IUniversalGeographicCode Members" Url="html/405973995.htm" />
+    <HelpKINode Title="about IUniversalGeographicCode interface" Url="html/1897214817.htm" />
+    <HelpKINode Title="all members" Url="html/405973995.htm" />
+    <HelpKINode Title="methods" Url="html/1553645213.htm" />
+    <HelpKINode Title="properties" Url="html/499976316.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IUniversalGeographicCode.Id property" Url="html/1630770145.htm" />
+  <HelpKINode Title="IUniversalGeographicCode.PurgeTime property" Url="html/152701415.htm" />
+  <HelpKINode Title="IUniversalGeographicCode.State property" Url="html/1748593984.htm" />
+  <HelpKINode Title="IUniversalGeographicCode.Type property" Url="html/1574824705.htm" />
+  <HelpKINode Title="IValidTimeEventCode interface">
+    <HelpKINode Title="IValidTimeEventCode Interface" Url="html/559422286.htm" />
+    <HelpKINode Title="IValidTimeEventCode Members" Url="html/268032474.htm" />
+    <HelpKINode Title="about IValidTimeEventCode interface" Url="html/559422286.htm" />
+    <HelpKINode Title="all members" Url="html/268032474.htm" />
+    <HelpKINode Title="methods" Url="html/1693244345.htm" />
+    <HelpKINode Title="properties" Url="html/2118884199.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IValidTimeEventCode.ActionCode property" Url="html/1401856537.htm" />
+  <HelpKINode Title="IValidTimeEventCode.Begin property" Url="html/193093934.htm" />
+  <HelpKINode Title="IValidTimeEventCode.End property" Url="html/859802547.htm" />
+  <HelpKINode Title="IValidTimeEventCode.EventNumber property" Url="html/75759071.htm" />
+  <HelpKINode Title="IValidTimeEventCode.PhenomenonCode property" Url="html/1405040368.htm" />
+  <HelpKINode Title="IValidTimeEventCode.SignificanceCode property" Url="html/1849162294.htm" />
+  <HelpKINode Title="IValidTimeEventCode.TypeIdentifier property" Url="html/319404209.htm" />
+  <HelpKINode Title="IValidTimeEventCode.WmoId property" Url="html/489419910.htm" />
+  <HelpKINode Title="Length property" Url="html/882125564.htm" />
   <HelpKINode Title="Log field">
-    <HelpKINode Title="Log Field" Url="html/189568460.htm" />
     <HelpKINode Title="Log Field" Url="html/728997343.htm" />
+    <HelpKINode Title="Log Field" Url="html/189568460.htm" />
   </HelpKINode>
-  <HelpKINode Title="LS property" Url="html/907001357.htm" />
-  <HelpKINode Title="LSH property" Url="html/150767949.htm" />
-  <HelpKINode Title="LSR property" Url="html/56659615.htm" />
-  <HelpKINode Title="LTG property" Url="html/104041462.htm" />
-  <HelpKINode Title="LW property" Url="html/907001353.htm" />
-  <HelpKINode Title="MA property" Url="html/1431650785.htm" />
-  <HelpKINode Title="MAV property" Url="html/1911529204.htm" />
-  <HelpKINode Title="MET property" Url="html/748467646.htm" />
   <HelpKINode Title="METFIREU property" Url="html/147295645.htm" />
-  <HelpKINode Title="MEX property" Url="html/864670462.htm" />
-  <HelpKINode Title="MF property" Url="html/1431650790.htm" />
-  <HelpKINode Title="MH property" Url="html/1431650776.htm" />
-  <HelpKINode Title="MIM property" Url="html/910938197.htm" />
-  <HelpKINode Title="MIS property" Url="html/1508768965.htm" />
   <HelpKINode Title="MOD91EUS property" Url="html/940292133.htm" />
   <HelpKINode Title="MOD92FBW property" Url="html/1250040390.htm" />
   <HelpKINode Title="MOD93SUS property" Url="html/1208072243.htm" />
@@ -820,72 +747,87 @@
   <HelpKINode Title="MODDY2US property" Url="html/817149355.htm" />
   <HelpKINode Title="MODQP1US property" Url="html/1960334903.htm" />
   <HelpKINode Title="MODQP2US property" Url="html/1960334902.htm" />
-  <HelpKINode Title="MON property" Url="html/1314353796.htm" />
-  <HelpKINode Title="MS property" Url="html/1431650803.htm" />
-  <HelpKINode Title="MTR property" Url="html/56987296.htm" />
-  <HelpKINode Title="MWS property" Url="html/1509162181.htm" />
-  <HelpKINode Title="MWW property" Url="html/816436647.htm" />
-  <HelpKINode Title="NationalData enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="NationalData field" Url="html/89680540.htm" />
-  <HelpKINode Title="NEW property" Url="html/1190406970.htm" />
-  <HelpKINode Title="Notices enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="Notices field" Url="html/584855114.htm" />
-  <HelpKINode Title="NOW property" Url="html/816960932.htm" />
-  <HelpKINode Title="NPW property" Url="html/816240036.htm" />
-  <HelpKINode Title="NSH property" Url="html/150767947.htm" />
-  <HelpKINode Title="NUW property" Url="html/816567716.htm" />
-  <HelpKINode Title="OAV property" Url="html/1911529206.htm" />
+  <HelpKINode Title="None enumeration member" Url="html/126689395.htm" />
+  <HelpKINode Title="None field" Url="html/1144343455.htm" />
+  <HelpKINode Title="NumberOfWorkers field" Url="html/1548476089.htm" />
   <HelpKINode Title="ObservableListener(Of T) class">
-    <HelpKINode Title="ObservableListener(T) Class" Url="html/134668408.htm" />
-    <HelpKINode Title="ObservableListener(T) Members" Url="html/1714252857.htm" />
-    <HelpKINode Title="about ObservableListener(Of T) class" Url="html/134668408.htm" />
-    <HelpKINode Title="all members" Url="html/1714252857.htm" />
-    <HelpKINode Title="methods" Url="html/654383482.htm" />
+    <HelpKINode Title="ObservableListener(T) Class" Url="html/1189446265.htm" />
+    <HelpKINode Title="ObservableListener(T) Members" Url="html/76859900.htm" />
+    <HelpKINode Title="about ObservableListener(Of T) class" Url="html/1189446265.htm" />
+    <HelpKINode Title="all members" Url="html/76859900.htm" />
+    <HelpKINode Title="methods" Url="html/663690487.htm" />
   </HelpKINode>
-  <HelpKINode Title="ObservableListener(Of T).Handle method" Url="html/1364799639.htm" />
-  <HelpKINode Title="ObservableListener(Of T).Subscribe method" Url="html/1736867369.htm" />
+  <HelpKINode Title="ObservableListener(Of T).Handle method" Url="html/1300586377.htm" />
+  <HelpKINode Title="ObservableListener(Of T).Subscribe method" Url="html/765334543.htm" />
   <HelpKINode Title="ObservableListener&lt;T&gt; class">
-    <HelpKINode Title="ObservableListener(T) Class" Url="html/134668408.htm" />
-    <HelpKINode Title="ObservableListener(T) Members" Url="html/1714252857.htm" />
-    <HelpKINode Title="about ObservableListener&lt;T&gt; class" Url="html/134668408.htm" />
-    <HelpKINode Title="all members" Url="html/1714252857.htm" />
-    <HelpKINode Title="methods" Url="html/654383482.htm" />
+    <HelpKINode Title="ObservableListener(T) Class" Url="html/1189446265.htm" />
+    <HelpKINode Title="ObservableListener(T) Members" Url="html/76859900.htm" />
+    <HelpKINode Title="about ObservableListener&lt;T&gt; class" Url="html/1189446265.htm" />
+    <HelpKINode Title="all members" Url="html/76859900.htm" />
+    <HelpKINode Title="methods" Url="html/663690487.htm" />
   </HelpKINode>
-  <HelpKINode Title="ObservableListener&lt;T&gt;.Handle method" Url="html/1364799639.htm" />
-  <HelpKINode Title="ObservableListener&lt;T&gt;.Subscribe method" Url="html/1736867369.htm" />
-  <HelpKINode Title="ObservationalData enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="ObservationalData field" Url="html/991634362.htm" />
-  <HelpKINode Title="OceanographicInformation enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="OceanographicInformation field" Url="html/339818815.htm" />
-  <HelpKINode Title="OFF property" Url="html/1671042906.htm" />
-  <HelpKINode Title="OMR property" Url="html/57577118.htm" />
-  <HelpKINode Title="Operational enumeration member" Url="html/1952166643.htm" />
-  <HelpKINode Title="Operational field" Url="html/1234357374.htm" />
-  <HelpKINode Title="OPU property" Url="html/1979039451.htm" />
-  <HelpKINode Title="OriginatingOffice property" Url="html/1608912733.htm" />
-  <HelpKINode Title="OSO property" Url="html/252516579.htm" />
-  <HelpKINode Title="Outlook enumeration member" Url="html/186638211.htm" />
-  <HelpKINode Title="Outlook field" Url="html/607359041.htm" />
+  <HelpKINode Title="ObservableListener&lt;T&gt;.Handle method" Url="html/1300586377.htm" />
+  <HelpKINode Title="ObservableListener&lt;T&gt;.Subscribe method" Url="html/765334543.htm" />
+  <HelpKINode Title="Outlook enumeration member" Url="html/126689395.htm" />
+  <HelpKINode Title="Outlook field" Url="html/10433086.htm" />
   <HelpKINode Title="ParseProduct method">
     <HelpKINode Title="ParseProduct Method " Url="html/905524952.htm" />
     <HelpKINode Title="ParseProduct Method " Url="html/1778459226.htm" />
+    <HelpKINode Title="ParseProduct Method " Url="html/1656146467.htm" />
   </HelpKINode>
   <HelpKINode Title="ParseUgc method" Url="html/1457207724.htm" />
-  <HelpKINode Title="PBF property" Url="html/1670780751.htm" />
-  <HelpKINode Title="PFM property" Url="html/911528008.htm" />
-  <HelpKINode Title="PFW property" Url="html/817419674.htm" />
-  <HelpKINode Title="PictorialInformation enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="PictorialInformation field" Url="html/1914891637.htm" />
-  <HelpKINode Title="PLS property" Url="html/1508572370.htm" />
-  <HelpKINode Title="PMD property" Url="html/1461452667.htm" />
-  <HelpKINode Title="Png enumeration member" Url="html/1257192578.htm" />
-  <HelpKINode Title="Png field" Url="html/444771372.htm" />
-  <HelpKINode Title="PNS property" Url="html/1508703442.htm" />
-  <HelpKINode Title="Polygons property">
-    <HelpKINode Title="Polygons Property " Url="html/1274249888.htm" />
-    <HelpKINode Title="Polygons Property " Url="html/1772149055.htm" />
+  <HelpKINode Title="PhenomenonCode property">
+    <HelpKINode Title="PhenomenonCode Property " Url="html/1405040368.htm" />
+    <HelpKINode Title="PhenomenonCode Property " Url="html/1988123151.htm" />
   </HelpKINode>
-  <HelpKINode Title="PRE property" Url="html/1266447648.htm" />
+  <HelpKINode Title="Pipeline(Of T) class">
+    <HelpKINode Title="Pipeline(T) Class" Url="html/656183413.htm" />
+    <HelpKINode Title="Pipeline(T) Members" Url="html/1874120759.htm" />
+    <HelpKINode Title="about Pipeline(Of T) class" Url="html/656183413.htm" />
+    <HelpKINode Title="all members" Url="html/1874120759.htm" />
+    <HelpKINode Title="fields" Url="html/1925179581.htm" />
+    <HelpKINode Title="methods" Url="html/1956779810.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Pipeline(Of T).Count field" Url="html/1876250598.htm" />
+  <HelpKINode Title="Pipeline&lt;T&gt; class">
+    <HelpKINode Title="Pipeline(T) Class" Url="html/656183413.htm" />
+    <HelpKINode Title="Pipeline(T) Members" Url="html/1874120759.htm" />
+    <HelpKINode Title="about Pipeline&lt;T&gt; class" Url="html/656183413.htm" />
+    <HelpKINode Title="all members" Url="html/1874120759.htm" />
+    <HelpKINode Title="fields" Url="html/1925179581.htm" />
+    <HelpKINode Title="methods" Url="html/1956779810.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Pipeline&lt;T&gt;.Count field" Url="html/1876250598.htm" />
+  <HelpKINode Title="Polygons property">
+    <HelpKINode Title="Polygons Property " Url="html/1487876468.htm" />
+    <HelpKINode Title="Polygons Property " Url="html/6023692.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PrimaryVtecCodes property">
+    <HelpKINode Title="PrimaryVtecCodes Property " Url="html/633719507.htm" />
+    <HelpKINode Title="PrimaryVtecCodes Property " Url="html/484296569.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ProcessorBase(Of T) class">
+    <HelpKINode Title="ProcessorBase(T) Class" Url="html/109248198.htm" />
+    <HelpKINode Title="ProcessorBase(T) Members" Url="html/337815059.htm" />
+    <HelpKINode Title="about ProcessorBase(Of T) class" Url="html/109248198.htm" />
+    <HelpKINode Title="all members" Url="html/337815059.htm" />
+    <HelpKINode Title="fields" Url="html/1903402708.htm" />
+    <HelpKINode Title="methods" Url="html/1657559952.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ProcessorBase(Of T).DefaultWorkers field" Url="html/756867395.htm" />
+  <HelpKINode Title="ProcessorBase(Of T).Dispose method" Url="html/1025252062.htm" />
+  <HelpKINode Title="ProcessorBase(Of T).NumberOfWorkers field" Url="html/1548476089.htm" />
+  <HelpKINode Title="ProcessorBase&lt;T&gt; class">
+    <HelpKINode Title="ProcessorBase(T) Class" Url="html/109248198.htm" />
+    <HelpKINode Title="ProcessorBase(T) Members" Url="html/337815059.htm" />
+    <HelpKINode Title="about ProcessorBase&lt;T&gt; class" Url="html/109248198.htm" />
+    <HelpKINode Title="all members" Url="html/337815059.htm" />
+    <HelpKINode Title="fields" Url="html/1903402708.htm" />
+    <HelpKINode Title="methods" Url="html/1657559952.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ProcessorBase&lt;T&gt;.DefaultWorkers field" Url="html/756867395.htm" />
+  <HelpKINode Title="ProcessorBase&lt;T&gt;.Dispose method" Url="html/1025252062.htm" />
+  <HelpKINode Title="ProcessorBase&lt;T&gt;.NumberOfWorkers field" Url="html/1548476089.htm" />
   <HelpKINode Title="ProcessorEventSource class">
     <HelpKINode Title="ProcessorEventSource Class" Url="html/862454943.htm" />
     <HelpKINode Title="ProcessorEventSource Members" Url="html/1904710522.htm" />
@@ -902,28 +844,27 @@
     <HelpKINode Title="all members" Url="html/1244365310.htm" />
     <HelpKINode Title="methods" Url="html/1870353750.htm" />
   </HelpKINode>
-  <HelpKINode Title="ProductFactory.CreateCompressedContent method" Url="html/1608244431.htm" />
-  <HelpKINode Title="ProductFactory.CreateImageProduct method" Url="html/513978576.htm" />
-  <HelpKINode Title="ProductFactory.CreateTextProduct method" Url="html/1293056182.htm" />
-  <HelpKINode Title="PSH property" Url="html/150767937.htm" />
-  <HelpKINode Title="PurgeTime property" Url="html/1454376868.htm" />
-  <HelpKINode Title="PWO property" Url="html/252254446.htm" />
-  <HelpKINode Title="PWS property" Url="html/1509162194.htm" />
-  <HelpKINode Title="QPF property" Url="html/1669863248.htm" />
-  <HelpKINode Title="QPS property" Url="html/1509358801.htm" />
+  <HelpKINode Title="ProductFactory.ConvertTo(Of T) method" Url="html/233717549.htm" />
+  <HelpKINode Title="ProductFactory.ConvertTo&lt;T&gt; method" Url="html/233717549.htm" />
+  <HelpKINode Title="ProductFactory.CreateBulletinProduct method" Url="html/1767264478.htm" />
+  <HelpKINode Title="ProductFactory.CreateCompressedContent method" Url="html/1329753049.htm" />
+  <HelpKINode Title="ProductFactory.CreateImageProduct method" Url="html/1139016852.htm" />
+  <HelpKINode Title="ProductFactory.CreateTextProduct method" Url="html/772594498.htm" />
+  <HelpKINode Title="PurgeTime property">
+    <HelpKINode Title="PurgeTime Property " Url="html/152701415.htm" />
+    <HelpKINode Title="PurgeTime Property " Url="html/1454376868.htm" />
+  </HelpKINode>
   <HelpKINode Title="QuickBlockTransferSegment class">
     <HelpKINode Title="QuickBlockTransferSegment Class" Url="html/495295339.htm" />
     <HelpKINode Title="QuickBlockTransferSegment Members" Url="html/1030626540.htm" />
     <HelpKINode Title="about QuickBlockTransferSegment class" Url="html/495295339.htm" />
     <HelpKINode Title="all members" Url="html/1030626540.htm" />
-    <HelpKINode Title="fields" Url="html/977102546.htm" />
     <HelpKINode Title="methods" Url="html/974896103.htm" />
     <HelpKINode Title="properties" Url="html/607202590.htm" />
   </HelpKINode>
   <HelpKINode Title="QuickBlockTransferSegment.BlockNumber property" Url="html/66094203.htm" />
   <HelpKINode Title="QuickBlockTransferSegment.Checksum property" Url="html/1518265226.htm" />
   <HelpKINode Title="QuickBlockTransferSegment.Content property" Url="html/1149980370.htm" />
-  <HelpKINode Title="QuickBlockTransferSegment.ContentType field" Url="html/1869399282.htm" />
   <HelpKINode Title="RADALLAK property" Url="html/1504983494.htm" />
   <HelpKINode Title="RADALLGU property" Url="html/14177352.htm" />
   <HelpKINode Title="RADALLHI property" Url="html/1627774212.htm" />
@@ -940,87 +881,26 @@
   <HelpKINode Title="RADSTHES property" Url="html/1478509852.htm" />
   <HelpKINode Title="RADSTHPL property" Url="html/980265023.htm" />
   <HelpKINode Title="RADUMSVY property" Url="html/68369605.htm" />
-  <HelpKINode Title="RB property" Url="html/996261406.htm" />
-  <HelpKINode Title="RCM property" Url="html/911331398.htm" />
-  <HelpKINode Title="RDF property" Url="html/1671173965.htm" />
-  <HelpKINode Title="RDG property" Url="html/105090024.htm" />
-  <HelpKINode Title="REC property" Url="html/2074524028.htm" />
   <HelpKINode Title="ReceivedAt property">
-    <HelpKINode Title="ReceivedAt Property " Url="html/1192272773.htm" />
-    <HelpKINode Title="ReceivedAt Property " Url="html/1336438123.htm" />
+    <HelpKINode Title="ReceivedAt Property " Url="html/1569301654.htm" />
     <HelpKINode Title="ReceivedAt Property " Url="html/544393613.htm" />
-    <HelpKINode Title="ReceivedAt Property " Url="html/1306991834.htm" />
-    <HelpKINode Title="ReceivedAt Property " Url="html/2110749399.htm" />
   </HelpKINode>
-  <HelpKINode Title="RegionalPictorialInformation enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="RegionalPictorialInformation field" Url="html/1658105129.htm" />
-  <HelpKINode Title="RemoveListener method">
-    <HelpKINode Title="RemoveListener Method " Url="html/354906451.htm" />
-    <HelpKINode Title="RemoveListener Method " Url="html/836127075.htm" />
-  </HelpKINode>
-  <HelpKINode Title="RER property" Url="html/58101393.htm" />
-  <HelpKINode Title="ResourceManager property">
-    <HelpKINode Title="ResourceManager Property " Url="html/66978792.htm" />
-    <HelpKINode Title="ResourceManager Property " Url="html/1222602578.htm" />
-    <HelpKINode Title="ResourceManager Property " Url="html/770560139.htm" />
-    <HelpKINode Title="ResourceManager Property " Url="html/785767752.htm" />
-  </HelpKINode>
-  <HelpKINode Title="RFD property" Url="html/1461124989.htm" />
-  <HelpKINode Title="RFR property" Url="html/57904785.htm" />
-  <HelpKINode Title="RFW property" Url="html/817419672.htm" />
-  <HelpKINode Title="RHW property" Url="html/816764312.htm" />
-  <HelpKINode Title="ROU property" Url="html/718940992.htm" />
-  <HelpKINode Title="RP property" Url="html/996261392.htm" />
-  <HelpKINode Title="RR1 property" Url="html/326487486.htm" />
-  <HelpKINode Title="RR2 property" Url="html/76797041.htm" />
-  <HelpKINode Title="RRA property" Url="html/1059151182.htm" />
-  <HelpKINode Title="RRC property" Url="html/2073016700.htm" />
-  <HelpKINode Title="RRM property" Url="html/910217286.htm" />
-  <HelpKINode Title="RRS property" Url="html/1509489876.htm" />
-  <HelpKINode Title="RTP property" Url="html/1219786695.htm" />
-  <HelpKINode Title="RVA property" Url="html/1058889038.htm" />
-  <HelpKINode Title="RVD property" Url="html/1462173565.htm" />
-  <HelpKINode Title="RVF property" Url="html/1669994317.htm" />
-  <HelpKINode Title="RVI property" Url="html/1415119398.htm" />
-  <HelpKINode Title="RVM property" Url="html/910479430.htm" />
-  <HelpKINode Title="RVR property" Url="html/56856209.htm" />
-  <HelpKINode Title="RVS property" Url="html/1509227732.htm" />
-  <HelpKINode Title="RWR property" Url="html/56921745.htm" />
-  <HelpKINode Title="RWS property" Url="html/1509162196.htm" />
-  <HelpKINode Title="RZF property" Url="html/1669207885.htm" />
-  <HelpKINode Title="SAB property" Url="html/654621470.htm" />
-  <HelpKINode Title="SAF property" Url="html/1670977358.htm" />
-  <HelpKINode Title="SatelliteData enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="SatelliteData field" Url="html/1532081499.htm" />
-  <HelpKINode Title="SatelliteImagery enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="SatelliteImagery field" Url="html/918535676.htm" />
+  <HelpKINode Title="RemoveListener method" Url="html/2051471236.htm" />
+  <HelpKINode Title="ResourceManager property" Url="html/770560139.htm" />
   <HelpKINode Title="SatServers field" Url="html/227786446.htm" />
-  <HelpKINode Title="SAW property" Url="html/817354137.htm" />
-  <HelpKINode Title="SB property" Url="html/1342390754.htm" />
-  <HelpKINode Title="SC property" Url="html/1342390755.htm" />
-  <HelpKINode Title="SCC property" Url="html/2074130813.htm" />
-  <HelpKINode Title="SCD property" Url="html/1461321596.htm" />
-  <HelpKINode Title="SCS property" Url="html/1508375763.htm" />
-  <HelpKINode Title="SDS property" Url="html/1508048083.htm" />
-  <HelpKINode Title="SE property" Url="html/1342390757.htm" />
-  <HelpKINode Title="SEL property" Url="html/1817158740.htm" />
   <HelpKINode Title="SendMessage method">
-    <HelpKINode Title="SendMessage Method " Url="html/317592013.htm" />
-    <HelpKINode Title="SendMessage Method " Url="html/1168896791.htm" />
+    <HelpKINode Title="SendMessage Method " Url="html/1407072706.htm" />
+    <HelpKINode Title="SendMessage Method " Url="html/680543732.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SequenceNumber property">
+    <HelpKINode Title="SequenceNumber Property " Url="html/1176111350.htm" />
+    <HelpKINode Title="SequenceNumber Property " Url="html/975670560.htm" />
   </HelpKINode>
   <HelpKINode Title="SESALLUS property" Url="html/1283888338.htm" />
-  <HelpKINode Title="SEV property" Url="html/1911267074.htm" />
-  <HelpKINode Title="SFD property" Url="html/1461124988.htm" />
-  <HelpKINode Title="SFP property" Url="html/1220704200.htm" />
-  <HelpKINode Title="SFT property" Url="html/748664268.htm" />
-  <HelpKINode Title="SHP property" Url="html/1220048840.htm" />
-  <HelpKINode Title="SI property" Url="html/1342390745.htm" />
-  <HelpKINode Title="SIM property" Url="html/910938183.htm" />
-  <HelpKINode Title="SLS property" Url="html/1508572371.htm" />
-  <HelpKINode Title="SM property" Url="html/1342390749.htm" />
-  <HelpKINode Title="SMF property" Url="html/1670715214.htm" />
-  <HelpKINode Title="SMW property" Url="html/817091993.htm" />
-  <HelpKINode Title="SN property" Url="html/1342390750.htm" />
+  <HelpKINode Title="SignificanceCode property">
+    <HelpKINode Title="SignificanceCode Property " Url="html/647265869.htm" />
+    <HelpKINode Title="SignificanceCode Property " Url="html/1849162294.htm" />
+  </HelpKINode>
   <HelpKINode Title="SpatialParser class">
     <HelpKINode Title="SpatialParser Class" Url="html/621143206.htm" />
     <HelpKINode Title="SpatialParser Members" Url="html/74863014.htm" />
@@ -1029,372 +909,32 @@
     <HelpKINode Title="methods" Url="html/977923657.htm" />
   </HelpKINode>
   <HelpKINode Title="SpatialParser.CreatePolygon method" Url="html/696999046.htm" />
-  <HelpKINode Title="SPE property" Url="html/1266578719.htm" />
-  <HelpKINode Title="SPF property" Url="html/1669863246.htm" />
-  <HelpKINode Title="SPS property" Url="html/1509358803.htm" />
-  <HelpKINode Title="SPW property" Url="html/816240025.htm" />
-  <HelpKINode Title="SR property" Url="html/1342390770.htm" />
-  <HelpKINode Title="SRF property" Url="html/1669732174.htm" />
-  <HelpKINode Title="STA property" Url="html/1058757965.htm" />
-  <HelpKINode Title="State property" Url="html/1281262860.htm" />
-  <HelpKINode Title="Statement enumeration member" Url="html/186638211.htm" />
-  <HelpKINode Title="Statement field" Url="html/921129568.htm" />
-  <HelpKINode Title="STD property" Url="html/1462042492.htm" />
-  <HelpKINode Title="STO property" Url="html/252188911.htm" />
-  <HelpKINode Title="STP property" Url="html/1219786696.htm" />
-  <HelpKINode Title="SU property" Url="html/1342390773.htm" />
-  <HelpKINode Title="Subscribe method" Url="html/1736867369.htm" />
-  <HelpKINode Title="SUM property" Url="html/910676039.htm" />
-  <HelpKINode Title="SurfaceData enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="SurfaceData field" Url="html/2025126901.htm" />
-  <HelpKINode Title="SV property" Url="html/1342390774.htm" />
-  <HelpKINode Title="SVR property" Url="html/56856210.htm" />
-  <HelpKINode Title="SVS property" Url="html/1509227731.htm" />
-  <HelpKINode Title="SW property" Url="html/1342390775.htm" />
-  <HelpKINode Title="SWO property" Url="html/252254447.htm" />
-  <HelpKINode Title="SWR property" Url="html/56921746.htm" />
-  <HelpKINode Title="SWS property" Url="html/1509162195.htm" />
-  <HelpKINode Title="SYN property" Url="html/1313174134.htm" />
-  <HelpKINode Title="Synopsis enumeration member" Url="html/186638211.htm" />
-  <HelpKINode Title="Synopsis field" Url="html/2027157714.htm" />
-  <HelpKINode Title="T1DataTypeCode enumeration" Url="html/1622348640.htm" />
-  <HelpKINode Title="T1DataTypeCode.AddressedMessage field" Url="html/773008880.htm" />
-  <HelpKINode Title="T1DataTypeCode.Analyses field" Url="html/925355178.htm" />
-  <HelpKINode Title="T1DataTypeCode.AviationXmlData field" Url="html/1176532794.htm" />
-  <HelpKINode Title="T1DataTypeCode.ClimaticData field" Url="html/1402025208.htm" />
-  <HelpKINode Title="T1DataTypeCode.CommonAlertProtocolMessages field" Url="html/1060661682.htm" />
-  <HelpKINode Title="T1DataTypeCode.Crex field" Url="html/1497270298.htm" />
-  <HelpKINode Title="T1DataTypeCode.Forecast field" Url="html/246967908.htm" />
-  <HelpKINode Title="T1DataTypeCode.ForecastData field" Url="html/2016466512.htm" />
-  <HelpKINode Title="T1DataTypeCode.GribRegionalUse field" Url="html/1801718648.htm" />
-  <HelpKINode Title="T1DataTypeCode.GridPointInformationD field" Url="html/1428040651.htm" />
-  <HelpKINode Title="T1DataTypeCode.GridPointInformationG field" Url="html/1024756124.htm" />
-  <HelpKINode Title="T1DataTypeCode.GridPointInformationH field" Url="html/897558177.htm" />
-  <HelpKINode Title="T1DataTypeCode.NationalData field" Url="html/89680540.htm" />
-  <HelpKINode Title="T1DataTypeCode.Notices field" Url="html/584855114.htm" />
-  <HelpKINode Title="T1DataTypeCode.ObservationalData field" Url="html/991634362.htm" />
-  <HelpKINode Title="T1DataTypeCode.OceanographicInformation field" Url="html/339818815.htm" />
-  <HelpKINode Title="T1DataTypeCode.PictorialInformation field" Url="html/1914891637.htm" />
-  <HelpKINode Title="T1DataTypeCode.RegionalPictorialInformation field" Url="html/1658105129.htm" />
-  <HelpKINode Title="T1DataTypeCode.SatelliteData field" Url="html/1532081499.htm" />
-  <HelpKINode Title="T1DataTypeCode.SatelliteImagery field" Url="html/918535676.htm" />
-  <HelpKINode Title="T1DataTypeCode.SurfaceData field" Url="html/2025126901.htm" />
-  <HelpKINode Title="T1DataTypeCode.UpperAirData field" Url="html/787269344.htm" />
-  <HelpKINode Title="T1DataTypeCode.Warnings field" Url="html/540061237.htm" />
-  <HelpKINode Title="TAF property" Url="html/1670977363.htm" />
-  <HelpKINode Title="TAV property" Url="html/1911529213.htm" />
-  <HelpKINode Title="TCA property" Url="html/1058037064.htm" />
-  <HelpKINode Title="TCD property" Url="html/1461321591.htm" />
-  <HelpKINode Title="TCE property" Url="html/1267561764.htm" />
-  <HelpKINode Title="TCM property" Url="html/911331404.htm" />
-  <HelpKINode Title="TCP property" Url="html/1220507597.htm" />
-  <HelpKINode Title="TCS property" Url="html/1508375758.htm" />
-  <HelpKINode Title="TCU property" Url="html/1980022484.htm" />
-  <HelpKINode Title="TCV property" Url="html/1911660285.htm" />
-  <HelpKINode Title="Test enumeration member" Url="html/1952166643.htm" />
-  <HelpKINode Title="Test field" Url="html/1687102066.htm" />
+  <HelpKINode Title="State property">
+    <HelpKINode Title="State Property " Url="html/1748593984.htm" />
+    <HelpKINode Title="State Property " Url="html/1281262860.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Statement enumeration member" Url="html/126689395.htm" />
+  <HelpKINode Title="Statement field" Url="html/221349034.htm" />
+  <HelpKINode Title="Subscribe method" Url="html/765334543.htm" />
+  <HelpKINode Title="Synopsis enumeration member" Url="html/126689395.htm" />
+  <HelpKINode Title="Synopsis field" Url="html/241285331.htm" />
   <HelpKINode Title="Text enumeration member" Url="html/1000439498.htm" />
   <HelpKINode Title="Text field" Url="html/2013012847.htm" />
   <HelpKINode Title="TextProduct class">
     <HelpKINode Title="TextProduct Class" Url="html/1641019303.htm" />
-    <HelpKINode Title="TextProduct Class" Url="html/641897895.htm" />
     <HelpKINode Title="TextProduct Members" Url="html/1218500720.htm" />
-    <HelpKINode Title="TextProduct Members" Url="html/127724555.htm" />
     <HelpKINode Title="about TextProduct class" Url="html/1641019303.htm" />
-    <HelpKINode Title="about TextProduct class" Url="html/641897895.htm" />
-    <HelpKINode Title="all members" Url="html/127724555.htm" />
     <HelpKINode Title="all members" Url="html/1218500720.htm" />
     <HelpKINode Title="methods" Url="html/592464935.htm" />
-    <HelpKINode Title="methods" Url="html/76651380.htm" />
-    <HelpKINode Title="properties" Url="html/25215048.htm" />
     <HelpKINode Title="properties" Url="html/1813065170.htm" />
   </HelpKINode>
-  <HelpKINode Title="TextProduct.ADA property" Url="html/1057709371.htm" />
-  <HelpKINode Title="TextProduct.ADM property" Url="html/911659097.htm" />
-  <HelpKINode Title="TextProduct.ADR property" Url="html/58035876.htm" />
-  <HelpKINode Title="TextProduct.ADV property" Url="html/1911332592.htm" />
-  <HelpKINode Title="TextProduct.ADW property" Url="html/817550763.htm" />
-  <HelpKINode Title="TextProduct.ADX property" Url="html/864604930.htm" />
-  <HelpKINode Title="TextProduct.AFD property" Url="html/1461124970.htm" />
-  <HelpKINode Title="TextProduct.AFM property" Url="html/911528025.htm" />
-  <HelpKINode Title="TextProduct.AFP property" Url="html/1220704218.htm" />
-  <HelpKINode Title="TextProduct.AGF property" Url="html/1671108448.htm" />
-  <HelpKINode Title="TextProduct.AGO property" Url="html/251205853.htm" />
-  <HelpKINode Title="TextProduct.AHO property" Url="html/251926749.htm" />
-  <HelpKINode Title="TextProduct.ALT property" Url="html/749057466.htm" />
-  <HelpKINode Title="TextProduct.APG property" Url="html/103779323.htm" />
-  <HelpKINode Title="TextProduct.APT property" Url="html/749843898.htm" />
-  <HelpKINode Title="TextProduct.AQA property" Url="html/1058954555.htm" />
-  <HelpKINode Title="TextProduct.AQI property" Url="html/1415184915.htm" />
-  <HelpKINode Title="TextProduct.ASA property" Url="html/1059085627.htm" />
-  <HelpKINode Title="TextProduct.AVA property" Url="html/1058889019.htm" />
-  <HelpKINode Title="TextProduct.AVM property" Url="html/910479449.htm" />
-  <HelpKINode Title="TextProduct.AVW property" Url="html/816371115.htm" />
-  <HelpKINode Title="TextProduct.AWG property" Url="html/103975931.htm" />
-  <HelpKINode Title="TextProduct.AWS property" Url="html/1509162177.htm" />
-  <HelpKINode Title="TextProduct.AWU property" Url="html/1979236065.htm" />
-  <HelpKINode Title="TextProduct.AWW property" Url="html/816436651.htm" />
-  <HelpKINode Title="TextProduct.BOY property" Url="html/702068838.htm" />
-  <HelpKINode Title="TextProduct.CAE property" Url="html/1267692847.htm" />
-  <HelpKINode Title="TextProduct.CCF property" Url="html/1670846302.htm" />
-  <HelpKINode Title="TextProduct.CDW property" Url="html/817550761.htm" />
-  <HelpKINode Title="TextProduct.CEM property" Url="html/911724631.htm" />
-  <HelpKINode Title="TextProduct.CF6 property" Url="html/1891260690.htm" />
-  <HelpKINode Title="TextProduct.CFW property" Url="html/817419689.htm" />
-  <HelpKINode Title="TextProduct.CGR property" Url="html/57970338.htm" />
-  <HelpKINode Title="TextProduct.CHG property" Url="html/104303609.htm" />
-  <HelpKINode Title="TextProduct.CLA property" Url="html/1058233661.htm" />
-  <HelpKINode Title="TextProduct.CLI property" Url="html/1414464021.htm" />
-  <HelpKINode Title="TextProduct.CLM property" Url="html/911134807.htm" />
-  <HelpKINode Title="TextProduct.CLS property" Url="html/1508572355.htm" />
-  <HelpKINode Title="TextProduct.CMM property" Url="html/911200343.htm" />
-  <HelpKINode Title="TextProduct.COD property" Url="html/1461583724.htm" />
   <HelpKINode Title="TextProduct.Content property" Url="html/1549383619.htm" />
-  <HelpKINode Title="TextProduct.ContentType property" Url="html/487233693.htm" />
-  <HelpKINode Title="TextProduct.CPF property" Url="html/1669863262.htm" />
-  <HelpKINode Title="TextProduct.CSC property" Url="html/2073082253.htm" />
-  <HelpKINode Title="TextProduct.Culture property" Url="html/1478683607.htm" />
-  <HelpKINode Title="TextProduct.CUR property" Url="html/57052834.htm" />
-  <HelpKINode Title="TextProduct.CWA property" Url="html/1058823485.htm" />
-  <HelpKINode Title="TextProduct.CWF property" Url="html/1670059870.htm" />
-  <HelpKINode Title="TextProduct.CWS property" Url="html/1509162179.htm" />
-  <HelpKINode Title="TextProduct.DAY property" Url="html/701675616.htm" />
-  <HelpKINode Title="TextProduct.DGT property" Url="html/748598711.htm" />
-  <HelpKINode Title="TextProduct.DPA property" Url="html/1059020088.htm" />
-  <HelpKINode Title="TextProduct.DSA property" Url="html/1059085624.htm" />
-  <HelpKINode Title="TextProduct.DSM property" Url="html/910282844.htm" />
-  <HelpKINode Title="TextProduct.EFP property" Url="html/1220704222.htm" />
-  <HelpKINode Title="TextProduct.EOL property" Url="html/1817814078.htm" />
-  <HelpKINode Title="TextProduct.EON property" Url="html/1314353804.htm" />
-  <HelpKINode Title="TextProduct.EQI property" Url="html/1415184911.htm" />
-  <HelpKINode Title="TextProduct.EQR property" Url="html/56790696.htm" />
-  <HelpKINode Title="TextProduct.EQW property" Url="html/816305583.htm" />
-  <HelpKINode Title="TextProduct.ESF property" Url="html/1669797732.htm" />
-  <HelpKINode Title="TextProduct.ESG property" Url="html/103713791.htm" />
-  <HelpKINode Title="TextProduct.ESP property" Url="html/1219459038.htm" />
-  <HelpKINode Title="TextProduct.ESS property" Url="html/1509424317.htm" />
-  <HelpKINode Title="TextProduct.EVI property" Url="html/1415119375.htm" />
-  <HelpKINode Title="TextProduct.EWW property" Url="html/816436655.htm" />
-  <HelpKINode Title="TextProduct.FA0 property" Url="html/1240841659.htm" />
-  <HelpKINode Title="TextProduct.FA1 property" Url="html/325242282.htm" />
-  <HelpKINode Title="TextProduct.FA2 property" Url="html/78042245.htm" />
-  <HelpKINode Title="TextProduct.FA3 property" Url="html/1488041696.htm" />
-  <HelpKINode Title="TextProduct.FA4 property" Url="html/728526809.htm" />
-  <HelpKINode Title="TextProduct.FA5 property" Url="html/2000356546.htm" />
-  <HelpKINode Title="TextProduct.FA6 property" Url="html/1891326223.htm" />
-  <HelpKINode Title="TextProduct.FA7 property" Url="html/837557132.htm" />
-  <HelpKINode Title="TextProduct.FA8 property" Url="html/884611299.htm" />
-  <HelpKINode Title="TextProduct.FA9 property" Url="html/681472642.htm" />
-  <HelpKINode Title="TextProduct.FDI property" Url="html/1413939730.htm" />
-  <HelpKINode Title="TextProduct.FFA property" Url="html/1057840442.htm" />
-  <HelpKINode Title="TextProduct.FFG property" Url="html/104958972.htm" />
-  <HelpKINode Title="TextProduct.FFH property" Url="html/152013139.htm" />
-  <HelpKINode Title="TextProduct.FFS property" Url="html/1508179136.htm" />
-  <HelpKINode Title="TextProduct.FFW property" Url="html/817419692.htm" />
-  <HelpKINode Title="TextProduct.Filename property" Url="html/2071343574.htm" />
-  <HelpKINode Title="TextProduct.FLN property" Url="html/1314419337.htm" />
-  <HelpKINode Title="TextProduct.FLS property" Url="html/1508572352.htm" />
-  <HelpKINode Title="TextProduct.FLW property" Url="html/817026476.htm" />
-  <HelpKINode Title="TextProduct.FMR property" Url="html/57577125.htm" />
-  <HelpKINode Title="TextProduct.FOF property" Url="html/1670584161.htm" />
-  <HelpKINode Title="TextProduct.FOH property" Url="html/151554387.htm" />
-  <HelpKINode Title="TextProduct.FRW property" Url="html/816108972.htm" />
-  <HelpKINode Title="TextProduct.FSS property" Url="html/1509424320.htm" />
-  <HelpKINode Title="TextProduct.FTM property" Url="html/910610522.htm" />
-  <HelpKINode Title="TextProduct.FWA property" Url="html/1058823482.htm" />
-  <HelpKINode Title="TextProduct.FWC property" Url="html/2073344400.htm" />
-  <HelpKINode Title="TextProduct.FWD property" Url="html/1462108009.htm" />
-  <HelpKINode Title="TextProduct.FWE property" Url="html/1266775346.htm" />
-  <HelpKINode Title="TextProduct.FWF property" Url="html/1670059873.htm" />
-  <HelpKINode Title="TextProduct.FWL property" Url="html/1818338369.htm" />
-  <HelpKINode Title="TextProduct.FWM property" Url="html/910544986.htm" />
-  <HelpKINode Title="TextProduct.FWN property" Url="html/1313829513.htm" />
-  <HelpKINode Title="TextProduct.FWO property" Url="html/252254428.htm" />
-  <HelpKINode Title="TextProduct.FWS property" Url="html/1509162176.htm" />
-  <HelpKINode Title="TextProduct.FZL property" Url="html/1819190337.htm" />
-  <HelpKINode Title="TextProduct.GeoCodes property" Url="html/1752912425.htm" />
-  <HelpKINode Title="TextProduct.GLF property" Url="html/1670649698.htm" />
-  <HelpKINode Title="TextProduct.GLO property" Url="html/251664603.htm" />
-  <HelpKINode Title="TextProduct.GLS property" Url="html/1508572351.htm" />
-  <HelpKINode Title="TextProduct.GSM property" Url="html/910282843.htm" />
-  <HelpKINode Title="TextProduct.Hash property" Url="html/1679848020.htm" />
-  <HelpKINode Title="TextProduct.HCM property" Url="html/911331408.htm" />
-  <HelpKINode Title="TextProduct.Header property" Url="html/1382830956.htm" />
-  <HelpKINode Title="TextProduct.HLS property" Url="html/1508572362.htm" />
-  <HelpKINode Title="TextProduct.HMD property" Url="html/1461452659.htm" />
-  <HelpKINode Title="TextProduct.HMW property" Url="html/817092002.htm" />
-  <HelpKINode Title="TextProduct.HRR property" Url="html/56594075.htm" />
-  <HelpKINode Title="TextProduct.HSF property" Url="html/1669797719.htm" />
-  <HelpKINode Title="TextProduct.HWO property" Url="html/252254438.htm" />
-  <HelpKINode Title="TextProduct.HYD property" Url="html/1462763379.htm" />
-  <HelpKINode Title="TextProduct.HYM property" Url="html/909889616.htm" />
-  <HelpKINode Title="TextProduct.ICE property" Url="html/1267561769.htm" />
-  <HelpKINode Title="TextProduct.IOB property" Url="html/655014676.htm" />
-  <HelpKINode Title="TextProduct.KPA property" Url="html/1059020101.htm" />
-  <HelpKINode Title="TextProduct.LAE property" Url="html/1267692844.htm" />
-  <HelpKINode Title="TextProduct.LAW property" Url="html/817354150.htm" />
-  <HelpKINode Title="TextProduct.LCO property" Url="html/251468002.htm" />
-  <HelpKINode Title="TextProduct.LEW property" Url="html/817616294.htm" />
-  <HelpKINode Title="TextProduct.LFP property" Url="html/1220704213.htm" />
-  <HelpKINode Title="TextProduct.LLS property" Url="html/1508572358.htm" />
-  <HelpKINode Title="TextProduct.LSH property" Url="html/150767949.htm" />
-  <HelpKINode Title="TextProduct.LSR property" Url="html/56659615.htm" />
-  <HelpKINode Title="TextProduct.LTG property" Url="html/104041462.htm" />
-  <HelpKINode Title="TextProduct.MAV property" Url="html/1911529204.htm" />
-  <HelpKINode Title="TextProduct.MET property" Url="html/748467646.htm" />
-  <HelpKINode Title="TextProduct.MEX property" Url="html/864670462.htm" />
-  <HelpKINode Title="TextProduct.MIM property" Url="html/910938197.htm" />
-  <HelpKINode Title="TextProduct.MIS property" Url="html/1508768965.htm" />
-  <HelpKINode Title="TextProduct.MON property" Url="html/1314353796.htm" />
-  <HelpKINode Title="TextProduct.MTR property" Url="html/56987296.htm" />
-  <HelpKINode Title="TextProduct.MWS property" Url="html/1509162181.htm" />
-  <HelpKINode Title="TextProduct.MWW property" Url="html/816436647.htm" />
-  <HelpKINode Title="TextProduct.NOW property" Url="html/816960932.htm" />
-  <HelpKINode Title="TextProduct.NPW property" Url="html/816240036.htm" />
-  <HelpKINode Title="TextProduct.NSH property" Url="html/150767947.htm" />
-  <HelpKINode Title="TextProduct.NUW property" Url="html/816567716.htm" />
-  <HelpKINode Title="TextProduct.OAV property" Url="html/1911529206.htm" />
-  <HelpKINode Title="TextProduct.OFF property" Url="html/1671042906.htm" />
-  <HelpKINode Title="TextProduct.OMR property" Url="html/57577118.htm" />
-  <HelpKINode Title="TextProduct.OPU property" Url="html/1979039451.htm" />
-  <HelpKINode Title="TextProduct.OSO property" Url="html/252516579.htm" />
-  <HelpKINode Title="TextProduct.PBF property" Url="html/1670780751.htm" />
-  <HelpKINode Title="TextProduct.PFM property" Url="html/911528008.htm" />
-  <HelpKINode Title="TextProduct.PFW property" Url="html/817419674.htm" />
-  <HelpKINode Title="TextProduct.PLS property" Url="html/1508572370.htm" />
-  <HelpKINode Title="TextProduct.PMD property" Url="html/1461452667.htm" />
-  <HelpKINode Title="TextProduct.PNS property" Url="html/1508703442.htm" />
-  <HelpKINode Title="TextProduct.Polygons property" Url="html/1274249888.htm" />
-  <HelpKINode Title="TextProduct.PRE property" Url="html/1266447648.htm" />
-  <HelpKINode Title="TextProduct.PSH property" Url="html/150767937.htm" />
-  <HelpKINode Title="TextProduct.PWO property" Url="html/252254446.htm" />
-  <HelpKINode Title="TextProduct.PWS property" Url="html/1509162194.htm" />
-  <HelpKINode Title="TextProduct.QPF property" Url="html/1669863248.htm" />
-  <HelpKINode Title="TextProduct.QPS property" Url="html/1509358801.htm" />
-  <HelpKINode Title="TextProduct.RCM property" Url="html/911331398.htm" />
-  <HelpKINode Title="TextProduct.RDF property" Url="html/1671173965.htm" />
-  <HelpKINode Title="TextProduct.RDG property" Url="html/105090024.htm" />
-  <HelpKINode Title="TextProduct.REC property" Url="html/2074524028.htm" />
-  <HelpKINode Title="TextProduct.ReceivedAt property" Url="html/1336438123.htm" />
-  <HelpKINode Title="TextProduct.RER property" Url="html/58101393.htm" />
-  <HelpKINode Title="TextProduct.ResourceManager property" Url="html/66978792.htm" />
-  <HelpKINode Title="TextProduct.RFD property" Url="html/1461124989.htm" />
-  <HelpKINode Title="TextProduct.RFR property" Url="html/57904785.htm" />
-  <HelpKINode Title="TextProduct.RFW property" Url="html/817419672.htm" />
-  <HelpKINode Title="TextProduct.RHW property" Url="html/816764312.htm" />
-  <HelpKINode Title="TextProduct.RR1 property" Url="html/326487486.htm" />
-  <HelpKINode Title="TextProduct.RR2 property" Url="html/76797041.htm" />
-  <HelpKINode Title="TextProduct.RRA property" Url="html/1059151182.htm" />
-  <HelpKINode Title="TextProduct.RRC property" Url="html/2073016700.htm" />
-  <HelpKINode Title="TextProduct.RRM property" Url="html/910217286.htm" />
-  <HelpKINode Title="TextProduct.RRS property" Url="html/1509489876.htm" />
-  <HelpKINode Title="TextProduct.RTP property" Url="html/1219786695.htm" />
-  <HelpKINode Title="TextProduct.RVA property" Url="html/1058889038.htm" />
-  <HelpKINode Title="TextProduct.RVD property" Url="html/1462173565.htm" />
-  <HelpKINode Title="TextProduct.RVF property" Url="html/1669994317.htm" />
-  <HelpKINode Title="TextProduct.RVI property" Url="html/1415119398.htm" />
-  <HelpKINode Title="TextProduct.RVM property" Url="html/910479430.htm" />
-  <HelpKINode Title="TextProduct.RVR property" Url="html/56856209.htm" />
-  <HelpKINode Title="TextProduct.RVS property" Url="html/1509227732.htm" />
-  <HelpKINode Title="TextProduct.RWR property" Url="html/56921745.htm" />
-  <HelpKINode Title="TextProduct.RWS property" Url="html/1509162196.htm" />
-  <HelpKINode Title="TextProduct.RZF property" Url="html/1669207885.htm" />
-  <HelpKINode Title="TextProduct.SAB property" Url="html/654621470.htm" />
-  <HelpKINode Title="TextProduct.SAF property" Url="html/1670977358.htm" />
-  <HelpKINode Title="TextProduct.SAW property" Url="html/817354137.htm" />
-  <HelpKINode Title="TextProduct.SCC property" Url="html/2074130813.htm" />
-  <HelpKINode Title="TextProduct.SCD property" Url="html/1461321596.htm" />
-  <HelpKINode Title="TextProduct.SCS property" Url="html/1508375763.htm" />
-  <HelpKINode Title="TextProduct.SDS property" Url="html/1508048083.htm" />
-  <HelpKINode Title="TextProduct.SEL property" Url="html/1817158740.htm" />
-  <HelpKINode Title="TextProduct.SEV property" Url="html/1911267074.htm" />
-  <HelpKINode Title="TextProduct.SFD property" Url="html/1461124988.htm" />
-  <HelpKINode Title="TextProduct.SFP property" Url="html/1220704200.htm" />
-  <HelpKINode Title="TextProduct.SFT property" Url="html/748664268.htm" />
-  <HelpKINode Title="TextProduct.SHP property" Url="html/1220048840.htm" />
-  <HelpKINode Title="TextProduct.SIM property" Url="html/910938183.htm" />
-  <HelpKINode Title="TextProduct.SLS property" Url="html/1508572371.htm" />
-  <HelpKINode Title="TextProduct.SMF property" Url="html/1670715214.htm" />
-  <HelpKINode Title="TextProduct.SMW property" Url="html/817091993.htm" />
-  <HelpKINode Title="TextProduct.SPE property" Url="html/1266578719.htm" />
-  <HelpKINode Title="TextProduct.SPF property" Url="html/1669863246.htm" />
-  <HelpKINode Title="TextProduct.SPS property" Url="html/1509358803.htm" />
-  <HelpKINode Title="TextProduct.SPW property" Url="html/816240025.htm" />
-  <HelpKINode Title="TextProduct.SRF property" Url="html/1669732174.htm" />
-  <HelpKINode Title="TextProduct.STA property" Url="html/1058757965.htm" />
-  <HelpKINode Title="TextProduct.STD property" Url="html/1462042492.htm" />
-  <HelpKINode Title="TextProduct.STO property" Url="html/252188911.htm" />
-  <HelpKINode Title="TextProduct.STP property" Url="html/1219786696.htm" />
-  <HelpKINode Title="TextProduct.SUM property" Url="html/910676039.htm" />
-  <HelpKINode Title="TextProduct.SVR property" Url="html/56856210.htm" />
-  <HelpKINode Title="TextProduct.SVS property" Url="html/1509227731.htm" />
-  <HelpKINode Title="TextProduct.SWO property" Url="html/252254447.htm" />
-  <HelpKINode Title="TextProduct.SWR property" Url="html/56921746.htm" />
-  <HelpKINode Title="TextProduct.SWS property" Url="html/1509162195.htm" />
-  <HelpKINode Title="TextProduct.SYN property" Url="html/1313174134.htm" />
-  <HelpKINode Title="TextProduct.TAF property" Url="html/1670977363.htm" />
-  <HelpKINode Title="TextProduct.TAV property" Url="html/1911529213.htm" />
-  <HelpKINode Title="TextProduct.TCA property" Url="html/1058037064.htm" />
-  <HelpKINode Title="TextProduct.TCD property" Url="html/1461321591.htm" />
-  <HelpKINode Title="TextProduct.TCE property" Url="html/1267561764.htm" />
-  <HelpKINode Title="TextProduct.TCM property" Url="html/911331404.htm" />
-  <HelpKINode Title="TextProduct.TCP property" Url="html/1220507597.htm" />
-  <HelpKINode Title="TextProduct.TCS property" Url="html/1508375758.htm" />
-  <HelpKINode Title="TextProduct.TCU property" Url="html/1980022484.htm" />
-  <HelpKINode Title="TextProduct.TCV property" Url="html/1911660285.htm" />
-  <HelpKINode Title="TextProduct.TIB property" Url="html/655145753.htm" />
-  <HelpKINode Title="TextProduct.TID property" Url="html/1461714807.htm" />
-  <HelpKINode Title="TextProduct.TimeStamp property" Url="html/674490112.htm" />
-  <HelpKINode Title="TextProduct.TMA property" Url="html/1058168136.htm" />
-  <HelpKINode Title="TextProduct.TOE property" Url="html/1267299620.htm" />
-  <HelpKINode Title="TextProduct.TOR property" Url="html/57446039.htm" />
-  <HelpKINode Title="TextProduct.TPT property" Url="html/749843911.htm" />
-  <HelpKINode Title="TextProduct.TSM property" Url="html/910282828.htm" />
-  <HelpKINode Title="TextProduct.TST property" Url="html/749909447.htm" />
-  <HelpKINode Title="TextProduct.TSU property" Url="html/1978973908.htm" />
-  <HelpKINode Title="TextProduct.TVL property" Url="html/1818403919.htm" />
-  <HelpKINode Title="TextProduct.TWD property" Url="html/1462108023.htm" />
-  <HelpKINode Title="TextProduct.TWO property" Url="html/252254442.htm" />
-  <HelpKINode Title="TextProduct.TWS property" Url="html/1509162190.htm" />
-  <HelpKINode Title="TextProduct.UVI property" Url="html/1415119391.htm" />
-  <HelpKINode Title="TextProduct.VAA property" Url="html/1057905994.htm" />
-  <HelpKINode Title="TextProduct.VOW property" Url="html/816960924.htm" />
-  <HelpKINode Title="TextProduct.VtecCodes property" Url="html/1431703875.htm" />
-  <HelpKINode Title="TextProduct.WAR property" Url="html/57839254.htm" />
-  <HelpKINode Title="TextProduct.WAT property" Url="html/748729800.htm" />
-  <HelpKINode Title="TextProduct.WCN property" Url="html/1314615930.htm" />
-  <HelpKINode Title="TextProduct.WCR property" Url="html/57708182.htm" />
-  <HelpKINode Title="TextProduct.WDA property" Url="html/1057709385.htm" />
-  <HelpKINode Title="TextProduct.WEK property" Url="html/1718293673.htm" />
-  <HelpKINode Title="TextProduct.WOU property" Url="html/1979760339.htm" />
-  <HelpKINode Title="TextProduct.WRK property" Url="html/1716786345.htm" />
-  <HelpKINode Title="TextProduct.WSW property" Url="html/816174493.htm" />
-  <HelpKINode Title="TextProduct.WVM property" Url="html/910479435.htm" />
-  <HelpKINode Title="TextProduct.WWA property" Url="html/1058823497.htm" />
-  <HelpKINode Title="TextProduct.WWP property" Url="html/1219721164.htm" />
-  <HelpKINode Title="TextProduct.ZFP property" Url="html/1220704191.htm" />
-  <HelpKINode Title="TextProduct._18A property" Url="html/1720772404.htm" />
-  <HelpKINode Title="TextProduct._24A property" Url="html/960860176.htm" />
-  <HelpKINode Title="TextProduct._30L property" Url="html/1409303132.htm" />
-  <HelpKINode Title="TextProduct._3HR property" Url="html/1351186116.htm" />
-  <HelpKINode Title="TI property" Url="html/613924391.htm" />
-  <HelpKINode Title="TIB property" Url="html/655145753.htm" />
-  <HelpKINode Title="TID property" Url="html/1461714807.htm" />
-  <HelpKINode Title="Tiff enumeration member" Url="html/1257192578.htm" />
-  <HelpKINode Title="Tiff field" Url="html/356743731.htm" />
-  <HelpKINode Title="Time property" Url="html/266712574.htm" />
-  <HelpKINode Title="TimeStamp property">
-    <HelpKINode Title="TimeStamp Property " Url="html/64400527.htm" />
-    <HelpKINode Title="TimeStamp Property " Url="html/1340115407.htm" />
-    <HelpKINode Title="TimeStamp Property " Url="html/1423132368.htm" />
-    <HelpKINode Title="TimeStamp Property " Url="html/674490112.htm" />
+  <HelpKINode Title="Time property">
+    <HelpKINode Title="Time Property " Url="html/266712574.htm" />
+    <HelpKINode Title="Time Property " Url="html/1183181481.htm" />
   </HelpKINode>
-  <HelpKINode Title="TMA property" Url="html/1058168136.htm" />
-  <HelpKINode Title="TO property" Url="html/613924385.htm" />
-  <HelpKINode Title="TOE property" Url="html/1267299620.htm" />
-  <HelpKINode Title="TOR property" Url="html/57446039.htm" />
-  <HelpKINode Title="TPT property" Url="html/749843911.htm" />
-  <HelpKINode Title="TR property" Url="html/613924366.htm" />
+  <HelpKINode Title="TimeStamp property" Url="html/1269729860.htm" />
+  <HelpKINode Title="TotalBlocks property" Url="html/141297528.htm" />
   <HelpKINode Title="TRKATLUS property" Url="html/639002849.htm" />
   <HelpKINode Title="TRKNEPUS property" Url="html/206453314.htm" />
   <HelpKINode Title="TRKNINUS property" Url="html/1400227288.htm" />
@@ -1403,16 +943,14 @@
   <HelpKINode Title="TRKSINUS property" Url="html/103171919.htm" />
   <HelpKINode Title="TRKSWPUS property" Url="html/370951989.htm" />
   <HelpKINode Title="TRKWLDUS property" Url="html/863148235.htm" />
-  <HelpKINode Title="TS property" Url="html/613924365.htm" />
-  <HelpKINode Title="TSM property" Url="html/910282828.htm" />
-  <HelpKINode Title="TST property" Url="html/749909447.htm" />
-  <HelpKINode Title="TSU property" Url="html/1978973908.htm" />
-  <HelpKINode Title="TVL property" Url="html/1818403919.htm" />
-  <HelpKINode Title="TWD property" Url="html/1462108023.htm" />
-  <HelpKINode Title="TWO property" Url="html/252254442.htm" />
-  <HelpKINode Title="TWS property" Url="html/1509162190.htm" />
-  <HelpKINode Title="TY property" Url="html/613924375.htm" />
-  <HelpKINode Title="Type property" Url="html/546268898.htm" />
+  <HelpKINode Title="Type property">
+    <HelpKINode Title="Type Property " Url="html/1574824705.htm" />
+    <HelpKINode Title="Type Property " Url="html/546268898.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TypeIdentifier property">
+    <HelpKINode Title="TypeIdentifier Property " Url="html/1044036541.htm" />
+    <HelpKINode Title="TypeIdentifier Property " Url="html/319404209.htm" />
+  </HelpKINode>
   <HelpKINode Title="UgcParser class">
     <HelpKINode Title="UgcParser Class" Url="html/163955418.htm" />
     <HelpKINode Title="UgcParser Members" Url="html/1412069724.htm" />
@@ -1434,54 +972,34 @@
   <HelpKINode Title="UniversalGeographicCode.PurgeTime property" Url="html/1454376868.htm" />
   <HelpKINode Title="UniversalGeographicCode.State property" Url="html/1281262860.htm" />
   <HelpKINode Title="UniversalGeographicCode.Type property" Url="html/546268898.htm" />
-  <HelpKINode Title="Unknown enumeration member">
-    <HelpKINode Title="ContentFileType Enumeration" Url="html/1000439498.htm" />
-    <HelpKINode Title="ImageFormatType Enumeration" Url="html/1257192578.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Unknown field">
-    <HelpKINode Title="Unknown Field" Url="html/1209370773.htm" />
-    <HelpKINode Title="Unknown Field" Url="html/55951343.htm" />
-  </HelpKINode>
-  <HelpKINode Title="UP property" Url="html/1724727792.htm" />
-  <HelpKINode Title="UPG property" Url="html/91542737.htm" />
-  <HelpKINode Title="UpperAirData enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="UpperAirData field" Url="html/787269344.htm" />
-  <HelpKINode Title="UVI property" Url="html/1415119391.htm" />
-  <HelpKINode Title="VAA property" Url="html/1057905994.htm" />
+  <HelpKINode Title="Unknown enumeration member" Url="html/1000439498.htm" />
+  <HelpKINode Title="Unknown field" Url="html/55951343.htm" />
   <HelpKINode Title="ValidTimeEventCode class">
     <HelpKINode Title="ValidTimeEventCode Class" Url="html/347320636.htm" />
     <HelpKINode Title="ValidTimeEventCode Members" Url="html/417898899.htm" />
     <HelpKINode Title="about ValidTimeEventCode class" Url="html/347320636.htm" />
     <HelpKINode Title="all members" Url="html/417898899.htm" />
-    <HelpKINode Title="fields" Url="html/1788074062.htm" />
     <HelpKINode Title="methods" Url="html/794170499.htm" />
+    <HelpKINode Title="properties" Url="html/161439369.htm" />
   </HelpKINode>
-  <HelpKINode Title="ValidTimeEventCode.Action field" Url="html/632154546.htm" />
-  <HelpKINode Title="VOW property" Url="html/816960924.htm" />
-  <HelpKINode Title="VtecAction class">
-    <HelpKINode Title="VtecAction Class" Url="html/871599505.htm" />
-    <HelpKINode Title="VtecAction Members" Url="html/740282156.htm" />
-    <HelpKINode Title="about VtecAction class" Url="html/871599505.htm" />
-    <HelpKINode Title="all members" Url="html/740282156.htm" />
-    <HelpKINode Title="methods" Url="html/993671933.htm" />
-    <HelpKINode Title="properties" Url="html/1782482034.htm" />
+  <HelpKINode Title="ValidTimeEventCode.ActionCode property" Url="html/1281395170.htm" />
+  <HelpKINode Title="ValidTimeEventCode.Begin property" Url="html/1114073979.htm" />
+  <HelpKINode Title="ValidTimeEventCode.End property" Url="html/223128702.htm" />
+  <HelpKINode Title="ValidTimeEventCode.EventNumber property" Url="html/1728862152.htm" />
+  <HelpKINode Title="ValidTimeEventCode.PhenomenonCode property" Url="html/1988123151.htm" />
+  <HelpKINode Title="ValidTimeEventCode.SignificanceCode property" Url="html/647265869.htm" />
+  <HelpKINode Title="ValidTimeEventCode.TypeIdentifier property" Url="html/1044036541.htm" />
+  <HelpKINode Title="ValidTimeEventCode.WmoId property" Url="html/1697397766.htm" />
+  <HelpKINode Title="Version property" Url="html/1602853182.htm" />
+  <HelpKINode Title="VtecExtensions class">
+    <HelpKINode Title="VtecExtensions Class" Url="html/1881989404.htm" />
+    <HelpKINode Title="VtecExtensions Members" Url="html/406451076.htm" />
+    <HelpKINode Title="about VtecExtensions class" Url="html/1881989404.htm" />
+    <HelpKINode Title="all members" Url="html/406451076.htm" />
+    <HelpKINode Title="methods" Url="html/1248666055.htm" />
   </HelpKINode>
-  <HelpKINode Title="VtecAction.CAN property" Url="html/1823938.htm" />
-  <HelpKINode Title="VtecAction.CON property" Url="html/1823936.htm" />
-  <HelpKINode Title="VtecAction.COR property" Url="html/1561792.htm" />
-  <HelpKINode Title="VtecAction.Culture property" Url="html/733744547.htm" />
-  <HelpKINode Title="VtecAction.EXA property" Url="html/1144597303.htm" />
-  <HelpKINode Title="VtecAction.EXB property" Url="html/1144400695.htm" />
-  <HelpKINode Title="VtecAction.EXP property" Url="html/1145580343.htm" />
-  <HelpKINode Title="VtecAction.EXT property" Url="html/1145842487.htm" />
-  <HelpKINode Title="VtecAction.NEW property" Url="html/1190406970.htm" />
-  <HelpKINode Title="VtecAction.ResourceManager property" Url="html/785767752.htm" />
-  <HelpKINode Title="VtecAction.ROU property" Url="html/718940992.htm" />
-  <HelpKINode Title="VtecAction.UPG property" Url="html/91542737.htm" />
-  <HelpKINode Title="VtecCodes property">
-    <HelpKINode Title="VtecCodes Property " Url="html/1431703875.htm" />
-    <HelpKINode Title="VtecCodes Property " Url="html/864815760.htm" />
-  </HelpKINode>
+  <HelpKINode Title="VtecExtensions.GetSignificanceLevel method" Url="html/1315892736.htm" />
+  <HelpKINode Title="VtecExtensions.IsActive method" Url="html/1726488458.htm" />
   <HelpKINode Title="VtecParser class">
     <HelpKINode Title="VtecParser Class" Url="html/2078821197.htm" />
     <HelpKINode Title="VtecParser Members" Url="html/506110020.htm" />
@@ -1489,133 +1007,34 @@
     <HelpKINode Title="all members" Url="html/506110020.htm" />
     <HelpKINode Title="methods" Url="html/284375101.htm" />
   </HelpKINode>
-  <HelpKINode Title="VtecPhenomenon class">
-    <HelpKINode Title="VtecPhenomenon Class" Url="html/531256769.htm" />
-    <HelpKINode Title="VtecPhenomenon Members" Url="html/914083886.htm" />
-    <HelpKINode Title="about VtecPhenomenon class" Url="html/531256769.htm" />
-    <HelpKINode Title="all members" Url="html/914083886.htm" />
-    <HelpKINode Title="methods" Url="html/1227802722.htm" />
-    <HelpKINode Title="properties" Url="html/604203019.htm" />
-  </HelpKINode>
-  <HelpKINode Title="VtecPhenomenon.AF property" Url="html/2098642458.htm" />
-  <HelpKINode Title="VtecPhenomenon.AS property" Url="html/2098642445.htm" />
-  <HelpKINode Title="VtecPhenomenon.AV property" Url="html/2098642442.htm" />
-  <HelpKINode Title="VtecPhenomenon.BH property" Url="html/240009688.htm" />
-  <HelpKINode Title="VtecPhenomenon.BS property" Url="html/240009715.htm" />
-  <HelpKINode Title="VtecPhenomenon.BW property" Url="html/240009719.htm" />
-  <HelpKINode Title="VtecPhenomenon.BZ property" Url="html/240009706.htm" />
-  <HelpKINode Title="VtecPhenomenon.CF property" Url="html/1716305434.htm" />
-  <HelpKINode Title="VtecPhenomenon.Culture property" Url="html/521958957.htm" />
-  <HelpKINode Title="VtecPhenomenon.DS property" Url="html/622346739.htm" />
-  <HelpKINode Title="VtecPhenomenon.DU property" Url="html/622346741.htm" />
-  <HelpKINode Title="VtecPhenomenon.EC property" Url="html/1333968413.htm" />
-  <HelpKINode Title="VtecPhenomenon.EH property" Url="html/1333968424.htm" />
-  <HelpKINode Title="VtecPhenomenon.EW property" Url="html/1333968393.htm" />
-  <HelpKINode Title="VtecPhenomenon.FA property" Url="html/1004683745.htm" />
-  <HelpKINode Title="VtecPhenomenon.FF property" Url="html/1004683750.htm" />
-  <HelpKINode Title="VtecPhenomenon.FG property" Url="html/1004683751.htm" />
-  <HelpKINode Title="VtecPhenomenon.FL property" Url="html/1004683740.htm" />
-  <HelpKINode Title="VtecPhenomenon.FR property" Url="html/1004683762.htm" />
-  <HelpKINode Title="VtecPhenomenon.FW property" Url="html/1004683767.htm" />
-  <HelpKINode Title="VtecPhenomenon.FZ property" Url="html/1004683754.htm" />
-  <HelpKINode Title="VtecPhenomenon.GL property" Url="html/951631396.htm" />
-  <HelpKINode Title="VtecPhenomenon.HF property" Url="html/1671675418.htm" />
-  <HelpKINode Title="VtecPhenomenon.HI property" Url="html/1671675431.htm" />
-  <HelpKINode Title="VtecPhenomenon.HS property" Url="html/1671675405.htm" />
-  <HelpKINode Title="VtecPhenomenon.HT property" Url="html/1671675404.htm" />
-  <HelpKINode Title="VtecPhenomenon.HU property" Url="html/1671675403.htm" />
-  <HelpKINode Title="VtecPhenomenon.HW property" Url="html/1671675401.htm" />
-  <HelpKINode Title="VtecPhenomenon.HY property" Url="html/1671675415.htm" />
-  <HelpKINode Title="VtecPhenomenon.HZ property" Url="html/1671675414.htm" />
-  <HelpKINode Title="VtecPhenomenon.IP property" Url="html/666976752.htm" />
-  <HelpKINode Title="VtecPhenomenon.IS property" Url="html/666976755.htm" />
-  <HelpKINode Title="VtecPhenomenon.LB property" Url="html/907001374.htm" />
-  <HelpKINode Title="VtecPhenomenon.LE property" Url="html/907001371.htm" />
-  <HelpKINode Title="VtecPhenomenon.LO property" Url="html/907001377.htm" />
-  <HelpKINode Title="VtecPhenomenon.LS property" Url="html/907001357.htm" />
-  <HelpKINode Title="VtecPhenomenon.LW property" Url="html/907001353.htm" />
-  <HelpKINode Title="VtecPhenomenon.MA property" Url="html/1431650785.htm" />
-  <HelpKINode Title="VtecPhenomenon.MF property" Url="html/1431650790.htm" />
-  <HelpKINode Title="VtecPhenomenon.MH property" Url="html/1431650776.htm" />
-  <HelpKINode Title="VtecPhenomenon.MS property" Url="html/1431650803.htm" />
-  <HelpKINode Title="VtecPhenomenon.RB property" Url="html/996261406.htm" />
-  <HelpKINode Title="VtecPhenomenon.ResourceManager property" Url="html/1222602578.htm" />
-  <HelpKINode Title="VtecPhenomenon.RP property" Url="html/996261392.htm" />
-  <HelpKINode Title="VtecPhenomenon.SB property" Url="html/1342390754.htm" />
-  <HelpKINode Title="VtecPhenomenon.SC property" Url="html/1342390755.htm" />
-  <HelpKINode Title="VtecPhenomenon.SE property" Url="html/1342390757.htm" />
-  <HelpKINode Title="VtecPhenomenon.SI property" Url="html/1342390745.htm" />
-  <HelpKINode Title="VtecPhenomenon.SM property" Url="html/1342390749.htm" />
-  <HelpKINode Title="VtecPhenomenon.SN property" Url="html/1342390750.htm" />
-  <HelpKINode Title="VtecPhenomenon.SR property" Url="html/1342390770.htm" />
-  <HelpKINode Title="VtecPhenomenon.SU property" Url="html/1342390773.htm" />
-  <HelpKINode Title="VtecPhenomenon.SV property" Url="html/1342390774.htm" />
-  <HelpKINode Title="VtecPhenomenon.SW property" Url="html/1342390775.htm" />
-  <HelpKINode Title="VtecPhenomenon.TI property" Url="html/613924391.htm" />
-  <HelpKINode Title="VtecPhenomenon.TO property" Url="html/613924385.htm" />
-  <HelpKINode Title="VtecPhenomenon.TR property" Url="html/613924366.htm" />
-  <HelpKINode Title="VtecPhenomenon.TS property" Url="html/613924365.htm" />
-  <HelpKINode Title="VtecPhenomenon.TY property" Url="html/613924375.htm" />
-  <HelpKINode Title="VtecPhenomenon.UP property" Url="html/1724727792.htm" />
-  <HelpKINode Title="VtecPhenomenon.WC property" Url="html/2107064803.htm" />
-  <HelpKINode Title="VtecPhenomenon.WI property" Url="html/2107064793.htm" />
-  <HelpKINode Title="VtecPhenomenon.WS property" Url="html/2107064819.htm" />
-  <HelpKINode Title="VtecPhenomenon.WW property" Url="html/2107064823.htm" />
-  <HelpKINode Title="VtecPhenomenon.ZF property" Url="html/1769357798.htm" />
-  <HelpKINode Title="VtecPhenomenon.ZR property" Url="html/1769357810.htm" />
-  <HelpKINode Title="VtecSignificanceCode enumeration" Url="html/186638211.htm" />
-  <HelpKINode Title="VtecSignificanceCode.Advisory field" Url="html/1213116110.htm" />
-  <HelpKINode Title="VtecSignificanceCode.Forecast field" Url="html/631466068.htm" />
-  <HelpKINode Title="VtecSignificanceCode.Outlook field" Url="html/607359041.htm" />
-  <HelpKINode Title="VtecSignificanceCode.Statement field" Url="html/921129568.htm" />
-  <HelpKINode Title="VtecSignificanceCode.Synopsis field" Url="html/2027157714.htm" />
-  <HelpKINode Title="VtecSignificanceCode.Warning field" Url="html/1393561773.htm" />
-  <HelpKINode Title="VtecSignificanceCode.Watch field" Url="html/2130619776.htm" />
-  <HelpKINode Title="VtecTypeCode enumeration" Url="html/1952166643.htm" />
-  <HelpKINode Title="VtecTypeCode.Experimental field" Url="html/1860783611.htm" />
-  <HelpKINode Title="VtecTypeCode.ExperimentalOp field" Url="html/189057211.htm" />
-  <HelpKINode Title="VtecTypeCode.Operational field" Url="html/1234357374.htm" />
-  <HelpKINode Title="VtecTypeCode.Test field" Url="html/1687102066.htm" />
-  <HelpKINode Title="WAR property" Url="html/57839254.htm" />
-  <HelpKINode Title="Warning enumeration member" Url="html/186638211.htm" />
-  <HelpKINode Title="Warning field" Url="html/1393561773.htm" />
-  <HelpKINode Title="Warnings enumeration member" Url="html/1622348640.htm" />
-  <HelpKINode Title="Warnings field" Url="html/540061237.htm" />
-  <HelpKINode Title="WAT property" Url="html/748729800.htm" />
-  <HelpKINode Title="Watch enumeration member" Url="html/186638211.htm" />
-  <HelpKINode Title="Watch field" Url="html/2130619776.htm" />
-  <HelpKINode Title="WC property" Url="html/2107064803.htm" />
-  <HelpKINode Title="WCN property" Url="html/1314615930.htm" />
-  <HelpKINode Title="WCR property" Url="html/57708182.htm" />
-  <HelpKINode Title="WDA property" Url="html/1057709385.htm" />
+  <HelpKINode Title="VtecSignificanceLevel enumeration" Url="html/126689395.htm" />
+  <HelpKINode Title="VtecSignificanceLevel.Advisory field" Url="html/733083080.htm" />
+  <HelpKINode Title="VtecSignificanceLevel.Forecast field" Url="html/1709302044.htm" />
+  <HelpKINode Title="VtecSignificanceLevel.None field" Url="html/1144343455.htm" />
+  <HelpKINode Title="VtecSignificanceLevel.Outlook field" Url="html/10433086.htm" />
+  <HelpKINode Title="VtecSignificanceLevel.Statement field" Url="html/221349034.htm" />
+  <HelpKINode Title="VtecSignificanceLevel.Synopsis field" Url="html/241285331.htm" />
+  <HelpKINode Title="VtecSignificanceLevel.Warning field" Url="html/95572969.htm" />
+  <HelpKINode Title="VtecSignificanceLevel.Watch field" Url="html/775034077.htm" />
+  <HelpKINode Title="Warning enumeration member" Url="html/126689395.htm" />
+  <HelpKINode Title="Warning field" Url="html/95572969.htm" />
+  <HelpKINode Title="Watch enumeration member" Url="html/126689395.htm" />
+  <HelpKINode Title="Watch field" Url="html/775034077.htm" />
   <HelpKINode Title="WeatherProductProcessor class">
     <HelpKINode Title="WeatherProductProcessor Class" Url="html/554940934.htm" />
     <HelpKINode Title="WeatherProductProcessor Members" Url="html/1182624834.htm" />
     <HelpKINode Title="about WeatherProductProcessor class" Url="html/554940934.htm" />
     <HelpKINode Title="all members" Url="html/1182624834.htm" />
-    <HelpKINode Title="constructor" Url="html/498653343.htm" />
+    <HelpKINode Title="constructor" Url="html/1587494496.htm" />
+    <HelpKINode Title="fields" Url="html/1352857056.htm" />
     <HelpKINode Title="methods" Url="html/1249297482.htm" />
   </HelpKINode>
-  <HelpKINode Title="WeatherProductProcessor.WeatherProductProcessor constructor" Url="html/498653343.htm" />
-  <HelpKINode Title="WEK property" Url="html/1718293673.htm" />
-  <HelpKINode Title="WI property" Url="html/2107064793.htm" />
-  <HelpKINode Title="Width property">
-    <HelpKINode Title="Width Property " Url="html/1445408614.htm" />
-    <HelpKINode Title="Width Property " Url="html/1008184558.htm" />
+  <HelpKINode Title="WeatherProductProcessor.WeatherProductProcessor constructor" Url="html/1587494496.htm" />
+  <HelpKINode Title="Width property" Url="html/959572620.htm" />
+  <HelpKINode Title="WmoId property">
+    <HelpKINode Title="WmoId Property " Url="html/489419910.htm" />
+    <HelpKINode Title="WmoId Property " Url="html/1862591358.htm" />
+    <HelpKINode Title="WmoId Property " Url="html/2068126550.htm" />
+    <HelpKINode Title="WmoId Property " Url="html/1697397766.htm" />
   </HelpKINode>
-  <HelpKINode Title="WOU property" Url="html/1979760339.htm" />
-  <HelpKINode Title="WRK property" Url="html/1716786345.htm" />
-  <HelpKINode Title="WS property" Url="html/2107064819.htm" />
-  <HelpKINode Title="WSW property" Url="html/816174493.htm" />
-  <HelpKINode Title="WVM property" Url="html/910479435.htm" />
-  <HelpKINode Title="WW property" Url="html/2107064823.htm" />
-  <HelpKINode Title="WWA property" Url="html/1058823497.htm" />
-  <HelpKINode Title="WWP property" Url="html/1219721164.htm" />
-  <HelpKINode Title="ZF property" Url="html/1769357798.htm" />
-  <HelpKINode Title="ZFP property" Url="html/1220704191.htm" />
-  <HelpKINode Title="ZR property" Url="html/1769357810.htm" />
-  <HelpKINode Title="_18A property" Url="html/1720772404.htm" />
-  <HelpKINode Title="_24A property" Url="html/960860176.htm" />
-  <HelpKINode Title="_30L property" Url="html/1409303132.htm" />
-  <HelpKINode Title="_3HR property" Url="html/1351186116.htm" />
 </HelpKI>

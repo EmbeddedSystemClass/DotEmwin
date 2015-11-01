@@ -57,18 +57,11 @@ namespace Emwin.Core.DataObjects
         public string AfosPil { get; set; }
 
         /// <summary>
-        /// Gets or sets the type of the product.
-        /// </summary>
-        /// <value>The type of the data.</value>
-        [DataMember]
-        public char ProductType { get; set; }
-
-        /// <summary>
         /// Gets the 6 character AWIPS identifier.
         /// </summary>
         /// <value>The wmo identifier.</value>
         [DataMember]
-        public string Id { get; set; }
+        public string AwipsId { get; set; }
 
         /// <summary>
         /// Gets the indicator.
@@ -82,7 +75,7 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The wmo station.</value>
         [DataMember]
-        public string OfficeId { get; set; }
+        public string WmoId { get; set; }
 
         /// <summary>
         /// Gets or sets the wmo time.
@@ -99,7 +92,7 @@ namespace Emwin.Core.DataObjects
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() => $"DataType={ProductType} Id={Id} Office={OfficeId} Time={Time:g} Indicator={Indicator}";
+        public override string ToString() => $"AwipsId={AwipsId} AfosPil={AfosPil} Office={WmoId} Time={Time:g}";
 
         #endregion Public Methods
 

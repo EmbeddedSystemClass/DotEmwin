@@ -27,7 +27,6 @@
 using System.Text.RegularExpressions;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
-using Emwin.Core.Types;
 
 namespace Emwin.Core.Parsers
 {
@@ -64,9 +63,8 @@ namespace Emwin.Core.Parsers
 
             return new CommsHeader
             {
-                Id = match.Groups["id"].Value,
-                ProductType = match.Groups["id"].Value[0],
-                OfficeId = match.Groups["station"].Value,
+                AwipsId = match.Groups["id"].Value,
+                WmoId = match.Groups["station"].Value,
                 Time = TimeParser.ParseDayHourMinute(product.TimeStamp, match.Groups["time"].Value),
                 Indicator = match.Groups["indicator"].Success ? match.Groups["indicator"].Value : null,
                 AfosPil = match.Groups["pil"].Success ? match.Groups["pil"].Value.TrimEnd() : null

@@ -26,6 +26,7 @@
 
 using System;
 using Emwin.Core.Contracts;
+using Emwin.Core.Parsers;
 using Emwin.Processor.Instrumentation;
 using Emwin.Core.Products;
 using Emwin.Core.Types;
@@ -47,7 +48,7 @@ namespace Emwin.Processor.Processor
         {
             try
             {
-                var contentType = bundle[0].ContentType;
+                var contentType = ContentTypeParser.GetFileContentType(bundle[0].Filename);
                 switch (contentType)
                 {
                     case ContentFileType.Text:

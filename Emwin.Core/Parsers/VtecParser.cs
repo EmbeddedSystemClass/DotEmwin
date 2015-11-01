@@ -29,7 +29,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
-using Emwin.Core.Types;
 using Emwin.Core.References;
 
 namespace Emwin.Core.Parsers
@@ -77,10 +76,8 @@ namespace Emwin.Core.Parsers
         private static IValidTimeEventCode Create(Match pvtecMatch) => new ValidTimeEventCode
         {
             TypeIdentifier = pvtecMatch.Groups["type"].Value[0],
-            Action = VtecAction.ResourceManager.GetString(pvtecMatch.Groups["action"].Value),
             ActionCode = pvtecMatch.Groups["action"].Value,
-            OfficeId = pvtecMatch.Groups["office"].Value,
-            Phenomenon = VtecPhenomenon.ResourceManager.GetString(pvtecMatch.Groups["phen"].Value),
+            WmoId = pvtecMatch.Groups["office"].Value,
             PhenomenonCode = pvtecMatch.Groups["phen"].Value,
             SignificanceCode = pvtecMatch.Groups["sig"].Value[0],
             EventNumber = int.Parse(pvtecMatch.Groups["number"].Value),

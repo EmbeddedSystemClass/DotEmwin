@@ -54,22 +54,18 @@
     <Compile Include="Contracts\IUniversalGeographicCode.cs" />
     <Compile Include="Contracts\IValidTimeEventCode.cs" />
     <Compile Include="Contracts\ICommsHeader.cs" />
+    <Compile Include="Extensions\HeaderExtensions.cs" />
     <Compile Include="Extensions\VtecExtensions.cs" />
     <Compile Include="Parsers\BulletinParser.cs" />
     <Compile Include="Products\BulletinProduct.cs" />
-    <Compile Include="References\FipsCode.cs" />
     <Compile Include="Types\ContentFileType.cs" />
     <Compile Include="Types\VtecSignificanceLevel.cs" />
-    <Compile Include="Types\VtecTypeCode.cs" />
-    <Compile Include="Types\T1ProductType.cs" />
-    <Compile Include="Types\ImageFormatType.cs" />
     <Compile Include="Products\ProductFactory.cs" />
     <Compile Include="Products\GraphicProduct.cs" />
     <Compile Include="DataObjects\QuickBlockTransferSegment.cs" />
     <Compile Include="Products\CompressedContent.cs" />
     <Compile Include="Products\TextProduct.cs" />
     <Compile Include="Parsers\HeadingParser.cs" />
-    <Compile Include="Parsers\ImageParser.cs" />
     <Compile Include="Parsers\SpatialParser.cs" />
     <Compile Include="Parsers\ContentTypeParser.cs" />
     <Compile Include="Parsers\TimeParser.cs" />
@@ -83,21 +79,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GraphicProduct.resx</DependentUpon>
     </Compile>
-    <Compile Include="References\TextProduct.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TextProduct.resx</DependentUpon>
-    </Compile>
-    <Compile Include="References\VtecAction.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VtecAction.resx</DependentUpon>
-    </Compile>
-    <Compile Include="References\VtecPhenomenon.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VtecPhenomenon.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Emwin.ByteBlaster.licenseheader" />
@@ -109,24 +90,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>GraphicProduct.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="References\TextProduct.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>TextProduct.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="References\VtecAction.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>VtecAction.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="References\VtecPhenomenon.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>VtecPhenomenon.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\FipsCodes.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\GraphicProducts.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

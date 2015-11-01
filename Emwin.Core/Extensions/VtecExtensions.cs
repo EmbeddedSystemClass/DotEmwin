@@ -24,8 +24,8 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 using System;
-using Emwin.Core.DataObjects;
 using Emwin.Core.Types;
+using Emwin.Core.Contracts;
 
 namespace Emwin.Core.Extensions
 {
@@ -36,10 +36,10 @@ namespace Emwin.Core.Extensions
         /// </summary>
         /// <param name="vtec">The vtec.</param>
         /// <returns><c>true</c> if the specified vtec is active; otherwise, <c>false</c>.</returns>
-        public static bool IsActive(this ValidTimeEventCode vtec)
+        public static bool IsActive(this IValidTimeEventCode vtec)
         {
             return DateTimeOffset.UtcNow >= vtec.Begin &&
-                   DateTimeOffset.UtcNow <= vtec.End && vtec.Action != "CAN" && vtec.Action != "EXP";
+                   DateTimeOffset.UtcNow <= vtec.End && vtec.ActionCode != "CAN" && vtec.ActionCode != "EXP";
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Emwin.Core.Extensions
         /// </summary>
         /// <param name="vtec">The vtec.</param>
         /// <returns>VtecSignificanceLevel.</returns>
-        public static VtecSignificanceLevel GetSignificanceLevel(this ValidTimeEventCode vtec)
+        public static VtecSignificanceLevel GetSignificanceLevel(this IValidTimeEventCode vtec)
         {
             switch (vtec.SignificanceCode)
             {
@@ -68,8 +68,7 @@ namespace Emwin.Core.Extensions
         /// </summary>
         /// <param name="vtec">The vtec.</param>
         /// <returns>System.Boolean.</returns>
-        public static bool IsOperational(this ValidTimeEventCode vtec)
-                    => vtec.TypeIdentifier == (char)VtecTypeCode.Operational;
+        public static bool IsOperational(this IValidTimeEventCode vtec) => vtec.TypeIdentifier == 'O';
 
     }
 }

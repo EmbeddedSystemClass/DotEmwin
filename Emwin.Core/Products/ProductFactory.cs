@@ -31,7 +31,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Emwin.Core.Contracts;
-using Emwin.Core.DataObjects;
 using Emwin.Core.Parsers;
 using Emwin.Core.Types;
 
@@ -59,7 +58,7 @@ namespace Emwin.Core.Products
             if (segments == null) throw new ArgumentNullException(nameof(segments));
 
             var lastSegment = segments[segments.Length - 1];
-            var isText = lastSegment.ContentType == ContentFileType.Text;
+            var isText = typeof(T) == typeof(ITextProduct);
             var content = segments.Select(b => b.Content).ToList().Combine(isText);
 
             if (typeof(T) == typeof(ITextProduct))
@@ -91,7 +90,6 @@ namespace Emwin.Core.Products
                 Filename = filename,
                 TimeStamp = timeStamp,
                 Content = content,
-                ContentType = ContentFileType.Text,
                 ReceivedAt = receivedAt,
                 Header = header,
                 SequenceNumber = seq,
@@ -120,8 +118,7 @@ namespace Emwin.Core.Products
                 Filename = filename,
                 TimeStamp = timeStamp,
                 Content = content,
-                ReceivedAt = receivedAt,
-                ContentType = ContentFileType.Compressed
+                ReceivedAt = receivedAt
             };
         }
 
@@ -170,7 +167,6 @@ namespace Emwin.Core.Products
                 TimeStamp = timeStamp,
                 Content = Encoding.ASCII.GetString(content, 0, count),
                 ReceivedAt = receivedAt,
-                ContentType = ContentFileType.Text
             };
 
             product.Header = HeadingParser.ParseProduct(product);

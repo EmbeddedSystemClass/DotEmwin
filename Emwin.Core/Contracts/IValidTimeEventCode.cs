@@ -31,12 +31,6 @@ namespace Emwin.Core.Contracts
     public interface IValidTimeEventCode
     {
         /// <summary>
-        /// Gets the action.
-        /// </summary>
-        /// <value>The action.</value>
-        string Action { get; }
-
-        /// <summary>
         /// Gets the action code.
         /// </summary>
         /// <value>The action code.</value>
@@ -64,13 +58,7 @@ namespace Emwin.Core.Contracts
         /// Gets the office identifier.
         /// </summary>
         /// <value>The office identifier.</value>
-        string OfficeId { get; }
-
-        /// <summary>
-        /// Gets the phenomenon.
-        /// </summary>
-        /// <value>The phenomenon.</value>
-        string Phenomenon { get; }
+        string WmoId { get; }
 
         /// <summary>
         /// Gets the phenomenon code.

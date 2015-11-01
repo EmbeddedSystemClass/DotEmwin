@@ -37,6 +37,7 @@ using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
 using Emwin.ByteBlaster.Instrumentation;
 using Emwin.Core.DataObjects;
+using Emwin.Core.Parsers;
 
 namespace Emwin.ByteBlaster.Protocol
 {
@@ -307,9 +308,14 @@ namespace Emwin.ByteBlaster.Protocol
             var match = HeaderRegex.Match(header);
             if (match.Success)
             {
-                var packet = new QuickBlockTransferSegment { Header = header };
+                var packet = new QuickBlockTransferSegment
+                {
+                    Header = header
+                };
+
                 ParseHeaderV1(match.Groups, packet);
                 ParseHeaderV2(match.Groups, packet);
+
                 return packet;
             }
 

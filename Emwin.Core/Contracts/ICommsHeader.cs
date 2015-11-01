@@ -40,7 +40,7 @@ namespace Emwin.Core.Contracts
         /// Gets the AWIPS product identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        string Id { get; }
+        string AwipsId { get; }
 
         /// <summary>
         /// Gets the extension indicator.
@@ -52,13 +52,7 @@ namespace Emwin.Core.Contracts
         /// Gets the office identifier.
         /// </summary>
         /// <value>The office identifier.</value>
-        string OfficeId { get; }
-
-        /// <summary>
-        /// Gets the type of the product.
-        /// </summary>
-        /// <value>The type of the product.</value>
-        char ProductType { get; }
+        string WmoId { get; }
 
         /// <summary>
         /// Gets the time.

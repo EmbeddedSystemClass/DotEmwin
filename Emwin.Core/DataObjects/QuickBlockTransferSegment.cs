@@ -72,13 +72,6 @@ namespace Emwin.Core.DataObjects
         object IEmwinContent.Content => Content;
 
         /// <summary>
-        /// Gets the type of the file the block is part of.
-        /// </summary>
-        /// <returns>WeatherProductFileType.</returns>
-        [DataMember]
-        public ContentFileType ContentType => ContentTypeParser.GetFileContentType(Filename);
-
-        /// <summary>
         /// Gets or sets the filename of the file the block is part of.
         /// </summary>
         /// <value>The filename.</value>
@@ -103,7 +96,7 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The received at.</value>
         [DataMember]
-        public DateTimeOffset ReceivedAt { get; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset ReceivedAt { get; set; } = DateTimeOffset.UtcNow;
 
         /// <summary>
         /// Gets or sets the time stamp of the file the block is part of.

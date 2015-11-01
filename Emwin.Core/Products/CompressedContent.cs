@@ -27,7 +27,6 @@
 using System;
 using System.IO;
 using Emwin.Core.Contracts;
-using Emwin.Core.Types;
 
 namespace Emwin.Core.Products
 {
@@ -44,12 +43,6 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <value>The content.</value>
         public byte[] Content { get; set; }
-
-        /// <summary>
-        /// Gets the type of the content.
-        /// </summary>
-        /// <value>The type of the content.</value>
-        public ContentFileType ContentType { get; set; }
 
         /// <summary>
         /// Gets the filename.

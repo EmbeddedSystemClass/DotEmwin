@@ -42,13 +42,6 @@ namespace Emwin.Core.DataObjects
         #region Public Properties
 
         /// <summary>
-        /// Gets the action.
-        /// </summary>
-        /// <value>The action.</value>
-        [DataMember]
-        public string Action { get; set; }
-
-        /// <summary>
         /// Gets or sets the action code.
         /// </summary>
         /// <value>The action code.</value>
@@ -81,14 +74,7 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The office identifier.</value>
         [DataMember]
-        public string OfficeId { get; set; }
-
-        /// <summary>
-        /// Gets the phenomenon.
-        /// </summary>
-        /// <value>The phenomenon.</value>
-        [DataMember]
-        public string Phenomenon { get; set; }
+        public string WmoId { get; set; }
 
         /// <summary>
         /// Gets or sets the phenomenon code.
@@ -119,7 +105,7 @@ namespace Emwin.Core.DataObjects
         /// To the string.
         /// </summary>
         /// <returns>System.String.</returns>
-        public override string ToString() => $"VTEC: {OfficeId} #{EventNumber} {Action} ({ActionCode}) {Phenomenon} ({PhenomenonCode}) {SignificanceCode} ({Begin:g} -> {End:g})";
+        public override string ToString() => $"VTEC: {WmoId} #{EventNumber} Action={ActionCode} Phonomenon={PhenomenonCode}) Significance={SignificanceCode} ({Begin:g} -> {End:g})";
 
         #endregion Public Methods
 

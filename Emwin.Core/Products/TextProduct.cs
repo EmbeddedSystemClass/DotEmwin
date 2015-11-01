@@ -26,8 +26,6 @@
 
 using System;
 using Emwin.Core.Contracts;
-using Emwin.Core.DataObjects;
-using Emwin.Core.Types;
 
 namespace Emwin.Core.Products
 {
@@ -50,12 +48,6 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <value>The content.</value>
         object IEmwinContent.Content => Content;
-
-        /// <summary>
-        /// Gets the type of the content.
-        /// </summary>
-        /// <value>The type of the content.</value>
-        public ContentFileType ContentType { get; set; }
 
         /// <summary>
         /// Gets the filename.
