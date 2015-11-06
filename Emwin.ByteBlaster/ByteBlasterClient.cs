@@ -25,15 +25,13 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
-using DotNetty.Transport.Channels.Sockets;
+using Emwin.ByteBlaster.Channel;
 using Emwin.ByteBlaster.Instrumentation;
 using Emwin.ByteBlaster.Protocol;
 using Emwin.Core.Contracts;
@@ -45,15 +43,12 @@ namespace Emwin.ByteBlaster
     /// Class ByteBlasterClient implements a persistent connection to a Byte Blaster Server
     /// and provides an observable provider of QuickBlockTransferSegment objects for processing.
     /// </summary>
-    public class ByteBlasterClient : IObservable<IQuickBlockTransferSegment>
+    public class ByteBlasterClient : ObservableBase<IQuickBlockTransferSegment>
     {
 
         #region Private Fields
 
-        private static readonly IEventLoopGroup ExecutorGroup = new MultithreadEventLoopGroup();
         private readonly Bootstrap _channelBootstrap;
-        private readonly List<IObserver<IQuickBlockTransferSegment>> _observers = new List<IObserver<IQuickBlockTransferSegment>>();
-        private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
         private CancellationTokenSource _cancelSource;
         private IChannel _channel;
         private Task _task;
@@ -69,29 +64,11 @@ namespace Emwin.ByteBlaster
         /// <param name="observer">The observer to subscribe.</param>
         public ByteBlasterClient(string email, IObserver<IQuickBlockTransferSegment> observer = null)
         {
-            _channelBootstrap = new Bootstrap()
-                .Group(ExecutorGroup)
-                .Channel<TcpSocketChannel>()
-                .Option(ChannelOption.ConnectTimeout, TimeSpan.FromSeconds(20))
-                .Option(ChannelOption.SoKeepalive, true)
-                .Handler(new ActionChannelInitializer<ISocketChannel>(ch => ch.Pipeline.AddLast(
-                    new ByteBlasterProtocolDecoder(),
-                    new ByteBlasterLogonHandler(email),
-                    new ByteBlasterWatchdogHandler(),
-                    new ChannelEventHandler<QuickBlockTransferSegment>((ctx, segment) =>
-                    {
-                        try
-                        {
-                            _lock.EnterReadLock();
-                            _observers.ForEach(o => o.OnNext(segment));
-                        }
-                        finally
-                        {
-                            _lock.ExitReadLock();
-                        }
-                    }),
+            _channelBootstrap = ByteBlasterChannelFactory.CreateBootstrap()
+                .Handler(new ByteBlasterChannelInitializer(email,
+                    new ChannelEventHandler<QuickBlockTransferSegment>((ctx, segment) => NotifySubscribers(segment)),
                     new ChannelEventHandler<ByteBlasterServerList>((ctx, serverList) => ServerList = serverList)
-                )));
+                ));
 
             if (observer != null)
                 Subscribe(observer);
@@ -127,7 +104,7 @@ namespace Emwin.ByteBlaster
         /// Shutdowns the executor threads gracefully.
         /// </summary>
         /// <returns>System.Threading.Tasks.Task.</returns>
-        public static Task ShutdownGracefullyAsync() => ExecutorGroup.ShutdownGracefullyAsync();
+        public static Task ShutdownGracefullyAsync() => ByteBlasterChannelFactory.ShutdownGracefullyAsync();
 
         /// <summary>
         /// Starts this instance.
@@ -162,39 +139,6 @@ namespace Emwin.ByteBlaster
             }
         }
 
-        /// <summary>
-        /// Subscribes the specified observer.
-        /// </summary>
-        /// <param name="observer">The observer.</param>
-        /// <returns>System.IDisposable.</returns>
-        public IDisposable Subscribe(IObserver<IQuickBlockTransferSegment> observer)
-        {
-            if (observer == null) throw new ArgumentNullException(nameof(observer));
-
-            try
-            {
-                _lock.EnterWriteLock();
-                _observers.Add(observer);
-            }
-            finally
-            {
-                _lock.ExitWriteLock();
-            }
-
-            return new Unsubscriber(() =>
-            {
-                try
-                {
-                    _lock.EnterWriteLock();
-                    _observers.Remove(observer);
-                }
-                finally
-                {
-                    _lock.ExitWriteLock();
-                }
-            });
-        }
-
         #endregion Public Methods
 
         #region Private Methods
@@ -226,59 +170,10 @@ namespace Emwin.ByteBlaster
                 await Task.Delay(5000, _cancelSource.Token);
             }
 
-            try
-            {
-                _lock.EnterReadLock();
-                _observers.ForEach(o => o.OnCompleted());
-                _observers.Clear();
-            }
-            finally
-            {
-                _lock.ExitWriteLock();
-            }
+            NotifyCompleted();
         }
 
         #endregion Private Methods
-
-        #region Private Classes
-
-        private class Unsubscriber : IDisposable
-        {
-
-            #region Private Fields
-
-            private readonly Action _action;
-
-            #endregion Private Fields
-
-            #region Public Constructors
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="Unsubscriber" /> class.
-            /// </summary>
-            /// <param name="action">The action.</param>
-            public Unsubscriber(Action action)
-            {
-                _action = action;
-            }
-
-            #endregion Public Constructors
-
-            #region Public Methods
-
-            /// <summary>
-            /// Disposes this instance.
-            /// </summary>
-            public void Dispose()
-            {
-                _action();
-            }
-
-            #endregion Public Methods
-
-        }
-
-        #endregion Private Classes
 
     }
 }

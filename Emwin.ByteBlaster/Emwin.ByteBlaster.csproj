@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByteBlasterClient.cs" />
+    <Compile Include="ObservableBase.cs" />
+    <Compile Include="Channel\ByteBlasterChannelFactory.cs" />
+    <Compile Include="Channel\ByteBlasterChannelInitializer.cs" />
     <Compile Include="Instrumentation\ByteBlasterEventSource.cs" />
     <Compile Include="Instrumentation\PerformanceCounterManager.cs" />
     <Compile Include="Instrumentation\PerformanceCounters.cs" />
