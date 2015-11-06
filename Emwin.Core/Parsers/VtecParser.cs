@@ -29,7 +29,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
-using Emwin.Core.References;
 
 namespace Emwin.Core.Parsers
 {

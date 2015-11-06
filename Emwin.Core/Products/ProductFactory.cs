@@ -133,7 +133,6 @@ namespace Emwin.Core.Products
         public static IImageProduct CreateImageProduct(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt)
         {
             var image = Image.FromStream(new MemoryStream(content));
-            var key = Path.GetFileNameWithoutExtension(filename) ?? "";
 
             return new ImageProduct
             {
@@ -143,8 +142,7 @@ namespace Emwin.Core.Products
                 Height = image.Height,
                 Width = image.Width,
                 ReceivedAt = receivedAt,
-                ContentType = ContentFileType.Image,
-                Description = References.GraphicProduct.ResourceManager.GetString(key.ToUpperInvariant())
+                ContentType = ContentFileType.Image
             };
         }
 

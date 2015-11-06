@@ -54,7 +54,6 @@
     <Compile Include="Contracts\IUniversalGeographicCode.cs" />
     <Compile Include="Contracts\IValidTimeEventCode.cs" />
     <Compile Include="Contracts\ICommsHeader.cs" />
-    <Compile Include="Extensions\HeaderExtensions.cs" />
     <Compile Include="Extensions\VtecExtensions.cs" />
     <Compile Include="Parsers\BulletinParser.cs" />
     <Compile Include="Products\BulletinProduct.cs" />
@@ -74,22 +73,11 @@
     <Compile Include="DataObjects\UniversalGeographicCode.cs" />
     <Compile Include="DataObjects\ValidTimeEventCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="References\GraphicProduct.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GraphicProduct.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Emwin.ByteBlaster.licenseheader" />
     <None Include="Emwin.Core.nuspec" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="References\GraphicProduct.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GraphicProduct.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

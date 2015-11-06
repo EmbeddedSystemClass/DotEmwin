@@ -41,11 +41,5 @@ namespace Emwin.Core.Contracts
         /// </summary>
         /// <value>The width.</value>
         int Width { get; }
-
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        /// <value>The description.</value>
-        string Description { get; set; }
     }
 }
