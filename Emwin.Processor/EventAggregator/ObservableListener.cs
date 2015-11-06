@@ -30,7 +30,7 @@ using System.Threading;
 
 namespace Emwin.Processor.EventAggregator
 {
-    public class ObservableListener<T> : IHandle<T>, IObservable<T>
+    internal class ObservableListener<T> : IHandle<T>, IObservable<T>
     {
         #region Private Fields
 

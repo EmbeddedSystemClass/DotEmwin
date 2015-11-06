@@ -37,7 +37,7 @@ namespace Emwin.Processor.EventAggregator
     /// <summary>
     /// Class EventAggregator.
     /// </summary>
-    public class EventAggregator : IEventAggregator
+    internal class EventAggregator : IEventAggregator
     {
         /// <summary>
         /// The _listeners

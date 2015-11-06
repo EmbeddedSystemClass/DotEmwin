@@ -29,7 +29,7 @@ using System;
 // ReSharper disable InconsistentNaming
 namespace Emwin.Processor.EventAggregator
 {
-    public static class EventAggregatorExtensions
+    internal static class EventAggregatorExtensions
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public static IDisposable AddListenerAction<T>(this IEventSubscriptionManager eventAggregator, Action<T, IEventAggregator> listener)
@@ -44,7 +44,7 @@ namespace Emwin.Processor.EventAggregator
         }
     }
 
-    public class DelegateListener<T> : IHandle<T>, IDisposable
+    internal class DelegateListener<T> : IHandle<T>, IDisposable
     {
         private readonly Action<T, IEventAggregator> _listener;
         private readonly IEventSubscriptionManager _eventSubscriptionManager;

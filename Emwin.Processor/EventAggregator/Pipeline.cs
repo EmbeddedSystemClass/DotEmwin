@@ -33,7 +33,7 @@ namespace Emwin.Processor.EventAggregator
     /// Class Pipeline.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Pipeline<T> : IPipelineFilter<T>, IHandle<T>
+    internal class Pipeline<T> : IPipelineFilter<T>, IHandle<T>
     {
 
         #region Private Fields

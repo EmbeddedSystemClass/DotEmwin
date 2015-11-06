@@ -32,7 +32,7 @@ namespace Emwin.Processor.EventAggregator
     /// Interface IFilter
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IPipelineFilter<T>
+    internal interface IPipelineFilter<T>
     {
         /// <summary>
         /// Executes on the specified input. 
