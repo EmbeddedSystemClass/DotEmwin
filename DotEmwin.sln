@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emwin.ByteBlaster", "Emwin.ByteBlaster\Emwin.ByteBlaster.csproj", "{0283D198-BEEE-46D8-B903-072036D03BDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emwin.ByteBlaster", "src\Emwin.ByteBlaster\Emwin.ByteBlaster.csproj", "{0283D198-BEEE-46D8-B903-072036D03BDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emwin.Core", "Emwin.Core\Emwin.Core.csproj", "{070F7869-7271-43B2-ACD1-5CB788F40525}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emwin.Core", "src\Emwin.Core\Emwin.Core.csproj", "{070F7869-7271-43B2-ACD1-5CB788F40525}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF8E3AFA-68CF-4A1E-A1A5-8D9DA49E56EA}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emwin.Processor", "Emwin.Processor\Emwin.Processor.csproj", "{4BB2B280-FC48-4E49-95B4-1C3E0EE82CEA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emwin.Processor", "src\Emwin.Processor\Emwin.Processor.csproj", "{4BB2B280-FC48-4E49-95B4-1C3E0EE82CEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
