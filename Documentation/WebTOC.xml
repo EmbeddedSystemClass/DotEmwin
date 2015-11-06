@@ -1,40 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpTOC>
 
-  <HelpTOCNode Id="b0ef4512-7374-4dce-afb4-f12a9ac9ed4c" Title="Emwin.ByteBlaster Namespace" Url="html/912953025.htm">
-    <HelpTOCNode Id="ce2e77fc-9362-4d74-9c62-515a93e2744f" Title="ByteBlasterClient Class" Url="html/1212748953.htm">
+  <HelpTOCNode Id="1d1528dc-caa0-4481-9261-87a760fbbc4a" Title="Emwin.ByteBlaster Namespace" Url="html/912953025.htm">
+    <HelpTOCNode Id="073ceeeb-9cfb-40ae-8f9b-882b5ca9b6bd" Title="ByteBlasterClient Class" Url="html/1212748953.htm">
       <HelpTOCNode Title="ByteBlasterClient Members" Url="html/967163186.htm" />
       <HelpTOCNode Title="ByteBlasterClient Constructor " Url="html/890171345.htm" />
-      <HelpTOCNode Id="158de018-edd0-4d83-9bf9-04fdc3661833" Title="ByteBlasterClient Fields" Url="html/966463377.htm">
+      <HelpTOCNode Id="916fa467-d3b4-48c5-be9e-2b4678d4587d" Title="ByteBlasterClient Fields" Url="html/966463377.htm">
         <HelpTOCNode Title="IsActive Field" Url="html/373722024.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ByteBlasterClient Methods" Url="html/1689463548.htm" />
     </HelpTOCNode>
+    <HelpTOCNode Id="904394b5-15a8-49ec-9952-e264adbd003b" Title="ObservableBase(T) Class" Url="html/1158814561.htm">
+      <HelpTOCNode Title="ObservableBase(T) Members" Url="html/882531396.htm" />
+      <HelpTOCNode Id="bb805abf-8b24-48d0-9ee7-9f1979fc366e" Title="ObservableBase(T) Methods" Url="html/345949033.htm">
+        <HelpTOCNode Title="Subscribe Method " Url="html/1370698948.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="7aba97a5-0377-440b-abbb-80669c829938" Title="Emwin.ByteBlaster.Instrumentation Namespace" Url="html/776761685.htm">
-    <HelpTOCNode Id="518045c6-dc35-4769-94ef-94490124a897" Title="ByteBlasterEventSource Class" Url="html/1271618976.htm">
+  <HelpTOCNode Id="d3ff4b32-8910-4013-9b7e-17df9498be10" Title="Emwin.ByteBlaster.Channel Namespace" Url="html/158062681.htm">
+    <HelpTOCNode Id="fd491786-c4cd-4760-b953-e4c8ad312f48" Title="ByteBlasterChannelFactory Class" Url="html/1234261970.htm">
+      <HelpTOCNode Title="ByteBlasterChannelFactory Members" Url="html/1862028323.htm" />
+      <HelpTOCNode Id="4c5eb5b9-f2ec-4041-ba91-03e021c1ca1f" Title="ByteBlasterChannelFactory Fields" Url="html/1866934066.htm">
+        <HelpTOCNode Title="ExecutorGroup Field" Url="html/1268734633.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="ByteBlasterChannelFactory Methods" Url="html/1866503759.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="b41a73fc-8902-478f-8c9f-3ca78e0de642" Title="ByteBlasterChannelInitializer Class" Url="html/1032817535.htm">
+      <HelpTOCNode Title="ByteBlasterChannelInitializer Members" Url="html/586478464.htm" />
+      <HelpTOCNode Title="ByteBlasterChannelInitializer Constructor " Url="html/544003568.htm" />
+      <HelpTOCNode Title="ByteBlasterChannelInitializer Methods" Url="html/343389456.htm" />
+      <HelpTOCNode Title="ByteBlasterChannelInitializer Properties" Url="html/1775883246.htm" />
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="44793fa0-e0e6-421b-966c-5f6602c40827" Title="Emwin.ByteBlaster.Instrumentation Namespace" Url="html/776761685.htm">
+    <HelpTOCNode Id="eb1db9c4-41f7-420b-b68b-af168f437dc2" Title="ByteBlasterEventSource Class" Url="html/1271618976.htm">
       <HelpTOCNode Title="ByteBlasterEventSource Members" Url="html/1359285054.htm" />
-      <HelpTOCNode Id="9c968bb7-e349-47d1-995f-e2d925f1961c" Title="ByteBlasterEventSource Fields" Url="html/1698054007.htm">
+      <HelpTOCNode Id="00318f29-e8e1-480d-a69d-2affa5bf392c" Title="ByteBlasterEventSource Fields" Url="html/1698054007.htm">
         <HelpTOCNode Title="Log Field" Url="html/189568460.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ByteBlasterEventSource Methods" Url="html/1464091990.htm" />
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="321cd956-93e2-4d17-a372-e170fed64e2b" Title="Emwin.Core.Contracts Namespace" Url="html/1406335976.htm">
-    <HelpTOCNode Id="91cce5cf-2996-40cf-a025-bee93aef95a2" Title="IBulletinProduct Interface" Url="html/1757430985.htm">
+  <HelpTOCNode Id="cd69097e-cb66-4c67-bdf9-7ae38e5b527a" Title="Emwin.Core.Contracts Namespace" Url="html/1406335976.htm">
+    <HelpTOCNode Id="7dffaddb-c731-45a2-8e89-3731c1aeb992" Title="IBulletinProduct Interface" Url="html/1757430985.htm">
       <HelpTOCNode Title="IBulletinProduct Members" Url="html/140612421.htm" />
       <HelpTOCNode Title="IBulletinProduct Methods" Url="html/1053389067.htm" />
-      <HelpTOCNode Id="8e57ecc1-0293-4eca-a9dc-b7eca67b9be8" Title="IBulletinProduct Properties" Url="html/1799167308.htm">
+      <HelpTOCNode Id="342c6a65-b511-4e2a-b0b6-b84b5a05e66a" Title="IBulletinProduct Properties" Url="html/1799167308.htm">
         <HelpTOCNode Title="GeoCodes Property " Url="html/1712284555.htm" />
         <HelpTOCNode Title="Polygons Property " Url="html/1487876468.htm" />
         <HelpTOCNode Title="PrimaryVtecCodes Property " Url="html/633719507.htm" />
         <HelpTOCNode Title="SequenceNumber Property " Url="html/975670560.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="0eaff1e9-549a-4d7f-a329-e622445dfa26" Title="ICommsHeader Interface" Url="html/1816882701.htm">
+    <HelpTOCNode Id="25816b67-45ec-4d18-840c-0e9a97ef8f2e" Title="ICommsHeader Interface" Url="html/1816882701.htm">
       <HelpTOCNode Title="ICommsHeader Members" Url="html/860492719.htm" />
       <HelpTOCNode Title="ICommsHeader Methods" Url="html/1079692591.htm" />
-      <HelpTOCNode Id="629ff9ab-4dc2-4dbb-9bfc-875ca9499943" Title="ICommsHeader Properties" Url="html/1713818935.htm">
+      <HelpTOCNode Id="0585cf5e-9a55-4a64-9d37-b01c93844870" Title="ICommsHeader Properties" Url="html/1713818935.htm">
         <HelpTOCNode Title="AfosPil Property " Url="html/283385598.htm" />
         <HelpTOCNode Title="AwipsId Property " Url="html/619608531.htm" />
         <HelpTOCNode Title="Indicator Property " Url="html/1960229788.htm" />
@@ -42,44 +63,43 @@
         <HelpTOCNode Title="WmoId Property " Url="html/2068126550.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="cbc5b4b6-d794-4259-b606-282f86dc83a0" Title="ICompressedContent Interface" Url="html/465636687.htm">
+    <HelpTOCNode Id="ff15bbab-de81-4fd5-adc1-7812451bd76c" Title="ICompressedContent Interface" Url="html/465636687.htm">
       <HelpTOCNode Title="ICompressedContent Members" Url="html/51756687.htm" />
-      <HelpTOCNode Id="a922e3ad-7f2d-4cc2-b437-292aafbe962a" Title="ICompressedContent Methods" Url="html/1546795596.htm">
+      <HelpTOCNode Id="ddbd1d68-2341-47d6-adef-d1adf8fa2331" Title="ICompressedContent Methods" Url="html/1546795596.htm">
         <HelpTOCNode Title="GetStream Method " Url="html/1835189106.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="e80272b3-4e4a-410e-af02-1210f0d5ebb6" Title="IEmwinContent Interface" Url="html/1436336560.htm">
+    <HelpTOCNode Id="e6821a36-4ba2-4bbe-a107-852884a01cb2" Title="IEmwinContent Interface" Url="html/1436336560.htm">
       <HelpTOCNode Title="IEmwinContent Members" Url="html/199650600.htm" />
       <HelpTOCNode Title="IEmwinContent Methods" Url="html/1820189239.htm" />
-      <HelpTOCNode Id="4b5e847f-fb8e-4567-bbb0-f34c528d2898" Title="IEmwinContent Properties" Url="html/913802979.htm">
+      <HelpTOCNode Id="bf2e9c56-f7f2-4337-910d-05c46cc880e9" Title="IEmwinContent Properties" Url="html/913802979.htm">
         <HelpTOCNode Title="Content Property " Url="html/2087113040.htm" />
         <HelpTOCNode Title="Filename Property " Url="html/901380501.htm" />
         <HelpTOCNode Title="ReceivedAt Property " Url="html/1569301654.htm" />
         <HelpTOCNode Title="TimeStamp Property " Url="html/1269729860.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="b39fbd53-0b0d-4f83-8d65-654e92a890f5" Title="IEmwinContent(T) Interface" Url="html/1558971958.htm">
+    <HelpTOCNode Id="07b6e8fc-e5d4-4cdc-91ad-486fabaaa90d" Title="IEmwinContent(T) Interface" Url="html/1558971958.htm">
       <HelpTOCNode Title="IEmwinContent Members" Url="html/2049196139.htm" />
       <HelpTOCNode Title="IEmwinContent Methods" Url="html/977387490.htm" />
-      <HelpTOCNode Id="fc3651fe-893c-4482-bda0-fa861419f881" Title="IEmwinContent Properties" Url="html/1691235843.htm">
+      <HelpTOCNode Id="a1f85ee1-7d33-45d5-90ed-c0dc79d22335" Title="IEmwinContent Properties" Url="html/1691235843.htm">
         <HelpTOCNode Title="Content Property " Url="html/999476429.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="29a7f82a-3bfb-47a0-b716-43aade171643" Title="IImageProduct Interface" Url="html/1660566863.htm">
+    <HelpTOCNode Id="a513aeab-c491-4c96-b737-51e7e4cd16a7" Title="IImageProduct Interface" Url="html/1660566863.htm">
       <HelpTOCNode Title="IImageProduct Members" Url="html/855925443.htm" />
       <HelpTOCNode Title="IImageProduct Methods" Url="html/101041794.htm" />
-      <HelpTOCNode Id="acd3be9c-65cd-4d8e-9798-e2731cdcae9b" Title="IImageProduct Properties" Url="html/1619439570.htm">
-        <HelpTOCNode Title="Description Property " Url="html/1022973982.htm" />
+      <HelpTOCNode Id="92bd202b-71b1-40db-9663-b6e5b3c843c4" Title="IImageProduct Properties" Url="html/1619439570.htm">
         <HelpTOCNode Title="Height Property " Url="html/1657419638.htm" />
         <HelpTOCNode Title="Width Property " Url="html/959572620.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="af2208ce-4463-4013-ad56-611f9756d11c" Title="IQuickBlockTransferSegment Interface" Url="html/1580295705.htm">
+    <HelpTOCNode Id="0cdedf5a-2ea0-4953-8c8d-45d1a86ac64c" Title="IQuickBlockTransferSegment Interface" Url="html/1580295705.htm">
       <HelpTOCNode Title="IQuickBlockTransferSegment Members" Url="html/117628096.htm" />
-      <HelpTOCNode Id="74a44b5a-9a5a-4856-9aba-1dbcac0649c4" Title="IQuickBlockTransferSegment Methods" Url="html/799846322.htm">
+      <HelpTOCNode Id="61f32c9d-31bb-473a-a22e-701570881f9d" Title="IQuickBlockTransferSegment Methods" Url="html/799846322.htm">
         <HelpTOCNode Title="GetKey Method " Url="html/40359766.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="692710f3-7442-4307-9dfe-c1bde7f81027" Title="IQuickBlockTransferSegment Properties" Url="html/674330990.htm">
+      <HelpTOCNode Id="e688b683-b0b4-4d69-a08a-d1369bf4aa6d" Title="IQuickBlockTransferSegment Properties" Url="html/674330990.htm">
         <HelpTOCNode Title="BlockNumber Property " Url="html/1161241495.htm" />
         <HelpTOCNode Title="Checksum Property " Url="html/725703933.htm" />
         <HelpTOCNode Title="Header Property " Url="html/66179320.htm" />
@@ -88,27 +108,27 @@
         <HelpTOCNode Title="Version Property " Url="html/1602853182.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="b96e8773-ba13-469a-a840-74541c9b7ce1" Title="ITextProduct Interface" Url="html/843918162.htm">
+    <HelpTOCNode Id="d58417bb-3bd3-45f2-82dd-304bd875902c" Title="ITextProduct Interface" Url="html/843918162.htm">
       <HelpTOCNode Title="ITextProduct Members" Url="html/338282731.htm" />
       <HelpTOCNode Title="ITextProduct Methods" Url="html/215854928.htm" />
-      <HelpTOCNode Id="9c83a802-b443-4cee-8eda-880e0f8e7b93" Title="ITextProduct Properties" Url="html/1812873425.htm">
+      <HelpTOCNode Id="d5876653-acc0-46a9-910c-701e2d8ec07d" Title="ITextProduct Properties" Url="html/1812873425.htm">
         <HelpTOCNode Title="Header Property " Url="html/1755524288.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="9a37b9f9-5f18-418d-8ef4-7527423a6004" Title="IUniversalGeographicCode Interface" Url="html/1897214817.htm">
+    <HelpTOCNode Id="eca417b9-8a73-4d55-b5db-fedd92293798" Title="IUniversalGeographicCode Interface" Url="html/1897214817.htm">
       <HelpTOCNode Title="IUniversalGeographicCode Members" Url="html/405973995.htm" />
       <HelpTOCNode Title="IUniversalGeographicCode Methods" Url="html/1553645213.htm" />
-      <HelpTOCNode Id="f83134fc-860c-409e-a8ca-50ec1664baa4" Title="IUniversalGeographicCode Properties" Url="html/499976316.htm">
+      <HelpTOCNode Id="bbfae3a8-1cdf-4909-843c-0fb9ab2fa0d9" Title="IUniversalGeographicCode Properties" Url="html/499976316.htm">
         <HelpTOCNode Title="Id Property " Url="html/1630770145.htm" />
         <HelpTOCNode Title="PurgeTime Property " Url="html/152701415.htm" />
         <HelpTOCNode Title="State Property " Url="html/1748593984.htm" />
         <HelpTOCNode Title="Type Property " Url="html/1574824705.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="19bb0478-b474-470f-b270-0912a039d194" Title="IValidTimeEventCode Interface" Url="html/559422286.htm">
+    <HelpTOCNode Id="3b2b4dd1-65cb-47dd-ab6a-3d0f54e008f1" Title="IValidTimeEventCode Interface" Url="html/559422286.htm">
       <HelpTOCNode Title="IValidTimeEventCode Members" Url="html/268032474.htm" />
       <HelpTOCNode Title="IValidTimeEventCode Methods" Url="html/1693244345.htm" />
-      <HelpTOCNode Id="2feed9be-ebb6-40d8-bd85-4396c68e7f27" Title="IValidTimeEventCode Properties" Url="html/2118884199.htm">
+      <HelpTOCNode Id="6e216a6c-2033-4c42-a617-17699b1d5fbf" Title="IValidTimeEventCode Properties" Url="html/2118884199.htm">
         <HelpTOCNode Title="ActionCode Property " Url="html/1401856537.htm" />
         <HelpTOCNode Title="Begin Property " Url="html/193093934.htm" />
         <HelpTOCNode Title="End Property " Url="html/859802547.htm" />
@@ -120,27 +140,27 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="bd29ada4-1fb8-43ac-bed6-07037bbcc784" Title="Emwin.Core.DataObjects Namespace" Url="html/570598424.htm">
-    <HelpTOCNode Id="26a97289-c527-4584-9aed-db6894a5e419" Title="ByteBlasterServerList Class" Url="html/1214950368.htm">
+  <HelpTOCNode Id="5c2a3016-2d30-41fe-a456-e63af37aa36b" Title="Emwin.Core.DataObjects Namespace" Url="html/570598424.htm">
+    <HelpTOCNode Id="62e578df-1223-4c6b-a41a-416f75b6ecfe" Title="ByteBlasterServerList Class" Url="html/1214950368.htm">
       <HelpTOCNode Title="ByteBlasterServerList Members" Url="html/1934946117.htm" />
-      <HelpTOCNode Id="eff571a2-9a9b-4cb8-818f-947b0d347eee" Title="ByteBlasterServerList Constructor " Url="html/1233548445.htm">
+      <HelpTOCNode Id="3b930c31-5e26-4fa5-ac80-293847a2bfff" Title="ByteBlasterServerList Constructor " Url="html/1233548445.htm">
         <HelpTOCNode Title="ByteBlasterServerList Constructor " Url="html/619058651.htm" />
         <HelpTOCNode Title="ByteBlasterServerList Constructor (IEnumerable(String), IEnumerable(String))" Url="html/1862230107.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="7a347457-b5de-4276-860f-8874bf3e45a6" Title="ByteBlasterServerList Fields" Url="html/1393014848.htm">
+      <HelpTOCNode Id="691e74f9-fdb9-47e6-8544-62523051d182" Title="ByteBlasterServerList Fields" Url="html/1393014848.htm">
         <HelpTOCNode Title="DefaultSatServers Field" Url="html/947571888.htm" />
         <HelpTOCNode Title="DefaultServers Field" Url="html/1072576130.htm" />
         <HelpTOCNode Title="SatServers Field" Url="html/227786446.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ByteBlasterServerList Methods" Url="html/856674406.htm" />
-      <HelpTOCNode Id="5d6538d6-25e4-41be-9fbc-e76357ddcd9e" Title="ByteBlasterServerList Properties" Url="html/95545633.htm">
+      <HelpTOCNode Id="053f78f3-c5cd-40dd-84ba-0356b42328b8" Title="ByteBlasterServerList Properties" Url="html/95545633.htm">
         <HelpTOCNode Title="ReceivedAt Property " Url="html/544393613.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="fd0e2856-5898-422d-a6e8-2d3eac31246a" Title="CommsHeader Class" Url="html/33324122.htm">
+    <HelpTOCNode Id="007110f9-0b0a-4633-981b-1fcd3455f84e" Title="CommsHeader Class" Url="html/33324122.htm">
       <HelpTOCNode Title="CommsHeader Members" Url="html/2098610405.htm" />
       <HelpTOCNode Title="CommsHeader Methods" Url="html/1305057589.htm" />
-      <HelpTOCNode Id="63e1858e-2d38-4ced-afc9-d01fb2618b03" Title="CommsHeader Properties" Url="html/248073223.htm">
+      <HelpTOCNode Id="b630d937-c660-4553-b17d-587cfa24f341" Title="CommsHeader Properties" Url="html/248073223.htm">
         <HelpTOCNode Title="AfosPil Property " Url="html/1018575021.htm" />
         <HelpTOCNode Title="AwipsId Property " Url="html/1502311667.htm" />
         <HelpTOCNode Title="Indicator Property " Url="html/1449039466.htm" />
@@ -148,29 +168,29 @@
         <HelpTOCNode Title="WmoId Property " Url="html/1862591358.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="3dfe2648-d865-4348-8de4-e9529610657b" Title="QuickBlockTransferSegment Class" Url="html/495295339.htm">
+    <HelpTOCNode Id="2966ea54-2a8c-4b6e-882d-ae349ebaa43d" Title="QuickBlockTransferSegment Class" Url="html/495295339.htm">
       <HelpTOCNode Title="QuickBlockTransferSegment Members" Url="html/1030626540.htm" />
       <HelpTOCNode Title="QuickBlockTransferSegment Methods" Url="html/974896103.htm" />
-      <HelpTOCNode Id="5f96dd07-e24d-43ed-b932-a6a530b78e97" Title="QuickBlockTransferSegment Properties" Url="html/607202590.htm">
+      <HelpTOCNode Id="36b9fb08-430a-4373-b3d4-dd5357fea630" Title="QuickBlockTransferSegment Properties" Url="html/607202590.htm">
         <HelpTOCNode Title="BlockNumber Property " Url="html/66094203.htm" />
         <HelpTOCNode Title="Checksum Property " Url="html/1518265226.htm" />
         <HelpTOCNode Title="Content Property " Url="html/1149980370.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="10382feb-46c4-463a-bb57-ba531a3f9d9a" Title="UniversalGeographicCode Class" Url="html/10435088.htm">
+    <HelpTOCNode Id="39c787c0-122a-4128-844f-d0f80788e089" Title="UniversalGeographicCode Class" Url="html/10435088.htm">
       <HelpTOCNode Title="UniversalGeographicCode Members" Url="html/695023928.htm" />
       <HelpTOCNode Title="UniversalGeographicCode Methods" Url="html/737162958.htm" />
-      <HelpTOCNode Id="6fbdb702-ff07-4501-a93e-5b1fb8e4914a" Title="UniversalGeographicCode Properties" Url="html/42785922.htm">
+      <HelpTOCNode Id="c70ff1d5-1cc8-4f5b-bc5c-1b51f666d5e0" Title="UniversalGeographicCode Properties" Url="html/42785922.htm">
         <HelpTOCNode Title="Id Property " Url="html/211566964.htm" />
         <HelpTOCNode Title="PurgeTime Property " Url="html/1454376868.htm" />
         <HelpTOCNode Title="State Property " Url="html/1281262860.htm" />
         <HelpTOCNode Title="Type Property " Url="html/546268898.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="80a83794-8b6b-4e4f-8dc8-3bfb3781962f" Title="ValidTimeEventCode Class" Url="html/347320636.htm">
+    <HelpTOCNode Id="c532d7e3-ef78-4e17-ab77-dddc404a1ec0" Title="ValidTimeEventCode Class" Url="html/347320636.htm">
       <HelpTOCNode Title="ValidTimeEventCode Members" Url="html/417898899.htm" />
       <HelpTOCNode Title="ValidTimeEventCode Methods" Url="html/794170499.htm" />
-      <HelpTOCNode Id="47fd8dbc-726f-4acf-886c-6a9e117b8598" Title="ValidTimeEventCode Properties" Url="html/161439369.htm">
+      <HelpTOCNode Id="8886a522-a5c5-43b0-b43b-ea572bc55dc2" Title="ValidTimeEventCode Properties" Url="html/161439369.htm">
         <HelpTOCNode Title="ActionCode Property " Url="html/1281395170.htm" />
         <HelpTOCNode Title="Begin Property " Url="html/1114073979.htm" />
         <HelpTOCNode Title="End Property " Url="html/223128702.htm" />
@@ -182,88 +202,81 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="dfbca7ba-33c5-4238-ae9d-dcbad6799dd7" Title="Emwin.Core.Extensions Namespace" Url="html/396279797.htm">
-    <HelpTOCNode Id="0ff5f2ef-f439-44ca-bd9b-1743e1c230e2" Title="HeaderExtensions Class" Url="html/302507068.htm">
-      <HelpTOCNode Title="HeaderExtensions Members" Url="html/1525732.htm" />
-      <HelpTOCNode Id="6cd45f54-063d-4604-a856-ef3de6db9988" Title="HeaderExtensions Methods" Url="html/971337607.htm">
-        <HelpTOCNode Title="Blah Method " Url="html/1965222916.htm" />
-      </HelpTOCNode>
-    </HelpTOCNode>
-    <HelpTOCNode Id="d2e1ae23-6acf-48c4-b291-7d9a74b95b6d" Title="VtecExtensions Class" Url="html/1881989404.htm">
+  <HelpTOCNode Id="37f3ee2f-5fcf-4533-b965-e2ca66b382b4" Title="Emwin.Core.Extensions Namespace" Url="html/396279797.htm">
+    <HelpTOCNode Id="143112c9-8ab8-48ff-847c-1c0464ad9f5c" Title="VtecExtensions Class" Url="html/1881989404.htm">
       <HelpTOCNode Title="VtecExtensions Members" Url="html/406451076.htm" />
-      <HelpTOCNode Id="fcc354aa-4d4d-4f95-93ee-a99a7d3e752d" Title="VtecExtensions Methods" Url="html/1248666055.htm">
+      <HelpTOCNode Id="8347919c-929d-4c35-bac4-d8ab9b07eb86" Title="VtecExtensions Methods" Url="html/1248666055.htm">
         <HelpTOCNode Title="GetSignificanceLevel Method " Url="html/1315892736.htm" />
         <HelpTOCNode Title="IsActive Method " Url="html/1726488458.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="4f412d6e-462c-4d4f-9bb8-b14e8be32658" Title="Emwin.Core.Parsers Namespace" Url="html/1648609939.htm">
-    <HelpTOCNode Id="bc82d8cf-d341-4b8e-ac77-3c54c01cc16b" Title="BulletinParser Class" Url="html/683068779.htm">
+  <HelpTOCNode Id="2e4952cf-54dd-498d-99cc-3bc92f194fe1" Title="Emwin.Core.Parsers Namespace" Url="html/1648609939.htm">
+    <HelpTOCNode Id="44f95bea-5248-4849-af7e-835fbad657bf" Title="BulletinParser Class" Url="html/683068779.htm">
       <HelpTOCNode Title="BulletinParser Members" Url="html/442220222.htm" />
-      <HelpTOCNode Id="9e9eadb9-058e-4c6b-ad40-cb56b790e14f" Title="BulletinParser Methods" Url="html/1628309918.htm">
+      <HelpTOCNode Id="198920ef-4315-4e6a-948a-3cdca5299f66" Title="BulletinParser Methods" Url="html/1628309918.htm">
         <HelpTOCNode Title="ParseProduct Method " Url="html/1656146467.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="8ade7d69-337d-4e9a-afe0-14bc32ce8b62" Title="ContentTypeParser Class" Url="html/251528657.htm">
+    <HelpTOCNode Id="45a57bc5-6c0a-4333-9fa3-7ebfd7f76f37" Title="ContentTypeParser Class" Url="html/251528657.htm">
       <HelpTOCNode Title="ContentTypeParser Members" Url="html/1537966303.htm" />
-      <HelpTOCNode Id="a403ae8b-163e-4eec-9013-3e3036157e54" Title="ContentTypeParser Methods" Url="html/1069711479.htm">
+      <HelpTOCNode Id="ed1650d5-b184-42f9-a9d3-3c8576950094" Title="ContentTypeParser Methods" Url="html/1069711479.htm">
         <HelpTOCNode Title="GetFileContentType Method " Url="html/989308377.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="ecf2b761-f34c-4cfa-95de-3195f4b6ea58" Title="HeadingParser Class" Url="html/526647829.htm">
+    <HelpTOCNode Id="ad664c04-5f2f-4e4f-ad51-f37d9470e9bf" Title="HeadingParser Class" Url="html/526647829.htm">
       <HelpTOCNode Title="HeadingParser Members" Url="html/1677603271.htm" />
-      <HelpTOCNode Id="fb5e6370-3544-43eb-9eac-d2b5a518c33a" Title="HeadingParser Methods" Url="html/2109858549.htm">
+      <HelpTOCNode Id="a3ce3923-a6b4-4394-85f2-63159e31ccd7" Title="HeadingParser Methods" Url="html/2109858549.htm">
         <HelpTOCNode Title="ParseProduct Method " Url="html/1778459226.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="d2df566c-1170-4ce0-93a3-73f7fd27a868" Title="SpatialParser Class" Url="html/621143206.htm">
+    <HelpTOCNode Id="a9ee4b84-586a-4786-8235-5341f407de0e" Title="SpatialParser Class" Url="html/621143206.htm">
       <HelpTOCNode Title="SpatialParser Members" Url="html/74863014.htm" />
-      <HelpTOCNode Id="21724eb7-9e5d-4ba0-b0a9-ef9a1cc2ab5a" Title="SpatialParser Methods" Url="html/977923657.htm">
+      <HelpTOCNode Id="ffd98668-80e7-4795-885a-1b12aa10cc56" Title="SpatialParser Methods" Url="html/977923657.htm">
         <HelpTOCNode Title="CreatePolygon Method " Url="html/696999046.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="11ed4af0-301d-47df-a4a8-773229b54e86" Title="UgcParser Class" Url="html/163955418.htm">
+    <HelpTOCNode Id="d66f79b1-234e-4236-9ab4-377d2b32d014" Title="UgcParser Class" Url="html/163955418.htm">
       <HelpTOCNode Title="UgcParser Members" Url="html/1412069724.htm" />
-      <HelpTOCNode Id="6a8b3091-8f03-4e80-b214-dfc872a4d050" Title="UgcParser Methods" Url="html/76761717.htm">
+      <HelpTOCNode Id="f4acb44b-0b5c-406f-9053-47a4da0fdfc8" Title="UgcParser Methods" Url="html/76761717.htm">
         <HelpTOCNode Title="ParseProduct Method " Url="html/905524952.htm" />
         <HelpTOCNode Title="ParseUgc Method " Url="html/1457207724.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="bff250f4-4df8-4448-8f72-814c1e6e7a52" Title="VtecParser Class" Url="html/2078821197.htm">
+    <HelpTOCNode Id="06d09833-2c6e-46d3-bd1f-6942c1031606" Title="VtecParser Class" Url="html/2078821197.htm">
       <HelpTOCNode Title="VtecParser Members" Url="html/506110020.htm" />
       <HelpTOCNode Title="VtecParser Methods" Url="html/284375101.htm" />
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="0038d81a-db3e-4c5a-a6cb-4b6cbeeeee18" Title="Emwin.Core.Products Namespace" Url="html/812884526.htm">
-    <HelpTOCNode Id="74192288-7ee5-47e2-afbe-f41ab0544d21" Title="BulletinProduct Class" Url="html/1817262784.htm">
+  <HelpTOCNode Id="ba5a9506-37d1-41eb-b92f-500a6cf589d5" Title="Emwin.Core.Products Namespace" Url="html/812884526.htm">
+    <HelpTOCNode Id="ab78fa6e-add9-4df2-bdf1-a9fddca93d94" Title="BulletinProduct Class" Url="html/1817262784.htm">
       <HelpTOCNode Title="BulletinProduct Members" Url="html/1273852217.htm" />
       <HelpTOCNode Title="BulletinProduct Methods" Url="html/828334514.htm" />
-      <HelpTOCNode Id="37ca7d73-be2b-4e35-82a9-a519e8af13a7" Title="BulletinProduct Properties" Url="html/681553256.htm">
+      <HelpTOCNode Id="b4edc991-05cf-47b4-a604-776de109717d" Title="BulletinProduct Properties" Url="html/681553256.htm">
         <HelpTOCNode Title="GeoCodes Property " Url="html/304078575.htm" />
         <HelpTOCNode Title="Polygons Property " Url="html/6023692.htm" />
         <HelpTOCNode Title="PrimaryVtecCodes Property " Url="html/484296569.htm" />
         <HelpTOCNode Title="SequenceNumber Property " Url="html/1176111350.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="3c3b5acb-d217-4f56-9a88-bd4b14796b30" Title="CompressedContent Class" Url="html/478199329.htm">
+    <HelpTOCNode Id="5b656d56-a8d7-46f3-bc1c-d7e7f6546f53" Title="CompressedContent Class" Url="html/478199329.htm">
       <HelpTOCNode Title="CompressedContent Members" Url="html/1689908743.htm" />
       <HelpTOCNode Title="CompressedContent Methods" Url="html/200671798.htm" />
-      <HelpTOCNode Id="65765360-7c99-446a-8701-e7089eacc167" Title="CompressedContent Properties" Url="html/1874032289.htm">
+      <HelpTOCNode Id="a5ab9bc6-c92b-4279-a769-d8993bac2af0" Title="CompressedContent Properties" Url="html/1874032289.htm">
         <HelpTOCNode Title="Content Property " Url="html/973943430.htm" />
         <HelpTOCNode Title="Filename Property " Url="html/728769933.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="41e502ed-27f9-444d-b01e-91dd88d7f146" Title="ImageProduct Class" Url="html/1247217555.htm">
+    <HelpTOCNode Id="f7a2c3a1-c2e8-46bc-8bb1-ae92b7abb019" Title="ImageProduct Class" Url="html/1247217555.htm">
       <HelpTOCNode Title="ImageProduct Members" Url="html/761668315.htm" />
       <HelpTOCNode Title="ImageProduct Methods" Url="html/444911950.htm" />
-      <HelpTOCNode Id="e854a169-153f-4090-9657-1e70004b3f36" Title="ImageProduct Properties" Url="html/739711297.htm">
+      <HelpTOCNode Id="0e2d19b0-c984-47d3-b772-4ca23fdf75b3" Title="ImageProduct Properties" Url="html/739711297.htm">
         <HelpTOCNode Title="Content Property " Url="html/722774447.htm" />
-        <HelpTOCNode Title="Description Property " Url="html/1885067423.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="30439d41-3293-44e3-ad42-6a99fdea81dd" Title="ProductFactory Class" Url="html/196752648.htm">
+    <HelpTOCNode Id="1badbde3-daa6-4553-aab6-83bf0b8d7d4f" Title="ProductFactory Class" Url="html/196752648.htm">
       <HelpTOCNode Title="ProductFactory Members" Url="html/1244365310.htm" />
-      <HelpTOCNode Id="836e9953-fc27-40d7-8c41-314503392fe7" Title="ProductFactory Methods" Url="html/1870353750.htm">
+      <HelpTOCNode Id="02352b7b-3715-4211-967b-c57813890908" Title="ProductFactory Methods" Url="html/1870353750.htm">
         <HelpTOCNode Title="ConvertTo(T) Method " Url="html/233717549.htm" />
         <HelpTOCNode Title="CreateBulletinProduct Method " Url="html/1767264478.htm" />
         <HelpTOCNode Title="CreateCompressedContent Method " Url="html/1329753049.htm" />
@@ -271,150 +284,53 @@
         <HelpTOCNode Title="CreateTextProduct Method " Url="html/772594498.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="4d90cd44-0a18-4fa8-8fff-dc3a9126b119" Title="TextProduct Class" Url="html/1641019303.htm">
+    <HelpTOCNode Id="ca6bb666-71aa-4686-90e7-78b6d2f451bd" Title="TextProduct Class" Url="html/1641019303.htm">
       <HelpTOCNode Title="TextProduct Members" Url="html/1218500720.htm" />
       <HelpTOCNode Title="TextProduct Methods" Url="html/592464935.htm" />
-      <HelpTOCNode Id="4c5756e8-27e0-4956-ba1b-5ed9508c5196" Title="TextProduct Properties" Url="html/1813065170.htm">
+      <HelpTOCNode Id="28904748-0e24-47a0-a482-37bb89f58de3" Title="TextProduct Properties" Url="html/1813065170.htm">
         <HelpTOCNode Title="Content Property " Url="html/1549383619.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="2e6f249b-9d7f-4539-b004-83a4ebf5c5e9" Title="Emwin.Core.References Namespace" Url="html/172616200.htm">
-    <HelpTOCNode Id="d2bbbc71-3263-49e5-8474-13904fa0d48d" Title="GraphicProduct Class" Url="html/1325037884.htm">
-      <HelpTOCNode Title="GraphicProduct Members" Url="html/896882220.htm" />
-      <HelpTOCNode Title="GraphicProduct Methods" Url="html/2054004365.htm" />
-      <HelpTOCNode Id="f54f2249-2adb-4cf9-a52d-0c490929cc9f" Title="GraphicProduct Properties" Url="html/553194563.htm">
-        <HelpTOCNode Title="ATPATHUS Property " Url="html/1989514949.htm" />
-        <HelpTOCNode Title="CMPWLDUS Property " Url="html/182491776.htm" />
-        <HelpTOCNode Title="CRB1WBCA Property " Url="html/809002905.htm" />
-        <HelpTOCNode Title="CRB2WBCA Property " Url="html/1899677474.htm" />
-        <HelpTOCNode Title="CRB3WBCA Property " Url="html/1798920925.htm" />
-        <HelpTOCNode Title="CSA001US Property " Url="html/1037093530.htm" />
-        <HelpTOCNode Title="CUBARADR Property " Url="html/307289644.htm" />
-        <HelpTOCNode Title="Culture Property " Url="html/997807204.htm" />
-        <HelpTOCNode Title="FFG001US Property " Url="html/395560931.htm" />
-        <HelpTOCNode Title="FFG003US Property " Url="html/395560929.htm" />
-        <HelpTOCNode Title="FFG006US Property " Url="html/395560926.htm" />
-        <HelpTOCNode Title="G08CIRUS Property " Url="html/321296667.htm" />
-        <HelpTOCNode Title="G08HURUS Property " Url="html/1609465200.htm" />
-        <HelpTOCNode Title="G10CIRUS Property " Url="html/336500990.htm" />
-        <HelpTOCNode Title="G10FDIUS Property " Url="html/2137040818.htm" />
-        <HelpTOCNode Title="GMS005US Property " Url="html/567462120.htm" />
-        <HelpTOCNode Title="GPHJ88US Property " Url="html/157722040.htm" />
-        <HelpTOCNode Title="IMGFNT00 Property " Url="html/942903146.htm" />
-        <HelpTOCNode Title="IMGFNT06 Property " Url="html/219896268.htm" />
-        <HelpTOCNode Title="IMGFNT12 Property " Url="html/2105637024.htm" />
-        <HelpTOCNode Title="IMGFNT18 Property " Url="html/1299067970.htm" />
-        <HelpTOCNode Title="IMGSJUPR Property " Url="html/1304416522.htm" />
-        <HelpTOCNode Title="IMGSNDUS Property " Url="html/797031020.htm" />
-        <HelpTOCNode Title="IMGSWPUS Property " Url="html/407979432.htm" />
-        <HelpTOCNode Title="IMGWWAUS Property " Url="html/156670587.htm" />
-        <HelpTOCNode Title="INDCIRUS Property " Url="html/1214555945.htm" />
-        <HelpTOCNode Title="METFIREU Property " Url="html/147295645.htm" />
-        <HelpTOCNode Title="MOD91EUS Property " Url="html/940292133.htm" />
-        <HelpTOCNode Title="MOD92FBW Property " Url="html/1250040390.htm" />
-        <HelpTOCNode Title="MOD93SUS Property " Url="html/1208072243.htm" />
-        <HelpTOCNode Title="MOD94SUS Property " Url="html/1341962291.htm" />
-        <HelpTOCNode Title="MOD96FBW Property " Url="html/714480198.htm" />
-        <HelpTOCNode Title="MODDY1US Property " Url="html/817149354.htm" />
-        <HelpTOCNode Title="MODDY2US Property " Url="html/817149355.htm" />
-        <HelpTOCNode Title="MODQP1US Property " Url="html/1960334903.htm" />
-        <HelpTOCNode Title="MODQP2US Property " Url="html/1960334902.htm" />
-        <HelpTOCNode Title="RADALLAK Property " Url="html/1504983494.htm" />
-        <HelpTOCNode Title="RADALLGU Property " Url="html/14177352.htm" />
-        <HelpTOCNode Title="RADALLHI Property " Url="html/1627774212.htm" />
-        <HelpTOCNode Title="RADALLPR Property " Url="html/1581244333.htm" />
-        <HelpTOCNode Title="RADALLUS Property " Url="html/1147442414.htm" />
-        <HelpTOCNode Title="RADGRTLK Property " Url="html/526701388.htm" />
-        <HelpTOCNode Title="RADNTHES Property " Url="html/1519402075.htm" />
-        <HelpTOCNode Title="RADPACNW Property " Url="html/1620183830.htm" />
-        <HelpTOCNode Title="RADPACSW Property " Url="html/1620380438.htm" />
-        <HelpTOCNode Title="RADRCKNT Property " Url="html/1701985871.htm" />
-        <HelpTOCNode Title="RADRCKST Property " Url="html/1702182479.htm" />
-        <HelpTOCNode Title="RADREFUS Property " Url="html/2102631461.htm" />
-        <HelpTOCNode Title="RADSMSVY Property " Url="html/1618673861.htm" />
-        <HelpTOCNode Title="RADSTHES Property " Url="html/1478509852.htm" />
-        <HelpTOCNode Title="RADSTHPL Property " Url="html/980265023.htm" />
-        <HelpTOCNode Title="RADUMSVY Property " Url="html/68369605.htm" />
-        <HelpTOCNode Title="ResourceManager Property " Url="html/770560139.htm" />
-        <HelpTOCNode Title="SESALLUS Property " Url="html/1283888338.htm" />
-        <HelpTOCNode Title="TRKATLUS Property " Url="html/639002849.htm" />
-        <HelpTOCNode Title="TRKNEPUS Property " Url="html/206453314.htm" />
-        <HelpTOCNode Title="TRKNINUS Property " Url="html/1400227288.htm" />
-        <HelpTOCNode Title="TRKNWPUS Property " Url="html/1668007358.htm" />
-        <HelpTOCNode Title="TRKSEPUS Property " Url="html/1503508683.htm" />
-        <HelpTOCNode Title="TRKSINUS Property " Url="html/103171919.htm" />
-        <HelpTOCNode Title="TRKSWPUS Property " Url="html/370951989.htm" />
-        <HelpTOCNode Title="TRKWLDUS Property " Url="html/863148235.htm" />
-      </HelpTOCNode>
-    </HelpTOCNode>
-  </HelpTOCNode>
-  <HelpTOCNode Id="de176322-e92e-4214-8d3b-a26340e4b0ff" Title="Emwin.Core.Types Namespace" Url="html/1337149015.htm">
+  <HelpTOCNode Id="e1c61073-13fa-46fa-8006-c8931954257f" Title="Emwin.Core.Types Namespace" Url="html/1337149015.htm">
     <HelpTOCNode Title="ContentFileType Enumeration" Url="html/1000439498.htm" />
     <HelpTOCNode Title="VtecSignificanceLevel Enumeration" Url="html/126689395.htm" />
   </HelpTOCNode>
-  <HelpTOCNode Id="4a64b1f8-7062-4ed0-8542-e1154cb0231a" Title="Emwin.Processor Namespace" Url="html/1962556211.htm">
-    <HelpTOCNode Id="528887cc-1310-4fe1-8d30-d972082daeef" Title="ProcessorBase(T) Class" Url="html/109248198.htm">
+  <HelpTOCNode Id="33da04e4-7991-4175-a96f-5ca391651957" Title="Emwin.Processor Namespace" Url="html/1962556211.htm">
+    <HelpTOCNode Id="2f966956-6828-46bb-8801-493c580101e4" Title="ProcessorBase(T) Class" Url="html/109248198.htm">
       <HelpTOCNode Title="ProcessorBase(T) Members" Url="html/337815059.htm" />
-      <HelpTOCNode Id="1300f43e-846f-473b-b376-5dda418b8649" Title="ProcessorBase(T) Fields" Url="html/1903402708.htm">
+      <HelpTOCNode Id="ab28c121-dce7-4b60-bf6e-a8a7e9c2bdd5" Title="ProcessorBase(T) Fields" Url="html/1903402708.htm">
         <HelpTOCNode Title="DefaultWorkers Field" Url="html/756867395.htm" />
         <HelpTOCNode Title="NumberOfWorkers Field" Url="html/1548476089.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="f1767c54-847e-4ef0-a2e0-f8bd98f9bc36" Title="ProcessorBase(T) Methods" Url="html/1657559952.htm">
+      <HelpTOCNode Id="0511cdfa-c6d7-4906-a088-85496f63b1e0" Title="ProcessorBase(T) Methods" Url="html/1657559952.htm">
         <HelpTOCNode Title="Dispose Method " Url="html/1025252062.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="f55dcefc-57c4-4038-8a2a-0b6a51f82b1b" Title="WeatherProductProcessor Class" Url="html/554940934.htm">
+    <HelpTOCNode Id="5dd9fe76-4102-4ee5-acf6-9e56360428ca" Title="WeatherProductProcessor Class" Url="html/554940934.htm">
       <HelpTOCNode Title="WeatherProductProcessor Members" Url="html/1182624834.htm" />
       <HelpTOCNode Title="WeatherProductProcessor Constructor " Url="html/1587494496.htm" />
       <HelpTOCNode Title="WeatherProductProcessor Fields" Url="html/1352857056.htm" />
       <HelpTOCNode Title="WeatherProductProcessor Methods" Url="html/1249297482.htm" />
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="68617671-ca37-4ab7-8fa9-1966a1111ea5" Title="Emwin.Processor.EventAggregator Namespace" Url="html/677453684.htm">
-    <HelpTOCNode Id="6769b6a2-e7bd-4151-9725-8647677e72cd" Title="DelegateListener(T) Class" Url="html/241974211.htm">
-      <HelpTOCNode Title="DelegateListener(T) Members" Url="html/227302899.htm" />
-      <HelpTOCNode Title="DelegateListener(T) Constructor " Url="html/499102167.htm" />
-      <HelpTOCNode Id="8f54152a-18cc-47d3-b922-d37fb7634971" Title="DelegateListener(T) Methods" Url="html/1727560413.htm">
-        <HelpTOCNode Title="Dispose Method " Url="html/1845124621.htm" />
-        <HelpTOCNode Title="Handle Method " Url="html/1591546563.htm" />
-      </HelpTOCNode>
-    </HelpTOCNode>
-    <HelpTOCNode Id="22a26620-8e88-4f5d-a72d-01767cddeda6" Title="EventAggregator Class" Url="html/1045826446.htm">
-      <HelpTOCNode Title="EventAggregator Members" Url="html/1089215434.htm" />
-      <HelpTOCNode Id="54478a3a-a308-41b7-a8ed-7d60b94c63e4" Title="EventAggregator Constructor " Url="html/1921558311.htm">
-        <HelpTOCNode Title="EventAggregator Constructor " Url="html/1947165132.htm" />
-        <HelpTOCNode Title="EventAggregator Constructor (Config)" Url="html/972284859.htm" />
-      </HelpTOCNode>
-      <HelpTOCNode Id="69055998-7a5e-4783-8a4f-9d0ecdbfbc62" Title="EventAggregator Methods" Url="html/1168984718.htm">
-        <HelpTOCNode Id="a6229697-dfdc-423b-bf45-8a61da96aa4b" Title="SendMessage Method " Url="html/1407072706.htm">
-          <HelpTOCNode Title="SendMessage(TMessage) Method (TMessage, Action(Action))" Url="html/853788613.htm" />
-          <HelpTOCNode Title="SendMessage(TMessage) Method (Action(Action))" Url="html/1119889226.htm" />
-        </HelpTOCNode>
-      </HelpTOCNode>
-    </HelpTOCNode>
-    <HelpTOCNode Id="f8859f29-ed1d-4728-8cbe-1c2877aae50e" Title="EventAggregatorExtensions Class" Url="html/1804367056.htm">
-      <HelpTOCNode Title="EventAggregatorExtensions Members" Url="html/1112311089.htm" />
-      <HelpTOCNode Id="71dab9ff-3ea3-4207-800a-fd33ce444d20" Title="EventAggregatorExtensions Methods" Url="html/1764849648.htm">
-        <HelpTOCNode Title="AddListenerAction(T) Method " Url="html/1608706032.htm" />
-      </HelpTOCNode>
-    </HelpTOCNode>
-    <HelpTOCNode Id="c354b03b-9a01-4abf-b6a9-b918bbc67c04" Title="IEventAggregator Interface" Url="html/1415188875.htm">
+  <HelpTOCNode Id="2faa03dc-71ff-4b90-98d4-7f8b053dba13" Title="Emwin.Processor.EventAggregator Namespace" Url="html/677453684.htm">
+    <HelpTOCNode Id="2b0a571b-ab47-41d3-97b3-c5bd8ff1a800" Title="IEventAggregator Interface" Url="html/1415188875.htm">
       <HelpTOCNode Title="IEventAggregator Methods" Url="html/857048656.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="8d11452f-1574-4e98-973d-135c43d34c83" Title="IEventPublisher Interface" Url="html/795945077.htm">
+    <HelpTOCNode Id="f08a965a-2b96-48be-b01b-dc0ca43574b3" Title="IEventPublisher Interface" Url="html/795945077.htm">
       <HelpTOCNode Title="IEventPublisher Members" Url="html/378613239.htm" />
-      <HelpTOCNode Id="27c296df-f828-4a60-9f44-219289bbb1f2" Title="IEventPublisher Methods" Url="html/1313069108.htm">
-        <HelpTOCNode Id="ea1685da-a694-4c12-8a5a-a0d37edc7376" Title="SendMessage Method " Url="html/680543732.htm">
+      <HelpTOCNode Id="411d7357-c07f-4f2e-be4a-a76e67d62cb8" Title="IEventPublisher Methods" Url="html/1313069108.htm">
+        <HelpTOCNode Id="8e20ce1a-eae5-455e-8e79-5278972269dc" Title="SendMessage Method " Url="html/680543732.htm">
           <HelpTOCNode Title="SendMessage(TMessage) Method (TMessage, Action(Action))" Url="html/1788433576.htm" />
           <HelpTOCNode Title="SendMessage(TMessage) Method (Action(Action))" Url="html/1659054371.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="21f8c29b-cef2-4c0f-93ef-75e76a5c73f5" Title="IEventSubscriptionManager Interface" Url="html/1070109034.htm">
+    <HelpTOCNode Id="7d77edbb-91f2-4a2f-a9c7-853788eaff27" Title="IEventSubscriptionManager Interface" Url="html/1070109034.htm">
       <HelpTOCNode Title="IEventSubscriptionManager Members" Url="html/1518112076.htm" />
-      <HelpTOCNode Id="5547e02e-5a48-4b5f-b491-92fc8fecdec9" Title="IEventSubscriptionManager Methods" Url="html/777827228.htm">
-        <HelpTOCNode Id="df6b4cab-972a-4773-a702-8bddd3485a81" Title="AddListener Method " Url="html/1614415490.htm">
+      <HelpTOCNode Id="116aa6ad-7054-48c6-baa0-a94aa15384d3" Title="IEventSubscriptionManager Methods" Url="html/777827228.htm">
+        <HelpTOCNode Id="be474826-08ca-4c24-bc88-87a5638ccb88" Title="AddListener Method " Url="html/1614415490.htm">
           <HelpTOCNode Title="AddListener Method (Object, Nullable(Boolean))" Url="html/1738768350.htm" />
           <HelpTOCNode Title="AddListener(T) Method " Url="html/1070744620.htm" />
           <HelpTOCNode Title="AddListener(T) Method (IHandle(T), Nullable(Boolean))" Url="html/1718061502.htm" />
@@ -422,37 +338,17 @@
         <HelpTOCNode Title="RemoveListener Method " Url="html/2051471236.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="78f1c856-e9ed-4272-b089-6bc366d8afb1" Title="IHandle(TMessage) Interface" Url="html/1144448659.htm">
+    <HelpTOCNode Id="6d6176a0-e5e1-4956-9e6f-4f832bf688dc" Title="IHandle(TMessage) Interface" Url="html/1144448659.htm">
       <HelpTOCNode Title="IHandle Members" Url="html/1744048321.htm" />
-      <HelpTOCNode Id="3e2ee51c-eb90-4eec-8a9e-0e699c1b583d" Title="IHandle Methods" Url="html/1482453010.htm">
+      <HelpTOCNode Id="badc8997-8834-4e08-9ff7-7ad35493b1ed" Title="IHandle Methods" Url="html/1482453010.htm">
         <HelpTOCNode Title="Handle Method " Url="html/989823877.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="f1e843c9-4274-488a-abe0-ea493efc4e95" Title="IPipelineFilter(T) Interface" Url="html/835473370.htm">
-      <HelpTOCNode Title="IPipelineFilter Members" Url="html/539896774.htm" />
-      <HelpTOCNode Id="f404965d-8550-4a29-ba4d-63302c6ca9ad" Title="IPipelineFilter Methods" Url="html/162612761.htm">
-        <HelpTOCNode Title="Execute Method " Url="html/165315016.htm" />
-      </HelpTOCNode>
-    </HelpTOCNode>
-    <HelpTOCNode Id="72027009-caf4-44ad-a872-9312a0b13c65" Title="ObservableListener(T) Class" Url="html/1189446265.htm">
-      <HelpTOCNode Title="ObservableListener(T) Members" Url="html/76859900.htm" />
-      <HelpTOCNode Id="0a9bc5c0-af6b-40eb-8759-edfc70c6d921" Title="ObservableListener(T) Methods" Url="html/663690487.htm">
-        <HelpTOCNode Title="Handle Method " Url="html/1300586377.htm" />
-        <HelpTOCNode Title="Subscribe Method " Url="html/765334543.htm" />
-      </HelpTOCNode>
-    </HelpTOCNode>
-    <HelpTOCNode Id="aa9a16f4-54a4-4f49-bf79-05a04e60e709" Title="Pipeline(T) Class" Url="html/656183413.htm">
-      <HelpTOCNode Title="Pipeline(T) Members" Url="html/1874120759.htm" />
-      <HelpTOCNode Id="d6c101dd-e3c4-47c2-aacd-e509311e72e8" Title="Pipeline(T) Fields" Url="html/1925179581.htm">
-        <HelpTOCNode Title="Count Field" Url="html/1876250598.htm" />
-      </HelpTOCNode>
-      <HelpTOCNode Title="Pipeline(T) Methods" Url="html/1956779810.htm" />
-    </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="0c159317-0666-452e-9bf0-d56689373f5f" Title="Emwin.Processor.Instrumentation Namespace" Url="html/778636501.htm">
-    <HelpTOCNode Id="f85c0efc-addd-4d29-a674-f472cdfcd45a" Title="ProcessorEventSource Class" Url="html/862454943.htm">
+  <HelpTOCNode Id="9c7149d5-3b27-444d-957d-43b39eab6e47" Title="Emwin.Processor.Instrumentation Namespace" Url="html/778636501.htm">
+    <HelpTOCNode Id="32e7917e-60d3-41c1-8e77-0faa6506a9c7" Title="ProcessorEventSource Class" Url="html/862454943.htm">
       <HelpTOCNode Title="ProcessorEventSource Members" Url="html/1904710522.htm" />
-      <HelpTOCNode Id="09d2b318-9f31-4483-bec5-78cade688352" Title="ProcessorEventSource Fields" Url="html/7051088.htm">
+      <HelpTOCNode Id="0c5dc67b-c520-40bc-891b-e64841674db2" Title="ProcessorEventSource Fields" Url="html/7051088.htm">
         <HelpTOCNode Title="Log Field" Url="html/728997343.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ProcessorEventSource Methods" Url="html/25613979.htm" />
