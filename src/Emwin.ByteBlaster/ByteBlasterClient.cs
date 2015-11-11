@@ -111,14 +111,7 @@ namespace Emwin.ByteBlaster
         /// </summary>
         public void Start()
         {
-            if (_task != null && _task.IsCompleted == false) return;
-
-            _cancelSource = new CancellationTokenSource();
-            _task = Task.Factory.StartNew(
-                function: ExecuteAsync,
-                cancellationToken: _cancelSource.Token,
-                creationOptions: TaskCreationOptions.LongRunning,
-                scheduler: TaskScheduler.Default).Unwrap();
+            StartAsync(new CancellationToken()).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -131,10 +124,9 @@ namespace Emwin.ByteBlaster
                 throw new InvalidOperationException("Task is already running");
 
             _cancelSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-            _task = Task.Factory.StartNew(ExecuteAsync,
-                cancellationToken: _cancelSource.Token,
-                creationOptions: TaskCreationOptions.LongRunning,
-                scheduler: TaskScheduler.Default).Unwrap();
+            _task = Task.Factory
+                .StartNew(ExecuteAsync, _cancelSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default)
+                .Unwrap();
 
             return _task;
         }
@@ -180,7 +172,7 @@ namespace Emwin.ByteBlaster
                     _cancelSource.Token.Register(() => _channel.CloseAsync());
                     await _channel.CloseCompletion;
                 }
-                catch (SocketException ex)
+                catch (Exception ex)
                 {
                     ByteBlasterEventSource.Log.Error(ex.GetBaseException().Message, ex.GetBaseException());
                 }
