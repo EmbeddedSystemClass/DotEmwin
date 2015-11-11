@@ -122,6 +122,24 @@ namespace Emwin.ByteBlaster
         }
 
         /// <summary>
+        /// Starts the instance and returns the task.
+        /// </summary>
+        /// <returns>System.Threading.Tasks.Task.</returns>
+        public Task StartAsync(CancellationToken cancellationToken)
+        {
+            if (_task != null && _task.IsCompleted == false)
+                throw new InvalidOperationException("Task is already running");
+
+            _cancelSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            _task = Task.Factory.StartNew(ExecuteAsync,
+                cancellationToken: _cancelSource.Token,
+                creationOptions: TaskCreationOptions.LongRunning,
+                scheduler: TaskScheduler.Default).Unwrap();
+
+            return _task;
+        }
+
+        /// <summary>
         /// Stops this instance.
         /// </summary>
         /// <param name="timeout">The timeout (or infinite if not specified).</param>
