@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 
 namespace Emwin.Core.DataObjects
 {
@@ -42,8 +43,24 @@ namespace Emwin.Core.DataObjects
         public static string[] DefaultSatServers = { };
 
         public static string[] DefaultServers = {
-            "140.90.128.133:1000", "140.90.6.245:1000", "140.90.128.132:1000",
-            "140.90.128.146:1000", "140.90.6.240:1000"
+            "w2.2y.net:2211",
+            "140.90.128.133:1000",
+            "2.pool.iemwin.net:2211",
+            "4.pool.iemwin.net:2211",
+            "woot.moses.bz:2211",
+            "woot2.moses.bz:2211",
+            "3.pool.iemwin.net:2211",
+            "1.pool.iemwin.net:2211",
+            "6.pool.iemwin.net:2211",
+            "emwin.aprsfl.net:2211",
+            "67.217.13.122:2211",
+            "apollo2.netwrx1.com:1000",
+            "mail.sacsoftware.com:2211",
+            "140.90.6.245:1000",
+            "140.90.128.146:1000",
+            "140.90.6.240:1000",
+            "emwin.ewarn.org:2211",
+            "140.90.24.30:22"
         };
 
         #endregion Public Fields
@@ -125,17 +142,17 @@ namespace Emwin.Core.DataObjects
         /// <summary>
         /// Converts host and port string to appropriate end point.
         /// </summary>
-        /// <param name="hostAndPointString">The host and point string.</param>
+        /// <param name="hostAndPortString">The host and point string.</param>
         /// <returns>System.Net.EndPoint.</returns>
-        private static EndPoint ToEndPoint(string hostAndPointString)
+        private static EndPoint ToEndPoint(string hostAndPortString)
         {
-            var split = hostAndPointString.Split(':');
+            var split = hostAndPortString.Split(':');
             var hostName = split[0];
             var portNum = int.Parse(split[1]);
             IPAddress ipAddress;
             if (IPAddress.TryParse(hostName, out ipAddress))
                 return new IPEndPoint(ipAddress, portNum);
-            return new DnsEndPoint(hostName, portNum);
+            return new DnsEndPoint(hostName, portNum, AddressFamily.InterNetwork);
         }
 
         #endregion Private Methods

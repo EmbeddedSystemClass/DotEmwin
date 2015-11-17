@@ -26,7 +26,6 @@
 
 using System;
 using System.Net;
-using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using DotNetty.Transport.Bootstrapping;
@@ -111,7 +110,7 @@ namespace Emwin.ByteBlaster
         /// </summary>
         public void Start()
         {
-            StartAsync(new CancellationToken()).GetAwaiter().GetResult();
+            StartAsync(CancellationToken.None);
         }
 
         /// <summary>
@@ -174,7 +173,7 @@ namespace Emwin.ByteBlaster
                 }
                 catch (Exception ex)
                 {
-                    ByteBlasterEventSource.Log.Error(ex.GetBaseException().Message, ex.GetBaseException());
+                    ByteBlasterEventSource.Log.Error(ex.GetBaseException().Message, ex.ToString());
                 }
 
                 await Task.Delay(5000, _cancelSource.Token);

@@ -24,7 +24,6 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System;
 using System.Threading.Tasks;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
@@ -43,11 +42,9 @@ namespace Emwin.ByteBlaster.Channel
         /// Creates a new byte blaster bootstrap.
         /// </summary>
         /// <returns>DotNetty.Transport.Bootstrapping.Bootstrap.</returns>
-        public static Bootstrap CreateBootstrap(TimeSpan? connectTimeout = null) => new Bootstrap()
-                    .Group(ExecutorGroup)
-                    .Channel<TcpSocketChannel>()
-                    .Option(ChannelOption.ConnectTimeout, connectTimeout ?? TimeSpan.FromSeconds(20))
-                    .Option(ChannelOption.SoKeepalive, true);
+        public static Bootstrap CreateBootstrap() => new Bootstrap()
+            .Group(ExecutorGroup)
+            .Channel<TcpSocketChannel>();
 
         /// <summary>
         /// Shutdowns the executor threads gracefully.
