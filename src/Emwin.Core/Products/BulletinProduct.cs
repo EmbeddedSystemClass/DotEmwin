@@ -53,7 +53,7 @@ namespace Emwin.Core.Products
         /// Gets any vtec codes.
         /// </summary>
         /// <value>The vtec codes.</value>
-        public IEnumerable<IValidTimeEventCode> PrimaryVtecCodes { get; set; }
+        public IValidTimeEventCode PrimaryVtec { get; set; }
 
         #region Public Methods
 
@@ -62,7 +62,7 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
-            $"[BulletinProduct] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {Header}";
+            $"[BulletinProduct] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {Header} {PrimaryVtec}";
 
         #endregion Public Methods
     }

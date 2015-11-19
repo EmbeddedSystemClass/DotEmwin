@@ -105,7 +105,7 @@ namespace Emwin.Core.DataObjects
         /// To the string.
         /// </summary>
         /// <returns>System.String.</returns>
-        public override string ToString() => $"VTEC: {WmoId} #{EventNumber} Action={ActionCode} Phonomenon={PhenomenonCode}) Significance={SignificanceCode} ({Begin:g} -> {End:g})";
+        public override string ToString() => $"VTEC: {WmoId} #{EventNumber} Action={ActionCode} Phonomenon={PhenomenonCode} Significance={SignificanceCode} ({Begin:g} -> {End:g})";
 
         #endregion Public Methods
 

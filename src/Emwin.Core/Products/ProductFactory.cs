@@ -96,7 +96,7 @@ namespace Emwin.Core.Products
             };
 
             product.GeoCodes = UgcParser.ParseProduct(product);
-            product.PrimaryVtecCodes = VtecParser.ParseProduct(product);
+            product.PrimaryVtec = VtecParser.ParseProduct(product).FirstOrDefault();
             product.Polygons = SpatialParser.ParseProduct(product).Select(SpatialParser.ConvertToWellKnownText);
 
             return product;

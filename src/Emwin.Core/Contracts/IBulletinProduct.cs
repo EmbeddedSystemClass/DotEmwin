@@ -52,6 +52,6 @@ namespace Emwin.Core.Contracts
         /// Gets any VTEC codes.
         /// </summary>
         /// <value>The VTEC codes.</value>
-        IEnumerable<IValidTimeEventCode> PrimaryVtecCodes { get; }
+        IValidTimeEventCode PrimaryVtec { get; }
     }
 }
