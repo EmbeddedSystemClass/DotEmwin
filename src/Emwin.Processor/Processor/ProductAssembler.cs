@@ -54,6 +54,12 @@ namespace Emwin.Processor.Processor
                         var textProduct = ProductFactory.ConvertTo<ITextProduct>(bundle);
                         ProcessorEventSource.Log.Verbose("ProductAssembler", textProduct.ToString());
                         ctx.SendMessage(textProduct);
+                        if (IsXml(textProduct))
+                        {
+                            var xmlProduct = ProductFactory.CreateXmlProduct(textProduct);
+                            ProcessorEventSource.Log.Verbose("ProductAssembler", xmlProduct.ToString());
+                            ctx.SendMessage(xmlProduct);
+                        }
                         break;
 
                     case ContentFileType.Image:
@@ -81,5 +87,12 @@ namespace Emwin.Processor.Processor
                 ProcessorEventSource.Log.Error("ProductAssembler", ex.ToString());
             }
         }
+
+        /// <summary>
+        /// Determines whether the specified product is XML.
+        /// </summary>
+        /// <param name="product">The product.</param>
+        /// <returns>System.Boolean.</returns>
+        private bool IsXml(ITextProduct product) => product.Content.IndexOf("<?xml", StringComparison.Ordinal) > 0;
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -24,41 +24,36 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
+using System;
 using System.Collections.Generic;
 using Emwin.Core.DataObjects;
 
 namespace Emwin.Core.Contracts
 {
-    public interface IBulletinProduct : ITextProduct
+    public interface ITrackingLine
     {
         /// <summary>
-        /// Gets the sequence number with the text product.
+        /// Gets the direction deg.
         /// </summary>
-        /// <value>The sequence number.</value>
-        int SequenceNumber { get; }
+        /// <value>The direction deg.</value>
+        int DirectionDeg { get; }
 
         /// <summary>
-        /// Gets the Universal Geographic Codes.
+        /// Gets the line.
         /// </summary>
-        /// <value>The geo codes.</value>
-        IEnumerable<IUniversalGeographicCode> GeoCodes { get; }
+        /// <value>The line.</value>
+        IEnumerable<Location> Line { get; }
 
         /// <summary>
-        /// Gets or sets the polygons.
+        /// Gets the time.
         /// </summary>
-        /// <value>The polygons.</value>
-        IEnumerable<Location[]> Polygons { get; set; }
+        /// <value>The time.</value>
+        DateTimeOffset TimeStamp { get; }
 
         /// <summary>
-        /// Gets any VTEC codes.
+        /// Gets the wind speed KTS.
         /// </summary>
-        /// <value>The VTEC codes.</value>
-        IValidTimeEventCode PrimaryVtec { get; }
-
-        /// <summary>
-        /// Gets the tracking line.
-        /// </summary>
-        /// <value>The tracking line.</value>
-        ITrackingLine TrackingLine { get; }
+        /// <value>The wind speed KTS.</value>
+        int WindSpeedKts { get; }
     }
 }

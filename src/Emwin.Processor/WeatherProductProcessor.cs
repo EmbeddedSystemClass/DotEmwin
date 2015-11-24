@@ -40,6 +40,7 @@ namespace Emwin.Processor
         private readonly ObservableListener<IBulletinProduct> _bulletinObservable = new ObservableListener<IBulletinProduct>();
         private readonly ObservableListener<IImageProduct> _imageObservable = new ObservableListener<IImageProduct>();
         private readonly ObservableListener<ITextProduct> _textObservable = new ObservableListener<ITextProduct>();
+        private readonly ObservableListener<IXmlProduct> _xmlObservable = new ObservableListener<IXmlProduct>();
 
         #endregion Private Fields
 
@@ -75,6 +76,9 @@ namespace Emwin.Processor
         /// </summary>
         /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.ITextProduct&gt;.</returns>
         public IObservable<ITextProduct> GetTextObservable() => _textObservable;
+
+        public IObservable<IXmlProduct> GetXmlObservable() => _xmlObservable;
+
 
         /// <summary>
         /// Called when input is completed.
@@ -117,6 +121,7 @@ namespace Emwin.Processor
                 .AddListener<ProductAssembler>()
                 .AddListener<ZipProcessor>()
                 .AddListener<BulletinSplitter>()
+                .AddListener(_xmlObservable)
                 .AddListener(_textObservable)
                 .AddListener(_imageObservable)
                 .AddListener(_bulletinObservable);

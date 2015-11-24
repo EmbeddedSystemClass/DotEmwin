@@ -36,8 +36,7 @@ namespace Emwin.Core.Parsers
         Unknown,
         Text,
         Image,
-        Compressed,
-        Xml
+        Compressed
     }
 
     /// <summary>

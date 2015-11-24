@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -24,41 +24,23 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System.Collections.Generic;
-using Emwin.Core.DataObjects;
-
-namespace Emwin.Core.Contracts
+namespace Emwin.Core.DataObjects
 {
-    public interface IBulletinProduct : ITextProduct
+    public struct Location
     {
-        /// <summary>
-        /// Gets the sequence number with the text product.
-        /// </summary>
-        /// <value>The sequence number.</value>
-        int SequenceNumber { get; }
+        public double Latitude;
+
+        public double Longitude;
 
         /// <summary>
-        /// Gets the Universal Geographic Codes.
+        /// Initializes a new instance of the <see cref="Location"/> struct.
         /// </summary>
-        /// <value>The geo codes.</value>
-        IEnumerable<IUniversalGeographicCode> GeoCodes { get; }
-
-        /// <summary>
-        /// Gets or sets the polygons.
-        /// </summary>
-        /// <value>The polygons.</value>
-        IEnumerable<Location[]> Polygons { get; set; }
-
-        /// <summary>
-        /// Gets any VTEC codes.
-        /// </summary>
-        /// <value>The VTEC codes.</value>
-        IValidTimeEventCode PrimaryVtec { get; }
-
-        /// <summary>
-        /// Gets the tracking line.
-        /// </summary>
-        /// <value>The tracking line.</value>
-        ITrackingLine TrackingLine { get; }
+        /// <param name="latitude">The latitude.</param>
+        /// <param name="longitude">The longitude.</param>
+        public Location(double latitude, double longitude)
+        {
+            Latitude = latitude;
+            Longitude = longitude;
+        }
     }
 }

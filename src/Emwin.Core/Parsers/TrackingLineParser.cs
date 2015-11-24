@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -25,40 +25,53 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
 
-namespace Emwin.Core.Contracts
+namespace Emwin.Core.Parsers
 {
-    public interface IBulletinProduct : ITextProduct
+    public class TrackingLineParser
     {
-        /// <summary>
-        /// Gets the sequence number with the text product.
-        /// </summary>
-        /// <value>The sequence number.</value>
-        int SequenceNumber { get; }
+
+        #region Private Fields
+
+        private static readonly Regex TimeMotLocRegex = new Regex(@"^TIME\.\.\.MOT\.\.\.LOC\s(?<time>[0-9]{4})Z\s(?<mot>[0-9]{3})DEG\s(?<wind>[0-9]{1,2})KT(?:\s(?<points>[0-9]{4}\s[0-9]{4,5}))+", RegexOptions.ExplicitCapture | RegexOptions.Multiline | RegexOptions.Compiled);
+
+        #endregion Private Fields
+
+        #region Public Methods
 
         /// <summary>
-        /// Gets the Universal Geographic Codes.
+        /// Parses the product and returns a set of latitude/longitude points.
         /// </summary>
-        /// <value>The geo codes.</value>
-        IEnumerable<IUniversalGeographicCode> GeoCodes { get; }
+        /// <param name="product">The product.</param>
+        /// <returns>IEnumerable&lt;TrackingLine&gt;.</returns>
+        public static IEnumerable<TrackingLine> ParseProduct(ITextProduct product)
+        {
+            var matches = TimeMotLocRegex.Matches(product.Content);
 
-        /// <summary>
-        /// Gets or sets the polygons.
-        /// </summary>
-        /// <value>The polygons.</value>
-        IEnumerable<Location[]> Polygons { get; set; }
+            return matches.Cast<Match>().Select(match => new TrackingLine
+            {
+                TimeStamp = TimeParser.ParseHourMinute(product.TimeStamp, match.Groups["time"].Value),
+                DirectionDeg = int.Parse(match.Groups["mot"].Value),
+                WindSpeedKts = int.Parse(match.Groups["wind"].Value),
+                Line = match.Groups["points"].Captures.Cast<Capture>().Select(ToLocation).ToList()
+            });
+        }
 
-        /// <summary>
-        /// Gets any VTEC codes.
-        /// </summary>
-        /// <value>The VTEC codes.</value>
-        IValidTimeEventCode PrimaryVtec { get; }
+        #endregion Public Methods
 
-        /// <summary>
-        /// Gets the tracking line.
-        /// </summary>
-        /// <value>The tracking line.</value>
-        ITrackingLine TrackingLine { get; }
+        #region Private Methods
+
+        private static Location ToLocation(Capture points)
+        {
+            var split = points.Value.Split(' ');
+            return new Location(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
+        }
+
+        #endregion Private Methods
+
     }
 }

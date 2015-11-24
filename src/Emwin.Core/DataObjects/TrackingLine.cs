@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -23,42 +23,36 @@
  *     (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
-
+using System;
 using System.Collections.Generic;
-using Emwin.Core.DataObjects;
+using Emwin.Core.Contracts;
 
-namespace Emwin.Core.Contracts
+namespace Emwin.Core.DataObjects
 {
-    public interface IBulletinProduct : ITextProduct
+    public class TrackingLine : ITrackingLine
     {
         /// <summary>
-        /// Gets the sequence number with the text product.
+        /// Gets or sets the time.
         /// </summary>
-        /// <value>The sequence number.</value>
-        int SequenceNumber { get; }
+        /// <value>The time.</value>
+        public DateTimeOffset TimeStamp { get; set; }
 
         /// <summary>
-        /// Gets the Universal Geographic Codes.
+        /// Gets or sets the direction deg.
         /// </summary>
-        /// <value>The geo codes.</value>
-        IEnumerable<IUniversalGeographicCode> GeoCodes { get; }
+        /// <value>The direction deg.</value>
+        public int DirectionDeg { get; set; }
 
         /// <summary>
-        /// Gets or sets the polygons.
+        /// Gets or sets the wind speed KTS.
         /// </summary>
-        /// <value>The polygons.</value>
-        IEnumerable<Location[]> Polygons { get; set; }
+        /// <value>The wind speed KTS.</value>
+        public int WindSpeedKts { get; set; }
 
         /// <summary>
-        /// Gets any VTEC codes.
+        /// Gets or sets the line.
         /// </summary>
-        /// <value>The VTEC codes.</value>
-        IValidTimeEventCode PrimaryVtec { get; }
-
-        /// <summary>
-        /// Gets the tracking line.
-        /// </summary>
-        /// <value>The tracking line.</value>
-        ITrackingLine TrackingLine { get; }
+        /// <value>The line.</value>
+        public IEnumerable<Location>  Line { get; set; }
     }
 }

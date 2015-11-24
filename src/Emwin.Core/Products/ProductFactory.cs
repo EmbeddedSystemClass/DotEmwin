@@ -60,6 +60,9 @@ namespace Emwin.Core.Products
             var isText = typeof(T) == typeof(ITextProduct);
             var content = segments.Select(b => b.Content).ToList().Combine(isText);
 
+            if (typeof(T) == typeof(IXmlProduct))
+                return (T)CreateXmlProduct(CreateTextProduct(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt));
+
             if (typeof(T) == typeof(ITextProduct))
                 return (T)CreateTextProduct(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt);
 
@@ -97,6 +100,7 @@ namespace Emwin.Core.Products
             product.GeoCodes = UgcParser.ParseProduct(product);
             product.PrimaryVtec = VtecParser.ParseProduct(product).FirstOrDefault();
             product.Polygons = SpatialParser.ParseProduct(product);
+            product.TrackingLine = TrackingLineParser.ParseProduct(product).FirstOrDefault();
 
             return product;
         }
@@ -170,6 +174,28 @@ namespace Emwin.Core.Products
 
             return product;
         }
+
+        /// <summary>
+        /// Creates the XML product.
+        /// </summary>
+        /// <param name="textProduct">The text product.</param>
+        /// <returns>IXmlProduct.</returns>
+        public static IXmlProduct CreateXmlProduct(ITextProduct textProduct)
+        {
+            var xml = textProduct.Content.Substring(textProduct.Content.IndexOf("<?xml", StringComparison.Ordinal));
+
+            var product = new XmlProduct
+            {
+                Filename = textProduct.Filename.Replace(".TXT", ".XML"),
+                TimeStamp = textProduct.TimeStamp,
+                ReceivedAt = textProduct.ReceivedAt,
+                Header = HeadingParser.ParseProduct(textProduct),
+                Content = xml                
+            };
+
+            return product;
+        }
+
 
         #endregion Public Methods
 

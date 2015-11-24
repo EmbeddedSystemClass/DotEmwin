@@ -42,6 +42,24 @@ namespace Emwin.Core.Parsers
                 DateTimeStyles.AssumeUniversal);
 
         /// <summary>
+        /// Parses the hour minute.
+        /// </summary>
+        /// <param name="reference">The reference.</param>
+        /// <param name="dayHourMinute">The day hour minute.</param>
+        /// <returns>System.DateTimeOffset.</returns>
+        public static DateTimeOffset ParseHourMinute(DateTimeOffset reference, string dayHourMinute)
+        {
+            if (reference == DateTimeOffset.MinValue || reference == DateTimeOffset.MaxValue)
+                reference = DateTimeOffset.UtcNow;
+
+            int hour, minute;
+            int.TryParse(dayHourMinute.Substring(0, 2), out hour);
+            int.TryParse(dayHourMinute.Substring(2, 2), out minute);
+
+            return new DateTimeOffset(reference.Year, reference.Month, reference.Day, hour, minute, 0, TimeSpan.Zero);
+        }
+
+        /// <summary>
         /// Parses the time in day hour minute format..
         /// </summary>
         /// <param name="reference">The reference.</param>

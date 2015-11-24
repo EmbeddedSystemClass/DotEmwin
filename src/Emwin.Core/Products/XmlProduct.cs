@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -24,41 +24,66 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System.Collections.Generic;
-using Emwin.Core.DataObjects;
+using System;
+using Emwin.Core.Contracts;
 
-namespace Emwin.Core.Contracts
+namespace Emwin.Core.Products
 {
-    public interface IBulletinProduct : ITextProduct
+    /// <summary>
+    /// Class XmlProduct. Represents a received Xml file.
+    /// </summary>
+    public class XmlProduct : IXmlProduct
     {
-        /// <summary>
-        /// Gets the sequence number with the text product.
-        /// </summary>
-        /// <value>The sequence number.</value>
-        int SequenceNumber { get; }
+
+        #region Public Properties
 
         /// <summary>
-        /// Gets the Universal Geographic Codes.
+        /// Gets or sets the content.
         /// </summary>
-        /// <value>The geo codes.</value>
-        IEnumerable<IUniversalGeographicCode> GeoCodes { get; }
+        /// <value>The content.</value>
+        public string Content { get; set; }
 
         /// <summary>
-        /// Gets or sets the polygons.
+        /// Gets the content.
         /// </summary>
-        /// <value>The polygons.</value>
-        IEnumerable<Location[]> Polygons { get; set; }
+        /// <value>The content.</value>
+        object IEmwinContent.Content => Content;
 
         /// <summary>
-        /// Gets any VTEC codes.
+        /// Gets the filename.
         /// </summary>
-        /// <value>The VTEC codes.</value>
-        IValidTimeEventCode PrimaryVtec { get; }
+        /// <value>The filename.</value>
+        public string Filename { get; set; }
 
         /// <summary>
-        /// Gets the tracking line.
+        /// Gets or sets the header.
         /// </summary>
-        /// <value>The tracking line.</value>
-        ITrackingLine TrackingLine { get; }
+        /// <value>The header.</value>
+        public ICommsHeader Header { get; set; }
+
+        /// <summary>
+        /// Gets the received at time.
+        /// </summary>
+        /// <value>The received at.</value>
+        public DateTimeOffset ReceivedAt { get; set; }
+
+        /// <summary>
+        /// Gets the content time stamp.
+        /// </summary>
+        /// <value>The time stamp.</value>
+        public DateTimeOffset TimeStamp { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString() =>
+            $"[XmlProduct] Filename={Filename} Date={TimeStamp:g} {Header}";
+
+        #endregion Public Methods
     }
 }

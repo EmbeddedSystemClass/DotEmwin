@@ -24,16 +24,17 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Emwin.Core.Contracts;
+using Emwin.Core.DataObjects;
 
 namespace Emwin.Core.Parsers
 {
     public class SpatialParser
     {
+
         #region Private Fields
 
         private static readonly Regex PolygonRegex = new Regex(@"^LAT\.{3}LON(?:\s(?<points>[0-9]{4}\s[0-9]{4,5}))+", RegexOptions.ExplicitCapture | RegexOptions.Multiline | RegexOptions.Compiled);
@@ -46,21 +47,27 @@ namespace Emwin.Core.Parsers
         /// Parses the product and returns a set of latitude/longitude points.
         /// </summary>
         /// <param name="product">The product.</param>
-        /// <returns>IEnumerable&lt;Tuple&lt;System.Double, System.Double&gt;[]&gt;.</returns>
-        public static IEnumerable<Tuple<double, double>[]> ParseProduct(ITextProduct product)
+        /// <returns>IEnumerable&lt;Location[]&gt;.</returns>
+        public static IEnumerable<Location[]> ParseProduct(ITextProduct product)
         {
             var polygonMatches = PolygonRegex.Matches(product.Content);
 
             return polygonMatches.Cast<Match>()
                 .Select(match => match.Groups["points"].Captures.Cast<Capture>()
-                    .Select(points =>
-                    {
-                        var split = points.Value.Split(' ');
-                        return new Tuple<double, double>(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
-                    }).ToArray());
+                    .Select(ToLocation).ToArray());
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private static Location ToLocation(Capture points)
+        {
+            var split = points.Value.Split(' ');
+            return new Location(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
+        }
+
+        #endregion Private Methods
 
     }
 }
