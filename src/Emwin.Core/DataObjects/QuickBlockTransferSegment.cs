@@ -25,11 +25,8 @@
  */
 
 using System;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 using Emwin.Core.Contracts;
-using Emwin.Core.Parsers;
-using Emwin.Core.Types;
 
 namespace Emwin.Core.DataObjects
 {

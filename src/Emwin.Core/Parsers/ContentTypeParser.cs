@@ -25,10 +25,21 @@
  */
 
 using System.IO;
-using Emwin.Core.Types;
 
 namespace Emwin.Core.Parsers
 {
+    /// <summary>
+    /// Data Content File Type
+    /// </summary>
+    public enum ContentFileType
+    {
+        Unknown,
+        Text,
+        Image,
+        Compressed,
+        Xml
+    }
+
     /// <summary>
     /// Class ContentTypeParser. Responsible for determining the content type.
     /// </summary>

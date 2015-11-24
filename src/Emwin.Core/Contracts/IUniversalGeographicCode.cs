@@ -34,7 +34,7 @@ namespace Emwin.Core.Contracts
         /// Gets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        string Id { get; }
+        string Value { get; }
 
         /// <summary>
         /// Gets the purge time.

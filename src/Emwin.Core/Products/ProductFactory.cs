@@ -32,7 +32,6 @@ using System.Linq;
 using System.Text;
 using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
-using Emwin.Core.Types;
 
 namespace Emwin.Core.Products
 {
@@ -97,7 +96,7 @@ namespace Emwin.Core.Products
 
             product.GeoCodes = UgcParser.ParseProduct(product);
             product.PrimaryVtec = VtecParser.ParseProduct(product).FirstOrDefault();
-            product.Polygons = SpatialParser.ParseProduct(product).Select(SpatialParser.ConvertToWellKnownText);
+            product.Polygons = SpatialParser.ParseProduct(product);
 
             return product;
         }

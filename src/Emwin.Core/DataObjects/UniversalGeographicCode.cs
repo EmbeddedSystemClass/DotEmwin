@@ -39,11 +39,11 @@ namespace Emwin.Core.DataObjects
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the zone or county element.
+        /// Gets or sets the zone or county value.
         /// </summary>
         /// <value>The element.</value>
         [DataMember]
-        public string Id { get; set; }
+        public string Value { get; set; }
 
         /// <summary>
         /// Gets or sets the purge time.
@@ -74,7 +74,7 @@ namespace Emwin.Core.DataObjects
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() => $"Type: {Type} State: {State} Id: {Id} PurgeTime: {PurgeTime:g}";
+        public override string ToString() => $"Type: {Type} State: {State} Id: {Value} PurgeTime: {PurgeTime:g}";
 
         #endregion Public Methods
     }

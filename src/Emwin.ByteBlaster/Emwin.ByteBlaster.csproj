@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByteBlasterClient.cs" />
+    <Compile Include="ByteBlasterServerList.cs" />
     <Compile Include="ObservableBase.cs" />
     <Compile Include="Channel\ByteBlasterChannelFactory.cs" />
     <Compile Include="Channel\ByteBlasterChannelInitializer.cs" />

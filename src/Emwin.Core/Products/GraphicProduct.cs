@@ -27,7 +27,7 @@
 using System;
 using System.Drawing;
 using Emwin.Core.Contracts;
-using Emwin.Core.Types;
+using Emwin.Core.Parsers;
 
 namespace Emwin.Core.Products
 {

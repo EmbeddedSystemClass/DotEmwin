@@ -24,6 +24,7 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
+using System;
 using System.Collections.Generic;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
@@ -47,7 +48,7 @@ namespace Emwin.Core.Products
         /// Gets or sets the polygons.
         /// </summary>
         /// <value>The polygons.</value>
-        public IEnumerable<string> Polygons { get; set; }
+        public IEnumerable<Tuple<double, double>[]> Polygons { get; set; }
 
         /// <summary>
         /// Gets any vtec codes.

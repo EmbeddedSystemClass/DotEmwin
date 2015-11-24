@@ -24,10 +24,10 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Spatial;
 using Emwin.Core.Contracts;
 
 namespace Emwin.Core.Parsers
@@ -36,56 +36,28 @@ namespace Emwin.Core.Parsers
     {
         #region Private Fields
 
-        private static readonly Regex PolygonRegex = new Regex(@"^LAT\.{3}LON(?:\s(?<points>[0-9]{4}\s[0-9]{4}))+", RegexOptions.ExplicitCapture | RegexOptions.Multiline | RegexOptions.Compiled);
+        private static readonly Regex PolygonRegex = new Regex(@"^LAT\.{3}LON(?:\s(?<points>[0-9]{4}\s[0-9]{4,5}))+", RegexOptions.ExplicitCapture | RegexOptions.Multiline | RegexOptions.Compiled);
 
         #endregion Private Fields
 
         #region Public Methods
 
         /// <summary>
-        /// Creates the polygon.
-        /// </summary>
-        /// <param name="points">The geographical points.</param>
-        /// <returns>GeographyLineString.</returns>
-        public static GeographyPolygon CreatePolygon(IEnumerable<GeographyPosition> points)
-        {
-            var queue = new Queue<GeographyPosition>(points);
-            var startPoint = queue.Dequeue();
-            var builder = SpatialBuilder.Create();
-            var pipeline = builder.GeographyPipeline;
-            pipeline.SetCoordinateSystem(CoordinateSystem.DefaultGeography);
-            pipeline.BeginGeography(SpatialType.Polygon);
-            pipeline.BeginFigure(startPoint);
-            while (queue.Count > 0)
-                pipeline.LineTo(queue.Dequeue());
-
-            pipeline.LineTo(startPoint);
-            pipeline.EndFigure();
-            pipeline.EndGeography();
-            return (GeographyPolygon) builder.ConstructedGeography;
-        }
-
-        /// <summary>
-        /// Converts Geography to well known text format.
-        /// </summary>
-        /// <param name="geography">The geography.</param>
-        /// <returns>System.String.</returns>
-        public static string ConvertToWellKnownText(Geography geography) => WellKnownTextSqlFormatter.Create(true).Write(geography);
-
-        /// <summary>
-        /// Parses the product and creates the polygon.
+        /// Parses the product and returns a set of latitude/longitude points.
         /// </summary>
         /// <param name="product">The product.</param>
-        /// <returns>IEnumerable&lt;GeographyLineString&gt;.</returns>
-        public static IEnumerable<GeographyPolygon> ParseProduct(ITextProduct product)
+        /// <returns>IEnumerable&lt;Tuple&lt;System.Double, System.Double&gt;[]&gt;.</returns>
+        public static IEnumerable<Tuple<double, double>[]> ParseProduct(ITextProduct product)
         {
             var polygonMatches = PolygonRegex.Matches(product.Content);
 
             return polygonMatches.Cast<Match>()
                 .Select(match => match.Groups["points"].Captures.Cast<Capture>()
-                .Select(points => points.Value.Split(' '))
-                .Select(split => new GeographyPosition(double.Parse(split[0]) / 100.0, - double.Parse(split[1]) / 100.0)))
-                .Select(CreatePolygon);
+                    .Select(points =>
+                    {
+                        var split = points.Value.Split(' ');
+                        return new Tuple<double, double>(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
+                    }).ToArray());
         }
 
         #endregion Public Methods

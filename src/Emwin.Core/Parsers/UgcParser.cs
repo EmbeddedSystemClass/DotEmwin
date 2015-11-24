@@ -43,7 +43,7 @@ namespace Emwin.Core.Parsers
         /// <summary>
         /// The Universal Geographic Code Pattern
         /// </summary>
-        private static readonly Regex UgcRegex = new Regex(@"[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-\r\r\n", RegexOptions.Compiled);
+        private static readonly Regex UgcRegex = new Regex(@"[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+", RegexOptions.Compiled);
 
         #endregion Private Fields
 
@@ -87,7 +87,7 @@ namespace Emwin.Core.Parsers
                         State = state,
                         Type = type,
                         PurgeTime = purgeTime,
-                        Id = segment.PadLeft(3, '0')
+                        Value = segment.PadLeft(3, '0')
                     };
                     continue;
                 }
@@ -102,7 +102,7 @@ namespace Emwin.Core.Parsers
                         State = state,
                         Type = type,
                         PurgeTime = purgeTime,
-                        Id = segment.Substring(3).PadLeft(3, '0')
+                        Value = segment.Substring(3).PadLeft(3, '0')
                     };
                     continue;
                 }
@@ -121,7 +121,7 @@ namespace Emwin.Core.Parsers
                             State = state,
                             Type = type,
                             PurgeTime = purgeTime,
-                            Id = i.ToString("D3")
+                            Value = i.ToString("D3")
                         };
                     continue;
                 }
@@ -138,7 +138,7 @@ namespace Emwin.Core.Parsers
                             State = state,
                             Type = type,
                             PurgeTime = purgeTime,
-                            Id = i.ToString("D3")
+                            Value = i.ToString("D3")
                         };
                     continue;
                 }

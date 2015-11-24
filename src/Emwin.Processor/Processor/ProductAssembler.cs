@@ -29,7 +29,6 @@ using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
 using Emwin.Processor.Instrumentation;
 using Emwin.Core.Products;
-using Emwin.Core.Types;
 using Emwin.Processor.EventAggregator;
 
 namespace Emwin.Processor.Processor

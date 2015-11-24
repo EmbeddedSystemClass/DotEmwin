@@ -27,11 +27,9 @@
 using System;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
 using Emwin.Core.Products;
-using Emwin.Core.Types;
 using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
 

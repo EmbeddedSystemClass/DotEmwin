@@ -37,10 +37,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Users\Administrator\Documents\Visual Studio 2015\Projects\EmwinTest\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -49,17 +45,13 @@
     <Compile Include="Contracts\ICompressedContent.cs" />
     <Compile Include="Contracts\IImageProduct.cs" />
     <Compile Include="Contracts\ITextProduct.cs" />
-    <Compile Include="DataObjects\ByteBlasterServerList.cs" />
     <Compile Include="DataObjects\CommsHeader.cs" />
     <Compile Include="Contracts\IEmwinContent.cs" />
     <Compile Include="Contracts\IUniversalGeographicCode.cs" />
     <Compile Include="Contracts\IValidTimeEventCode.cs" />
     <Compile Include="Contracts\ICommsHeader.cs" />
-    <Compile Include="Extensions\VtecExtensions.cs" />
     <Compile Include="Parsers\BulletinParser.cs" />
     <Compile Include="Products\BulletinProduct.cs" />
-    <Compile Include="Types\ContentFileType.cs" />
-    <Compile Include="Types\VtecSignificanceLevel.cs" />
     <Compile Include="Products\ProductFactory.cs" />
     <Compile Include="Products\GraphicProduct.cs" />
     <Compile Include="DataObjects\QuickBlockTransferSegment.cs" />
@@ -78,7 +70,6 @@
   <ItemGroup>
     <None Include="Emwin.ByteBlaster.licenseheader" />
     <None Include="Emwin.Core.nuspec" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

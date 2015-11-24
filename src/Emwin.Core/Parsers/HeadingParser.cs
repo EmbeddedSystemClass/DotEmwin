@@ -43,7 +43,7 @@ namespace Emwin.Core.Parsers
         /// http://www.nws.noaa.gov/tg/head.php
         /// </summary>
         private static readonly Regex WmoHeaderRegex = new Regex(
-            @"^(?<id>[A-Z]{4}[0-9]{2})\s(?<station>[A-Z]{4})\s(?<time>[0-9]{6})(\s(?<indicator>[A-Z]{3}))?(\r\r\n(?<pil>[A-Z ]{6}))?\r\r\n", 
+            @"^(?<id>[A-Z]{4}[0-9]{2})\s(?<station>[A-Z]{4})\s(?<time>[0-9]{6})(\s(?<indicator>[A-Z]{3}))?([\r\n]+(?<pil>[A-Z ]{6}))?[\r\n]+", 
             RegexOptions.ExplicitCapture | RegexOptions.Singleline | RegexOptions.Compiled);
 
         #endregion Private Fields
