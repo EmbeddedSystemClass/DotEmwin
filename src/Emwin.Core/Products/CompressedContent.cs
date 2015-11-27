@@ -55,11 +55,18 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <value>The content.</value>
         object IEmwinContent.Content => Content;
+
         /// <summary>
         /// Gets the received at time.
         /// </summary>
         /// <value>The received at.</value>
         public DateTimeOffset ReceivedAt { get; set; }
+
+        /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>The source.</value>
+        public string Source { get; set; }
 
         /// <summary>
         /// Gets the content time stamp.
@@ -72,11 +79,32 @@ namespace Emwin.Core.Products
         #region Public Methods
 
         /// <summary>
+        /// Creates the compressed.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <param name="source">The source.</param>
+        /// <returns>ICompressedContent.</returns>
+        public static ICompressedContent Create(string filename, DateTimeOffset timeStamp, byte[] content,
+            DateTimeOffset receivedAt, string source)
+        {
+            return new CompressedContent
+            {
+                Filename = filename,
+                TimeStamp = timeStamp,
+                Content = content,
+                ReceivedAt = receivedAt,
+                Source = source
+            };
+        }
+
+        /// <summary>
         /// Gets the stream.
         /// </summary>
         /// <returns>System.IO.Stream.</returns>
         public Stream GetStream() => new MemoryStream(Content, false);
-
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>

@@ -24,9 +24,12 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
+using Emwin.Core.Parsers;
 
 namespace Emwin.Core.Products
 {
@@ -35,7 +38,7 @@ namespace Emwin.Core.Products
     /// </summary>
     public class BulletinProduct : TextProduct, IBulletinProduct
     {
-        public int SequenceNumber { get; set; }
+        #region Public Properties
 
         /// <summary>
         /// Gets or sets the geo codes.
@@ -47,21 +50,56 @@ namespace Emwin.Core.Products
         /// Gets or sets the polygons.
         /// </summary>
         /// <value>The polygons.</value>
-        public IEnumerable<Location[]> Polygons { get; set; }
+        public IEnumerable<Position[]> Polygons { get; set; }
 
         /// <summary>
         /// Gets any vtec codes.
         /// </summary>
         /// <value>The vtec codes.</value>
-        public IValidTimeEventCode PrimaryVtec { get; set; }
+        public IPrimaryVtec PrimaryVtec { get; set; }
 
+        public int SequenceNumber { get; set; }
         /// <summary>
         /// Gets or sets the tracking line.
         /// </summary>
         /// <value>The tracking line.</value>
-        public ITrackingLine TrackingLine { get; set; } 
+        public ITrackingLine TrackingLine { get; set; }
+
+        #endregion Public Properties
 
         #region Public Methods
+
+        /// <summary>
+        /// Creates the bulletin product.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <param name="header">The header.</param>
+        /// <param name="seq">The seq.</param>
+        /// <param name="source">The source.</param>
+        /// <returns>ITextProduct.</returns>
+        public static IBulletinProduct Create(string filename, DateTimeOffset timeStamp, string content, DateTimeOffset receivedAt, ICommsHeader header, int seq, string source)
+        {
+            var product = new BulletinProduct
+            {
+                Filename = filename,
+                TimeStamp = timeStamp,
+                Content = content,
+                ReceivedAt = receivedAt,
+                Header = header,
+                SequenceNumber = seq,
+                Source = source
+            };
+
+            product.GeoCodes = UgcParser.ParseProduct(product);
+            product.PrimaryVtec = VtecParser.ParseProduct(product).FirstOrDefault();
+            product.Polygons = SpatialParser.ParseProduct(product);
+            product.TrackingLine = TrackingLineParser.ParseProduct(product).FirstOrDefault();
+
+            return product;
+        }
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -71,5 +109,6 @@ namespace Emwin.Core.Products
             $"[BulletinProduct] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {Header} {PrimaryVtec}";
 
         #endregion Public Methods
+
     }
 }

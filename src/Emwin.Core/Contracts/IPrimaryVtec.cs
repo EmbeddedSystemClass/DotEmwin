@@ -25,100 +25,52 @@
  */
 
 using System;
-using System.Text;
-using Emwin.Core.Contracts;
-using Emwin.Core.Parsers;
 
-namespace Emwin.Core.Products
+namespace Emwin.Core.Contracts
 {
-    /// <summary>
-    /// Class TextProduct. Represents a received text file.
-    /// </summary>
-    public class TextProduct : ITextProduct
+    public interface IPrimaryVtec
     {
-
-        #region Public Properties
+        /// <summary>
+        /// Gets the action code.
+        /// </summary>
+        /// <value>The action code.</value>
+        string ActionCode { get; }
 
         /// <summary>
-        /// Gets or sets the content.
+        /// Gets the begin.
         /// </summary>
-        /// <value>The content.</value>
-        public string Content { get; set; }
+        /// <value>The begin.</value>
+        DateTimeOffset Begin { get; }
 
         /// <summary>
-        /// Gets the filename.
+        /// Gets the end.
         /// </summary>
-        /// <value>The filename.</value>
-        public string Filename { get; set; }
+        /// <value>The end.</value>
+        DateTimeOffset End { get; }
 
         /// <summary>
-        /// Gets or sets the header.
+        /// Gets the event number.
         /// </summary>
-        /// <value>The header.</value>
-        public ICommsHeader Header { get; set; }
+        /// <value>The event number.</value>
+        int EventNumber { get; }
 
         /// <summary>
-        /// Gets the content.
+        /// Gets the office identifier.
         /// </summary>
-        /// <value>The content.</value>
-        object IEmwinContent.Content => Content;
-        /// <summary>
-        /// Gets the received at time.
-        /// </summary>
-        /// <value>The received at.</value>
-        public DateTimeOffset ReceivedAt { get; set; }
+        /// <value>The office identifier.</value>
+        string WmoId { get; }
 
         /// <summary>
-        /// Gets or sets the source.
+        /// Gets the phenomenon code.
         /// </summary>
-        /// <value>The source.</value>
-        public string Source { get; set; }
+        /// <value>The phenomenon code.</value>
+        string PhenomenonCode { get; }
 
+        char SignificanceCode { get; }
         /// <summary>
-        /// Gets the content time stamp.
+        /// Gets the type identifier.
         /// </summary>
-        /// <value>The time stamp.</value>
-        public DateTimeOffset TimeStamp { get; set; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Creates the text product.
-        /// </summary>
-        /// <param name="filename">The filename.</param>
-        /// <param name="timeStamp">The time stamp.</param>
-        /// <param name="content">The content.</param>
-        /// <param name="receivedAt">The received at.</param>
-        /// <param name="source">The source.</param>
-        /// <returns>Emwin.Core.Contracts.ITextProduct.</returns>
-        public static ITextProduct Create(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt, string source)
-        {
-            var count = Array.LastIndexOf(content, (byte)03); // Trim to ETX
-            if (count < 0) count = content.Length;
-
-            var product = new TextProduct
-            {
-                Filename = filename,
-                TimeStamp = timeStamp,
-                Content = Encoding.ASCII.GetString(content, 0, count),
-                ReceivedAt = receivedAt,
-                Source = source
-            };
-
-            product.Header = HeadingParser.ParseProduct(product);
-
-            return product;
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() =>
-            $"[TextProduct] Filename={Filename} Date={TimeStamp:g} {Header}";
-
-        #endregion Public Methods
+        /// <value>The type identifier.</value>
+        char TypeIdentifier { get; }
     }
 }

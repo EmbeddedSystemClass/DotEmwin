@@ -25,16 +25,17 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace Emwin.Core.Contracts
 {
     public interface IUniversalGeographicCode
     {
         /// <summary>
-        /// Gets the identifier.
+        /// Gets the counties.
         /// </summary>
-        /// <value>The identifier.</value>
-        string Value { get; }
+        /// <value>The counties.</value>
+        HashSet<int> Counties { get; }
 
         /// <summary>
         /// Gets the purge time.
@@ -49,9 +50,9 @@ namespace Emwin.Core.Contracts
         string State { get; }
 
         /// <summary>
-        /// Gets the type.
+        /// Gets the zones.
         /// </summary>
-        /// <value>The type.</value>
-        char Type { get; }
+        /// <value>The zones.</value>
+        HashSet<string> Zones { get; }
     }
 }

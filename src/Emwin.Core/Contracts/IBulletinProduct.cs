@@ -47,13 +47,13 @@ namespace Emwin.Core.Contracts
         /// Gets or sets the polygons.
         /// </summary>
         /// <value>The polygons.</value>
-        IEnumerable<Location[]> Polygons { get; set; }
+        IEnumerable<Position[]> Polygons { get; set; }
 
         /// <summary>
         /// Gets any VTEC codes.
         /// </summary>
         /// <value>The VTEC codes.</value>
-        IValidTimeEventCode PrimaryVtec { get; }
+        IPrimaryVtec PrimaryVtec { get; }
 
         /// <summary>
         /// Gets the tracking line.

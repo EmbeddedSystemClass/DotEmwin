@@ -24,100 +24,34 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
+using Emwin.Processor.EventAggregator;
+using Emwin.Processor.Instrumentation;
 
-namespace Emwin.Core.Products
+namespace Emwin.Processor.Processor
 {
-    /// <summary>
-    /// Class TextProduct. Represents a received text file.
-    /// </summary>
-    public class TextProduct : ITextProduct
+    internal sealed class XmlSplitter : IHandle<ITextProduct>
     {
-
-        #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the content.
-        /// </summary>
-        /// <value>The content.</value>
-        public string Content { get; set; }
-
-        /// <summary>
-        /// Gets the filename.
-        /// </summary>
-        /// <value>The filename.</value>
-        public string Filename { get; set; }
-
-        /// <summary>
-        /// Gets or sets the header.
-        /// </summary>
-        /// <value>The header.</value>
-        public ICommsHeader Header { get; set; }
-
-        /// <summary>
-        /// Gets the content.
-        /// </summary>
-        /// <value>The content.</value>
-        object IEmwinContent.Content => Content;
-        /// <summary>
-        /// Gets the received at time.
-        /// </summary>
-        /// <value>The received at.</value>
-        public DateTimeOffset ReceivedAt { get; set; }
-
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>The source.</value>
-        public string Source { get; set; }
-
-        /// <summary>
-        /// Gets the content time stamp.
-        /// </summary>
-        /// <value>The time stamp.</value>
-        public DateTimeOffset TimeStamp { get; set; }
-
-        #endregion Public Properties
-
         #region Public Methods
 
         /// <summary>
-        /// Creates the text product.
+        /// This will be called every time a CompressedProduct is published through the event aggregator
+        /// Unzips the product and returns the first contained product in the zip.
+        /// Assumes a single product is contained inside the zip file.
         /// </summary>
-        /// <param name="filename">The filename.</param>
-        /// <param name="timeStamp">The time stamp.</param>
-        /// <param name="content">The content.</param>
-        /// <param name="receivedAt">The received at.</param>
-        /// <param name="source">The source.</param>
-        /// <returns>Emwin.Core.Contracts.ITextProduct.</returns>
-        public static ITextProduct Create(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt, string source)
+        /// <param name="product">The product.</param>
+        /// <param name="ctx">The CTX.</param>
+        public void Handle(ITextProduct product, IEventAggregator ctx)
         {
-            var count = Array.LastIndexOf(content, (byte)03); // Trim to ETX
-            if (count < 0) count = content.Length;
+            var xmlFiles = XmlParser.ParseProduct(product).ToList();
+            if (xmlFiles.Count == 0) return;
 
-            var product = new TextProduct
-            {
-                Filename = filename,
-                TimeStamp = timeStamp,
-                Content = Encoding.ASCII.GetString(content, 0, count),
-                ReceivedAt = receivedAt,
-                Source = source
-            };
-
-            product.Header = HeadingParser.ParseProduct(product);
-
-            return product;
+            ProcessorEventSource.Log.Info("XmlSplitter", "Splitting product into " + xmlFiles.Count + " xml files");
+            Parallel.ForEach(xmlFiles, xml => ctx.SendMessage(xml));
         }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() =>
-            $"[TextProduct] Filename={Filename} Date={TimeStamp:g} {Header}";
 
         #endregion Public Methods
     }

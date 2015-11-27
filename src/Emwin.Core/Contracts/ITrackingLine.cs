@@ -42,7 +42,7 @@ namespace Emwin.Core.Contracts
         /// Gets the line.
         /// </summary>
         /// <value>The line.</value>
-        IEnumerable<Location> Line { get; }
+        IEnumerable<Position> Line { get; }
 
         /// <summary>
         /// Gets the time.

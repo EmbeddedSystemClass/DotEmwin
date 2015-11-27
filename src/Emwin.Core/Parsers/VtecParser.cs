@@ -58,7 +58,7 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;ValidTimeEventCode&gt;.</returns>
-        public static IEnumerable<IValidTimeEventCode> ParseProduct(ITextProduct product)
+        public static IEnumerable<IPrimaryVtec> ParseProduct(ITextProduct product)
             => PvtecRegex.Matches(product.Content).Cast<Match>().Select(Create);
 
         /// <summary>
@@ -66,13 +66,13 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="vtec">The VTEC.</param>
         /// <returns>ValidTimeEventCode.</returns>
-        public static IValidTimeEventCode ParseVtec(string vtec) => Create(PvtecRegex.Match(vtec));
+        public static IPrimaryVtec ParseVtec(string vtec) => Create(PvtecRegex.Match(vtec));
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private static IValidTimeEventCode Create(Match pvtecMatch) => new ValidTimeEventCode
+        private static IPrimaryVtec Create(Match pvtecMatch) => new PrimaryVtec
         {
             TypeIdentifier = pvtecMatch.Groups["type"].Value[0],
             ActionCode = pvtecMatch.Groups["action"].Value,

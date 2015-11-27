@@ -44,12 +44,6 @@ namespace Emwin.Core.Products
         public string Content { get; set; }
 
         /// <summary>
-        /// Gets the content.
-        /// </summary>
-        /// <value>The content.</value>
-        object IEmwinContent.Content => Content;
-
-        /// <summary>
         /// Gets the filename.
         /// </summary>
         /// <value>The filename.</value>
@@ -62,10 +56,21 @@ namespace Emwin.Core.Products
         public ICommsHeader Header { get; set; }
 
         /// <summary>
+        /// Gets the content.
+        /// </summary>
+        /// <value>The content.</value>
+        object IEmwinContent.Content => Content;
+        /// <summary>
         /// Gets the received at time.
         /// </summary>
         /// <value>The received at.</value>
         public DateTimeOffset ReceivedAt { get; set; }
+
+        /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>The source.</value>
+        public string Source { get; set; }
 
         /// <summary>
         /// Gets the content time stamp.
@@ -78,6 +83,32 @@ namespace Emwin.Core.Products
         #region Public Methods
 
         /// <summary>
+        /// Creates the XML product.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <param name="header">The header.</param>
+        /// <param name="seq">The seq.</param>
+        /// <param name="source">The source.</param>
+        /// <returns>IXmlProduct.</returns>
+        public static IXmlProduct Create(string filename, DateTimeOffset timeStamp, string content, DateTimeOffset receivedAt, ICommsHeader header, int seq, string source)
+        {
+            var product = new XmlProduct
+            {
+                Filename = filename,
+                TimeStamp = timeStamp,
+                ReceivedAt = receivedAt,
+                Header = header,
+                Content = content,
+                Source = source
+            };
+
+            return product;
+        }
+
+        /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
@@ -85,5 +116,6 @@ namespace Emwin.Core.Products
             $"[XmlProduct] Filename={Filename} Date={TimeStamp:g} {Header}";
 
         #endregion Public Methods
+
     }
 }

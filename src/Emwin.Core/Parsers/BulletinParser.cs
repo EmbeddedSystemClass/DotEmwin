@@ -49,8 +49,9 @@ namespace Emwin.Core.Parsers
         /// Parses the product.
         /// </summary>
         /// <param name="product">The product.</param>
+        /// <param name="includeHeader">if set to <c>true</c> [include header].</param>
         /// <returns>IEnumerable&lt;ITextProduct&gt;.</returns>
-        public static IEnumerable<IBulletinProduct> ParseProduct(ITextProduct product)
+        public static IEnumerable<IBulletinProduct> ParseProduct(ITextProduct product, bool includeHeader = false)
         {
             var headerMatch = HeaderRegex.Match(product.Content);
             if (!headerMatch.Success) yield break;
@@ -65,13 +66,14 @@ namespace Emwin.Core.Parsers
                     '-', seq.ToString("00"),
                     Path.GetExtension(product.Filename));
 
-                yield return ProductFactory.CreateBulletinProduct(
+                yield return BulletinProduct.Create(
                     newFilename, 
                     product.TimeStamp, 
-                    string.Concat(header, bulletin), 
+                    includeHeader ? string.Concat(header, bulletin) : bulletin, 
                     product.ReceivedAt,
                     product.Header,
-                    seq++);
+                    seq++, 
+                    product.Source);
             }
         }
 

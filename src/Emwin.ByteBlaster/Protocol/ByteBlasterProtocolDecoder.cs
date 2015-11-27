@@ -37,7 +37,6 @@ using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
 using Emwin.ByteBlaster.Instrumentation;
 using Emwin.Core.DataObjects;
-using Emwin.Core.Parsers;
 
 namespace Emwin.ByteBlaster.Protocol
 {
@@ -94,6 +93,11 @@ namespace Emwin.ByteBlaster.Protocol
         /// </summary>
         private static readonly Regex ServerListRegex = new Regex(@"^/ServerList/(?<ServerList>.*?)\\ServerList\\/SatServers/(?<SatServers>.*?)\\SatServers\\$", RegexOptions.Compiled);
 
+        /// <summary>
+        /// The channel remote address
+        /// </summary>
+        private string _remoteAddress;
+
         #endregion Private Fields
 
         #region Protected Enums
@@ -122,6 +126,7 @@ namespace Emwin.ByteBlaster.Protocol
         /// <param name="context">The context.</param>
         public override void ChannelActive(IChannelHandlerContext context)
         {
+            _remoteAddress = context.Channel.RemoteAddress.ToString();
             State = DecoderState.ReSync;
             base.ChannelActive(context);
         }
@@ -310,7 +315,8 @@ namespace Emwin.ByteBlaster.Protocol
             {
                 var packet = new QuickBlockTransferSegment
                 {
-                    Header = header
+                    Header = header,
+                    Source = _remoteAddress
                 };
 
                 ParseHeaderV1(match.Groups, packet);

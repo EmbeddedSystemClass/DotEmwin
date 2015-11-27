@@ -26,6 +26,7 @@
 
 using System;
 using System.Drawing;
+using System.IO;
 using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
 
@@ -36,6 +37,7 @@ namespace Emwin.Core.Products
     /// </summary>
     public class ImageProduct : IImageProduct
     {
+
         #region Public Properties
 
         /// <summary>
@@ -43,12 +45,6 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <value>The content.</value>
         public Image Content { get; set; }
-
-        /// <summary>
-        /// Gets the content.
-        /// </summary>
-        /// <value>The content.</value>
-        object IEmwinContent.Content => Content;
 
         /// <summary>
         /// Gets the type of the content.
@@ -63,23 +59,33 @@ namespace Emwin.Core.Products
         public string Filename { get; set; }
 
         /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
+        /// <value>The height.</value>
+        public int Height { get; set; }
+
+        /// <summary>
+        /// Gets the content.
+        /// </summary>
+        /// <value>The content.</value>
+        object IEmwinContent.Content => Content;
+        /// <summary>
         /// Gets the received at time.
         /// </summary>
         /// <value>The received at.</value>
         public DateTimeOffset ReceivedAt { get; set; }
 
         /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>The source.</value>
+        public string Source { get; set; }
+
+        /// <summary>
         /// Gets the content time stamp.
         /// </summary>
         /// <value>The time stamp.</value>
         public DateTimeOffset TimeStamp { get; set; }
-
-        /// <summary>
-        /// Gets or sets the height.
-        /// </summary>
-        /// <value>The height.</value>
-        public int Height { get; set; }
-
         /// <summary>
         /// Gets or sets the width.
         /// </summary>
@@ -88,11 +94,41 @@ namespace Emwin.Core.Products
 
         #endregion Public Properties
 
+        #region Public Methods
+
+        /// <summary>
+        /// Creates the image product.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <param name="source">The source.</param>
+        /// <returns>Emwin.Core.Contracts.IImageProduct.</returns>
+        public static IImageProduct Create(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt, string source)
+        {
+            var image = Image.FromStream(new MemoryStream(content));
+
+            return new ImageProduct
+            {
+                Filename = filename,
+                TimeStamp = timeStamp,
+                Content = image,
+                Height = image.Height,
+                Width = image.Width,
+                ReceivedAt = receivedAt,
+                ContentType = ContentFileType.Image,
+                Source = source
+            };
+        }
+
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
             $"[ImageProduct] Filename={Filename} Date={TimeStamp:g} Size={Content.Width}x{Content.Height}";
+
+        #endregion Public Methods
     }
 }

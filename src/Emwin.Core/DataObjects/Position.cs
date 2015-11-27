@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -24,90 +24,23 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System;
-using System.Runtime.Serialization;
-using Emwin.Core.Contracts;
-
 namespace Emwin.Core.DataObjects
 {
-    /// <summary>
-    /// Valid Time Event Code (VTEC).
-    /// An event is defined as a specific combination of phenomenon and level of significance.
-    /// Each VTEC event is given an Event Tracking Number, or ETN.
-    /// There are two types of VTEC, the P-(Primary) VTEC, and an H-(Hydrologic) VTEC.
-    /// </summary>
-    [DataContract]
-    public class ValidTimeEventCode : IValidTimeEventCode
+    public struct Position
     {
-        #region Public Properties
+        public double Latitude;
+
+        public double Longitude;
 
         /// <summary>
-        /// Gets or sets the action code.
+        /// Initializes a new instance of the <see cref="Position"/> struct.
         /// </summary>
-        /// <value>The action code.</value>
-        [DataMember]
-        public string ActionCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the begin time.
-        /// </summary>
-        /// <value>The begin time or MinValue if event in progress.</value>
-        [DataMember]
-        public DateTimeOffset Begin { get; set; }
-
-        /// <summary>
-        /// Gets or sets the end time.
-        /// </summary>
-        /// <value>The end time.</value>
-        [DataMember]
-        public DateTimeOffset End { get; set; }
-
-        /// <summary>
-        /// Gets or sets the event tracking number.
-        /// </summary>
-        /// <value>The tracking number.</value>
-        [DataMember]
-        public int EventNumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets the office identifier.
-        /// </summary>
-        /// <value>The office identifier.</value>
-        [DataMember]
-        public string WmoId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the phenomenon code.
-        /// </summary>
-        /// <value>The phenomenon.</value>
-        [DataMember]
-        public string PhenomenonCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the significance code.
-        /// </summary>
-        /// <value>The significance.</value>
-        [DataMember]
-        public char SignificanceCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the type of VTEC.
-        /// </summary>
-        /// <value>The type of VTEC.</value>
-        [DataMember]
-        public char TypeIdentifier { get; set; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// To the string.
-        /// </summary>
-        /// <returns>System.String.</returns>
-        public override string ToString() => $"VTEC: {WmoId} #{EventNumber} Action={ActionCode} Phonomenon={PhenomenonCode} Significance={SignificanceCode} ({Begin:g} -> {End:g})";
-
-        #endregion Public Methods
-
+        /// <param name="latitude">The latitude.</param>
+        /// <param name="longitude">The longitude.</param>
+        public Position(double latitude, double longitude)
+        {
+            Latitude = latitude;
+            Longitude = longitude;
+        }
     }
 }

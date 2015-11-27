@@ -34,7 +34,6 @@ namespace Emwin.Processor
 {
     public class WeatherProductProcessor : ProcessorBase<IQuickBlockTransferSegment>, IObserver<IQuickBlockTransferSegment>
     {
-
         #region Private Fields
 
         private readonly ObservableListener<IBulletinProduct> _bulletinObservable = new ObservableListener<IBulletinProduct>();
@@ -119,8 +118,9 @@ namespace Emwin.Processor
             aggregator
                 .AddListener<SegmentBundler>()
                 .AddListener<ProductAssembler>()
-                .AddListener<ZipProcessor>()
+                .AddListener<ZipExtractor>()
                 .AddListener<BulletinSplitter>()
+                .AddListener<XmlSplitter>()
                 .AddListener(_xmlObservable)
                 .AddListener(_textObservable)
                 .AddListener(_imageObservable)

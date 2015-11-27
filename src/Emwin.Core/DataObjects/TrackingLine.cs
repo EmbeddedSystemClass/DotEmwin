@@ -25,34 +25,40 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Emwin.Core.Contracts;
 
 namespace Emwin.Core.DataObjects
 {
+    [DataContract]
     public class TrackingLine : ITrackingLine
     {
         /// <summary>
         /// Gets or sets the time.
         /// </summary>
         /// <value>The time.</value>
+        [DataMember]
         public DateTimeOffset TimeStamp { get; set; }
 
         /// <summary>
         /// Gets or sets the direction deg.
         /// </summary>
         /// <value>The direction deg.</value>
+        [DataMember]
         public int DirectionDeg { get; set; }
 
         /// <summary>
         /// Gets or sets the wind speed KTS.
         /// </summary>
         /// <value>The wind speed KTS.</value>
+        [DataMember]
         public int WindSpeedKts { get; set; }
 
         /// <summary>
         /// Gets or sets the line.
         /// </summary>
         /// <value>The line.</value>
-        public IEnumerable<Location>  Line { get; set; }
+        [DataMember]
+        public IEnumerable<Position> Line { get; set; }
     }
 }

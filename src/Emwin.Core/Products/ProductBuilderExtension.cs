@@ -25,86 +25,76 @@
  */
 
 using System;
-using System.IO;
-using System.IO.Compression;
+using System.Collections.Generic;
+using System.Linq;
 using Emwin.Core.Contracts;
-using Emwin.Core.Parsers;
-using Emwin.Core.Products;
-using Emwin.Processor.EventAggregator;
-using Emwin.Processor.Instrumentation;
 
-namespace Emwin.Processor.Processor
+namespace Emwin.Core.Products
 {
-    internal sealed class ZipProcessor : IHandle<ICompressedContent>
+    /// <summary>
+    /// Class ProductFactory for creating products.
+    /// </summary>
+    public static class ProductBuilderExtension
     {
+
         #region Public Methods
 
         /// <summary>
-        /// This will be called every time a CompressedProduct is published through the event aggregator
-        /// Unzips the product and returns the first contained product in the zip.
-        /// Assumes a single product is contained inside the zip file.
+        /// Converts bundle of segments to desired product type.
         /// </summary>
-        /// <param name="product">The product.</param>
-        /// <param name="ctx">The CTX.</param>
-        public void Handle(ICompressedContent product, IEventAggregator ctx)
+        /// <typeparam name="T"></typeparam>
+        /// <param name="segments">The segments.</param>
+        /// <returns>T.</returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        /// <exception cref="System.ArgumentException">@At least one segment is not complete (is null).</exception>
+        /// <exception cref="System.InvalidCastException">Unable to convert to specified type.</exception>
+        public static T BuildProduct<T>(this IQuickBlockTransferSegment[] segments) where T : IEmwinContent
         {
-            try
-            {
-                UnZip(product, ctx);
-            }
-            catch (Exception ex)
-            {
-                ProcessorEventSource.Log.Error("ZipProcessor", ex.ToString());
-            }
-        }
+            if (segments == null) throw new ArgumentNullException(nameof(segments));
 
-        private static void UnZip(ICompressedContent product, IEventPublisher ctx)
-        {
-            using (var zip = new ZipArchive(product.GetStream(), ZipArchiveMode.Read))
-            {
-                foreach (var file in zip.Entries)
-                {
-                    using (var fileStream = file.Open())
-                    {
-                        var content = ReadAllBytes(fileStream);
-                        var contentType = ContentTypeParser.GetFileContentType(file.Name);
-                        switch (contentType)
-                        {
-                            case ContentFileType.Text:
-                                var textProduct = ProductFactory.CreateTextProduct(
-                                    file.Name.ToUpperInvariant(), file.LastWriteTime, content, product.ReceivedAt);
-                                ctx.SendMessage(textProduct);
-                                ProcessorEventSource.Log.Info("ZipProcessor", textProduct.ToString());
-                                break;
+            var lastSegment = segments[segments.Length - 1];
+            var isText = typeof(T) == typeof(ITextProduct);
+            var content = segments.Select(b => b.Content).ToList().Combine(isText);
 
-                            case ContentFileType.Image:
-                                var imageProduct = ProductFactory.CreateImageProduct(
-                                    file.Name.ToUpperInvariant(), file.LastWriteTime, content, product.ReceivedAt);
-                                ctx.SendMessage(imageProduct);
-                                ProcessorEventSource.Log.Info("ZipProcessor", imageProduct.ToString());
-                                break;
+            if (typeof(T) == typeof(ITextProduct))
+                return (T)TextProduct.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
 
-                            default:
-                                ProcessorEventSource.Log.Warning("ZipProcessor",
-                                    "Unknown content file type: " + file.Name);
-                                return;
-                        }
-                    }
-                }
-            }
+            if (typeof(T) == typeof(IImageProduct))
+                return (T)ImageProduct.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
+
+            if (typeof(T) == typeof(ICompressedContent))
+                return (T) CompressedContent.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
+
+                throw new InvalidCastException("Unable to convert to specified type");
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private static byte[] ReadAllBytes(Stream stream)
+        private static byte[] Combine(this IList<byte[]> arrays, bool trimLast = false)
         {
-            using (var ms = new MemoryStream())
+            if (trimLast)
             {
-                stream.CopyTo(ms);
-                return ms.ToArray();
+                var last = arrays[arrays.Count - 1];
+                var pos = last.Length - 1;
+                while (pos > 0 && last[pos] == 0) --pos;
+                if (pos < last.Length)
+                {
+                    Array.Resize(ref last, pos + 1);
+                    arrays[arrays.Count - 1] = last;
+                }
             }
+
+            var result = new byte[arrays.Sum(a => a.Length)];
+            var offset = 0;
+            foreach (var array in arrays)
+            {
+                Buffer.BlockCopy(array, 0, result, offset, array.Length);
+                offset += array.Length;
+            }
+
+            return result;
         }
 
         #endregion Private Methods

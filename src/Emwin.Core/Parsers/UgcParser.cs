@@ -49,32 +49,38 @@ namespace Emwin.Core.Parsers
 
         #region Public Methods
 
-        /// <summary>
-        /// Parses the content and returns any UGC codes contained.
-        /// </summary>
-        /// <param name="product">The product.</param>
-        /// <returns>IEnumerable&lt;UniversalGeographicCode&gt;.</returns>
-        public static IEnumerable<IUniversalGeographicCode> ParseProduct(ITextProduct product)
-        {
-            var ugcMatches = UgcRegex.Matches(product.Content);
-            return ugcMatches.Cast<Match>().SelectMany(ugcMatch => ParseUgc(ugcMatch.Value, product.TimeStamp));
-        }
+        public static IEnumerable<UniversalGeographicCode> ParseProduct(ITextProduct product) => UgcRegex.Matches(product.Content)
+            .Cast<Match>()
+            .SelectMany(ugcMatch => ParseUgcGroups(ugcMatch.Value, product.TimeStamp))
+            .GroupBy(x => x.State)
+            .Select(st => new UniversalGeographicCode
+            {
+                State = st.Key,
+                PurgeTime = st.First().PurgeTime,
+                Zones = new HashSet<string>(st.Where(x => x.Type == 'Z').Select(z => z.Value)),
+                Counties = new HashSet<int>(st.Where(x => x.Type == 'C').Select(z => int.Parse(z.Value)))
+            });
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         /// <summary>
-        /// Parses the Universal Geographic Code string.
+        /// Parses the Universal Geographic Code string into groups.
         /// </summary>
         /// <param name="ugc">The Universal Geographic Code string.</param>
         /// <param name="referenceTime">The reference time used for dates.</param>
         /// <returns>IEnumerable&lt;UniversalGeographicCode&gt;.</returns>
-        public static IEnumerable<IUniversalGeographicCode> ParseUgc(string ugc, DateTimeOffset referenceTime)
+        private static IEnumerable<UgcGroup> ParseUgcGroups(string ugc, DateTimeOffset referenceTime)
         {
             // WIZ001-002-006>008-014>016-023>028-212300-
             string state = null;
             var type = char.MinValue;
-            var segments = RemoveWhitespace(ugc).Split(new[] {'-'}, StringSplitOptions.RemoveEmptyEntries);
+            var segments = RemoveWhitespace(ugc).Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
             var purgeTime = TimeParser.ParseDayHourMinute(referenceTime, segments[segments.Length - 1]);
             var index = 0;
-            while (index < segments.Length-1)
+
+            while (index < segments.Length - 1)
             {
                 var segment = segments[index++];
                 int start, end;
@@ -82,7 +88,7 @@ namespace Emwin.Core.Parsers
                 // Zone or county value (eg: 002 or ALL)
                 if (state != null && type != char.MinValue && (segment == "ALL" || segment.All(char.IsDigit)))
                 {
-                    yield return new UniversalGeographicCode
+                    yield return new UgcGroup
                     {
                         State = state,
                         Type = type,
@@ -97,7 +103,7 @@ namespace Emwin.Core.Parsers
                 {
                     state = segment.Substring(0, 2);
                     type = segment[2];
-                    yield return new UniversalGeographicCode
+                    yield return new UgcGroup
                     {
                         State = state,
                         Type = type,
@@ -116,7 +122,7 @@ namespace Emwin.Core.Parsers
                     start = int.Parse(split[0].Substring(3));
                     end = int.Parse(split[1]);
                     for (var i = start; i <= end; i++)
-                        yield return new UniversalGeographicCode
+                        yield return new UgcGroup
                         {
                             State = state,
                             Type = type,
@@ -133,7 +139,7 @@ namespace Emwin.Core.Parsers
                     start = int.Parse(split[0]);
                     end = int.Parse(split[1]);
                     for (var i = start; i <= end; i++)
-                        yield return new UniversalGeographicCode
+                        yield return new UgcGroup
                         {
                             State = state,
                             Type = type,
@@ -147,10 +153,6 @@ namespace Emwin.Core.Parsers
             }
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
         /// <summary>
         /// Removes the whitespace.
         /// </summary>
@@ -159,5 +161,21 @@ namespace Emwin.Core.Parsers
         private static string RemoveWhitespace(string input) => new string(input.Where(c => !char.IsWhiteSpace(c)).ToArray());
 
         #endregion Private Methods
+
+        #region Private Classes
+
+        private class UgcGroup
+        {
+            #region Public Properties
+
+            public DateTimeOffset PurgeTime { get; set; }
+            public string State { get; set; }
+            public char Type { get; set; }
+            public string Value { get; set; }
+
+            #endregion Public Properties
+        }
+
+        #endregion Private Classes
     }
 }

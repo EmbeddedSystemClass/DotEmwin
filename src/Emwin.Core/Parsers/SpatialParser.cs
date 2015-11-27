@@ -48,7 +48,7 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;Location[]&gt;.</returns>
-        public static IEnumerable<Location[]> ParseProduct(ITextProduct product)
+        public static IEnumerable<Position[]> ParseProduct(ITextProduct product)
         {
             var polygonMatches = PolygonRegex.Matches(product.Content);
 
@@ -61,10 +61,10 @@ namespace Emwin.Core.Parsers
 
         #region Private Methods
 
-        private static Location ToLocation(Capture points)
+        private static Position ToLocation(Capture points)
         {
             var split = points.Value.Split(' ');
-            return new Location(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
+            return new Position(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
         }
 
         #endregion Private Methods

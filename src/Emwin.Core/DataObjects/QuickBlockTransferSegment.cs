@@ -96,6 +96,12 @@ namespace Emwin.Core.DataObjects
         public DateTimeOffset ReceivedAt { get; set; } = DateTimeOffset.UtcNow;
 
         /// <summary>
+        /// Gets the source.
+        /// </summary>
+        /// <value>The source.</value>
+        public string Source { get; set; }
+
+        /// <summary>
         /// Gets or sets the time stamp of the file the block is part of.
         /// </summary>
         /// <value>The time stamp.</value>

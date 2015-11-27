@@ -47,17 +47,18 @@
     <Compile Include="Contracts\IXmlProduct.cs" />
     <Compile Include="Contracts\ITextProduct.cs" />
     <Compile Include="Contracts\ITrackingLine.cs" />
-    <Compile Include="DataObjects\Location.cs" />
+    <Compile Include="DataObjects\Position.cs" />
     <Compile Include="DataObjects\CommsHeader.cs" />
     <Compile Include="Contracts\IEmwinContent.cs" />
     <Compile Include="Contracts\IUniversalGeographicCode.cs" />
-    <Compile Include="Contracts\IValidTimeEventCode.cs" />
+    <Compile Include="Contracts\IPrimaryVtec.cs" />
     <Compile Include="Contracts\ICommsHeader.cs" />
     <Compile Include="DataObjects\TrackingLine.cs" />
+    <Compile Include="Parsers\XmlParser.cs" />
     <Compile Include="Parsers\BulletinParser.cs" />
     <Compile Include="Parsers\TrackingLineParser.cs" />
     <Compile Include="Products\BulletinProduct.cs" />
-    <Compile Include="Products\ProductFactory.cs" />
+    <Compile Include="Products\ProductBuilderExtension.cs" />
     <Compile Include="Products\GraphicProduct.cs" />
     <Compile Include="DataObjects\QuickBlockTransferSegment.cs" />
     <Compile Include="Products\CompressedContent.cs" />
@@ -70,7 +71,7 @@
     <Compile Include="Parsers\UgcParser.cs" />
     <Compile Include="Parsers\VtecParser.cs" />
     <Compile Include="DataObjects\UniversalGeographicCode.cs" />
-    <Compile Include="DataObjects\ValidTimeEventCode.cs" />
+    <Compile Include="DataObjects\PrimaryVtec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

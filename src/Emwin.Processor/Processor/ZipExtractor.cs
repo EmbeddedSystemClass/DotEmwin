@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -25,61 +25,93 @@
  */
 
 using System;
+using System.IO;
+using System.IO.Compression;
 using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
-using Emwin.Processor.Instrumentation;
 using Emwin.Core.Products;
 using Emwin.Processor.EventAggregator;
+using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
 {
-    /// <summary>
-    /// Class ProductAssembler. Assembles bundles of segments into a product by combining all the bytes from each segment.
-    /// </summary>
-    internal sealed class ProductAssembler : IHandle<IQuickBlockTransferSegment[]>
+    internal sealed class ZipExtractor : IHandle<ICompressedContent>
     {
+        #region Public Methods
+
         /// <summary>
-        /// This will be called every time a QuickBlockTransferSegment[] bundle is published through the event aggregator
+        /// This will be called every time a CompressedProduct is published through the event aggregator
+        /// Unzips the product and returns the first contained product in the zip.
+        /// Assumes a single product is contained inside the zip file.
         /// </summary>
-        /// <param name="bundle">The bundle.</param>
+        /// <param name="product">The product.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(IQuickBlockTransferSegment[] bundle, IEventAggregator ctx)
+        public void Handle(ICompressedContent product, IEventAggregator ctx)
         {
             try
             {
-                var contentType = ContentTypeParser.GetFileContentType(bundle[0].Filename);
-                switch (contentType)
-                {
-                    case ContentFileType.Text:
-                        var textProduct = bundle.BuildProduct<ITextProduct>();
-                        ProcessorEventSource.Log.Verbose("ProductAssembler", textProduct.ToString());
-                        ctx.SendMessage(textProduct);
-                        break;
-
-                    case ContentFileType.Image:
-                        var imageProduct = bundle.BuildProduct<IImageProduct>();
-                        ProcessorEventSource.Log.Verbose("ProductAssembler", imageProduct.ToString());
-                        ctx.SendMessage(imageProduct);
-                        break;
-
-                    case ContentFileType.Compressed:
-                        var compressedProduct = bundle.BuildProduct<ICompressedContent>();
-                        ProcessorEventSource.Log.Verbose("ProductAssembler", compressedProduct.ToString());
-                        ctx.SendMessage(compressedProduct);
-                        break;
-
-                    default:
-                        ProcessorEventSource.Log.Warning("ProductAssembler",
-                            "Unknown content file type: " + contentType);
-                        return;
-                }
-
-                PerformanceCounters.ProductsCreatedTotal.Increment();
+                UnZip(product, ctx);
             }
             catch (Exception ex)
             {
-                ProcessorEventSource.Log.Error("ProductAssembler", ex.ToString());
+                ProcessorEventSource.Log.Error("ZipProcessor", ex.ToString());
             }
         }
+
+        private static void UnZip(ICompressedContent product, IEventPublisher ctx)
+        {
+            using (var zip = new ZipArchive(product.GetStream(), ZipArchiveMode.Read))
+            {
+                foreach (var file in zip.Entries)
+                {
+                    using (var fileStream = file.Open())
+                    {
+                        var content = ReadAllBytes(fileStream);
+                        var contentType = ContentTypeParser.GetFileContentType(file.Name);
+                        switch (contentType)
+                        {
+                            case ContentFileType.Text:
+                                var textProduct = TextProduct.Create(
+                                    file.Name.ToUpperInvariant(), file.LastWriteTime, content, product.ReceivedAt, product.Source);
+                                ctx.SendMessage(textProduct);
+                                ProcessorEventSource.Log.Info("ZipProcessor", textProduct.ToString());
+                                break;
+
+                            case ContentFileType.Image:
+                                var imageProduct = ImageProduct.Create(
+                                    file.Name.ToUpperInvariant(), file.LastWriteTime, content, product.ReceivedAt, product.Source);
+                                ctx.SendMessage(imageProduct);
+                                ProcessorEventSource.Log.Info("ZipProcessor", imageProduct.ToString());
+                                break;
+
+                            default:
+                                ProcessorEventSource.Log.Warning("ZipProcessor",
+                                    "Unknown content file type: " + file.Name);
+                                return;
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        /// <summary>
+        /// Reads all bytes.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <returns>System.Byte[].</returns>
+        private static byte[] ReadAllBytes(Stream stream)
+        {
+            using (var ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
+        #endregion Private Methods
     }
 }

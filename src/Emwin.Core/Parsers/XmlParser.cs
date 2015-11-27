@@ -25,52 +25,58 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using Emwin.Core.Contracts;
+using Emwin.Core.Products;
 
-namespace Emwin.Core.Contracts
+namespace Emwin.Core.Parsers
 {
-    public interface IValidTimeEventCode
+    public static class XmlParser
     {
-        /// <summary>
-        /// Gets the action code.
-        /// </summary>
-        /// <value>The action code.</value>
-        string ActionCode { get; }
+        private const string XmlHeader = "<?xml version=\"1.0\"";
+
+        #region Public Methods
 
         /// <summary>
-        /// Gets the begin.
+        /// Parses the product.
         /// </summary>
-        /// <value>The begin.</value>
-        DateTimeOffset Begin { get; }
+        /// <param name="product">The product.</param>
+        /// <returns>IEnumerable&lt;IXmlProduct&gt;.</returns>
+        public static IEnumerable<IXmlProduct> ParseProduct(ITextProduct product)
+        {
+            var startAt = 0;
+            var seq = 1;
 
-        /// <summary>
-        /// Gets the end.
-        /// </summary>
-        /// <value>The end.</value>
-        DateTimeOffset End { get; }
+            do
+            {
+                startAt = product.Content.IndexOf(XmlHeader, startAt, StringComparison.Ordinal);
+                if (startAt == -1) yield break;
 
-        /// <summary>
-        /// Gets the event number.
-        /// </summary>
-        /// <value>The event number.</value>
-        int EventNumber { get; }
+                var endAt = product.Content.IndexOf(XmlHeader, startAt + XmlHeader.Length, StringComparison.Ordinal);
+                if (endAt == -1) endAt = product.Content.Length;
 
-        /// <summary>
-        /// Gets the office identifier.
-        /// </summary>
-        /// <value>The office identifier.</value>
-        string WmoId { get; }
+                var xml = product.Content.Substring(startAt, endAt - startAt).TrimEnd();
 
-        /// <summary>
-        /// Gets the phenomenon code.
-        /// </summary>
-        /// <value>The phenomenon code.</value>
-        string PhenomenonCode { get; }
+                var newFilename = string.Concat(
+                    Path.GetFileNameWithoutExtension(product.Filename),
+                    '-', seq.ToString("00"),
+                    ".XML");
 
-        char SignificanceCode { get; }
-        /// <summary>
-        /// Gets the type identifier.
-        /// </summary>
-        /// <value>The type identifier.</value>
-        char TypeIdentifier { get; }
+                yield return XmlProduct.Create(
+                    newFilename,
+                    product.TimeStamp,
+                    xml,
+                    product.ReceivedAt,
+                    product.Header,
+                    seq++, 
+                    product.Source);
+
+                startAt = endAt;
+            } while (startAt < product.Content.Length);
+        }
+
+        #endregion Public Methods
+
     }
 }

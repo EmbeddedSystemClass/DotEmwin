@@ -54,6 +54,12 @@ namespace Emwin.Core.Contracts
         DateTimeOffset ReceivedAt { get; }
 
         /// <summary>
+        /// Gets the source.
+        /// </summary>
+        /// <value>The source.</value>
+        string Source { get; }
+
+        /// <summary>
         /// Gets the content time stamp.
         /// </summary>
         /// <value>The time stamp.</value>

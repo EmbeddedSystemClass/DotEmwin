@@ -25,6 +25,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Emwin.Core.Contracts;
 
@@ -36,14 +37,12 @@ namespace Emwin.Core.DataObjects
     [DataContract]
     public class UniversalGeographicCode : IUniversalGeographicCode
     {
-        #region Public Properties
-
         /// <summary>
-        /// Gets or sets the zone or county value.
+        /// Gets or sets the state.
         /// </summary>
-        /// <value>The element.</value>
+        /// <value>The state.</value>
         [DataMember]
-        public string Value { get; set; }
+        public string State { get; set; }
 
         /// <summary>
         /// Gets or sets the purge time.
@@ -53,29 +52,17 @@ namespace Emwin.Core.DataObjects
         public DateTimeOffset PurgeTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the state.
+        /// Gets or sets the zones.
         /// </summary>
-        /// <value>The state.</value>
+        /// <value>The zones.</value>
         [DataMember]
-        public string State { get; set; }
+        public HashSet<string> Zones { get; set; }
 
         /// <summary>
-        /// Gets or sets the type.
+        /// Gets or sets the counties.
         /// </summary>
-        /// <value>The type.</value>
+        /// <value>The counties.</value>
         [DataMember]
-        public char Type { get; set; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() => $"Type: {Type} State: {State} Id: {Value} PurgeTime: {PurgeTime:g}";
-
-        #endregion Public Methods
+        public HashSet<int> Counties { get; set; }
     }
 }
