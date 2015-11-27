@@ -24,54 +24,52 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Emwin.Core.Contracts;
-using Emwin.Core.DataObjects;
+using System;
 
-namespace Emwin.Core.Parsers
+namespace Emwin.Core.Contracts
 {
-    public static class TrackingLineParser
+    public interface IHydrologicVtec
     {
-
-        #region Private Fields
-
-        private static readonly Regex TimeMotLocRegex = new Regex(@"^TIME\.\.\.MOT\.\.\.LOC\s(?<time>[0-9]{4})Z\s(?<mot>[0-9]{3})DEG\s(?<wind>[0-9]{1,2})KT(?:\s(?<points>[0-9]{4}\s[0-9]{4,5}))+", RegexOptions.ExplicitCapture | RegexOptions.Multiline | RegexOptions.Compiled);
-
-        #endregion Private Fields
-
-        #region Public Methods
+        /// <summary>
+        /// Gets the location identifier.
+        /// </summary>
+        /// <value>The location.</value>
+        string LocationIdentifier { get; }
 
         /// <summary>
-        /// Parses the product and returns a set of latitude/longitude points.
+        /// Gets the severity code.
         /// </summary>
-        /// <param name="product">The product.</param>
-        /// <returns>IEnumerable&lt;TrackingLine&gt;.</returns>
-        public static IEnumerable<TrackingLine> ParseTrackingLines(this ITextProduct product)
-        {
-            var matches = TimeMotLocRegex.Matches(product.Content);
+        /// <value>The severity code.</value>
+        char SeverityCode { get; }
 
-            return matches.Cast<Match>().Select(match => new TrackingLine
-            {
-                TimeStamp = TimeParser.ParseHourMinute(product.TimeStamp, match.Groups["time"].Value),
-                DirectionDeg = int.Parse(match.Groups["mot"].Value),
-                WindSpeedKts = int.Parse(match.Groups["wind"].Value),
-                Line = match.Groups["points"].Captures.Cast<Capture>().Select(ToLocation).ToList()
-            });
-        }
+        /// <summary>
+        /// Gets the immediate cause code.
+        /// </summary>
+        /// <value>The immediate cause code.</value>
+        string ImmediateCauseCode { get; }
 
-        #endregion Public Methods
+        /// <summary>
+        /// Gets the flood record status code.
+        /// </summary>
+        /// <value>The flood record.</value>
+        string FloodRecordStatusCode { get; }
 
-        #region Private Methods
+        /// <summary>
+        /// Gets the begin time.
+        /// </summary>
+        /// <value>The begin.</value>
+        DateTimeOffset Begin { get; }
 
-        private static Position ToLocation(Capture points)
-        {
-            var split = points.Value.Split(' ');
-            return new Position(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
-        }
+        /// <summary>
+        /// Gets the crest time.
+        /// </summary>
+        /// <value>The crest.</value>
+        DateTimeOffset Crest { get; }
 
-        #endregion Private Methods
-
+        /// <summary>
+        /// Gets the end time.
+        /// </summary>
+        /// <value>The end.</value>
+        DateTimeOffset End { get; }
     }
 }

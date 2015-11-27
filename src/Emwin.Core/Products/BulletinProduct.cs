@@ -53,12 +53,23 @@ namespace Emwin.Core.Products
         public IEnumerable<Position[]> Polygons { get; set; }
 
         /// <summary>
-        /// Gets any vtec codes.
+        /// Gets the primary vtec.
         /// </summary>
-        /// <value>The vtec codes.</value>
+        /// <value>The primary vtec.</value>
         public IPrimaryVtec PrimaryVtec { get; set; }
 
+        /// <summary>
+        /// Gets or sets the hydrologic vtec.
+        /// </summary>
+        /// <value>The hydrologic vtec.</value>
+        public IHydrologicVtec HydrologicVtec { get; set; }
+
+        /// <summary>
+        /// Gets the sequence number with the text product.
+        /// </summary>
+        /// <value>The sequence number.</value>
         public int SequenceNumber { get; set; }
+
         /// <summary>
         /// Gets or sets the tracking line.
         /// </summary>
@@ -93,10 +104,11 @@ namespace Emwin.Core.Products
                 Source = source
             };
 
-            product.GeoCodes = UgcParser.ParseProduct(product);
-            product.PrimaryVtec = VtecParser.ParseProduct(product).FirstOrDefault();
-            product.Polygons = SpatialParser.ParseProduct(product);
-            product.TrackingLine = TrackingLineParser.ParseProduct(product).FirstOrDefault();
+            product.GeoCodes = product.ParseGeographicCodes();
+            product.PrimaryVtec = product.ParsePrimaryVtec().FirstOrDefault();
+            product.Polygons = product.ParsePolygons();
+            product.TrackingLine = product.ParseTrackingLines().FirstOrDefault();
+            product.HydrologicVtec = product.ParseHydrologicVtec().FirstOrDefault();
 
             return product;
         }

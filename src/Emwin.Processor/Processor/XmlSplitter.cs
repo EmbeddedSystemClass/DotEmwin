@@ -46,7 +46,7 @@ namespace Emwin.Processor.Processor
         /// <param name="ctx">The CTX.</param>
         public void Handle(ITextProduct product, IEventAggregator ctx)
         {
-            var xmlFiles = XmlParser.ParseProduct(product).ToList();
+            var xmlFiles = XmlParser.ParseXmlProducts(product).ToList();
             if (xmlFiles.Count == 0) return;
 
             ProcessorEventSource.Log.Info("XmlSplitter", "Splitting product into " + xmlFiles.Count + " xml files");

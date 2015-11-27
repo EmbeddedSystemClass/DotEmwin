@@ -32,7 +32,7 @@ using Emwin.Core.DataObjects;
 
 namespace Emwin.Core.Parsers
 {
-    public class SpatialParser
+    public static class SpatialParser
     {
 
         #region Private Fields
@@ -48,7 +48,7 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;Location[]&gt;.</returns>
-        public static IEnumerable<Position[]> ParseProduct(ITextProduct product)
+        public static IEnumerable<Position[]> ParsePolygons(this ITextProduct product)
         {
             var polygonMatches = PolygonRegex.Matches(product.Content);
 

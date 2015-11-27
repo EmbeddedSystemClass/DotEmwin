@@ -51,7 +51,7 @@ namespace Emwin.Core.Parsers
         /// <param name="product">The product.</param>
         /// <param name="includeHeader">if set to <c>true</c> [include header].</param>
         /// <returns>IEnumerable&lt;ITextProduct&gt;.</returns>
-        public static IEnumerable<IBulletinProduct> ParseProduct(ITextProduct product, bool includeHeader = false)
+        public static IEnumerable<IBulletinProduct> ParseBulletinProducts(this ITextProduct product, bool includeHeader = false)
         {
             var headerMatch = HeaderRegex.Match(product.Content);
             if (!headerMatch.Success) yield break;

@@ -50,10 +50,16 @@ namespace Emwin.Core.Contracts
         IEnumerable<Position[]> Polygons { get; set; }
 
         /// <summary>
-        /// Gets any VTEC codes.
+        /// Gets the primary vtec.
         /// </summary>
-        /// <value>The VTEC codes.</value>
+        /// <value>The primary vtec.</value>
         IPrimaryVtec PrimaryVtec { get; }
+
+        /// <summary>
+        /// Gets the hydrologic vtec.
+        /// </summary>
+        /// <value>The hydrologic vtec.</value>
+        IHydrologicVtec HydrologicVtec { get; }
 
         /// <summary>
         /// Gets the tracking line.

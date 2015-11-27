@@ -56,7 +56,7 @@ namespace Emwin.Core.Parsers
         /// <param name="product">The product.</param>
         /// <returns>Header.</returns>
         /// <exception cref="System.ArgumentException">Invalid content header</exception>
-        public static ICommsHeader ParseProduct(ITextProduct product)
+        public static ICommsHeader ParseCommsHeader(this ITextProduct product)
         {
             var match = WmoHeaderRegex.Match(product.Content);
             if (!match.Success) return new CommsHeader();

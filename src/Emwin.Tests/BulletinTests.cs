@@ -18,7 +18,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = BulletinParser.ParseProduct(product).FirstOrDefault();
+            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
             Assert.IsNotNull(product.Header, "product.Header != null");
@@ -35,7 +35,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = BulletinParser.ParseProduct(product).FirstOrDefault();
+            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
             var polygon = bulletin.Polygons.FirstOrDefault();
@@ -51,7 +51,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = BulletinParser.ParseProduct(product).FirstOrDefault();
+            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
             var trackingLine = bulletin.TrackingLine;
@@ -73,7 +73,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = BulletinParser.ParseProduct(product).FirstOrDefault();
+            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
             var geoCodes = bulletin.GeoCodes.ToList();
@@ -91,7 +91,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = BulletinParser.ParseProduct(product).FirstOrDefault();
+            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
             var vtec = bulletin.PrimaryVtec;
@@ -105,6 +105,26 @@ namespace Emwin.Tests
             Assert.AreEqual('W', vtec.SignificanceCode, "VTEC SignificanceCode");
         }
 
+        [TestMethod]
+        public void FloodWarningVTecTest()
+        {
+            var product = GetFloodWarning();
+            Assert.IsNotNull(product, "Unable to create text product");
+
+            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
+            Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
+
+            var vtec = bulletin.HydrologicVtec;
+            Assert.IsNotNull(vtec, "Unable to parse hydrologic VTEC");
+            Assert.AreEqual("00000", vtec.LocationIdentifier, "Location");
+            Assert.AreEqual('0', vtec.SeverityCode, "Severity");
+            Assert.AreEqual("ER", vtec.ImmediateCauseCode, "Cause");
+            Assert.AreEqual("OO", vtec.FloodRecordStatusCode, "Flood Status");
+            Assert.AreEqual(DateTimeOffset.MinValue, vtec.Begin, "VTEC Begin");
+            Assert.AreEqual(DateTimeOffset.MinValue, vtec.Crest, "VTEC Crest");
+            Assert.AreEqual(DateTimeOffset.MinValue, vtec.End, "VTEC End");
+        }
+
         #endregion Public Methods
 
         #region Private Methods
@@ -115,7 +135,16 @@ namespace Emwin.Tests
                 "TORDDCXXXX.TXT",
                 new DateTimeOffset(2015, 6, 5, 0, 56, 0, TimeSpan.Zero),
                 Encoding.ASCII.GetBytes(BulletinContent.TornadoWarning),
-                DateTimeOffset.UtcNow, String.Empty);
+                DateTimeOffset.UtcNow, string.Empty);
+        }
+
+        private static ITextProduct GetFloodWarning()
+        {
+            return TextProduct.Create(
+                "FLWOAXXXXX.TXT",
+                new DateTimeOffset(2015, 6, 5, 23, 45, 0, TimeSpan.Zero),
+                Encoding.ASCII.GetBytes(BulletinContent.FloodWarning),
+                DateTimeOffset.UtcNow, string.Empty);
         }
 
         #endregion Private Methods

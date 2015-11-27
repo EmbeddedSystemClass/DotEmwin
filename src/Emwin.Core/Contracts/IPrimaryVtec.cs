@@ -66,7 +66,12 @@ namespace Emwin.Core.Contracts
         /// <value>The phenomenon code.</value>
         string PhenomenonCode { get; }
 
+        /// <summary>
+        /// Gets the significance code.
+        /// </summary>
+        /// <value>The significance code.</value>
         char SignificanceCode { get; }
+
         /// <summary>
         /// Gets the type identifier.
         /// </summary>

@@ -40,7 +40,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataObjects\HydrologicVtec.cs" />
     <Compile Include="Contracts\IBulletinProduct.cs" />
+    <Compile Include="Contracts\IHydrologicVtec.cs" />
     <Compile Include="Contracts\IQuickBlockTransferSegment.cs" />
     <Compile Include="Contracts\ICompressedContent.cs" />
     <Compile Include="Contracts\IImageProduct.cs" />

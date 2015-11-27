@@ -43,7 +43,7 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;IXmlProduct&gt;.</returns>
-        public static IEnumerable<IXmlProduct> ParseProduct(ITextProduct product)
+        public static IEnumerable<IXmlProduct> ParseXmlProducts(this ITextProduct product)
         {
             var startAt = 0;
             var seq = 1;

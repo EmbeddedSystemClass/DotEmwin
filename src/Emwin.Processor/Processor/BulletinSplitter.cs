@@ -46,7 +46,7 @@ namespace Emwin.Processor.Processor
         /// <param name="ctx">The CTX.</param>
         public void Handle(ITextProduct product, IEventAggregator ctx)
         {
-            var bulletins = BulletinParser.ParseProduct(product).ToList();
+            var bulletins = BulletinParser.ParseBulletinProducts(product).ToList();
             if (bulletins.Count == 0) return;
 
             ProcessorEventSource.Log.Info("BulletinSplitter", "Splitting product into " + bulletins.Count + " bulletins");

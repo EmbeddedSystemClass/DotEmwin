@@ -107,7 +107,7 @@ namespace Emwin.Core.Products
                 Source = source
             };
 
-            product.Header = HeadingParser.ParseProduct(product);
+            product.Header = HeadingParser.ParseCommsHeader(product);
 
             return product;
         }

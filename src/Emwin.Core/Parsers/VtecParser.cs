@@ -43,6 +43,9 @@ namespace Emwin.Core.Parsers
 
         #region Private Fields
 
+        private static readonly Regex HvtecRegex = new Regex(@"^/(?<nwsli>[0-9A-Z]{5})\.(?<severity>[N0123U])\.(?<cause>[A-Z]{2})\.(?<begin>[0-9]{6}T[0-9]{4}Z)\.(?<crest>[0-9]{6}T[0-9]{4}Z)\.(?<end>[0-9]{6}T[0-9]{4}Z)\.(?<floodrecord>[A-Z]{2})/\r",
+                    RegexOptions.Multiline | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+
         /// <summary>
         /// The Primary VTEC Pattern
         /// </summary>
@@ -54,25 +57,50 @@ namespace Emwin.Core.Parsers
         #region Public Methods
 
         /// <summary>
-        /// Parses the content and returns any VTEC items contained.
+        /// Parses the content and returns any Hydrologic VTEC items contained.
+        /// </summary>
+        /// <param name="product">The product.</param>
+        /// <returns>System.Collections.Generic.IEnumerable&lt;Emwin.Core.Contracts.IHydrologicVtec&gt;.</returns>
+        public static IEnumerable<IHydrologicVtec> ParseHydrologicVtec(this ITextProduct product)
+                    => HvtecRegex.Matches(product.Content).Cast<Match>().Select(CreateHydrologicVtec);
+
+        /// <summary>
+        /// Parses the hydrologic vtec.
+        /// </summary>
+        /// <param name="hvtec">The hvtec.</param>
+        /// <returns>Emwin.Core.Contracts.IHydrologicVtec.</returns>
+        public static IHydrologicVtec ParseHydrologicVtec(string hvtec) => CreateHydrologicVtec(HvtecRegex.Match(hvtec));
+
+        /// <summary>
+        /// Parses the content and returns any Primary VTEC items contained.
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;ValidTimeEventCode&gt;.</returns>
-        public static IEnumerable<IPrimaryVtec> ParseProduct(ITextProduct product)
-            => PvtecRegex.Matches(product.Content).Cast<Match>().Select(Create);
-
+        public static IEnumerable<IPrimaryVtec> ParsePrimaryVtec(this ITextProduct product)
+            => PvtecRegex.Matches(product.Content).Cast<Match>().Select(CreatePrimaryVtec);
         /// <summary>
         /// Parses the VTEC string.
         /// </summary>
-        /// <param name="vtec">The VTEC.</param>
+        /// <param name="pvtec">The VTEC.</param>
         /// <returns>ValidTimeEventCode.</returns>
-        public static IPrimaryVtec ParseVtec(string vtec) => Create(PvtecRegex.Match(vtec));
+        public static IPrimaryVtec ParsePrimaryVtec(string pvtec) => CreatePrimaryVtec(PvtecRegex.Match(pvtec));
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private static IPrimaryVtec Create(Match pvtecMatch) => new PrimaryVtec
+        private static IHydrologicVtec CreateHydrologicVtec(Match hvtecMatch) => new HydrologicVtec
+        {
+            LocationIdentifier = hvtecMatch.Groups["nwsli"].Value,
+            SeverityCode = hvtecMatch.Groups["severity"].Value[0],
+            ImmediateCauseCode = hvtecMatch.Groups["cause"].Value,
+            Begin = TimeParser.ParseDateTime(hvtecMatch.Groups["begin"].Value),
+            Crest = TimeParser.ParseDateTime(hvtecMatch.Groups["crest"].Value),
+            End = TimeParser.ParseDateTime(hvtecMatch.Groups["end"].Value),
+            FloodRecordStatusCode = hvtecMatch.Groups["floodrecord"].Value
+        };
+
+        private static IPrimaryVtec CreatePrimaryVtec(Match pvtecMatch) => new PrimaryVtec
         {
             TypeIdentifier = pvtecMatch.Groups["type"].Value[0],
             ActionCode = pvtecMatch.Groups["action"].Value,
@@ -85,6 +113,5 @@ namespace Emwin.Core.Parsers
         };
 
         #endregion Private Methods
-
     }
 }
