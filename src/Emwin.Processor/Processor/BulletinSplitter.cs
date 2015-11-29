@@ -26,27 +26,28 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
+using Emwin.Core.Products;
 using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
 {
-    internal sealed class BulletinSplitter : IHandle<ITextProduct>
+    internal sealed class BulletinSplitter : IHandle<TextProduct>
     {
+        private const bool IncludeHeaderInBulletin = false;
+
         #region Public Methods
 
         /// <summary>
-        /// This will be called every time a CompressedProduct is published through the event aggregator
-        /// Unzips the product and returns the first contained product in the zip.
-        /// Assumes a single product is contained inside the zip file.
+        /// This will be called every time a text product is published through the event aggregator.
+        /// Checks for any bulletins within the text product and publishes them out in parallel.
         /// </summary>
         /// <param name="product">The product.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(ITextProduct product, IEventAggregator ctx)
+        public void Handle(TextProduct product, IEventAggregator ctx)
         {
-            var bulletins = BulletinParser.ParseBulletinProducts(product).ToList();
+            var bulletins = product.ParseBulletinProducts(IncludeHeaderInBulletin).ToList();
             if (bulletins.Count == 0) return;
 
             ProcessorEventSource.Log.Info("BulletinSplitter", "Splitting product into " + bulletins.Count + " bulletins");

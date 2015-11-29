@@ -25,11 +25,10 @@
  */
 
 using System;
-using Emwin.Core.Contracts;
 
 namespace Emwin.Core.DataObjects
 {
-    public class HydrologicVtec : IHydrologicVtec
+    public class HydrologicVtec
     {
         /// <summary>
         /// Gets the location identifier.
@@ -72,5 +71,11 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The end.</value>
         public DateTimeOffset End { get; set; }
+
+        /// <summary>
+        /// Formats as raw Hydrologic VTEC string.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        public string ToRaw() => $"/{LocationIdentifier}.{SeverityCode}.{ImmediateCauseCode}.{Begin:yyMMdd\\THHmm}Z.{Crest:yyMMdd\\THHmm}Z.{End:yyMMdd\\THHmm}Z.{FloodRecordStatusCode}/";
     }
 }

@@ -48,6 +48,7 @@
     <Compile Include="EventAggregator\IPipelineFilter.cs" />
     <Compile Include="EventAggregator\ObservableListener.cs" />
     <Compile Include="EventAggregator\Pipeline.cs" />
+    <Compile Include="Processor\AlertGenerator.cs" />
     <Compile Include="Processor\XmlSplitter.cs" />
     <Compile Include="Processor\ProductAssembler.cs" />
     <Compile Include="Processor\SegmentBundler.cs" />

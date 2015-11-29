@@ -24,23 +24,29 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-namespace Emwin.Core.DataObjects
-{
-    public struct Position
-    {
-        public double Latitude;
+using Emwin.Core.Products;
+using Emwin.Processor.EventAggregator;
 
-        public double Longitude;
+namespace Emwin.Processor.Processor
+{
+    internal sealed class AlertGenerator : IHandle<BulletinProduct>
+    {
+
+        #region Public Methods
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Position"/> struct.
+        /// This will be called every time a text product is published through the event aggregator.
         /// </summary>
-        /// <param name="latitude">The latitude.</param>
-        /// <param name="longitude">The longitude.</param>
-        public Position(double latitude, double longitude)
+        /// <param name="bulletin">The bulletin.</param>
+        /// <param name="ctx">The CTX.</param>
+        public void Handle(BulletinProduct bulletin, IEventAggregator ctx)
         {
-            Latitude = latitude;
-            Longitude = longitude;
+            if (bulletin.PrimaryVtec == null || bulletin.Header == null) return;
+
+            ctx.SendMessage(bulletin.CreateAlert());
         }
+
+        #endregion Public Methods
+
     }
 }

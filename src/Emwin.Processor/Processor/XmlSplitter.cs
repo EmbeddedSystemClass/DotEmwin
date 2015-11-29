@@ -26,14 +26,14 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
+using Emwin.Core.Products;
 using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
 {
-    internal sealed class XmlSplitter : IHandle<ITextProduct>
+    internal sealed class XmlSplitter : IHandle<TextProduct>
     {
         #region Public Methods
 
@@ -44,9 +44,9 @@ namespace Emwin.Processor.Processor
         /// </summary>
         /// <param name="product">The product.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(ITextProduct product, IEventAggregator ctx)
+        public void Handle(TextProduct product, IEventAggregator ctx)
         {
-            var xmlFiles = XmlParser.ParseXmlProducts(product).ToList();
+            var xmlFiles = product.ParseXmlProducts().ToList();
             if (xmlFiles.Count == 0) return;
 
             ProcessorEventSource.Log.Info("XmlSplitter", "Splitting product into " + xmlFiles.Count + " xml files");

@@ -27,6 +27,7 @@
 using System;
 using System.Text;
 using Emwin.Core.Contracts;
+using Emwin.Core.DataObjects;
 using Emwin.Core.Parsers;
 
 namespace Emwin.Core.Products
@@ -34,7 +35,7 @@ namespace Emwin.Core.Products
     /// <summary>
     /// Class TextProduct. Represents a received text file.
     /// </summary>
-    public class TextProduct : ITextProduct
+    public class TextProduct : IEmwinContent<string>
     {
 
         #region Public Properties
@@ -55,7 +56,7 @@ namespace Emwin.Core.Products
         /// Gets or sets the header.
         /// </summary>
         /// <value>The header.</value>
-        public ICommsHeader Header { get; set; }
+        public CommsHeader Header { get; set; }
 
         /// <summary>
         /// Gets the content.
@@ -92,8 +93,8 @@ namespace Emwin.Core.Products
         /// <param name="content">The content.</param>
         /// <param name="receivedAt">The received at.</param>
         /// <param name="source">The source.</param>
-        /// <returns>Emwin.Core.Contracts.ITextProduct.</returns>
-        public static ITextProduct Create(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt, string source)
+        /// <returns>Emwin.Core.Contracts.TextProduct.</returns>
+        public static TextProduct Create(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt, string source)
         {
             var count = Array.LastIndexOf(content, (byte)03); // Trim to ETX
             if (count < 0) count = content.Length;

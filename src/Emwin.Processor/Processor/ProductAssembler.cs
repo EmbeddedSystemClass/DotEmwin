@@ -51,19 +51,19 @@ namespace Emwin.Processor.Processor
                 switch (contentType)
                 {
                     case ContentFileType.Text:
-                        var textProduct = bundle.BuildProduct<ITextProduct>();
+                        var textProduct = bundle.AsTextProduct();
                         ProcessorEventSource.Log.Verbose("ProductAssembler", textProduct.ToString());
                         ctx.SendMessage(textProduct);
                         break;
 
                     case ContentFileType.Image:
-                        var imageProduct = bundle.BuildProduct<IImageProduct>();
+                        var imageProduct = bundle.AsImageProduct();
                         ProcessorEventSource.Log.Verbose("ProductAssembler", imageProduct.ToString());
                         ctx.SendMessage(imageProduct);
                         break;
 
                     case ContentFileType.Compressed:
-                        var compressedProduct = bundle.BuildProduct<ICompressedContent>();
+                        var compressedProduct = bundle.AsCompressedProduct();
                         ProcessorEventSource.Log.Verbose("ProductAssembler", compressedProduct.ToString());
                         ctx.SendMessage(compressedProduct);
                         break;

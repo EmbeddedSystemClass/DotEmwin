@@ -27,7 +27,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using Emwin.Core.Contracts;
 using System.Linq;
 using Emwin.Core.Products;
 
@@ -50,8 +49,8 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <param name="includeHeader">if set to <c>true</c> [include header].</param>
-        /// <returns>IEnumerable&lt;ITextProduct&gt;.</returns>
-        public static IEnumerable<IBulletinProduct> ParseBulletinProducts(this ITextProduct product, bool includeHeader = false)
+        /// <returns>IEnumerable&lt;TextProduct&gt;.</returns>
+        public static IEnumerable<BulletinProduct> ParseBulletinProducts(this TextProduct product, bool includeHeader = false)
         {
             var headerMatch = HeaderRegex.Match(product.Content);
             if (!headerMatch.Success) yield break;

@@ -25,51 +25,110 @@
  */
 
 using System;
+using System.Drawing;
+using System.IO;
+using Emwin.Core.Contracts;
+using Emwin.Core.Parsers;
 
-namespace Emwin.Core.Contracts
+namespace Emwin.Core.Products
 {
-    public interface IHydrologicVtec
+    /// <summary>
+    /// Class GraphicProduct. Represents a received graphic image file.
+    /// </summary>
+    public class ImageProduct : IEmwinContent<Image>
     {
-        /// <summary>
-        /// Gets the location identifier.
-        /// </summary>
-        /// <value>The location.</value>
-        string LocationIdentifier { get; }
+
+        #region Public Properties
 
         /// <summary>
-        /// Gets the severity code.
+        /// Gets or sets the content.
         /// </summary>
-        /// <value>The severity code.</value>
-        char SeverityCode { get; }
+        /// <value>The content.</value>
+        public Image Content { get; set; }
 
         /// <summary>
-        /// Gets the immediate cause code.
+        /// Gets the type of the content.
         /// </summary>
-        /// <value>The immediate cause code.</value>
-        string ImmediateCauseCode { get; }
+        /// <value>The type of the content.</value>
+        public ContentFileType ContentType { get; set; }
 
         /// <summary>
-        /// Gets the flood record status code.
+        /// Gets the filename.
         /// </summary>
-        /// <value>The flood record.</value>
-        string FloodRecordStatusCode { get; }
+        /// <value>The filename.</value>
+        public string Filename { get; set; }
 
         /// <summary>
-        /// Gets the begin time.
+        /// Gets or sets the height.
         /// </summary>
-        /// <value>The begin.</value>
-        DateTimeOffset Begin { get; }
+        /// <value>The height.</value>
+        public int Height { get; set; }
 
         /// <summary>
-        /// Gets the crest time.
+        /// Gets the content.
         /// </summary>
-        /// <value>The crest.</value>
-        DateTimeOffset Crest { get; }
+        /// <value>The content.</value>
+        object IEmwinContent.Content => Content;
+        /// <summary>
+        /// Gets the received at time.
+        /// </summary>
+        /// <value>The received at.</value>
+        public DateTimeOffset ReceivedAt { get; set; }
 
         /// <summary>
-        /// Gets the end time.
+        /// Gets or sets the source.
         /// </summary>
-        /// <value>The end.</value>
-        DateTimeOffset End { get; }
+        /// <value>The source.</value>
+        public string Source { get; set; }
+
+        /// <summary>
+        /// Gets the content time stamp.
+        /// </summary>
+        /// <value>The time stamp.</value>
+        public DateTimeOffset TimeStamp { get; set; }
+        /// <summary>
+        /// Gets or sets the width.
+        /// </summary>
+        /// <value>The width.</value>
+        public int Width { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Creates the image product.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <param name="source">The source.</param>
+        /// <returns>Emwin.Core.Contracts.ImageProduct.</returns>
+        public static ImageProduct Create(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt, string source)
+        {
+            var image = Image.FromStream(new MemoryStream(content));
+
+            return new ImageProduct
+            {
+                Filename = filename,
+                TimeStamp = timeStamp,
+                Content = image,
+                Height = image.Height,
+                Width = image.Width,
+                ReceivedAt = receivedAt,
+                ContentType = ContentFileType.Image,
+                Source = source
+            };
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString() =>
+            $"[ImageProduct] Filename={Filename} Date={TimeStamp:g} Size={Content.Width}x{Content.Height}";
+
+        #endregion Public Methods
     }
 }

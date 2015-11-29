@@ -27,7 +27,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Emwin.Core.Contracts;
 using Emwin.Core.Products;
 
 namespace Emwin.Core.Parsers
@@ -42,8 +41,8 @@ namespace Emwin.Core.Parsers
         /// Parses the product.
         /// </summary>
         /// <param name="product">The product.</param>
-        /// <returns>IEnumerable&lt;IXmlProduct&gt;.</returns>
-        public static IEnumerable<IXmlProduct> ParseXmlProducts(this ITextProduct product)
+        /// <returns>IEnumerable&lt;XmlProduct&gt;.</returns>
+        public static IEnumerable<XmlProduct> ParseXmlProducts(this TextProduct product)
         {
             var startAt = 0;
             var seq = 1;

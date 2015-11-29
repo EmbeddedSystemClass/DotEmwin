@@ -27,8 +27,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
+using Emwin.Core.Products;
 
 namespace Emwin.Core.Parsers
 {
@@ -48,23 +48,26 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;Location[]&gt;.</returns>
-        public static IEnumerable<Position[]> ParsePolygons(this ITextProduct product)
+        public static IEnumerable<LatLong[]> ParsePolygons(this TextProduct product)
         {
             var polygonMatches = PolygonRegex.Matches(product.Content);
 
-            return polygonMatches.Cast<Match>()
-                .Select(match => match.Groups["points"].Captures.Cast<Capture>()
-                    .Select(ToLocation).ToArray());
+            foreach (var match in polygonMatches.Cast<Match>().Select(x => x.Groups["points"].Captures.Cast<Capture>()))
+            {
+                var result = match.Select(ToLocation).ToList();
+                result.Add(result.First());
+                yield return result.ToArray();
+            }
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private static Position ToLocation(Capture points)
+        private static LatLong ToLocation(Capture points)
         {
             var split = points.Value.Split(' ');
-            return new Position(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
+            return new LatLong(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
         }
 
         #endregion Private Methods

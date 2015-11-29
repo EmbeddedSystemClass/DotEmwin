@@ -25,60 +25,15 @@
  */
 
 using System;
-using Emwin.Core.Contracts;
+using Emwin.Core.DataObjects;
 
 namespace Emwin.Core.Products
 {
     /// <summary>
     /// Class XmlProduct. Represents a received Xml file.
     /// </summary>
-    public class XmlProduct : IXmlProduct
+    public class XmlProduct : TextProduct
     {
-
-        #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the content.
-        /// </summary>
-        /// <value>The content.</value>
-        public string Content { get; set; }
-
-        /// <summary>
-        /// Gets the filename.
-        /// </summary>
-        /// <value>The filename.</value>
-        public string Filename { get; set; }
-
-        /// <summary>
-        /// Gets or sets the header.
-        /// </summary>
-        /// <value>The header.</value>
-        public ICommsHeader Header { get; set; }
-
-        /// <summary>
-        /// Gets the content.
-        /// </summary>
-        /// <value>The content.</value>
-        object IEmwinContent.Content => Content;
-        /// <summary>
-        /// Gets the received at time.
-        /// </summary>
-        /// <value>The received at.</value>
-        public DateTimeOffset ReceivedAt { get; set; }
-
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>The source.</value>
-        public string Source { get; set; }
-
-        /// <summary>
-        /// Gets the content time stamp.
-        /// </summary>
-        /// <value>The time stamp.</value>
-        public DateTimeOffset TimeStamp { get; set; }
-
-        #endregion Public Properties
 
         #region Public Methods
 
@@ -92,8 +47,8 @@ namespace Emwin.Core.Products
         /// <param name="header">The header.</param>
         /// <param name="seq">The seq.</param>
         /// <param name="source">The source.</param>
-        /// <returns>IXmlProduct.</returns>
-        public static IXmlProduct Create(string filename, DateTimeOffset timeStamp, string content, DateTimeOffset receivedAt, ICommsHeader header, int seq, string source)
+        /// <returns>XmlProduct.</returns>
+        public static XmlProduct Create(string filename, DateTimeOffset timeStamp, string content, DateTimeOffset receivedAt, CommsHeader header, int seq, string source)
         {
             var product = new XmlProduct
             {

@@ -28,8 +28,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
+using Emwin.Core.Products;
 
 namespace Emwin.Core.Parsers
 {
@@ -49,7 +49,7 @@ namespace Emwin.Core.Parsers
 
         #region Public Methods
 
-        public static IEnumerable<UniversalGeographicCode> ParseGeographicCodes(this ITextProduct product) => UgcRegex.Matches(product.Content)
+        public static IEnumerable<UniversalGeographicCode> ParseGeographicCodes(this TextProduct product) => UgcRegex.Matches(product.Content)
             .Cast<Match>()
             .SelectMany(ugcMatch => ParseUgcGroups(ugcMatch.Value, product.TimeStamp))
             .GroupBy(x => x.State)

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="AzureCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="EmwinPublisherWorker">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="EventHubConnectionString" value="Endpoint=sb://emwindev.servicebus.windows.net/;SharedAccessKeyName=send;SharedAccessKey=C0aTjDCF9k+ft31CSTLDpRUWQdz4MYbMAG97vHTYghI=" />
+      <Setting name="EventHubName" value="blocks" />
+      <Setting name="Email" value="jonathan@nrgup.net" />
+      <Setting name="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=emwindemo;AccountKey=ZyBlu8M9a0+54ylvSXhcuMZZKxV/rvyIseq1Xn/HJjQoenaY8rxMmi4fa+RQDiytSZFOG6RnyZ313W4WS3EppA==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

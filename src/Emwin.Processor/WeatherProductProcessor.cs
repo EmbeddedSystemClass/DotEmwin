@@ -26,6 +26,7 @@
 
 using System;
 using Emwin.Core.Contracts;
+using Emwin.Core.Products;
 using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
 using Emwin.Processor.Processor;
@@ -36,10 +37,11 @@ namespace Emwin.Processor
     {
         #region Private Fields
 
-        private readonly ObservableListener<IBulletinProduct> _bulletinObservable = new ObservableListener<IBulletinProduct>();
-        private readonly ObservableListener<IImageProduct> _imageObservable = new ObservableListener<IImageProduct>();
-        private readonly ObservableListener<ITextProduct> _textObservable = new ObservableListener<ITextProduct>();
-        private readonly ObservableListener<IXmlProduct> _xmlObservable = new ObservableListener<IXmlProduct>();
+        private readonly ObservableListener<BulletinProduct> _bulletinObservable = new ObservableListener<BulletinProduct>();
+        private readonly ObservableListener<ImageProduct> _imageObservable = new ObservableListener<ImageProduct>();
+        private readonly ObservableListener<TextProduct> _textObservable = new ObservableListener<TextProduct>();
+        private readonly ObservableListener<XmlProduct> _xmlObservable = new ObservableListener<XmlProduct>();
+        private readonly ObservableListener<alert> _capObservable = new ObservableListener<alert>();
 
         #endregion Private Fields
 
@@ -61,23 +63,32 @@ namespace Emwin.Processor
         /// <summary>
         /// Gets the bulletin observable.
         /// </summary>
-        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.IBulletinProduct&gt;.</returns>
-        public IObservable<IBulletinProduct> GetBulletinObservable() => _bulletinObservable;
+        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.BulletinProduct&gt;.</returns>
+        public IObservable<BulletinProduct> GetBulletinObservable() => _bulletinObservable;
 
         /// <summary>
         /// Gets the image observable.
         /// </summary>
-        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.ITextProduct&gt;.</returns>
-        public IObservable<IImageProduct> GetImageObservable() => _imageObservable;
+        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.TextProduct&gt;.</returns>
+        public IObservable<ImageProduct> GetImageObservable() => _imageObservable;
 
         /// <summary>
         /// Gets the text observable.
         /// </summary>
-        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.ITextProduct&gt;.</returns>
-        public IObservable<ITextProduct> GetTextObservable() => _textObservable;
+        /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.TextProduct&gt;.</returns>
+        public IObservable<TextProduct> GetTextObservable() => _textObservable;
 
-        public IObservable<IXmlProduct> GetXmlObservable() => _xmlObservable;
+        /// <summary>
+        /// Gets the XML observable.
+        /// </summary>
+        /// <returns>System.IObservable&lt;Emwin.Core.Contracts.XmlProduct&gt;.</returns>
+        public IObservable<XmlProduct> GetXmlObservable() => _xmlObservable;
 
+        /// <summary>
+        /// Gets the cap observable.
+        /// </summary>
+        /// <returns>System.IObservable&lt;Emwin.Core.Contracts.alert&gt;.</returns>
+        public IObservable<alert> GetCapObservable() => _capObservable;
 
         /// <summary>
         /// Called when input is completed.
@@ -121,10 +132,12 @@ namespace Emwin.Processor
                 .AddListener<ZipExtractor>()
                 .AddListener<BulletinSplitter>()
                 .AddListener<XmlSplitter>()
+                .AddListener<AlertGenerator>()
                 .AddListener(_xmlObservable)
                 .AddListener(_textObservable)
                 .AddListener(_imageObservable)
-                .AddListener(_bulletinObservable);
+                .AddListener(_bulletinObservable)
+                .AddListener(_capObservable);
 
             return aggregator;
         }

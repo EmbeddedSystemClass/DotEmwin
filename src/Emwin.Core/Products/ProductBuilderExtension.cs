@@ -40,32 +40,51 @@ namespace Emwin.Core.Products
         #region Public Methods
 
         /// <summary>
-        /// Converts bundle of segments to desired product type.
+        /// Combines segments into text product.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="segments">The segments.</param>
-        /// <returns>T.</returns>
+        /// <returns>TextProduct.</returns>
         /// <exception cref="System.ArgumentNullException"></exception>
-        /// <exception cref="System.ArgumentException">@At least one segment is not complete (is null).</exception>
-        /// <exception cref="System.InvalidCastException">Unable to convert to specified type.</exception>
-        public static T BuildProduct<T>(this IQuickBlockTransferSegment[] segments) where T : IEmwinContent
+        public static TextProduct AsTextProduct(this IQuickBlockTransferSegment[] segments)
         {
             if (segments == null) throw new ArgumentNullException(nameof(segments));
 
             var lastSegment = segments[segments.Length - 1];
-            var isText = typeof(T) == typeof(ITextProduct);
-            var content = segments.Select(b => b.Content).ToList().Combine(isText);
+            var content = segments.Select(b => b.Content).ToList().Combine(true);
 
-            if (typeof(T) == typeof(ITextProduct))
-                return (T)TextProduct.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
+            return TextProduct.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
+        }
 
-            if (typeof(T) == typeof(IImageProduct))
-                return (T)ImageProduct.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
+        /// <summary>
+        /// Combines segments into image product.
+        /// </summary>
+        /// <param name="segments">The segments.</param>
+        /// <returns>ImageProduct.</returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        public static ImageProduct AsImageProduct(this IQuickBlockTransferSegment[] segments)
+        {
+            if (segments == null) throw new ArgumentNullException(nameof(segments));
 
-            if (typeof(T) == typeof(ICompressedContent))
-                return (T) CompressedContent.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
+            var lastSegment = segments[segments.Length - 1];
+            var content = segments.Select(b => b.Content).ToList().Combine();
 
-                throw new InvalidCastException("Unable to convert to specified type");
+            return ImageProduct.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
+        }
+
+        /// <summary>
+        /// Combines segments into compressed product.
+        /// </summary>
+        /// <param name="segments">The segments.</param>
+        /// <returns>CompressedContent.</returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        public static CompressedContent AsCompressedProduct(this IQuickBlockTransferSegment[] segments)
+        {
+            if (segments == null) throw new ArgumentNullException(nameof(segments));
+
+            var lastSegment = segments[segments.Length - 1];
+            var content = segments.Select(b => b.Content).ToList().Combine();
+
+            return CompressedContent.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
         }
 
         #endregion Public Methods

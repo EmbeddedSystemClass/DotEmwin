@@ -26,7 +26,6 @@
 
 using System;
 using System.Runtime.Serialization;
-using Emwin.Core.Contracts;
 
 namespace Emwin.Core.DataObjects
 {
@@ -45,7 +44,7 @@ namespace Emwin.Core.DataObjects
     /// http://www.nws.noaa.gov/tg/table.php
     /// </summary>
     [DataContract]
-    public class CommsHeader : ICommsHeader
+    public class CommsHeader
     {
         #region Public Properties
 

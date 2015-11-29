@@ -27,7 +27,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
 using Emwin.Core.Parsers;
 
@@ -36,7 +35,7 @@ namespace Emwin.Core.Products
     /// <summary>
     /// Class TextProduct. Represents a received text file.
     /// </summary>
-    public class BulletinProduct : TextProduct, IBulletinProduct
+    public class BulletinProduct : TextProduct
     {
         #region Public Properties
 
@@ -44,25 +43,25 @@ namespace Emwin.Core.Products
         /// Gets or sets the geo codes.
         /// </summary>
         /// <value>The geo codes.</value>
-        public IEnumerable<IUniversalGeographicCode> GeoCodes { get; set; }
+        public IEnumerable<UniversalGeographicCode> GeoCodes { get; set; }
 
         /// <summary>
         /// Gets or sets the polygons.
         /// </summary>
         /// <value>The polygons.</value>
-        public IEnumerable<Position[]> Polygons { get; set; }
+        public LatLong[] Polygon { get; set; }
 
         /// <summary>
         /// Gets the primary vtec.
         /// </summary>
         /// <value>The primary vtec.</value>
-        public IPrimaryVtec PrimaryVtec { get; set; }
+        public PrimaryVtec PrimaryVtec { get; set; }
 
         /// <summary>
         /// Gets or sets the hydrologic vtec.
         /// </summary>
         /// <value>The hydrologic vtec.</value>
-        public IHydrologicVtec HydrologicVtec { get; set; }
+        public HydrologicVtec HydrologicVtec { get; set; }
 
         /// <summary>
         /// Gets the sequence number with the text product.
@@ -74,7 +73,7 @@ namespace Emwin.Core.Products
         /// Gets or sets the tracking line.
         /// </summary>
         /// <value>The tracking line.</value>
-        public ITrackingLine TrackingLine { get; set; }
+        public TrackingLine TrackingLine { get; set; }
 
         #endregion Public Properties
 
@@ -90,8 +89,8 @@ namespace Emwin.Core.Products
         /// <param name="header">The header.</param>
         /// <param name="seq">The seq.</param>
         /// <param name="source">The source.</param>
-        /// <returns>ITextProduct.</returns>
-        public static IBulletinProduct Create(string filename, DateTimeOffset timeStamp, string content, DateTimeOffset receivedAt, ICommsHeader header, int seq, string source)
+        /// <returns>TextProduct.</returns>
+        public static BulletinProduct Create(string filename, DateTimeOffset timeStamp, string content, DateTimeOffset receivedAt, CommsHeader header, int seq, string source)
         {
             var product = new BulletinProduct
             {
@@ -106,7 +105,7 @@ namespace Emwin.Core.Products
 
             product.GeoCodes = product.ParseGeographicCodes();
             product.PrimaryVtec = product.ParsePrimaryVtec().FirstOrDefault();
-            product.Polygons = product.ParsePolygons();
+            product.Polygon = product.ParsePolygons().FirstOrDefault();
             product.TrackingLine = product.ParseTrackingLines().FirstOrDefault();
             product.HydrologicVtec = product.ParseHydrologicVtec().FirstOrDefault();
 

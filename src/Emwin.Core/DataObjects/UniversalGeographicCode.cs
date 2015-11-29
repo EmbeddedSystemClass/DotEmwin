@@ -27,7 +27,6 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Emwin.Core.Contracts;
 
 namespace Emwin.Core.DataObjects
 {
@@ -35,7 +34,7 @@ namespace Emwin.Core.DataObjects
     /// Universal Geographic Code.
     /// </summary>
     [DataContract]
-    public class UniversalGeographicCode : IUniversalGeographicCode
+    public class UniversalGeographicCode
     {
         /// <summary>
         /// Gets or sets the state.

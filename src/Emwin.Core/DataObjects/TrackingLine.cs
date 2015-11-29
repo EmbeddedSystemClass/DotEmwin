@@ -25,13 +25,13 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
-using Emwin.Core.Contracts;
 
 namespace Emwin.Core.DataObjects
 {
     [DataContract]
-    public class TrackingLine : ITrackingLine
+    public class TrackingLine
     {
         /// <summary>
         /// Gets or sets the time.
@@ -59,6 +59,12 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The line.</value>
         [DataMember]
-        public IEnumerable<Position> Line { get; set; }
+        public IEnumerable<LatLong> Line { get; set; }
+
+        /// <summary>
+        /// Return in NWS format.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        public override string ToString() => $"TIME...MOT...LOC {TimeStamp:HHmm}Z {DirectionDeg:D3}DEG {WindSpeedKts:D2}KT {string.Join(" ", Line.Select(x => x.ToRaw()))}";
     }
 }

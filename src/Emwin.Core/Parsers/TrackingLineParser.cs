@@ -27,8 +27,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
+using Emwin.Core.Products;
 
 namespace Emwin.Core.Parsers
 {
@@ -48,7 +48,7 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;TrackingLine&gt;.</returns>
-        public static IEnumerable<TrackingLine> ParseTrackingLines(this ITextProduct product)
+        public static IEnumerable<TrackingLine> ParseTrackingLines(this TextProduct product)
         {
             var matches = TimeMotLocRegex.Matches(product.Content);
 
@@ -65,10 +65,10 @@ namespace Emwin.Core.Parsers
 
         #region Private Methods
 
-        private static Position ToLocation(Capture points)
+        private static LatLong ToLocation(Capture points)
         {
             var split = points.Value.Split(' ');
-            return new Position(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
+            return new LatLong(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
         }
 
         #endregion Private Methods

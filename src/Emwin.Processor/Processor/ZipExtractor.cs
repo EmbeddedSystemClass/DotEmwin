@@ -27,7 +27,6 @@
 using System;
 using System.IO;
 using System.IO.Compression;
-using Emwin.Core.Contracts;
 using Emwin.Core.Parsers;
 using Emwin.Core.Products;
 using Emwin.Processor.EventAggregator;
@@ -35,7 +34,7 @@ using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
 {
-    internal sealed class ZipExtractor : IHandle<ICompressedContent>
+    internal sealed class ZipExtractor : IHandle<CompressedContent>
     {
         #region Public Methods
 
@@ -46,7 +45,7 @@ namespace Emwin.Processor.Processor
         /// </summary>
         /// <param name="product">The product.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(ICompressedContent product, IEventAggregator ctx)
+        public void Handle(CompressedContent product, IEventAggregator ctx)
         {
             try
             {
@@ -58,7 +57,7 @@ namespace Emwin.Processor.Processor
             }
         }
 
-        private static void UnZip(ICompressedContent product, IEventPublisher ctx)
+        private static void UnZip(CompressedContent product, IEventPublisher ctx)
         {
             using (var zip = new ZipArchive(product.GetStream(), ZipArchiveMode.Read))
             {
@@ -83,10 +82,11 @@ namespace Emwin.Processor.Processor
                                 ctx.SendMessage(imageProduct);
                                 ProcessorEventSource.Log.Info("ZipProcessor", imageProduct.ToString());
                                 break;
+                            
+                            // There are no zips within zips :-)
 
                             default:
-                                ProcessorEventSource.Log.Warning("ZipProcessor",
-                                    "Unknown content file type: " + file.Name);
+                                ProcessorEventSource.Log.Warning("ZipProcessor", "Unknown content file type: " + file.Name);
                                 return;
                         }
                     }

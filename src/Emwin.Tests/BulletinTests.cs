@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Emwin.Core.Parsers;
 using Emwin.Core.Products;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Emwin.Core.Contracts;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Emwin.Tests
 {
@@ -13,6 +15,24 @@ namespace Emwin.Tests
     {
         #region Public Methods
 
+        [TestMethod]
+        public void TornadoWarningCapTests()
+        {
+            var product = GetTornadoWarning();
+            Assert.IsNotNull(product, "Unable to create text product");
+
+            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
+            var cap = bulletin.CreateAlert();
+            var json = JsonConvert.SerializeObject(cap, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                Formatting = Formatting.Indented,
+                Converters = new JsonConverter[]{new StringEnumConverter()}
+            });
+            Trace.WriteLine(json);
+        }
+
+        [TestMethod]
         public void TornadoWarningHeaderTests()
         {
             var product = GetTornadoWarning();
@@ -38,11 +58,13 @@ namespace Emwin.Tests
             var bulletin = product.ParseBulletinProducts().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
-            var polygon = bulletin.Polygons.FirstOrDefault();
+            var polygon = bulletin.Polygon;
             Assert.IsNotNull(polygon, "Unable to parse polygon");
-            Assert.AreEqual(4, polygon.Length, "Count");
+            Assert.AreEqual(5, polygon.Length, "Count");
             Assert.AreEqual(38.7, polygon[0].Latitude, "Latitude");
             Assert.AreEqual(-100.17, polygon[0].Longitude, "Longitude");
+            Assert.AreEqual(38.7, polygon[4].Latitude, "Latitude");
+            Assert.AreEqual(-100.17, polygon[4].Longitude, "Longitude");
         }
 
         [TestMethod]
@@ -129,7 +151,7 @@ namespace Emwin.Tests
 
         #region Private Methods
 
-        private static ITextProduct GetTornadoWarning()
+        private static TextProduct GetTornadoWarning()
         {
             return TextProduct.Create(
                 "TORDDCXXXX.TXT",
@@ -138,7 +160,7 @@ namespace Emwin.Tests
                 DateTimeOffset.UtcNow, string.Empty);
         }
 
-        private static ITextProduct GetFloodWarning()
+        private static TextProduct GetFloodWarning()
         {
             return TextProduct.Create(
                 "FLWOAXXXXX.TXT",

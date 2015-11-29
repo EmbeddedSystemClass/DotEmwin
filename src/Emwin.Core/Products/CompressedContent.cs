@@ -33,7 +33,7 @@ namespace Emwin.Core.Products
     /// <summary>
     /// Class CompressedProduct. Represents a received compressed (ZIP) file.
     /// </summary>
-    public class CompressedContent : ICompressedContent
+    public class CompressedContent : IEmwinContent<byte[]>
     {
 
         #region Public Properties
@@ -86,8 +86,8 @@ namespace Emwin.Core.Products
         /// <param name="content">The content.</param>
         /// <param name="receivedAt">The received at.</param>
         /// <param name="source">The source.</param>
-        /// <returns>ICompressedContent.</returns>
-        public static ICompressedContent Create(string filename, DateTimeOffset timeStamp, byte[] content,
+        /// <returns>CompressedContent.</returns>
+        public static CompressedContent Create(string filename, DateTimeOffset timeStamp, byte[] content,
             DateTimeOffset receivedAt, string source)
         {
             return new CompressedContent

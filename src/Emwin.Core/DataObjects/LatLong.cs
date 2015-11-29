@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -24,9 +24,41 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-namespace Emwin.Core.Contracts
+namespace Emwin.Core.DataObjects
 {
-    public interface IXmlProduct : ITextProduct
+    public struct LatLong
     {
+        /// <summary>
+        /// The latitude
+        /// </summary>
+        public double Latitude;
+
+        /// <summary>
+        /// The longitude
+        /// </summary>
+        public double Longitude;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LatLong"/> struct.
+        /// </summary>
+        /// <param name="latitude">The latitude.</param>
+        /// <param name="longitude">The longitude.</param>
+        public LatLong(double latitude, double longitude)
+        {
+            Latitude = latitude;
+            Longitude = longitude;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString() => $"{Latitude},{Longitude}";
+
+        /// <summary>
+        /// Returns raw format used by NWS.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        public string ToRaw() => $"{Latitude * 100} {Longitude * -100}";
     }
 }

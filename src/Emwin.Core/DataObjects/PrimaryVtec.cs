@@ -26,7 +26,6 @@
 
 using System;
 using System.Runtime.Serialization;
-using Emwin.Core.Contracts;
 
 namespace Emwin.Core.DataObjects
 {
@@ -35,9 +34,10 @@ namespace Emwin.Core.DataObjects
     /// An event is defined as a specific combination of phenomenon and level of significance.
     /// Each VTEC event is given an Event Tracking Number, or ETN.
     /// There are two types of VTEC, the P-(Primary) VTEC, and an H-(Hydrologic) VTEC.
+    /// http://www.nws.noaa.gov/directives/sym/pd01017003curr.pdf
     /// </summary>
     [DataContract]
-    public class PrimaryVtec : IPrimaryVtec
+    public class PrimaryVtec
     {
         #region Public Properties
 
@@ -102,10 +102,16 @@ namespace Emwin.Core.DataObjects
         #region Public Methods
 
         /// <summary>
-        /// To the string.
+        /// Formats as a VTEC string.
         /// </summary>
         /// <returns>System.String.</returns>
-        public override string ToString() => $"VTEC: {WmoId} #{EventNumber} Action={ActionCode} Phonomenon={PhenomenonCode} Significance={SignificanceCode} ({Begin:g} -> {End:g})";
+        public override string ToString() => $"Primary VTEC: Type={TypeIdentifier} Action={ActionCode} Wmo={WmoId} Phonomenon={PhenomenonCode} Significance={SignificanceCode} #{EventNumber} {Begin:yyMMdd\\THHmm}Z-{End:yyMMdd\\THHmm}Z";
+
+        /// <summary>
+        /// Formats as a raw VTEC string.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        public string ToRaw() => $"/{TypeIdentifier}.{ActionCode}.{WmoId}.{PhenomenonCode}.{SignificanceCode}.{EventNumber:D4}.{Begin:yyMMdd\\THHmm}Z-{End:yyMMdd\\THHmm}Z/";
 
         #endregion Public Methods
 

@@ -40,28 +40,22 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\cap12.cs">
+      <DependentUpon>cap12.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataObjects\HydrologicVtec.cs" />
-    <Compile Include="Contracts\IBulletinProduct.cs" />
-    <Compile Include="Contracts\IHydrologicVtec.cs" />
     <Compile Include="Contracts\IQuickBlockTransferSegment.cs" />
-    <Compile Include="Contracts\ICompressedContent.cs" />
-    <Compile Include="Contracts\IImageProduct.cs" />
-    <Compile Include="Contracts\IXmlProduct.cs" />
-    <Compile Include="Contracts\ITextProduct.cs" />
-    <Compile Include="Contracts\ITrackingLine.cs" />
-    <Compile Include="DataObjects\Position.cs" />
+    <Compile Include="DataObjects\LatLong.cs" />
     <Compile Include="DataObjects\CommsHeader.cs" />
     <Compile Include="Contracts\IEmwinContent.cs" />
-    <Compile Include="Contracts\IUniversalGeographicCode.cs" />
-    <Compile Include="Contracts\IPrimaryVtec.cs" />
-    <Compile Include="Contracts\ICommsHeader.cs" />
     <Compile Include="DataObjects\TrackingLine.cs" />
+    <Compile Include="Products\CapExtensions.cs" />
     <Compile Include="Parsers\XmlParser.cs" />
     <Compile Include="Parsers\BulletinParser.cs" />
     <Compile Include="Parsers\TrackingLineParser.cs" />
     <Compile Include="Products\BulletinProduct.cs" />
     <Compile Include="Products\ProductBuilderExtension.cs" />
-    <Compile Include="Products\GraphicProduct.cs" />
+    <Compile Include="Products\ImageProduct.cs" />
     <Compile Include="DataObjects\QuickBlockTransferSegment.cs" />
     <Compile Include="Products\CompressedContent.cs" />
     <Compile Include="Products\XmlProduct.cs" />
@@ -77,6 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Contracts\cap12.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Emwin.ByteBlaster.licenseheader" />
     <None Include="Emwin.Core.nuspec" />
   </ItemGroup>
