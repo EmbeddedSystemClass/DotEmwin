@@ -36,7 +36,7 @@ namespace Emwin.Core.DataObjects
     /// of impending severe weather events, even at a very low data rate.
     /// </summary>
     [DataContract]
-    public sealed class QuickBlockTransferSegment : IQuickBlockTransferSegment
+    public class QuickBlockTransferSegment : IEmwinContent<byte[]>
     {
 
         #region Public Properties

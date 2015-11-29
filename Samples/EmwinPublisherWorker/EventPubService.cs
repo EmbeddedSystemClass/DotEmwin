@@ -5,7 +5,7 @@ using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using Emwin.ByteBlaster;
 using Emwin.ByteBlaster.Instrumentation;
-using Emwin.Core.Contracts;
+using Emwin.Core.DataObjects;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using Microsoft.ServiceBus.Messaging;
 
@@ -65,7 +65,7 @@ namespace EmwinPublisherWorker
 
         #region Private Methods
 
-        private async Task Publish(EventHubClient client, IQuickBlockTransferSegment segment)
+        private async Task Publish(EventHubClient client, QuickBlockTransferSegment segment)
         {
             try
             {

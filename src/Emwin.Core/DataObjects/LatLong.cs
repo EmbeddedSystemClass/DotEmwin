@@ -28,6 +28,8 @@ namespace Emwin.Core.DataObjects
 {
     public struct LatLong
     {
+        #region Public Fields
+
         /// <summary>
         /// The latitude
         /// </summary>
@@ -37,6 +39,10 @@ namespace Emwin.Core.DataObjects
         /// The longitude
         /// </summary>
         public double Longitude;
+
+        #endregion Public Fields
+
+        #region Public Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LatLong"/> struct.
@@ -50,15 +56,32 @@ namespace Emwin.Core.DataObjects
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Initializes a new instance of the <see cref="LatLong" /> struct.
         /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() => $"{Latitude},{Longitude}";
+        /// <param name="raw">The raw NWS string.</param>
+        public LatLong(string raw)
+        {
+            var split = raw.Split(' ');
+            Latitude = double.Parse(split[0]) / 100.0;
+            Longitude = 180 - double.Parse(split[1]) / 100.0;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         /// <summary>
         /// Returns raw format used by NWS.
         /// </summary>
         /// <returns>System.String.</returns>
-        public string ToRaw() => $"{Latitude * 100} {Longitude * -100}";
+        public string ToRaw() => $"{Latitude * 100} {180 - Longitude * 100}";
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString() => $"{Latitude},{Longitude}";
+
+        #endregion Public Methods
     }
 }

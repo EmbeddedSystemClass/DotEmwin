@@ -54,23 +54,13 @@ namespace Emwin.Core.Parsers
 
             foreach (var match in polygonMatches.Cast<Match>().Select(x => x.Groups["points"].Captures.Cast<Capture>()))
             {
-                var result = match.Select(ToLocation).ToList();
+                var result = match.Select(m => new LatLong(m.Value)).ToList();
                 result.Add(result.First());
                 yield return result.ToArray();
             }
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private static LatLong ToLocation(Capture points)
-        {
-            var split = points.Value.Split(' ');
-            return new LatLong(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
-        }
-
-        #endregion Private Methods
 
     }
 }

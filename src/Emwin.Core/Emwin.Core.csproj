@@ -40,11 +40,10 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\cap12.cs">
-      <DependentUpon>cap12.xsd</DependentUpon>
+    <Compile Include="Contracts\CAP12.cs">
+      <DependentUpon>CAP12.xsd</DependentUpon>
     </Compile>
     <Compile Include="DataObjects\HydrologicVtec.cs" />
-    <Compile Include="Contracts\IQuickBlockTransferSegment.cs" />
     <Compile Include="DataObjects\LatLong.cs" />
     <Compile Include="DataObjects\CommsHeader.cs" />
     <Compile Include="Contracts\IEmwinContent.cs" />
@@ -71,7 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Contracts\cap12.xsd">
+    <None Include="Contracts\CAP12.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Emwin.ByteBlaster.licenseheader" />

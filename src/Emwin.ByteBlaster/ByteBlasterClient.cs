@@ -33,7 +33,6 @@ using DotNetty.Transport.Channels;
 using Emwin.ByteBlaster.Channel;
 using Emwin.ByteBlaster.Instrumentation;
 using Emwin.ByteBlaster.Protocol;
-using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
 
 namespace Emwin.ByteBlaster
@@ -42,7 +41,7 @@ namespace Emwin.ByteBlaster
     /// Class ByteBlasterClient implements a persistent connection to a Byte Blaster Server
     /// and provides an observable provider of QuickBlockTransferSegment objects for processing.
     /// </summary>
-    public class ByteBlasterClient : ObservableBase<IQuickBlockTransferSegment>
+    public class ByteBlasterClient : ObservableBase<QuickBlockTransferSegment>
     {
 
         #region Private Fields
@@ -61,7 +60,7 @@ namespace Emwin.ByteBlaster
         /// </summary>
         /// <param name="email">The email.</param>
         /// <param name="observer">The observer to subscribe.</param>
-        public ByteBlasterClient(string email, IObserver<IQuickBlockTransferSegment> observer = null)
+        public ByteBlasterClient(string email, IObserver<QuickBlockTransferSegment> observer = null)
         {
             _channelBootstrap = ByteBlasterChannelFactory.CreateBootstrap()
                 .Handler(new ByteBlasterChannelInitializer(email,

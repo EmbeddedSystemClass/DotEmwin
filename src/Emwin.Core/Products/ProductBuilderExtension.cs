@@ -27,7 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Emwin.Core.Contracts;
+using Emwin.Core.DataObjects;
 
 namespace Emwin.Core.Products
 {
@@ -45,7 +45,7 @@ namespace Emwin.Core.Products
         /// <param name="segments">The segments.</param>
         /// <returns>TextProduct.</returns>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public static TextProduct AsTextProduct(this IQuickBlockTransferSegment[] segments)
+        public static TextProduct AsTextProduct(this QuickBlockTransferSegment[] segments)
         {
             if (segments == null) throw new ArgumentNullException(nameof(segments));
 
@@ -61,7 +61,7 @@ namespace Emwin.Core.Products
         /// <param name="segments">The segments.</param>
         /// <returns>ImageProduct.</returns>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public static ImageProduct AsImageProduct(this IQuickBlockTransferSegment[] segments)
+        public static ImageProduct AsImageProduct(this QuickBlockTransferSegment[] segments)
         {
             if (segments == null) throw new ArgumentNullException(nameof(segments));
 
@@ -77,7 +77,7 @@ namespace Emwin.Core.Products
         /// <param name="segments">The segments.</param>
         /// <returns>CompressedContent.</returns>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public static CompressedContent AsCompressedProduct(this IQuickBlockTransferSegment[] segments)
+        public static CompressedContent AsCompressedProduct(this QuickBlockTransferSegment[] segments)
         {
             if (segments == null) throw new ArgumentNullException(nameof(segments));
 

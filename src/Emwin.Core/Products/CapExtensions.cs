@@ -53,23 +53,19 @@ namespace Emwin.Core.Products
             info = new[] {GetAlertInfo(bulletin)}
         };
 
-        #endregion Public Methods
-
-        #region Private Methods
-
         /// <summary>
         /// Gets the alert information.
         /// </summary>
         /// <param name="bulletin">The bulletin.</param>
         /// <returns>Emwin.Core.Contracts.alertInfo.</returns>
-        private static alertInfo GetAlertInfo(BulletinProduct bulletin) => new alertInfo
+        public static alertInfo GetAlertInfo(this BulletinProduct bulletin) => new alertInfo
         {
             category = new[] { alertInfoCategory.Met },
             @event = "",
-            urgency = GetUrgency(bulletin.PrimaryVtec),
-            severity = GetSeverity(bulletin.PrimaryVtec),
-            certainty = GetCertainty(bulletin.PrimaryVtec),
-            eventCode = new[] { GetEventCode(bulletin.PrimaryVtec) },
+            urgency = bulletin.PrimaryVtec.GetUrgency(),
+            severity = bulletin.PrimaryVtec.GetSeverity(),
+            certainty = bulletin.PrimaryVtec.GetCertainty(),
+            eventCode = new[] { bulletin.PrimaryVtec.GetEventCode() },
             effectiveSpecified = true,
             effective = bulletin.PrimaryVtec.Begin.DateTime,
             expiresSpecified = true,
@@ -83,11 +79,86 @@ namespace Emwin.Core.Products
         };
 
         /// <summary>
+        /// Gets the alert status.
+        /// </summary>
+        /// <param name="primaryVtec">The pvtec.</param>
+        /// <returns>Emwin.Core.Contracts.alertStatus.</returns>
+        public static alertStatus GetAlertStatus(this PrimaryVtec primaryVtec)
+        {
+            switch (primaryVtec.TypeIdentifier)
+            {
+                case 'O': return alertStatus.Actual;
+                case 'T': return alertStatus.Test;
+                case 'E': return alertStatus.Exercise;
+                case 'X': return alertStatus.Draft;
+            }
+
+            return alertStatus.Test;
+        }
+
+        /// <summary>
+        /// Gets the certainty.
+        /// </summary>
+        /// <param name="primaryVtec">The primary vtec.</param>
+        /// <returns>Emwin.Core.Contracts.alertInfoCertainty.</returns>
+        public static alertInfoCertainty GetCertainty(this PrimaryVtec primaryVtec)
+        {
+            switch (primaryVtec.SignificanceCode)
+            {
+                case 'N':
+                case 'W': return alertInfoCertainty.Observed;
+
+                case 'F':
+                case 'A': return alertInfoCertainty.Likely;
+
+                case 'Y': return alertInfoCertainty.Possible;
+            }
+
+            return alertInfoCertainty.Unknown;
+        }
+
+        /// <summary>
+        /// Gets the event code.
+        /// </summary>
+        /// <param name="pvtec">The pvtec.</param>
+        /// <returns>Emwin.Core.Contracts.alertInfoEventCode.</returns>
+        public static alertInfoEventCode GetEventCode(this PrimaryVtec pvtec) => new alertInfoEventCode
+        {
+            valueName = "SAME",
+            value = string.Concat(pvtec.PhenomenonCode, pvtec.SignificanceCode)
+        };
+
+        public static string GetPolygonText(this LatLong[] polygon)
+        {
+            if (polygon == null || polygon.Length == 0) return null;
+            var points = polygon.Select(p => p.ToString());
+            return string.Join(" ", points);
+        }
+
+        /// <summary>
+        /// Gets the severity.
+        /// </summary>
+        /// <param name="primaryVtec">The pvtec.</param>
+        /// <returns>Emwin.Core.Contracts.alertInfoSeverity.</returns>
+        public static alertInfoSeverity GetSeverity(this PrimaryVtec primaryVtec)
+        {
+            switch (primaryVtec.SignificanceCode)
+            {
+                case 'W': return alertInfoSeverity.Extreme;
+                case 'A': return alertInfoSeverity.Severe;
+                case 'Y': return alertInfoSeverity.Moderate;
+                case 'S': return alertInfoSeverity.Minor;
+            }
+
+            return alertInfoSeverity.Unknown;
+        }
+
+        /// <summary>
         /// Gets the urgency.
         /// </summary>
         /// <param name="primaryVtec">The primary vtec.</param>
         /// <returns>Emwin.Core.Contracts.alertInfoUrgency.</returns>
-        private static alertInfoUrgency GetUrgency(PrimaryVtec primaryVtec)
+        public static alertInfoUrgency GetUrgency(this PrimaryVtec primaryVtec)
         {
             switch (primaryVtec.SignificanceCode)
             {
@@ -105,63 +176,9 @@ namespace Emwin.Core.Products
             return alertInfoUrgency.Unknown;
         }
 
-        /// <summary>
-        /// Gets the alert status.
-        /// </summary>
-        /// <param name="primaryVtec">The pvtec.</param>
-        /// <returns>Emwin.Core.Contracts.alertStatus.</returns>
-        private static alertStatus GetAlertStatus(PrimaryVtec primaryVtec)
-        {
-            switch (primaryVtec.TypeIdentifier)
-            {
-                case 'O': return alertStatus.Actual;
-                case 'T': return alertStatus.Test;
-                case 'E': return alertStatus.Exercise;
-                case 'X': return alertStatus.Draft;
-            }
+        #endregion Public Methods
 
-            return alertStatus.Test;
-        }
-
-        /// <summary>
-        /// Gets the severity.
-        /// </summary>
-        /// <param name="primaryVtec">The pvtec.</param>
-        /// <returns>Emwin.Core.Contracts.alertInfoSeverity.</returns>
-        private static alertInfoSeverity GetSeverity(PrimaryVtec primaryVtec)
-        {
-            switch (primaryVtec.SignificanceCode)
-            {
-                case 'W': return alertInfoSeverity.Extreme;
-                case 'A': return alertInfoSeverity.Severe;
-                case 'Y': return alertInfoSeverity.Moderate;
-                case 'S': return alertInfoSeverity.Minor;
-            }
-
-            return alertInfoSeverity.Unknown;
-        }
-
-        /// <summary>
-        /// Gets the certainty.
-        /// </summary>
-        /// <param name="primaryVtec">The primary vtec.</param>
-        /// <returns>Emwin.Core.Contracts.alertInfoCertainty.</returns>
-        private static alertInfoCertainty GetCertainty(PrimaryVtec primaryVtec)
-        {
-            switch (primaryVtec.SignificanceCode)
-            {
-                case 'N':
-                case 'W': return alertInfoCertainty.Observed;
-
-                case 'F':
-                case 'A': return alertInfoCertainty.Likely;
-
-                case 'Y': return alertInfoCertainty.Possible;
-            }
-
-            return alertInfoCertainty.Unknown;
-        }
-
+        #region Private Methods
 
         /// <summary>
         /// Gets the areas.
@@ -172,25 +189,14 @@ namespace Emwin.Core.Products
         {
             new alertInfoArea
             {
-                areaDesc = "",
-                polygon = new[] {string.Join(" ", bulletin.Polygon.Select(p => p.ToString()))},
+                //areaDesc = "",
+                polygon = new [] { bulletin.Polygon.GetPolygonText()},
                 //geocode = new[]
                 //{
                 //    new alertInfoAreaGeocode {valueName = "FIPS6", value = ""},
                 //    new alertInfoAreaGeocode {valueName = "UGC", value = ""}
                 //}
             }
-        };
-
-        /// <summary>
-        /// Gets the event code.
-        /// </summary>
-        /// <param name="pvtec">The pvtec.</param>
-        /// <returns>Emwin.Core.Contracts.alertInfoEventCode.</returns>
-        private static alertInfoEventCode GetEventCode(PrimaryVtec pvtec) => new alertInfoEventCode
-        {
-            valueName = "SAME",
-            value = string.Concat(pvtec.PhenomenonCode, pvtec.SignificanceCode)
         };
 
         /// <summary>
@@ -207,7 +213,7 @@ namespace Emwin.Core.Products
                 valueName = "VTEC",
                 value = string.Join(Environment.NewLine, bulletin.PrimaryVtec?.ToRaw(), bulletin.HydrologicVtec?.ToRaw())
             },
-            new alertInfoParameter
+            bulletin.TrackingLine == null ? null : new alertInfoParameter
             {
                 valueName = "TIME...MOT...LOC",
                 value = bulletin.TrackingLine?.ToString()
@@ -215,6 +221,5 @@ namespace Emwin.Core.Products
         };
 
         #endregion Private Methods
-
     }
 }

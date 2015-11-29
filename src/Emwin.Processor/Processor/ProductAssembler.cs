@@ -25,7 +25,7 @@
  */
 
 using System;
-using Emwin.Core.Contracts;
+using Emwin.Core.DataObjects;
 using Emwin.Core.Parsers;
 using Emwin.Processor.Instrumentation;
 using Emwin.Core.Products;
@@ -36,14 +36,14 @@ namespace Emwin.Processor.Processor
     /// <summary>
     /// Class ProductAssembler. Assembles bundles of segments into a product by combining all the bytes from each segment.
     /// </summary>
-    internal sealed class ProductAssembler : IHandle<IQuickBlockTransferSegment[]>
+    internal sealed class ProductAssembler : IHandle<QuickBlockTransferSegment[]>
     {
         /// <summary>
         /// This will be called every time a QuickBlockTransferSegment[] bundle is published through the event aggregator
         /// </summary>
         /// <param name="bundle">The bundle.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(IQuickBlockTransferSegment[] bundle, IEventAggregator ctx)
+        public void Handle(QuickBlockTransferSegment[] bundle, IEventAggregator ctx)
         {
             try
             {

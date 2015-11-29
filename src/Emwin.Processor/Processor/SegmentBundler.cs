@@ -27,7 +27,7 @@
 using System;
 using System.Linq;
 using System.Runtime.Caching;
-using Emwin.Core.Contracts;
+using Emwin.Core.DataObjects;
 using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
 
@@ -36,7 +36,7 @@ namespace Emwin.Processor.Processor
     /// <summary>
     /// Class SegmentBundler. Uses a Memory Cache to bundle the segments of a file together.
     /// </summary>
-    internal sealed class SegmentBundler : IHandle<IQuickBlockTransferSegment>
+    internal sealed class SegmentBundler : IHandle<QuickBlockTransferSegment>
     {
         #region Private Fields
 
@@ -52,15 +52,15 @@ namespace Emwin.Processor.Processor
         /// </summary>
         /// <param name="blockSegment">The segment.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(IQuickBlockTransferSegment blockSegment, IEventAggregator ctx)
+        public void Handle(QuickBlockTransferSegment blockSegment, IEventAggregator ctx)
         {
             var key = blockSegment.GetKey();
-            IQuickBlockTransferSegment[] bundle = null;
+            QuickBlockTransferSegment[] bundle = null;
 
             // If there is already a bundle in the cache, put the segment into it. 
             if (BlockCache.Contains(key))
             {
-                bundle = (IQuickBlockTransferSegment[])BlockCache.Get(key);
+                bundle = (QuickBlockTransferSegment[])BlockCache.Get(key);
                 if (blockSegment.BlockNumber > 0 && blockSegment.BlockNumber <= bundle.Length)
                     bundle[blockSegment.BlockNumber - 1] = blockSegment;
                 ProcessorEventSource.Log.Verbose("SegmentBundler",
@@ -69,7 +69,7 @@ namespace Emwin.Processor.Processor
             else
             {
                 // Create a new bundle array with the initial segment and add to cache.
-                bundle = new IQuickBlockTransferSegment[blockSegment.TotalBlocks];
+                bundle = new QuickBlockTransferSegment[blockSegment.TotalBlocks];
                 bundle[blockSegment.BlockNumber - 1] = blockSegment;
                 BlockCache.Set(key, bundle, CacheItemPolicy);
                 ProcessorEventSource.Log.Verbose("SegmentBundler",
