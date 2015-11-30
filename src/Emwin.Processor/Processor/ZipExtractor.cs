@@ -40,10 +40,9 @@ namespace Emwin.Processor.Processor
 
         /// <summary>
         /// This will be called every time a CompressedProduct is published through the event aggregator
-        /// Unzips the product and returns the first contained product in the zip.
-        /// Assumes a single product is contained inside the zip file.
+        /// Unzips the product and publishes each product contained in the zip.
         /// </summary>
-        /// <param name="product">The product.</param>
+        /// <param name="product">The compressed product.</param>
         /// <param name="ctx">The CTX.</param>
         public void Handle(CompressedContent product, IEventAggregator ctx)
         {
@@ -53,7 +52,7 @@ namespace Emwin.Processor.Processor
             }
             catch (Exception ex)
             {
-                ProcessorEventSource.Log.Error("ZipProcessor", ex.ToString());
+                ProcessorEventSource.Log.Error(nameof(ZipExtractor), ex.ToString());
             }
         }
 
@@ -66,27 +65,28 @@ namespace Emwin.Processor.Processor
                     using (var fileStream = file.Open())
                     {
                         var content = ReadAllBytes(fileStream);
-                        var contentType = ContentTypeParser.GetFileContentType(file.Name);
+                        var fileName = file.Name.ToUpperInvariant();
+                        var contentType = ContentTypeParser.GetFileContentType(fileName);
                         switch (contentType)
                         {
                             case ContentFileType.Text:
                                 var textProduct = TextProduct.Create(
-                                    file.Name.ToUpperInvariant(), file.LastWriteTime, content, product.ReceivedAt, product.Source);
+                                    fileName, file.LastWriteTime, content, product.ReceivedAt, product.Source);
                                 ctx.SendMessage(textProduct);
-                                ProcessorEventSource.Log.Info("ZipProcessor", textProduct.ToString());
+                                ProcessorEventSource.Log.Info(nameof(ZipExtractor), textProduct.ToString());
                                 break;
 
                             case ContentFileType.Image:
                                 var imageProduct = ImageProduct.Create(
-                                    file.Name.ToUpperInvariant(), file.LastWriteTime, content, product.ReceivedAt, product.Source);
+                                    fileName, file.LastWriteTime, content, product.ReceivedAt, product.Source);
                                 ctx.SendMessage(imageProduct);
-                                ProcessorEventSource.Log.Info("ZipProcessor", imageProduct.ToString());
+                                ProcessorEventSource.Log.Info(nameof(ZipExtractor), imageProduct.ToString());
                                 break;
                             
                             // There are no zips within zips :-)
 
                             default:
-                                ProcessorEventSource.Log.Warning("ZipProcessor", "Unknown content file type: " + file.Name);
+                                ProcessorEventSource.Log.Warning(nameof(ZipExtractor), "Unknown content file type: " + file.Name);
                                 return;
                         }
                     }

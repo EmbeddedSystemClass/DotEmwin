@@ -24,6 +24,7 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Emwin.Core.Parsers;
@@ -33,24 +34,32 @@ using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
 {
-    internal sealed class XmlSplitter : IHandle<TextProduct>
+    internal sealed class TextProductSplitter : IHandle<TextProduct>
     {
+        private const bool IncludeHeaderInBulletin = false;
+
         #region Public Methods
 
         /// <summary>
-        /// This will be called every time a CompressedProduct is published through the event aggregator
-        /// Unzips the product and returns the first contained product in the zip.
-        /// Assumes a single product is contained inside the zip file.
+        /// This will be called every time a text product is published through the event aggregator.
+        /// Checks for any bulletins within the text product and publishes them out in parallel.
         /// </summary>
         /// <param name="product">The product.</param>
         /// <param name="ctx">The CTX.</param>
         public void Handle(TextProduct product, IEventAggregator ctx)
         {
-            var xmlFiles = product.ParseXmlProducts().ToList();
-            if (xmlFiles.Count == 0) return;
+            try
+            {
+                var segments = product.ParseSegments(IncludeHeaderInBulletin).ToList();
+                if (segments.Count == 0) return;
 
-            ProcessorEventSource.Log.Info("XmlSplitter", "Splitting product into " + xmlFiles.Count + " xml files");
-            Parallel.ForEach(xmlFiles, xml => ctx.SendMessage(xml));
+                ProcessorEventSource.Log.Info(nameof(TextProductSplitter), "Splitting product into " + segments.Count + " segments");
+                Parallel.ForEach(segments, segment => ctx.SendMessage(segment));
+            }
+            catch (Exception ex)
+            {
+                ProcessorEventSource.Log.Error(nameof(TextProductSplitter), ex.ToString());
+            }
         }
 
         #endregion Public Methods

@@ -24,12 +24,14 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
+using System;
 using Emwin.Core.Products;
 using Emwin.Processor.EventAggregator;
+using Emwin.Processor.Instrumentation;
 
 namespace Emwin.Processor.Processor
 {
-    internal sealed class AlertGenerator : IHandle<BulletinProduct>
+    internal sealed class AlertGenerator : IHandle<ProductSegment>
     {
 
         #region Public Methods
@@ -39,11 +41,18 @@ namespace Emwin.Processor.Processor
         /// </summary>
         /// <param name="bulletin">The bulletin.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(BulletinProduct bulletin, IEventAggregator ctx)
+        public void Handle(ProductSegment bulletin, IEventAggregator ctx)
         {
-            if (bulletin.PrimaryVtec == null || bulletin.Header == null) return;
+            try
+            {
+                if (bulletin.PrimaryVtec == null || bulletin.Header == null) return;
 
-            ctx.SendMessage(bulletin.CreateAlert());
+                ctx.SendMessage(bulletin.CreateAlert());
+            }
+            catch (Exception ex)
+            {
+                ProcessorEventSource.Log.Error(nameof(AlertGenerator), ex.ToString());
+            }
         }
 
         #endregion Public Methods

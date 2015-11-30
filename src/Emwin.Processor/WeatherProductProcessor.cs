@@ -38,7 +38,7 @@ namespace Emwin.Processor
     {
         #region Private Fields
 
-        private readonly ObservableListener<BulletinProduct> _bulletinObservable = new ObservableListener<BulletinProduct>();
+        private readonly ObservableListener<ProductSegment> _segmentObservable = new ObservableListener<ProductSegment>();
         private readonly ObservableListener<ImageProduct> _imageObservable = new ObservableListener<ImageProduct>();
         private readonly ObservableListener<TextProduct> _textObservable = new ObservableListener<TextProduct>();
         private readonly ObservableListener<XmlProduct> _xmlObservable = new ObservableListener<XmlProduct>();
@@ -62,10 +62,10 @@ namespace Emwin.Processor
         #region Public Methods
 
         /// <summary>
-        /// Gets the bulletin observable.
+        /// Gets the product segment observable.
         /// </summary>
         /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.BulletinProduct&gt;.</returns>
-        public IObservable<BulletinProduct> GetBulletinObservable() => _bulletinObservable;
+        public IObservable<ProductSegment> GetSegmentObservable() => _segmentObservable;
 
         /// <summary>
         /// Gets the image observable.
@@ -128,16 +128,16 @@ namespace Emwin.Processor
             var aggregator = new EventAggregator.EventAggregator();
 
             aggregator
-                .AddListener<SegmentBundler>()
+                .AddListener<BlockSegmentBundler>()
                 .AddListener<ProductAssembler>()
                 .AddListener<ZipExtractor>()
-                .AddListener<BulletinSplitter>()
-                .AddListener<XmlSplitter>()
+                .AddListener<TextProductSplitter>()
+                .AddListener<XmlProductSplitter>()
                 .AddListener<AlertGenerator>()
                 .AddListener(_xmlObservable)
                 .AddListener(_textObservable)
                 .AddListener(_imageObservable)
-                .AddListener(_bulletinObservable)
+                .AddListener(_segmentObservable)
                 .AddListener(_capObservable);
 
             return aggregator;

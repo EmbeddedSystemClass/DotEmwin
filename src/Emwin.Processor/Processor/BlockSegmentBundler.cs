@@ -36,7 +36,7 @@ namespace Emwin.Processor.Processor
     /// <summary>
     /// Class SegmentBundler. Uses a Memory Cache to bundle the segments of a file together.
     /// </summary>
-    internal sealed class SegmentBundler : IHandle<QuickBlockTransferSegment>
+    internal sealed class BlockSegmentBundler : IHandle<QuickBlockTransferSegment>
     {
         #region Private Fields
 
@@ -55,7 +55,7 @@ namespace Emwin.Processor.Processor
         public void Handle(QuickBlockTransferSegment blockSegment, IEventAggregator ctx)
         {
             var key = blockSegment.GetKey();
-            QuickBlockTransferSegment[] bundle = null;
+            QuickBlockTransferSegment[] bundle;
 
             // If there is already a bundle in the cache, put the segment into it. 
             if (BlockCache.Contains(key))
@@ -63,7 +63,7 @@ namespace Emwin.Processor.Processor
                 bundle = (QuickBlockTransferSegment[])BlockCache.Get(key);
                 if (blockSegment.BlockNumber > 0 && blockSegment.BlockNumber <= bundle.Length)
                     bundle[blockSegment.BlockNumber - 1] = blockSegment;
-                ProcessorEventSource.Log.Verbose("SegmentBundler",
+                ProcessorEventSource.Log.Verbose(nameof(BlockSegmentBundler),
                     $"Added segment {blockSegment.BlockNumber} of {blockSegment.TotalBlocks} to existing bundle {blockSegment.Filename}");
             }
             else
@@ -72,14 +72,14 @@ namespace Emwin.Processor.Processor
                 bundle = new QuickBlockTransferSegment[blockSegment.TotalBlocks];
                 bundle[blockSegment.BlockNumber - 1] = blockSegment;
                 BlockCache.Set(key, bundle, CacheItemPolicy);
-                ProcessorEventSource.Log.Verbose("SegmentBundler",
+                ProcessorEventSource.Log.Verbose(nameof(BlockSegmentBundler),
                     $"Added segment {blockSegment.BlockNumber} of {blockSegment.TotalBlocks} to new bundle {blockSegment.Filename}");
             }
 
             // If all segments are complete, publish the bundle
             if (bundle != null && bundle.All(s => s != null))
             {
-                ProcessorEventSource.Log.Info("SegmentBundler", 
+                ProcessorEventSource.Log.Info(nameof(BlockSegmentBundler), 
                     $"Completed assembling {blockSegment.TotalBlocks} blocks for bundle {blockSegment.Filename}");
                 BlockCache.Remove(key);
                 ctx.SendMessage(bundle);

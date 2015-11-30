@@ -52,24 +52,24 @@ namespace Emwin.Processor.Processor
                 {
                     case ContentFileType.Text:
                         var textProduct = bundle.AsTextProduct();
-                        ProcessorEventSource.Log.Verbose("ProductAssembler", textProduct.ToString());
+                        ProcessorEventSource.Log.Verbose(nameof(ProductAssembler), textProduct.ToString());
                         ctx.SendMessage(textProduct);
                         break;
 
                     case ContentFileType.Image:
                         var imageProduct = bundle.AsImageProduct();
-                        ProcessorEventSource.Log.Verbose("ProductAssembler", imageProduct.ToString());
+                        ProcessorEventSource.Log.Verbose(nameof(ProductAssembler), imageProduct.ToString());
                         ctx.SendMessage(imageProduct);
                         break;
 
                     case ContentFileType.Compressed:
                         var compressedProduct = bundle.AsCompressedProduct();
-                        ProcessorEventSource.Log.Verbose("ProductAssembler", compressedProduct.ToString());
+                        ProcessorEventSource.Log.Verbose(nameof(ProductAssembler), compressedProduct.ToString());
                         ctx.SendMessage(compressedProduct);
                         break;
 
                     default:
-                        ProcessorEventSource.Log.Warning("ProductAssembler",
+                        ProcessorEventSource.Log.Warning(nameof(ProductAssembler),
                             "Unknown content file type: " + contentType);
                         return;
                 }
@@ -78,7 +78,7 @@ namespace Emwin.Processor.Processor
             }
             catch (Exception ex)
             {
-                ProcessorEventSource.Log.Error("ProductAssembler", ex.ToString());
+                ProcessorEventSource.Log.Error(nameof(ProductAssembler), ex.ToString());
             }
         }
     }

@@ -30,28 +30,34 @@ using Emwin.Core.Parsers;
 using Emwin.Core.Products;
 using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
+using System;
 
 namespace Emwin.Processor.Processor
 {
-    internal sealed class BulletinSplitter : IHandle<TextProduct>
+    internal sealed class XmlProductSplitter : IHandle<TextProduct>
     {
-        private const bool IncludeHeaderInBulletin = false;
-
         #region Public Methods
 
         /// <summary>
-        /// This will be called every time a text product is published through the event aggregator.
-        /// Checks for any bulletins within the text product and publishes them out in parallel.
+        /// This will be called every time a TextProduct is published through the event aggregator.
+        /// If it contains XML products it will be split up into XmlProducts.
         /// </summary>
-        /// <param name="product">The product.</param>
+        /// <param name="product">The text product.</param>
         /// <param name="ctx">The CTX.</param>
         public void Handle(TextProduct product, IEventAggregator ctx)
         {
-            var bulletins = product.ParseBulletinProducts(IncludeHeaderInBulletin).ToList();
-            if (bulletins.Count == 0) return;
+            try
+            {
+                var xmlFiles = product.ParseXmlProducts().ToList();
+                if (xmlFiles.Count == 0) return;
 
-            ProcessorEventSource.Log.Info("BulletinSplitter", "Splitting product into " + bulletins.Count + " bulletins");
-            Parallel.ForEach(bulletins, bulletin => ctx.SendMessage(bulletin));
+                ProcessorEventSource.Log.Info(nameof(XmlProductSplitter), "Splitting product into " + xmlFiles.Count + " xml files");
+                Parallel.ForEach(xmlFiles, xml => ctx.SendMessage(xml));
+            }
+            catch (Exception ex)
+            {
+                ProcessorEventSource.Log.Error(nameof(XmlProductSplitter), ex.ToString());
+            }
         }
 
         #endregion Public Methods
