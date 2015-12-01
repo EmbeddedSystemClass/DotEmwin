@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
-using DotNetty.Common.Concurrency;
-using DotNetty.Transport.Bootstrapping;
-using DotNetty.Transport.Channels;
+using DotNetty.Common.Internal.Logging;
 using Emwin.ByteBlaster;
 using Emwin.ByteBlaster.Instrumentation;
 using Emwin.Core.DataObjects;
@@ -99,9 +97,7 @@ namespace EmwinPublisherWorker
                 _configuration.Identifier,
                 _configuration.StorageConnectionString);
 
-            eventListener.EnableEvents(ChannelEventSource.Log, EventLevel.Informational);
-            eventListener.EnableEvents(BootstrapEventSource.Log, EventLevel.Informational);
-            eventListener.EnableEvents(ExecutorEventSource.Log, EventLevel.Informational);
+            eventListener.EnableEvents(DefaultEventSource.Log, EventLevel.Informational);
             eventListener.EnableEvents(ByteBlasterEventSource.Log, EventLevel.Informational);
 
             var eventHubClient = EventHubClient.CreateFromConnectionString(
