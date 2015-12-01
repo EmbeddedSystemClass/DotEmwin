@@ -48,13 +48,13 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;Location[]&gt;.</returns>
-        public static IEnumerable<LatLong[]> ParsePolygons(this TextProduct product)
+        public static IEnumerable<GeoPoint[]> GetPolygons(this TextProduct product)
         {
-            var polygonMatches = PolygonRegex.Matches(product.Content);
+            var polygonMatches = PolygonRegex.Matches(product.Content.Body);
 
             foreach (var match in polygonMatches.Cast<Match>().Select(x => x.Groups["points"].Captures.Cast<Capture>()))
             {
-                var result = match.Select(m => new LatLong(m.Value)).ToList();
+                var result = match.Select(m => new GeoPoint(m.Value)).ToList();
                 result.Add(result.First());
                 yield return result.ToArray();
             }

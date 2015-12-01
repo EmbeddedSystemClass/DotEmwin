@@ -25,43 +25,80 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Emwin.Core.DataObjects
 {
-    /// <summary>
-    /// Universal Geographic Code.
-    /// </summary>
-    [DataContract]
-    public class UniversalGeographicCode
+    public class TextContent
     {
-        /// <summary>
-        /// Gets or sets the state.
-        /// </summary>
-        /// <value>The state.</value>
-        [DataMember]
-        public string State { get; set; }
+        #region Private Fields
 
         /// <summary>
-        /// Gets or sets the purge time.
+        /// The header regex, example:
+        /// WFUS53 KDDC 050056
+        /// TORDDC
         /// </summary>
-        /// <value>The purge time.</value>
-        [DataMember]
-        public DateTimeOffset PurgeTime { get; set; }
+        private static readonly Regex HeaderRegex = new Regex(
+            @"^[A-Z]{4}[0-9]{2}\s[A-Z]{4}\s[0-9]{6}(\s[A-Z]{3})?(\r\n[0-9A-Z ]{5,6})?",
+            RegexOptions.ExplicitCapture | RegexOptions.Singleline | RegexOptions.Compiled);
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         /// <summary>
-        /// Gets or sets the zones.
+        /// Initializes a new instance of the <see cref="TextContent"/> class.
         /// </summary>
-        /// <value>The zones.</value>
-        [DataMember]
-        public HashSet<string> Zones { get; set; }
+        public TextContent()
+        {
+        }
 
         /// <summary>
-        /// Gets or sets the counties.
+        /// Initializes a new instance of the <see cref="TextContent"/> class.
         /// </summary>
-        /// <value>The counties.</value>
-        [DataMember]
-        public HashSet<int> Counties { get; set; }
+        /// <param name="content">The raw.</param>
+        public TextContent(string content)
+        {
+            var match = HeaderRegex.Match(content);
+            if (match.Success)
+            {
+                Header = match.Value;
+                Body = content.Substring(match.Length + 2); // Skip CR-LF
+            }
+            else
+            {
+                Body = content;
+            }
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the body.
+        /// </summary>
+        /// <value>The body.</value>
+        public string Body { get; set; }
+
+        /// <summary>
+        /// Gets or sets the header.
+        /// </summary>
+        /// <value>The header.</value>
+        public string Header { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
+        public override string ToString() => string.Concat(Header, Environment.NewLine, "Body");
+
+        #endregion Public Methods
     }
 }

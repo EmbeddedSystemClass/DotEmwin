@@ -61,8 +61,8 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>System.Collections.Generic.IEnumerable&lt;Emwin.Core.Contracts.HydrologicVtec&gt;.</returns>
-        public static IEnumerable<HydrologicVtec> ParseHydrologicVtec(this TextProduct product)
-                    => HvtecRegex.Matches(product.Content).Cast<Match>().Select(CreateHydrologicVtec);
+        public static IEnumerable<HydrologicVtec> GetHydrologicVtec(this TextProduct product)
+                    => HvtecRegex.Matches(product.Content.Body).Cast<Match>().Select(CreateHydrologicVtec);
 
         /// <summary>
         /// Parses the hydrologic vtec.
@@ -76,8 +76,8 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;ValidTimeEventCode&gt;.</returns>
-        public static IEnumerable<PrimaryVtec> ParsePrimaryVtec(this TextProduct product)
-            => PvtecRegex.Matches(product.Content).Cast<Match>().Select(CreatePrimaryVtec);
+        public static IEnumerable<PrimaryVtec> GetPrimaryVtec(this TextProduct product)
+            => PvtecRegex.Matches(product.Content.Body).Cast<Match>().Select(CreatePrimaryVtec);
         /// <summary>
         /// Parses the VTEC string.
         /// </summary>

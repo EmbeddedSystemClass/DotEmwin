@@ -31,19 +31,18 @@ using Emwin.Core.Products;
 namespace Emwin.Core.Parsers
 {
     /// <summary>
-    /// AwipsHeader represents the header information on the first line of the product.
+    /// The header information on the first lines of the product.
     /// </summary>
-    public static class HeadingParser
+    public static class HeaderBlockParser
     {
 
         #region Private Fields
 
         /// <summary>
-        /// The WMO Abbreviated Header
-        /// http://www.nws.noaa.gov/tg/head.php
+        /// The Header Block
         /// </summary>
-        private static readonly Regex WmoHeaderRegex = new Regex(
-            @"^(?<id>[A-Z]{4}[0-9]{2})\s(?<station>[A-Z]{4})\s(?<time>[0-9]{6})(\s(?<indicator>[A-Z]{3}))?([\r\n]+(?<pil>[A-Z ]{6}))?[\r\n]+", 
+        private static readonly Regex HeaderBlockRegex = new Regex(
+            @"^(?<dtl>[A-Z]{4}[0-9]{2})\s(?<station>[A-Z]{4})\s(?<time>[0-9]{6})(\s(?<indicator>[A-Z]{3}))?(\r\n(?<ai>[0-9A-Z ]{5,6}))?", 
             RegexOptions.ExplicitCapture | RegexOptions.Singleline | RegexOptions.Compiled);
 
         #endregion Private Fields
@@ -51,23 +50,36 @@ namespace Emwin.Core.Parsers
         #region Public Methods
 
         /// <summary>
-        /// Creates the header from the content.
+        /// Gets the awips identifier.
         /// </summary>
-        /// <param name="product">The product.</param>
-        /// <returns>Header.</returns>
-        /// <exception cref="System.ArgumentException">Invalid content header</exception>
-        public static CommsHeader ParseCommsHeader(this TextProduct product)
+        /// <param name="textProduct">The text product.</param>
+        /// <returns>AwipsIdentifier.</returns>
+        public static AwipsIdentifier GetAwipsIdentifier(this TextProduct textProduct)
         {
-            var match = WmoHeaderRegex.Match(product.Content);
-            if (!match.Success) return new CommsHeader();
+            var match = HeaderBlockRegex.Match(textProduct.Content.Header);
 
-            return new CommsHeader
+            return match.Groups["ai"].Success
+                ? new AwipsIdentifier(match.Groups["ai"].Value)
+                : new AwipsIdentifier();
+        }
+
+        /// <summary>
+        /// Gets the wmo header.
+        /// </summary>
+        /// <param name="textProduct">The text product.</param>
+        /// <returns>WmoHeader.</returns>
+        public static WmoHeader GetWmoHeader(this TextProduct textProduct)
+        {
+            var match = HeaderBlockRegex.Match(textProduct.Content.Header);
+            if (!match.Success) return new WmoHeader();
+
+            return new WmoHeader
             {
-                AwipsId = match.Groups["id"].Value,
+                DataType = match.Groups["dtl"].Value.Substring(0, 2),
+                Distribution = match.Groups["dtl"].Value.Substring(2),
                 WmoId = match.Groups["station"].Value,
-                Time = TimeParser.ParseDayHourMinute(product.TimeStamp, match.Groups["time"].Value),
-                Indicator = match.Groups["indicator"].Success ? match.Groups["indicator"].Value : null,
-                AfosPil = match.Groups["pil"].Success ? match.Groups["pil"].Value.TrimEnd() : null
+                IssuedAt = TimeParser.ParseDayHourMinute(textProduct.TimeStamp, match.Groups["time"].Value),
+                Designator = match.Groups["indicator"].Success ? match.Groups["indicator"].Value : string.Empty
             };
         }
 

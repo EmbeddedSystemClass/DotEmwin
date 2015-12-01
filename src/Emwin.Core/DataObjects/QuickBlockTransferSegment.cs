@@ -137,7 +137,7 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
-            $"[QuickBlockTransferSegment] Filename={Filename} Date={TimeStamp:g} Block#{BlockNumber}/{TotalBlocks} V{Version} Length={Length}";
+            $"[{nameof(QuickBlockTransferSegment)}] Filename={Filename} Date={TimeStamp:g} Block#{BlockNumber}/{TotalBlocks} V{Version} Length={Length}";
 
         #endregion Public Methods
 

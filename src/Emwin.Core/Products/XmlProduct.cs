@@ -44,18 +44,16 @@ namespace Emwin.Core.Products
         /// <param name="timeStamp">The time stamp.</param>
         /// <param name="content">The content.</param>
         /// <param name="receivedAt">The received at.</param>
-        /// <param name="header">The header.</param>
         /// <param name="seq">The seq.</param>
         /// <param name="source">The source.</param>
         /// <returns>XmlProduct.</returns>
-        public static XmlProduct Create(string filename, DateTimeOffset timeStamp, string content, DateTimeOffset receivedAt, CommsHeader header, int seq, string source)
+        public static XmlProduct Create(string filename, DateTimeOffset timeStamp, TextContent content, DateTimeOffset receivedAt, int seq, string source)
         {
             var product = new XmlProduct
             {
                 Filename = filename,
                 TimeStamp = timeStamp,
                 ReceivedAt = receivedAt,
-                Header = header,
                 Content = content,
                 Source = source
             };
@@ -68,7 +66,7 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
-            $"[XmlProduct] Filename={Filename} Date={TimeStamp:g} {Header}";
+            $"[{nameof(XmlProduct)}] Filename={Filename} Date={TimeStamp:g}";
 
         #endregion Public Methods
 

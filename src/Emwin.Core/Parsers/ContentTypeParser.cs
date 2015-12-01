@@ -25,6 +25,7 @@
  */
 
 using System.IO;
+using Emwin.Core.Contracts;
 
 namespace Emwin.Core.Parsers
 {
@@ -44,6 +45,18 @@ namespace Emwin.Core.Parsers
     /// </summary>
     public static class ContentTypeParser
     {
+        /// <summary>
+        /// Gets the type of the content.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <returns>Emwin.Core.Parsers.ContentFileType.</returns>
+        public static ContentFileType GetContentType(this IEmwinContent content) => GetFileContentType(content.Filename);
+
+        /// <summary>
+        /// Gets the type of the file content.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <returns>Emwin.Core.Parsers.ContentFileType.</returns>
         public static ContentFileType GetFileContentType(string filename)
         {
             switch (Path.GetExtension(filename.ToUpperInvariant()))

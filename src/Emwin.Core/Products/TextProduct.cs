@@ -25,60 +25,60 @@
  */
 
 using System;
+using System.Runtime.Serialization;
 using System.Text;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
-using Emwin.Core.Parsers;
 
 namespace Emwin.Core.Products
 {
     /// <summary>
     /// Class TextProduct. Represents a received text file.
     /// </summary>
-    public class TextProduct : IEmwinContent<string>
+    [DataContract]
+    public class TextProduct : IEmwinContent<TextContent>
     {
-
         #region Public Properties
 
         /// <summary>
         /// Gets or sets the content.
         /// </summary>
         /// <value>The content.</value>
-        public string Content { get; set; }
+        [DataMember]
+        public TextContent Content { get; set; }
 
         /// <summary>
         /// Gets the filename.
         /// </summary>
         /// <value>The filename.</value>
+        [DataMember]
         public string Filename { get; set; }
-
-        /// <summary>
-        /// Gets or sets the header.
-        /// </summary>
-        /// <value>The header.</value>
-        public CommsHeader Header { get; set; }
 
         /// <summary>
         /// Gets the content.
         /// </summary>
         /// <value>The content.</value>
         object IEmwinContent.Content => Content;
+
         /// <summary>
         /// Gets the received at time.
         /// </summary>
         /// <value>The received at.</value>
+        [DataMember]
         public DateTimeOffset ReceivedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the source.
         /// </summary>
         /// <value>The source.</value>
+        [DataMember]
         public string Source { get; set; }
 
         /// <summary>
         /// Gets the content time stamp.
         /// </summary>
         /// <value>The time stamp.</value>
+        [DataMember]
         public DateTimeOffset TimeStamp { get; set; }
 
         #endregion Public Properties
@@ -98,19 +98,18 @@ namespace Emwin.Core.Products
         {
             var count = Array.LastIndexOf(content, (byte)03); // Trim to ETX
             if (count < 0) count = content.Length;
+            var text = Encoding.ASCII
+                .GetString(content, 0, count)
+                .Replace("\r\r\n", "\r\n"); // Normalize double <CR> with single <CR>
 
-            var product = new TextProduct
+            return new TextProduct
             {
                 Filename = filename,
                 TimeStamp = timeStamp,
-                Content = Encoding.ASCII.GetString(content, 0, count),
                 ReceivedAt = receivedAt,
-                Source = source
+                Source = source,
+                Content = new TextContent(text)
             };
-
-            product.Header = HeadingParser.ParseCommsHeader(product);
-
-            return product;
         }
 
         /// <summary>
@@ -118,7 +117,7 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
-            $"[TextProduct] Filename={Filename} Date={TimeStamp:g} {Header}";
+            $"[TextProduct] Filename={Filename} Date={TimeStamp:g} Header={Content.Header.Replace("\r\n", " ")}";
 
         #endregion Public Methods
     }

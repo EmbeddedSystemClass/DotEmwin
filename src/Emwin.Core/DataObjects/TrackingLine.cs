@@ -59,7 +59,7 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The line.</value>
         [DataMember]
-        public IEnumerable<LatLong> Line { get; set; }
+        public IEnumerable<GeoPoint> Line { get; set; }
 
         /// <summary>
         /// Return in NWS format.

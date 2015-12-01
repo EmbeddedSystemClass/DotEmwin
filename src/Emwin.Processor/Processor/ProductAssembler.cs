@@ -26,6 +26,7 @@
 
 using System;
 using Emwin.Core.DataObjects;
+using Emwin.Core.Extensions;
 using Emwin.Core.Parsers;
 using Emwin.Processor.Instrumentation;
 using Emwin.Core.Products;

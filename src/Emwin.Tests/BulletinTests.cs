@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using Emwin.Core.DataObjects;
+using Emwin.Core.Extensions;
 using Emwin.Core.Parsers;
 using Emwin.Core.Products;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,7 +23,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
+            var bulletin = product.ParseSegments().FirstOrDefault();
             var cap = bulletin.CreateAlert();
             var json = JsonConvert.SerializeObject(cap, new JsonSerializerSettings
             {
@@ -37,16 +39,40 @@ namespace Emwin.Tests
         {
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
+            Assert.IsNotNull(product.Content, "Content != null");
 
-            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
-            Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
+            Assert.AreEqual("WFUS53 KDDC 050056\r\nTORDDC", product.Content.Header, "Header");
 
-            Assert.IsNotNull(product.Header, "product.Header != null");
-            Assert.AreEqual("TORDDC", product.Header.AfosPil, "AfosPil");
-            Assert.AreEqual("WFUS53", product.Header.AwipsId, "AwipsId");
-            Assert.AreEqual("KDDC", product.Header.WmoId, "WmoId");
-            Assert.IsNull(product.Header.Indicator, "Indicator");
-            Assert.AreEqual(new TimeSpan(0, 56, 0), product.Header.Time.TimeOfDay);
+            var awips = product.GetAwipsIdentifier();
+            Assert.AreEqual("TOR", awips.ProductCategory, "ProductCategory");
+            Assert.AreEqual("DDC", awips.LocationIdentifier, "LocationIdentifier");
+
+            var wmo = product.GetWmoHeader();
+            Assert.AreEqual("WF", wmo.DataType, "DataType");
+            Assert.AreEqual("US53", wmo.Distribution, "Distribution");
+            Assert.AreEqual("KDDC", wmo.WmoId, "WmoId");
+            Assert.AreEqual(string.Empty, wmo.Designator, "Designator");
+            Assert.AreEqual(new TimeSpan(0, 56, 0), wmo.IssuedAt.TimeOfDay);
+        }
+
+        [TestMethod]
+        public void GeoPointTests()
+        {
+            var actual = new GeoPoint("3870 10017");
+            Assert.AreEqual(38.70, actual.Latitude, "Latitude 1");
+            Assert.AreEqual(-100.17, actual.Longitude, "Longitude 1");
+            Assert.AreEqual("3870 10017", actual.ToRaw(), "Raw 1");
+
+            actual = new GeoPoint("9000 18000");
+            Assert.AreEqual(90, actual.Latitude, "Latitude 2");
+            Assert.AreEqual(-180, actual.Longitude, "Longitude 2");
+            Assert.AreEqual("9000 18000", actual.ToRaw(), "Raw 2");
+
+            actual = new GeoPoint("3870 28000");
+            Assert.AreEqual(38.70, actual.Latitude, "Latitude 3");
+            Assert.AreEqual(100, actual.Longitude, "Longitude 3");
+            Assert.AreEqual("3870 28000", actual.ToRaw(), "Raw 3");
+
         }
 
         [TestMethod]
@@ -55,7 +81,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
+            var bulletin = product.ParseSegments().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
             var polygon = bulletin.Polygon;
@@ -73,7 +99,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
+            var bulletin = product.ParseSegments().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
             var trackingLine = bulletin.TrackingLine;
@@ -95,7 +121,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
+            var bulletin = product.ParseSegments().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
             var geoCodes = bulletin.GeoCodes.ToList();
@@ -113,7 +139,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
+            var bulletin = product.ParseSegments().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
             var vtec = bulletin.PrimaryVtec;
@@ -133,7 +159,7 @@ namespace Emwin.Tests
             var product = GetFloodWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseBulletinProducts().FirstOrDefault();
+            var bulletin = product.ParseSegments().FirstOrDefault();
             Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
 
             var vtec = bulletin.HydrologicVtec;
@@ -151,23 +177,17 @@ namespace Emwin.Tests
 
         #region Private Methods
 
-        private static TextProduct GetTornadoWarning()
-        {
-            return TextProduct.Create(
-                "TORDDCXXXX.TXT",
-                new DateTimeOffset(2015, 6, 5, 0, 56, 0, TimeSpan.Zero),
-                Encoding.ASCII.GetBytes(BulletinContent.TornadoWarning),
-                DateTimeOffset.UtcNow, string.Empty);
-        }
+        private static TextProduct GetTornadoWarning() => TextProduct.Create(
+            "TORDDCXXXX.TXT",
+            new DateTimeOffset(2015, 6, 5, 0, 56, 0, TimeSpan.Zero),
+            Encoding.ASCII.GetBytes(BulletinContent.TornadoWarning),
+            DateTimeOffset.UtcNow, string.Empty);
 
-        private static TextProduct GetFloodWarning()
-        {
-            return TextProduct.Create(
-                "FLWOAXXXXX.TXT",
-                new DateTimeOffset(2015, 6, 5, 23, 45, 0, TimeSpan.Zero),
-                Encoding.ASCII.GetBytes(BulletinContent.FloodWarning),
-                DateTimeOffset.UtcNow, string.Empty);
-        }
+        private static TextProduct GetFloodWarning() => TextProduct.Create(
+            "FLWOAXXXXX.TXT",
+            new DateTimeOffset(2015, 6, 5, 23, 45, 0, TimeSpan.Zero),
+            Encoding.ASCII.GetBytes(BulletinContent.FloodWarning),
+            DateTimeOffset.UtcNow, string.Empty);
 
         #endregion Private Methods
     }

@@ -48,9 +48,9 @@ namespace Emwin.Core.Parsers
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;TrackingLine&gt;.</returns>
-        public static IEnumerable<TrackingLine> ParseTrackingLines(this TextProduct product)
+        public static IEnumerable<TrackingLine> GetTrackingLines(this TextProduct product)
         {
-            var matches = TimeMotLocRegex.Matches(product.Content);
+            var matches = TimeMotLocRegex.Matches(product.Content.Body);
 
             return matches.Cast<Match>().Select(match => new TrackingLine
             {
@@ -65,10 +65,10 @@ namespace Emwin.Core.Parsers
 
         #region Private Methods
 
-        private static LatLong ToLocation(Capture points)
+        private static GeoPoint ToLocation(Capture points)
         {
             var split = points.Value.Split(' ');
-            return new LatLong(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
+            return new GeoPoint(double.Parse(split[0])/100.0, -double.Parse(split[1])/100.0);
         }
 
         #endregion Private Methods

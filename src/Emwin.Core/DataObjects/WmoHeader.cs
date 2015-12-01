@@ -25,99 +25,79 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Emwin.Core.DataObjects;
-using Emwin.Core.Parsers;
+using System.Runtime.Serialization;
 
-namespace Emwin.Core.Products
+namespace Emwin.Core.DataObjects
 {
     /// <summary>
-    /// Class TextProduct. Represents a received text file.
     /// </summary>
-    public class BulletinProduct : TextProduct
+    [DataContract]
+    public class WmoHeader
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the geo codes.
+        /// Gets or sets the type of the data or form.
         /// </summary>
-        /// <value>The geo codes.</value>
-        public IEnumerable<UniversalGeographicCode> GeoCodes { get; set; }
+        /// <value>The type of the data.</value>
+        [DataMember]
+        public string DataType { get; set; }
 
         /// <summary>
-        /// Gets or sets the polygons.
+        /// Gets or sets the geographical distribution location.
         /// </summary>
-        /// <value>The polygons.</value>
-        public LatLong[] Polygon { get; set; }
+        /// <value>The geographical distribution location.</value>
+        [DataMember]
+        public string Distribution { get; set; }
 
         /// <summary>
-        /// Gets the primary vtec.
+        /// Gets the indicator.
         /// </summary>
-        /// <value>The primary vtec.</value>
-        public PrimaryVtec PrimaryVtec { get; set; }
+        /// <value>The indicator.</value>
+        [DataMember]
+        public string Designator { get; set; }
 
         /// <summary>
-        /// Gets or sets the hydrologic vtec.
+        /// Gets or sets the 4 letter originating office.
         /// </summary>
-        /// <value>The hydrologic vtec.</value>
-        public HydrologicVtec HydrologicVtec { get; set; }
+        /// <value>The wmo station.</value>
+        [DataMember]
+        public string WmoId { get; set; }
 
         /// <summary>
-        /// Gets the sequence number with the text product.
+        /// Gets or sets the wmo time.
         /// </summary>
-        /// <value>The sequence number.</value>
-        public int SequenceNumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets the tracking line.
-        /// </summary>
-        /// <value>The tracking line.</value>
-        public TrackingLine TrackingLine { get; set; }
+        /// <value>The wmo time.</value>
+        [DataMember]
+        public DateTimeOffset IssuedAt { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
         /// <summary>
-        /// Creates the bulletin product.
-        /// </summary>
-        /// <param name="filename">The filename.</param>
-        /// <param name="timeStamp">The time stamp.</param>
-        /// <param name="content">The content.</param>
-        /// <param name="receivedAt">The received at.</param>
-        /// <param name="header">The header.</param>
-        /// <param name="seq">The seq.</param>
-        /// <param name="source">The source.</param>
-        /// <returns>TextProduct.</returns>
-        public static BulletinProduct Create(string filename, DateTimeOffset timeStamp, string content, DateTimeOffset receivedAt, CommsHeader header, int seq, string source)
-        {
-            var product = new BulletinProduct
-            {
-                Filename = filename,
-                TimeStamp = timeStamp,
-                Content = content,
-                ReceivedAt = receivedAt,
-                Header = header,
-                SequenceNumber = seq,
-                Source = source
-            };
-
-            product.GeoCodes = product.ParseGeographicCodes();
-            product.PrimaryVtec = product.ParsePrimaryVtec().FirstOrDefault();
-            product.Polygon = product.ParsePolygons().FirstOrDefault();
-            product.TrackingLine = product.ParseTrackingLines().FirstOrDefault();
-            product.HydrologicVtec = product.ParseHydrologicVtec().FirstOrDefault();
-
-            return product;
-        }
-
-        /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() =>
-            $"[BulletinProduct] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {Header} {PrimaryVtec}";
+        public override string ToString() => $"{DataType}{WmoId}{IssuedAt:ddHHmm}";
+
+        /// <summary>
+        /// Determines whether this product is amended/update.
+        /// </summary>
+        /// <returns>System.Boolean.</returns>
+        public bool IsAmended() => Designator != null && Designator.StartsWith("AA");
+
+        /// <summary>
+        /// Determines whether this product is a correction.
+        /// </summary>
+        /// <returns>System.Boolean.</returns>
+        public bool IsCorrection() => Designator != null && Designator.StartsWith("CC");
+
+        /// <summary>
+        /// Determines whether this product is an re-issuance.
+        /// </summary>
+        /// <returns>System.Boolean.</returns>
+        public bool IsReissuance() => Designator != null && Designator.StartsWith("RR");
 
         #endregion Public Methods
 

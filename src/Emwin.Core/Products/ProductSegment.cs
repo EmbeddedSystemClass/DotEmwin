@@ -28,94 +28,97 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Emwin.Core.DataObjects;
+using Emwin.Core.Parsers;
 
 namespace Emwin.Core.Products
 {
     /// <summary>
-    /// Class ProductFactory for creating products.
+    /// Class TextProduct. Represents a received text file.
     /// </summary>
-    public static class ProductBuilderExtension
+    public class ProductSegment : TextProduct
     {
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the geo codes.
+        /// </summary>
+        /// <value>The geo codes.</value>
+        public IEnumerable<UniversalGeoCode> GeoCodes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the polygons.
+        /// </summary>
+        /// <value>The polygons.</value>
+        public GeoPoint[] Polygon { get; set; }
+
+        /// <summary>
+        /// Gets the primary vtec.
+        /// </summary>
+        /// <value>The primary vtec.</value>
+        public PrimaryVtec PrimaryVtec { get; set; }
+
+        /// <summary>
+        /// Gets or sets the hydrologic vtec.
+        /// </summary>
+        /// <value>The hydrologic vtec.</value>
+        public HydrologicVtec HydrologicVtec { get; set; }
+
+        /// <summary>
+        /// Gets the sequence number with the text product.
+        /// </summary>
+        /// <value>The sequence number.</value>
+        public int SequenceNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the tracking line.
+        /// </summary>
+        /// <value>The tracking line.</value>
+        public TrackingLine TrackingLine { get; set; }
+
+        #endregion Public Properties
 
         #region Public Methods
 
         /// <summary>
-        /// Combines segments into text product.
+        /// Creates the bulletin product.
         /// </summary>
-        /// <param name="segments">The segments.</param>
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <param name="header">The header.</param>
+        /// <param name="seq">The seq.</param>
+        /// <param name="source">The source.</param>
         /// <returns>TextProduct.</returns>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        public static TextProduct AsTextProduct(this QuickBlockTransferSegment[] segments)
+        public static ProductSegment Create(string filename, DateTimeOffset timeStamp, TextContent content, DateTimeOffset receivedAt, int seq, string source)
         {
-            if (segments == null) throw new ArgumentNullException(nameof(segments));
+            var product = new ProductSegment
+            {
+                Filename = filename,
+                TimeStamp = timeStamp,
+                Content = content,
+                ReceivedAt = receivedAt,
+                SequenceNumber = seq,
+                Source = source
+            };
 
-            var lastSegment = segments[segments.Length - 1];
-            var content = segments.Select(b => b.Content).ToList().Combine(true);
+            product.GeoCodes = product.GetGeoCodes();
+            product.PrimaryVtec = product.GetPrimaryVtec().FirstOrDefault();
+            product.Polygon = product.GetPolygons().FirstOrDefault();
+            product.TrackingLine = product.GetTrackingLines().FirstOrDefault();
+            product.HydrologicVtec = product.GetHydrologicVtec().FirstOrDefault();
 
-            return TextProduct.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
+            return product;
         }
 
         /// <summary>
-        /// Combines segments into image product.
+        /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
-        /// <param name="segments">The segments.</param>
-        /// <returns>ImageProduct.</returns>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        public static ImageProduct AsImageProduct(this QuickBlockTransferSegment[] segments)
-        {
-            if (segments == null) throw new ArgumentNullException(nameof(segments));
-
-            var lastSegment = segments[segments.Length - 1];
-            var content = segments.Select(b => b.Content).ToList().Combine();
-
-            return ImageProduct.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
-        }
-
-        /// <summary>
-        /// Combines segments into compressed product.
-        /// </summary>
-        /// <param name="segments">The segments.</param>
-        /// <returns>CompressedContent.</returns>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        public static CompressedContent AsCompressedProduct(this QuickBlockTransferSegment[] segments)
-        {
-            if (segments == null) throw new ArgumentNullException(nameof(segments));
-
-            var lastSegment = segments[segments.Length - 1];
-            var content = segments.Select(b => b.Content).ToList().Combine();
-
-            return CompressedContent.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
-        }
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString() =>
+            $"[{nameof(ProductSegment)}] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {PrimaryVtec}";
 
         #endregion Public Methods
 
-        #region Private Methods
-
-        private static byte[] Combine(this IList<byte[]> arrays, bool trimLast = false)
-        {
-            if (trimLast)
-            {
-                var last = arrays[arrays.Count - 1];
-                var pos = last.Length - 1;
-                while (pos > 0 && last[pos] == 0) --pos;
-                if (pos < last.Length)
-                {
-                    Array.Resize(ref last, pos + 1);
-                    arrays[arrays.Count - 1] = last;
-                }
-            }
-
-            var result = new byte[arrays.Sum(a => a.Length)];
-            var offset = 0;
-            foreach (var array in arrays)
-            {
-                Buffer.BlockCopy(array, 0, result, offset, array.Length);
-                offset += array.Length;
-            }
-
-            return result;
-        }
-
-        #endregion Private Methods
     }
 }

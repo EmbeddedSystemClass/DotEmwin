@@ -25,6 +25,7 @@
  */
 
 using System;
+using Emwin.Core.Extensions;
 using Emwin.Core.Products;
 using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
@@ -45,7 +46,7 @@ namespace Emwin.Processor.Processor
         {
             try
             {
-                if (bulletin.PrimaryVtec == null || bulletin.Header == null) return;
+                if (bulletin.PrimaryVtec == null) return;
 
                 ctx.SendMessage(bulletin.CreateAlert());
             }

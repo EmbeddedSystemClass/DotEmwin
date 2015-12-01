@@ -28,8 +28,9 @@ using System;
 using System.Linq;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
+using Emwin.Core.Products;
 
-namespace Emwin.Core.Products
+namespace Emwin.Core.Extensions
 {
     public static class CapExtension
     {
@@ -39,43 +40,43 @@ namespace Emwin.Core.Products
         /// <summary>
         /// Generate Common Alerting Protocol (1.2) from bulletin
         /// </summary>
-        /// <param name="bulletin">The bulletin.</param>
+        /// <param name="segment">The bulletin.</param>
         /// <returns>alert.</returns>
-        public static alert CreateAlert(this BulletinProduct bulletin) => new alert
+        public static alert CreateAlert(this ProductSegment segment) => new alert
         {
             identifier = Guid.NewGuid().ToString("N"),
-            sender = $"{bulletin.Header.WmoId}@NWS.NOAA.GOV",
-            sent = bulletin.TimeStamp.DateTime,
-            status = GetAlertStatus(bulletin.PrimaryVtec),
+            //sender = $"{segment.Header.WmoHeading.WmoId}@NWS.NOAA.GOV",
+            sent = segment.TimeStamp.DateTime,
+            status = GetAlertStatus(segment.PrimaryVtec),
             msgType = alertMsgType.Alert,
             scope = alertScope.Public,
             note = "",
-            info = new[] {GetAlertInfo(bulletin)}
+            info = new[] {GetAlertInfo(segment)}
         };
 
         /// <summary>
         /// Gets the alert information.
         /// </summary>
-        /// <param name="bulletin">The bulletin.</param>
+        /// <param name="segment">The bulletin.</param>
         /// <returns>Emwin.Core.Contracts.alertInfo.</returns>
-        public static alertInfo GetAlertInfo(this BulletinProduct bulletin) => new alertInfo
+        public static alertInfo GetAlertInfo(this ProductSegment segment) => new alertInfo
         {
             category = new[] { alertInfoCategory.Met },
             @event = "",
-            urgency = bulletin.PrimaryVtec.GetUrgency(),
-            severity = bulletin.PrimaryVtec.GetSeverity(),
-            certainty = bulletin.PrimaryVtec.GetCertainty(),
-            eventCode = new[] { bulletin.PrimaryVtec.GetEventCode() },
+            urgency = segment.PrimaryVtec.GetUrgency(),
+            severity = segment.PrimaryVtec.GetSeverity(),
+            certainty = segment.PrimaryVtec.GetCertainty(),
+            eventCode = new[] { segment.PrimaryVtec.GetEventCode() },
             effectiveSpecified = true,
-            effective = bulletin.PrimaryVtec.Begin.DateTime,
+            effective = segment.PrimaryVtec.Begin.DateTime,
             expiresSpecified = true,
-            expires = bulletin.PrimaryVtec.End.DateTime,
+            expires = segment.PrimaryVtec.End.DateTime,
             senderName = "DotEmwin",
             headline = "",
-            description = bulletin.Content,
+            description = segment.Content.Body,
             instruction = "",
-            parameter = GetParameters(bulletin),
-            area = GetAreas(bulletin)
+            parameter = GetParameters(segment),
+            area = GetAreas(segment)
         };
 
         /// <summary>
@@ -128,7 +129,7 @@ namespace Emwin.Core.Products
             value = string.Concat(pvtec.PhenomenonCode, pvtec.SignificanceCode)
         };
 
-        public static string GetPolygonText(this LatLong[] polygon)
+        public static string GetPolygonText(this GeoPoint[] polygon)
         {
             if (polygon == null || polygon.Length == 0) return null;
             var points = polygon.Select(p => p.ToString());
@@ -183,14 +184,14 @@ namespace Emwin.Core.Products
         /// <summary>
         /// Gets the areas.
         /// </summary>
-        /// <param name="bulletin">The bulletin.</param>
+        /// <param name="segment">The bulletin.</param>
         /// <returns>Emwin.Core.Contracts.alertInfoArea[].</returns>
-        private static alertInfoArea[] GetAreas(BulletinProduct bulletin) => new[]
+        private static alertInfoArea[] GetAreas(ProductSegment segment) => new[]
         {
             new alertInfoArea
             {
                 //areaDesc = "",
-                polygon = new [] { bulletin.Polygon.GetPolygonText()},
+                polygon = new [] { segment.Polygon.GetPolygonText()},
                 //geocode = new[]
                 //{
                 //    new alertInfoAreaGeocode {valueName = "FIPS6", value = ""},
@@ -202,21 +203,21 @@ namespace Emwin.Core.Products
         /// <summary>
         /// Gets the parameters.
         /// </summary>
-        /// <param name="bulletin">The bulletin.</param>
+        /// <param name="segment">The bulletin.</param>
         /// <returns>Emwin.Core.Contracts.alertInfoParameter[].</returns>
-        private static alertInfoParameter[] GetParameters(BulletinProduct bulletin) => new[]
+        private static alertInfoParameter[] GetParameters(ProductSegment segment) => new[]
         {
             //new alertInfoParameter {valueName = "WMOHEADER", value = ""},
             //new alertInfoParameter {valueName = "UGC", value = ""},
             new alertInfoParameter
             {
                 valueName = "VTEC",
-                value = string.Join(Environment.NewLine, bulletin.PrimaryVtec?.ToRaw(), bulletin.HydrologicVtec?.ToRaw())
+                value = string.Join(Environment.NewLine, segment.PrimaryVtec?.ToRaw(), segment.HydrologicVtec?.ToRaw())
             },
-            bulletin.TrackingLine == null ? null : new alertInfoParameter
+            segment.TrackingLine == null ? null : new alertInfoParameter
             {
                 valueName = "TIME...MOT...LOC",
-                value = bulletin.TrackingLine?.ToString()
+                value = segment.TrackingLine?.ToString()
             }
         };
 

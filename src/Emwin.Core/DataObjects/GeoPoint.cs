@@ -24,46 +24,58 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
+using System;
+using System.Runtime.Serialization;
+
 namespace Emwin.Core.DataObjects
 {
-    public struct LatLong
+    /// <summary>
+    /// Class to hold Latitude and Longitude tuple.
+    /// </summary>
+    [DataContract]
+    public class GeoPoint
     {
         #region Public Fields
 
         /// <summary>
-        /// The latitude
+        /// Gets or sets the latitude.
         /// </summary>
-        public double Latitude;
+        /// <value>The latitude.</value>
+        [DataMember]
+        public double Latitude { get; set; }
 
         /// <summary>
-        /// The longitude
+        /// Gets or sets the longitude.
         /// </summary>
-        public double Longitude;
+        /// <value>The longitude.</value>
+        [DataMember]
+        public double Longitude { get; set; }
 
         #endregion Public Fields
 
         #region Public Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LatLong"/> struct.
+        /// Initializes a new instance of the <see cref="GeoPoint"/> struct.
         /// </summary>
         /// <param name="latitude">The latitude.</param>
         /// <param name="longitude">The longitude.</param>
-        public LatLong(double latitude, double longitude)
+        public GeoPoint(double latitude, double longitude)
         {
             Latitude = latitude;
             Longitude = longitude;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LatLong" /> struct.
+        /// Initializes a new instance of the <see cref="GeoPoint" /> struct.
         /// </summary>
         /// <param name="raw">The raw NWS string.</param>
-        public LatLong(string raw)
+        public GeoPoint(string raw)
         {
             var split = raw.Split(' ');
             Latitude = double.Parse(split[0]) / 100.0;
-            Longitude = 180 - double.Parse(split[1]) / 100.0;
+            Longitude = double.Parse(split[1]) / 100.0;
+            Longitude = Longitude > 180 ? Longitude -180 : -Longitude;
         }
 
         #endregion Public Constructors
@@ -74,7 +86,7 @@ namespace Emwin.Core.DataObjects
         /// Returns raw format used by NWS.
         /// </summary>
         /// <returns>System.String.</returns>
-        public string ToRaw() => $"{Latitude * 100} {180 - Longitude * 100}";
+        public string ToRaw() => $"{Latitude*100} {(Longitude < 0 ? -Longitude*100 : 100*(180 + Longitude))}";
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.

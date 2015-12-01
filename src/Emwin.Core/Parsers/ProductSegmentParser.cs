@@ -24,42 +24,54 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
+using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
 using System.Linq;
-using System.Threading.Tasks;
-using Emwin.Core.Parsers;
+using Emwin.Core.DataObjects;
 using Emwin.Core.Products;
-using Emwin.Processor.EventAggregator;
-using Emwin.Processor.Instrumentation;
-using System;
 
-namespace Emwin.Processor.Processor
+namespace Emwin.Core.Parsers
 {
-    internal sealed class XmlProductSplitter : IHandle<TextProduct>
+    public static class ProductSegmentParser
     {
+
+        #region Private Fields
+
+        private static readonly Regex SegmentRegex = new Regex(@"(?<segment>[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+.+?[\r\n]+\$\$)", RegexOptions.Singleline | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+
+        #endregion Private Fields
+
         #region Public Methods
 
         /// <summary>
-        /// This will be called every time a TextProduct is published through the event aggregator.
-        /// If it contains XML products it will be split up into XmlProducts.
+        /// Parses the product.
         /// </summary>
-        /// <param name="product">The text product.</param>
-        /// <param name="ctx">The CTX.</param>
-        public void Handle(TextProduct product, IEventAggregator ctx)
+        /// <param name="product">The product.</param>
+        /// <param name="includeHeader">if set to <c>true</c> [include header].</param>
+        /// <returns>IEnumerable&lt;TextProduct&gt;.</returns>
+        public static IEnumerable<ProductSegment> ParseSegments(this TextProduct product, bool includeHeader = false)
         {
-            try
+            var matches = SegmentRegex.Matches(product.Content.Body);
+            var seq = 1;
+            foreach (var segment in matches.Cast<Match>().Select(match => match.Groups["segment"].Value))
             {
-                var xmlFiles = product.GetXmlProducts().ToList();
-                if (xmlFiles.Count == 0) return;
+                var newFilename = string.Concat(
+                    Path.GetFileNameWithoutExtension(product.Filename), 
+                    '-', seq.ToString("00"),
+                    Path.GetExtension(product.Filename));
 
-                ProcessorEventSource.Log.Info(nameof(XmlProductSplitter), "Splitting product into " + xmlFiles.Count + " xml files");
-                Parallel.ForEach(xmlFiles, xml => ctx.SendMessage(xml));
-            }
-            catch (Exception ex)
-            {
-                ProcessorEventSource.Log.Error(nameof(XmlProductSplitter), ex.ToString());
+                yield return ProductSegment.Create(
+                    newFilename, 
+                    product.TimeStamp,
+                    new TextContent { Header = product.Content.Header, Body = segment },
+                    product.ReceivedAt,
+                    seq++, 
+                    product.Source);
             }
         }
 
         #endregion Public Methods
+
     }
 }

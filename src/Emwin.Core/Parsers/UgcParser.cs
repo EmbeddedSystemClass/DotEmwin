@@ -49,11 +49,11 @@ namespace Emwin.Core.Parsers
 
         #region Public Methods
 
-        public static IEnumerable<UniversalGeographicCode> ParseGeographicCodes(this TextProduct product) => UgcRegex.Matches(product.Content)
+        public static IEnumerable<UniversalGeoCode> GetGeoCodes(this TextProduct product) => UgcRegex.Matches(product.Content.Body)
             .Cast<Match>()
             .SelectMany(ugcMatch => ParseUgcGroups(ugcMatch.Value, product.TimeStamp))
             .GroupBy(x => x.State)
-            .Select(st => new UniversalGeographicCode
+            .Select(st => new UniversalGeoCode
             {
                 State = st.Key,
                 PurgeTime = st.First().PurgeTime,

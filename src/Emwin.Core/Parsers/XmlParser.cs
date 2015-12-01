@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Emwin.Core.DataObjects;
 using Emwin.Core.Products;
 
 namespace Emwin.Core.Parsers
@@ -38,24 +39,25 @@ namespace Emwin.Core.Parsers
         #region Public Methods
 
         /// <summary>
-        /// Parses the product.
+        /// Parses the product for Xml Documents (multiple XML documents can be in a single product).
         /// </summary>
         /// <param name="product">The product.</param>
         /// <returns>IEnumerable&lt;XmlProduct&gt;.</returns>
-        public static IEnumerable<XmlProduct> ParseXmlProducts(this TextProduct product)
+        public static IEnumerable<XmlProduct> GetXmlProducts(this TextProduct product)
         {
             var startAt = 0;
             var seq = 1;
+            var body = product.Content.Body;
 
             do
             {
-                startAt = product.Content.IndexOf(XmlHeader, startAt, StringComparison.Ordinal);
+                startAt = body.IndexOf(XmlHeader, startAt, StringComparison.Ordinal);
                 if (startAt == -1) yield break;
 
-                var endAt = product.Content.IndexOf(XmlHeader, startAt + XmlHeader.Length, StringComparison.Ordinal);
-                if (endAt == -1) endAt = product.Content.Length;
+                var endAt = body.IndexOf(XmlHeader, startAt + XmlHeader.Length, StringComparison.Ordinal);
+                if (endAt == -1) endAt = body.Length;
 
-                var xml = product.Content.Substring(startAt, endAt - startAt).TrimEnd();
+                var xml = body.Substring(startAt, endAt - startAt).TrimEnd();
 
                 var newFilename = string.Concat(
                     Path.GetFileNameWithoutExtension(product.Filename),
@@ -65,14 +67,13 @@ namespace Emwin.Core.Parsers
                 yield return XmlProduct.Create(
                     newFilename,
                     product.TimeStamp,
-                    xml,
+                    new TextContent { Header = product.Content.Header, Body = xml },
                     product.ReceivedAt,
-                    product.Header,
                     seq++, 
                     product.Source);
 
                 startAt = endAt;
-            } while (startAt < product.Content.Length);
+            } while (startAt < body.Length);
         }
 
         #endregion Public Methods

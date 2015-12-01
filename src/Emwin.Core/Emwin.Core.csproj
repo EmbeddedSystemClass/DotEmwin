@@ -43,29 +43,31 @@
     <Compile Include="Contracts\CAP12.cs">
       <DependentUpon>CAP12.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataObjects\AwipsIdentifier.cs" />
     <Compile Include="DataObjects\HydrologicVtec.cs" />
-    <Compile Include="DataObjects\LatLong.cs" />
-    <Compile Include="DataObjects\CommsHeader.cs" />
+    <Compile Include="DataObjects\GeoPoint.cs" />
+    <Compile Include="DataObjects\WmoHeader.cs" />
     <Compile Include="Contracts\IEmwinContent.cs" />
     <Compile Include="DataObjects\TrackingLine.cs" />
-    <Compile Include="Products\CapExtensions.cs" />
+    <Compile Include="Extensions\CapExtensions.cs" />
     <Compile Include="Parsers\XmlParser.cs" />
-    <Compile Include="Parsers\BulletinParser.cs" />
+    <Compile Include="Parsers\ProductSegmentParser.cs" />
     <Compile Include="Parsers\TrackingLineParser.cs" />
-    <Compile Include="Products\BulletinProduct.cs" />
-    <Compile Include="Products\ProductBuilderExtension.cs" />
+    <Compile Include="Products\ProductSegment.cs" />
+    <Compile Include="Extensions\QuickBlockExtensions.cs" />
     <Compile Include="Products\ImageProduct.cs" />
     <Compile Include="DataObjects\QuickBlockTransferSegment.cs" />
     <Compile Include="Products\CompressedContent.cs" />
+    <Compile Include="DataObjects\TextContent.cs" />
     <Compile Include="Products\XmlProduct.cs" />
     <Compile Include="Products\TextProduct.cs" />
-    <Compile Include="Parsers\HeadingParser.cs" />
+    <Compile Include="Parsers\HeaderBlockParser.cs" />
     <Compile Include="Parsers\SpatialParser.cs" />
     <Compile Include="Parsers\ContentTypeParser.cs" />
     <Compile Include="Parsers\TimeParser.cs" />
     <Compile Include="Parsers\UgcParser.cs" />
     <Compile Include="Parsers\VtecParser.cs" />
-    <Compile Include="DataObjects\UniversalGeographicCode.cs" />
+    <Compile Include="DataObjects\UniversalGeoCode.cs" />
     <Compile Include="DataObjects\PrimaryVtec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

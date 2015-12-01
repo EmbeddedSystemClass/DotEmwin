@@ -24,59 +24,71 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System.Collections.Generic;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Linq;
-using Emwin.Core.Products;
+using System.Runtime.Serialization;
 
-namespace Emwin.Core.Parsers
+namespace Emwin.Core.DataObjects
 {
-    public static class BulletinParser
+    [DataContract]
+    public class AwipsIdentifier
     {
+        #region Public Constructors
 
-        #region Private Fields
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AwipsIdentifier"/> class.
+        /// </summary>
+        public AwipsIdentifier()
+        {
+        }
 
-        private static readonly Regex BulletinRegex = new Regex(@"[\r\n]+(?<bulletin>[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+.+?[\r\n]+\$\$)", RegexOptions.Singleline | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-        private static readonly Regex HeaderRegex = new Regex(@"^(?<header>.+?)[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+.+?[\r\n]+\$\$", RegexOptions.Singleline | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AwipsIdentifier" /> struct.
+        /// </summary>
+        /// <param name="productCategory">The product category.</param>
+        /// <param name="locationIdentifier">The location identifier.</param>
+        public AwipsIdentifier(string productCategory, string locationIdentifier)
+        {
+            ProductCategory = productCategory;
+            LocationIdentifier = locationIdentifier;
+        }
 
-        #endregion Private Fields
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AwipsIdentifier" /> struct.
+        /// </summary>
+        /// <param name="raw">The raw.</param>
+        public AwipsIdentifier(string raw)
+        {
+            ProductCategory = raw.Substring(0, 3);
+            LocationIdentifier = raw.Substring(3).TrimEnd();
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the location identifier (up to 3 characters).
+        /// </summary>
+        /// <value>The location identifier.</value>
+        [DataMember]
+        public string LocationIdentifier { get; set; }
+
+        /// <summary>
+        /// Gets or sets the 3 character product category.
+        /// </summary>
+        /// <value>The product category.</value>
+        [DataMember]
+        public string ProductCategory { get; set; }
+
+        #endregion Public Properties
 
         #region Public Methods
 
         /// <summary>
-        /// Parses the product.
+        /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
-        /// <param name="product">The product.</param>
-        /// <param name="includeHeader">if set to <c>true</c> [include header].</param>
-        /// <returns>IEnumerable&lt;TextProduct&gt;.</returns>
-        public static IEnumerable<BulletinProduct> ParseBulletinProducts(this TextProduct product, bool includeHeader = false)
-        {
-            var headerMatch = HeaderRegex.Match(product.Content);
-            if (!headerMatch.Success) yield break;
-
-            var header = headerMatch.Groups["header"].Value;
-            var matches = BulletinRegex.Matches(product.Content);
-            var seq = 1;
-            foreach (var bulletin in matches.Cast<Match>().Select(match => match.Groups["bulletin"].Value))
-            {
-                var newFilename = string.Concat(
-                    Path.GetFileNameWithoutExtension(product.Filename), 
-                    '-', seq.ToString("00"),
-                    Path.GetExtension(product.Filename));
-
-                yield return BulletinProduct.Create(
-                    newFilename, 
-                    product.TimeStamp, 
-                    includeHeader ? string.Concat(header, bulletin) : bulletin, 
-                    product.ReceivedAt,
-                    product.Header,
-                    seq++, 
-                    product.Source);
-            }
-        }
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString() => $"{ProductCategory}{LocationIdentifier}";
 
         #endregion Public Methods
-
     }
 }
