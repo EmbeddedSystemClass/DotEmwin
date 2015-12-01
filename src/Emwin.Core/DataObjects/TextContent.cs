@@ -24,13 +24,14 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Emwin.Core.DataObjects
 {
     public class TextContent
     {
+
         #region Private Fields
 
         /// <summary>
@@ -63,12 +64,12 @@ namespace Emwin.Core.DataObjects
             if (match.Success)
             {
                 Header = match.Value;
-                Body = content.Substring(match.Length + 2); // Skip CR-LF
+                RawBody = content.Substring(match.Length + 2); // Skip CR-LF
             }
             else
             {
                 Header = string.Empty;
-                Body = content;
+                RawBody = content;
             }
         }
 
@@ -80,7 +81,7 @@ namespace Emwin.Core.DataObjects
         /// Gets or sets the body.
         /// </summary>
         /// <value>The body.</value>
-        public string Body { get; set; }
+        public string RawBody { get; set; }
 
         /// <summary>
         /// Gets or sets the header.
@@ -93,12 +94,18 @@ namespace Emwin.Core.DataObjects
         #region Public Methods
 
         /// <summary>
+        /// Gets the body without control characters.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        public string GetText() => new string(RawBody.Where(c => !char.IsControl(c)).ToArray());
+
+        /// <summary>
         /// Returns a string that represents the current object.
         /// </summary>
         /// <returns>
         /// A string that represents the current object.
         /// </returns>
-        public override string ToString() => string.Concat(Header, Environment.NewLine, "Body");
+        public override string ToString() => string.Concat(Header, "\r\n", RawBody);
 
         #endregion Public Methods
     }

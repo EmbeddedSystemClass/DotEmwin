@@ -65,7 +65,7 @@ namespace Emwin.ByteBlaster
             _channelBootstrap = ByteBlasterChannelFactory.CreateBootstrap()
                 .Handler(new ByteBlasterChannelInitializer(email,
                     new ChannelEventHandler<QuickBlockTransferSegment>((ctx, segment) => NotifySubscribers(segment)),
-                    new ChannelEventHandler<ByteBlasterServerList>((ctx, serverList) => ServerList = serverList)
+                    new ChannelEventHandler<ByteBlasterServerList>((ctx, serverList) => UpdateServerList(serverList))
                 ));
 
             if (observer != null)
@@ -75,6 +75,12 @@ namespace Emwin.ByteBlaster
         #endregion Public Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the enable server list updates option.
+        /// </summary>
+        /// <value>The enable server list updates option.</value>
+        public bool EnableServerListUpdates { get; set; } = true;
 
         /// <summary>
         /// Gets if the channel is open and active.
@@ -181,7 +187,16 @@ namespace Emwin.ByteBlaster
             NotifyCompleted();
         }
 
-        #endregion Private Methods
+        /// <summary>
+        /// Updates the server list.
+        /// </summary>
+        /// <param name="serverList">The server list.</param>
+        private void UpdateServerList(ByteBlasterServerList serverList)
+        {
+            if (EnableServerListUpdates)
+                ServerList = serverList;
+        }
 
+        #endregion Private Methods
     }
 }

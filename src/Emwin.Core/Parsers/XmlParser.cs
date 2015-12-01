@@ -47,7 +47,7 @@ namespace Emwin.Core.Parsers
         {
             var startAt = 0;
             var seq = 1;
-            var body = product.Content.Body;
+            var body = product.Content.RawBody;
 
             do
             {
@@ -67,7 +67,7 @@ namespace Emwin.Core.Parsers
                 yield return XmlProduct.Create(
                     newFilename,
                     product.TimeStamp,
-                    new TextContent { Header = product.Content.Header, Body = xml },
+                    new TextContent { Header = product.Content.Header, RawBody = xml },
                     product.ReceivedAt,
                     seq++, 
                     product.Source);

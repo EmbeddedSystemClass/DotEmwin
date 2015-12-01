@@ -118,7 +118,7 @@ namespace Emwin.Core.Products
         /// Gets the body string reader.
         /// </summary>
         /// <returns>System.IO.StringReader.</returns>
-        public StringReader GetBodyReader() => new StringReader(Content.Body);
+        public StringReader GetBodyReader(bool raw = false) => new StringReader(raw ? Content.RawBody : Content.GetText());
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -128,5 +128,6 @@ namespace Emwin.Core.Products
             $"[{nameof(TextProduct)}] Filename={Filename} Date={TimeStamp:g} Header={Content.Header.Replace("\r\n", " ")}";
 
         #endregion Public Methods
+
     }
 }

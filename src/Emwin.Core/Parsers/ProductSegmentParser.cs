@@ -51,7 +51,7 @@ namespace Emwin.Core.Parsers
         /// <returns>IEnumerable&lt;TextProduct&gt;.</returns>
         public static IEnumerable<TextProductSegment> GetSegments(this TextProduct product)
         {
-            var matches = SegmentRegex.Matches(product.Content.Body);
+            var matches = SegmentRegex.Matches(product.Content.RawBody);
             var seq = 1;
             foreach (var segment in matches.Cast<Match>().Select(match => match.Groups["segment"].Value))
             {
@@ -63,7 +63,7 @@ namespace Emwin.Core.Parsers
                 yield return TextProductSegment.Create(
                     newFilename, 
                     product.TimeStamp,
-                    new TextContent { Header = product.Content.Header, Body = segment },
+                    new TextContent { Header = product.Content.Header, RawBody = segment },
                     product.ReceivedAt,
                     seq++, 
                     product.Source);

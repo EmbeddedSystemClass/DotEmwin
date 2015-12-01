@@ -50,7 +50,7 @@ namespace Emwin.Core.Parsers
         /// <returns>IEnumerable&lt;Location[]&gt;.</returns>
         public static IEnumerable<GeoPoint[]> GetPolygons(this TextProduct product)
         {
-            var polygonMatches = PolygonRegex.Matches(product.Content.Body);
+            var polygonMatches = PolygonRegex.Matches(product.Content.RawBody);
 
             foreach (var match in polygonMatches.Cast<Match>().Select(x => x.Groups["points"].Captures.Cast<Capture>()))
             {

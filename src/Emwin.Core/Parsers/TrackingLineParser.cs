@@ -50,7 +50,7 @@ namespace Emwin.Core.Parsers
         /// <returns>IEnumerable&lt;TrackingLine&gt;.</returns>
         public static IEnumerable<TrackingLine> GetTrackingLines(this TextProduct product)
         {
-            var matches = TimeMotLocRegex.Matches(product.Content.Body);
+            var matches = TimeMotLocRegex.Matches(product.Content.RawBody);
 
             return matches.Cast<Match>().Select(match => new TrackingLine
             {

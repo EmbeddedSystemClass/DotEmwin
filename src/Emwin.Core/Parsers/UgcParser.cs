@@ -50,7 +50,7 @@ namespace Emwin.Core.Parsers
 
         #region Public Methods
 
-        public static IDictionary<string, UniversalGeoCode> GetGeoCodes(this TextProduct product) => UgcRegex.Matches(product.Content.Body)
+        public static IDictionary<string, UniversalGeoCode> GetGeoCodes(this TextProduct product) => UgcRegex.Matches(product.Content.RawBody)
             .Cast<Match>()
             .SelectMany(ugcMatch => ParseUgcGroups(ugcMatch.Value, product.TimeStamp))
             .GroupBy(x => x.State)

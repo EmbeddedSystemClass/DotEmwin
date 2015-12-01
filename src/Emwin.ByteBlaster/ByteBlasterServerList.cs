@@ -84,9 +84,18 @@ namespace Emwin.ByteBlaster
         /// Initializes a new instance of the <see cref="ByteBlasterServerList" /> class.
         /// </summary>
         /// <param name="servers">The servers.</param>
+        public ByteBlasterServerList(IEnumerable<string> servers) : this(servers, DefaultSatServers) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ByteBlasterServerList" /> class.
+        /// </summary>
+        /// <param name="servers">The servers.</param>
         /// <param name="satServers">The satServers.</param>
         public ByteBlasterServerList(IEnumerable<string> servers, IEnumerable<string> satServers)
         {
+            if (servers == null) throw new ArgumentNullException(nameof(servers));
+            if (satServers == null) throw new ArgumentNullException(nameof(satServers));
+
             _servers = servers.Select(ToEndPoint).ToList();
             _satServers = satServers.Select(ToEndPoint).ToList();
 
