@@ -97,7 +97,7 @@ namespace Emwin.Core.DataObjects
         /// Gets the body without control characters.
         /// </summary>
         /// <returns>System.String.</returns>
-        public string GetText() => new string(RawBody.Where(c => !char.IsControl(c)).ToArray());
+        public string GetBodyText() => new string(RawBody.Where(c => char.IsWhiteSpace(c) || !char.IsControl(c)).ToArray());
 
         /// <summary>
         /// Returns a string that represents the current object.

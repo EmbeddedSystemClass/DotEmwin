@@ -118,7 +118,7 @@ namespace Emwin.Core.Products
         /// Gets the body string reader.
         /// </summary>
         /// <returns>System.IO.StringReader.</returns>
-        public StringReader GetBodyReader(bool raw = false) => new StringReader(raw ? Content.RawBody : Content.GetText());
+        public StringReader GetBodyReader(bool raw = false) => new StringReader(raw ? Content.RawBody : Content.GetBodyText());
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
