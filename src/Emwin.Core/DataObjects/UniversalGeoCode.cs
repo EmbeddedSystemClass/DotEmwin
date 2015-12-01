@@ -55,7 +55,7 @@ namespace Emwin.Core.DataObjects
         /// </summary>
         /// <value>The zones.</value>
         [DataMember]
-        public HashSet<string> Zones { get; set; }
+        public HashSet<int> Zones { get; set; }
 
         /// <summary>
         /// Gets or sets the counties.

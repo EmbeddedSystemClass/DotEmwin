@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -25,68 +25,93 @@
  */
 
 using System;
-using System.Linq;
-using System.Runtime.Caching;
-using Emwin.Core.DataObjects;
+using System.IO;
+using System.IO.Compression;
+using Emwin.Core.Parsers;
+using Emwin.Core.Products;
 using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
 
-namespace Emwin.Processor.Processor
+namespace Emwin.Processor.CoreHandlers
 {
-    /// <summary>
-    /// Class SegmentBundler. Uses a Memory Cache to bundle the segments of a file together.
-    /// </summary>
-    internal sealed class BlockSegmentBundler : IHandle<QuickBlockTransferSegment>
+    internal sealed class ZipExtractor : IHandle<CompressedProduct>
     {
-        #region Private Fields
-
-        private static readonly CacheItemPolicy CacheItemPolicy = new CacheItemPolicy { SlidingExpiration = TimeSpan.FromMinutes(1) };
-        private static readonly ObjectCache BlockCache = new MemoryCache("BlockCache");
-
-        #endregion Private Fields
-
         #region Public Methods
 
         /// <summary>
-        /// This will be called every time a QuickBlockTransferSegment is published through the event aggregator
+        /// This will be called every time a CompressedProduct is published through the event aggregator
+        /// Unzips the product and publishes each product contained in the zip.
         /// </summary>
-        /// <param name="blockSegment">The segment.</param>
+        /// <param name="product">The compressed product.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(QuickBlockTransferSegment blockSegment, IEventAggregator ctx)
+        public void Handle(CompressedProduct product, IEventAggregator ctx)
         {
-            var key = blockSegment.GetKey();
-            QuickBlockTransferSegment[] bundle;
-
-            // If there is already a bundle in the cache, put the segment into it. 
-            if (BlockCache.Contains(key))
+            try
             {
-                bundle = (QuickBlockTransferSegment[])BlockCache.Get(key);
-                if (blockSegment.BlockNumber > 0 && blockSegment.BlockNumber <= bundle.Length)
-                    bundle[blockSegment.BlockNumber - 1] = blockSegment;
-                ProcessorEventSource.Log.Verbose(nameof(BlockSegmentBundler),
-                    $"Added segment {blockSegment.BlockNumber} of {blockSegment.TotalBlocks} to existing bundle {blockSegment.Filename}");
+                UnZip(product, ctx);
             }
-            else
+            catch (Exception ex)
             {
-                // Create a new bundle array with the initial segment and add to cache.
-                bundle = new QuickBlockTransferSegment[blockSegment.TotalBlocks];
-                bundle[blockSegment.BlockNumber - 1] = blockSegment;
-                BlockCache.Set(key, bundle, CacheItemPolicy);
-                ProcessorEventSource.Log.Verbose(nameof(BlockSegmentBundler),
-                    $"Added segment {blockSegment.BlockNumber} of {blockSegment.TotalBlocks} to new bundle {blockSegment.Filename}");
+                ProcessorEventSource.Log.Error(nameof(ZipExtractor), ex.ToString());
             }
+        }
 
-            // If all segments are complete, publish the bundle
-            if (bundle != null && bundle.All(s => s != null))
+        private static void UnZip(CompressedProduct product, IEventPublisher ctx)
+        {
+            using (var zip = new ZipArchive(product.GetStream(), ZipArchiveMode.Read))
             {
-                ProcessorEventSource.Log.Info(nameof(BlockSegmentBundler), 
-                    $"Completed assembling {blockSegment.TotalBlocks} blocks for bundle {blockSegment.Filename}");
-                BlockCache.Remove(key);
-                ctx.SendMessage(bundle);
+                foreach (var file in zip.Entries)
+                {
+                    using (var fileStream = file.Open())
+                    {
+                        var content = ReadAllBytes(fileStream);
+                        var fileName = file.Name.ToUpperInvariant();
+                        var contentType = ContentTypeParser.GetFileContentType(fileName);
+                        switch (contentType)
+                        {
+                            case ContentFileType.Text:
+                                var textProduct = TextProduct.Create(
+                                    fileName, file.LastWriteTime, content, product.ReceivedAt, product.Source);
+                                ctx.SendMessage(textProduct);
+                                ProcessorEventSource.Log.Info(nameof(ZipExtractor), textProduct.ToString());
+                                break;
+
+                            case ContentFileType.Image:
+                                var imageProduct = ImageProduct.Create(
+                                    fileName, file.LastWriteTime, content, product.ReceivedAt, product.Source);
+                                ctx.SendMessage(imageProduct);
+                                ProcessorEventSource.Log.Info(nameof(ZipExtractor), imageProduct.ToString());
+                                break;
+                            
+                            // There are no zips within zips :-)
+
+                            default:
+                                ProcessorEventSource.Log.Warning(nameof(ZipExtractor), "Unknown content file type: " + file.Name);
+                                return;
+                        }
+                    }
+                }
             }
         }
 
         #endregion Public Methods
 
+        #region Private Methods
+
+        /// <summary>
+        /// Reads all bytes.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <returns>System.Byte[].</returns>
+        private static byte[] ReadAllBytes(Stream stream)
+        {
+            using (var ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
+        #endregion Private Methods
     }
 }

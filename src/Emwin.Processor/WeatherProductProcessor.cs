@@ -28,9 +28,9 @@ using System;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
 using Emwin.Core.Products;
+using Emwin.Processor.CoreHandlers;
 using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
-using Emwin.Processor.Processor;
 
 namespace Emwin.Processor
 {
@@ -38,7 +38,7 @@ namespace Emwin.Processor
     {
         #region Private Fields
 
-        private readonly ObservableListener<ProductSegment> _segmentObservable = new ObservableListener<ProductSegment>();
+        private readonly ObservableListener<TextProductSegment> _segmentObservable = new ObservableListener<TextProductSegment>();
         private readonly ObservableListener<ImageProduct> _imageObservable = new ObservableListener<ImageProduct>();
         private readonly ObservableListener<TextProduct> _textObservable = new ObservableListener<TextProduct>();
         private readonly ObservableListener<XmlProduct> _xmlObservable = new ObservableListener<XmlProduct>();
@@ -65,7 +65,7 @@ namespace Emwin.Processor
         /// Gets the product segment observable.
         /// </summary>
         /// <returns>System.IObservable&lt;Emwin.Core.Interfaces.BulletinProduct&gt;.</returns>
-        public IObservable<ProductSegment> GetSegmentObservable() => _segmentObservable;
+        public IObservable<TextProductSegment> GetSegmentObservable() => _segmentObservable;
 
         /// <summary>
         /// Gets the image observable.
@@ -123,22 +123,30 @@ namespace Emwin.Processor
 
         #region Protected Methods
 
+        /// <summary>
+        /// Gets and wires up the event aggregator.
+        /// </summary>
+        /// <returns>Emwin.Processor.EventAggregator.IEventAggregator.</returns>
         protected override IEventAggregator GetAggregator()
         {
             var aggregator = new EventAggregator.EventAggregator();
 
             aggregator
-                .AddListener<BlockSegmentBundler>()
-                .AddListener<ProductAssembler>()
-                .AddListener<ZipExtractor>()
-                .AddListener<TextProductSplitter>()
-                .AddListener<XmlProductSplitter>()
-                .AddListener<AlertGenerator>()
+                // Observable Listeners
                 .AddListener(_xmlObservable)
                 .AddListener(_textObservable)
                 .AddListener(_imageObservable)
                 .AddListener(_segmentObservable)
-                .AddListener(_capObservable);
+                //.AddListener(_capObservable)
+
+                // Core Listener Handlers
+                .AddListener<BlockSegmentBundler>()
+                .AddListener<ProductAssembler>()
+                .AddListener<ZipExtractor>()
+                .AddListener<TextProductSplitter>()
+                .AddListener<XmlProductSplitter>();
+
+            // Product Based Handlers
 
             return aggregator;
         }

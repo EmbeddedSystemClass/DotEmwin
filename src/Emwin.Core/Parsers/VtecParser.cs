@@ -43,6 +43,9 @@ namespace Emwin.Core.Parsers
 
         #region Private Fields
 
+        /// <summary>
+        /// The Hydrologic VTEC Pattern
+        /// </summary>
         private static readonly Regex HvtecRegex = new Regex(@"^/(?<nwsli>[0-9A-Z]{5})\.(?<severity>[N0123U])\.(?<cause>[A-Z]{2})\.(?<begin>[0-9]{6}T[0-9]{4}Z)\.(?<crest>[0-9]{6}T[0-9]{4}Z)\.(?<end>[0-9]{6}T[0-9]{4}Z)\.(?<floodrecord>[A-Z]{2})/\r",
                     RegexOptions.Multiline | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 

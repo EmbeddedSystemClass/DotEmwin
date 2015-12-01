@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -25,62 +25,41 @@
  */
 
 using System;
-using Emwin.Core.DataObjects;
-using Emwin.Core.Extensions;
+using System.Linq;
+using System.Threading.Tasks;
 using Emwin.Core.Parsers;
-using Emwin.Processor.Instrumentation;
 using Emwin.Core.Products;
 using Emwin.Processor.EventAggregator;
+using Emwin.Processor.Instrumentation;
 
-namespace Emwin.Processor.Processor
+namespace Emwin.Processor.CoreHandlers
 {
-    /// <summary>
-    /// Class ProductAssembler. Assembles bundles of segments into a product by combining all the bytes from each segment.
-    /// </summary>
-    internal sealed class ProductAssembler : IHandle<QuickBlockTransferSegment[]>
+    internal sealed class TextProductSplitter : IHandle<TextProduct>
     {
+        #region Public Methods
+
         /// <summary>
-        /// This will be called every time a QuickBlockTransferSegment[] bundle is published through the event aggregator
+        /// This will be called every time a text product is published through the event aggregator.
+        /// Checks for any bulletins within the text product and publishes them out in parallel.
         /// </summary>
-        /// <param name="bundle">The bundle.</param>
+        /// <param name="product">The product.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(QuickBlockTransferSegment[] bundle, IEventAggregator ctx)
+        public void Handle(TextProduct product, IEventAggregator ctx)
         {
             try
             {
-                var contentType = ContentTypeParser.GetFileContentType(bundle[0].Filename);
-                switch (contentType)
-                {
-                    case ContentFileType.Text:
-                        var textProduct = bundle.AsTextProduct();
-                        ProcessorEventSource.Log.Verbose(nameof(ProductAssembler), textProduct.ToString());
-                        ctx.SendMessage(textProduct);
-                        break;
+                var segments = product.GetSegments().ToList();
+                if (segments.Count == 0) return;
 
-                    case ContentFileType.Image:
-                        var imageProduct = bundle.AsImageProduct();
-                        ProcessorEventSource.Log.Verbose(nameof(ProductAssembler), imageProduct.ToString());
-                        ctx.SendMessage(imageProduct);
-                        break;
-
-                    case ContentFileType.Compressed:
-                        var compressedProduct = bundle.AsCompressedProduct();
-                        ProcessorEventSource.Log.Verbose(nameof(ProductAssembler), compressedProduct.ToString());
-                        ctx.SendMessage(compressedProduct);
-                        break;
-
-                    default:
-                        ProcessorEventSource.Log.Warning(nameof(ProductAssembler),
-                            "Unknown content file type: " + contentType);
-                        return;
-                }
-
-                PerformanceCounters.ProductsCreatedTotal.Increment();
+                ProcessorEventSource.Log.Info(nameof(TextProductSplitter), "Splitting product into " + segments.Count + " segments");
+                Parallel.ForEach(segments, segment => ctx.SendMessage(segment));
             }
             catch (Exception ex)
             {
-                ProcessorEventSource.Log.Error(nameof(ProductAssembler), ex.ToString());
+                ProcessorEventSource.Log.Error(nameof(TextProductSplitter), ex.ToString());
             }
         }
+
+        #endregion Public Methods
     }
 }

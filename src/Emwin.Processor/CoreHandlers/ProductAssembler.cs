@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Microsoft Public License (MS-PL)
  * Copyright (c) 2015 Jonathan Bradshaw <jonathan@nrgup.net>
  *     
@@ -25,38 +25,61 @@
  */
 
 using System;
+using Emwin.Core.DataObjects;
 using Emwin.Core.Extensions;
-using Emwin.Core.Products;
+using Emwin.Core.Parsers;
 using Emwin.Processor.EventAggregator;
 using Emwin.Processor.Instrumentation;
 
-namespace Emwin.Processor.Processor
+namespace Emwin.Processor.CoreHandlers
 {
-    internal sealed class AlertGenerator : IHandle<ProductSegment>
+    /// <summary>
+    /// Class ProductAssembler. Assembles bundles of segments into a product by combining all the bytes from each segment.
+    /// </summary>
+    internal sealed class ProductAssembler : IHandle<QuickBlockTransferSegment[]>
     {
-
-        #region Public Methods
-
         /// <summary>
-        /// This will be called every time a text product is published through the event aggregator.
+        /// This will be called every time a QuickBlockTransferSegment[] bundle is published through the event aggregator
         /// </summary>
-        /// <param name="bulletin">The bulletin.</param>
+        /// <param name="bundle">The bundle.</param>
         /// <param name="ctx">The CTX.</param>
-        public void Handle(ProductSegment bulletin, IEventAggregator ctx)
+        public void Handle(QuickBlockTransferSegment[] bundle, IEventAggregator ctx)
         {
             try
             {
-                if (bulletin.PrimaryVtec == null) return;
+                var contentType = ContentTypeParser.GetFileContentType(bundle[0].Filename);
+                switch (contentType)
+                {
+                    case ContentFileType.Text:
+                        var textProduct = bundle.AsTextProduct();
+                        ProcessorEventSource.Log.Verbose(nameof(ProductAssembler), textProduct.ToString());
+                        ctx.SendMessage(textProduct);
+                        break;
 
-                ctx.SendMessage(bulletin.CreateAlert());
+                    case ContentFileType.Image:
+                        var imageProduct = bundle.AsImageProduct();
+                        ProcessorEventSource.Log.Verbose(nameof(ProductAssembler), imageProduct.ToString());
+                        ctx.SendMessage(imageProduct);
+                        break;
+
+                    case ContentFileType.Compressed:
+                        var compressedProduct = bundle.AsCompressedProduct();
+                        ProcessorEventSource.Log.Verbose(nameof(ProductAssembler), compressedProduct.ToString());
+                        ctx.SendMessage(compressedProduct);
+                        break;
+
+                    default:
+                        ProcessorEventSource.Log.Warning(nameof(ProductAssembler),
+                            "Unknown content file type: " + contentType);
+                        return;
+                }
+
+                PerformanceCounters.ProductsCreatedTotal.Increment();
             }
             catch (Exception ex)
             {
-                ProcessorEventSource.Log.Error(nameof(AlertGenerator), ex.ToString());
+                ProcessorEventSource.Log.Error(nameof(ProductAssembler), ex.ToString());
             }
         }
-
-        #endregion Public Methods
-
     }
 }

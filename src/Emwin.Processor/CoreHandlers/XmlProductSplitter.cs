@@ -24,66 +24,42 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System.Text.RegularExpressions;
-using Emwin.Core.DataObjects;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Emwin.Core.Parsers;
 using Emwin.Core.Products;
+using Emwin.Processor.EventAggregator;
+using Emwin.Processor.Instrumentation;
 
-namespace Emwin.Core.Parsers
+namespace Emwin.Processor.CoreHandlers
 {
-    /// <summary>
-    /// The header information on the first lines of the product.
-    /// </summary>
-    public static class HeaderBlockParser
+    internal sealed class XmlProductSplitter : IHandle<TextProduct>
     {
-
-        #region Private Fields
-
-        /// <summary>
-        /// The Header Block
-        /// </summary>
-        private static readonly Regex HeaderBlockRegex = new Regex(
-            @"^(?<dtl>[A-Z]{4}[0-9]{2})\s(?<station>[A-Z]{4})\s(?<time>[0-9]{6})(\s(?<indicator>[A-Z]{3}))?(\r\n(?<ai>[0-9A-Z ]{5,6}))?", 
-            RegexOptions.ExplicitCapture | RegexOptions.Singleline | RegexOptions.Compiled);
-
-        #endregion Private Fields
-
         #region Public Methods
 
         /// <summary>
-        /// Gets the awips identifier.
+        /// This will be called every time a TextProduct is published through the event aggregator.
+        /// If it contains XML products it will be split up into XmlProducts.
         /// </summary>
-        /// <param name="textProduct">The text product.</param>
-        /// <returns>AwipsIdentifier.</returns>
-        public static AwipsIdentifier GetAwipsIdentifier(this TextProduct textProduct)
+        /// <param name="product">The text product.</param>
+        /// <param name="ctx">The CTX.</param>
+        public void Handle(TextProduct product, IEventAggregator ctx)
         {
-            var match = HeaderBlockRegex.Match(textProduct.Content.Header);
-
-            return match.Groups["ai"].Success
-                ? new AwipsIdentifier(match.Groups["ai"].Value)
-                : new AwipsIdentifier();
-        }
-
-        /// <summary>
-        /// Gets the wmo header.
-        /// </summary>
-        /// <param name="textProduct">The text product.</param>
-        /// <returns>WmoHeader.</returns>
-        public static WmoHeader GetWmoHeader(this TextProduct textProduct)
-        {
-            var match = HeaderBlockRegex.Match(textProduct.Content.Header);
-            if (!match.Success) return new WmoHeader();
-
-            return new WmoHeader
+            try
             {
-                DataType = match.Groups["dtl"].Value.Substring(0, 2),
-                Distribution = match.Groups["dtl"].Value.Substring(2),
-                WmoId = match.Groups["station"].Value,
-                IssuedAt = TimeParser.ParseDayHourMinute(textProduct.TimeStamp, match.Groups["time"].Value),
-                Designator = match.Groups["indicator"].Success ? match.Groups["indicator"].Value : string.Empty
-            };
+                var xmlFiles = product.GetXmlProducts().ToList();
+                if (xmlFiles.Count == 0) return;
+
+                ProcessorEventSource.Log.Info(nameof(XmlProductSplitter), "Splitting product into " + xmlFiles.Count + " xml files");
+                Parallel.ForEach(xmlFiles, xml => ctx.SendMessage(xml));
+            }
+            catch (Exception ex)
+            {
+                ProcessorEventSource.Log.Error(nameof(XmlProductSplitter), ex.ToString());
+            }
         }
 
         #endregion Public Methods
-
     }
 }

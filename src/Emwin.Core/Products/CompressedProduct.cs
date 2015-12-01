@@ -25,43 +25,95 @@
  */
 
 using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Emwin.Core.Parsers;
-using Emwin.Core.Products;
-using Emwin.Processor.EventAggregator;
-using Emwin.Processor.Instrumentation;
+using System.IO;
+using Emwin.Core.Contracts;
 
-namespace Emwin.Processor.Processor
+namespace Emwin.Core.Products
 {
-    internal sealed class TextProductSplitter : IHandle<TextProduct>
+    /// <summary>
+    /// Class CompressedProduct. Represents a received compressed (ZIP) file.
+    /// </summary>
+    public class CompressedProduct : IEmwinContent<byte[]>
     {
-        private const bool IncludeHeaderInBulletin = false;
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the content.
+        /// </summary>
+        /// <value>The content.</value>
+        public byte[] Content { get; set; }
+
+        /// <summary>
+        /// Gets the filename.
+        /// </summary>
+        /// <value>The filename.</value>
+        public string Filename { get; set; }
+
+        /// <summary>
+        /// Gets the content.
+        /// </summary>
+        /// <value>The content.</value>
+        object IEmwinContent.Content => Content;
+
+        /// <summary>
+        /// Gets the received at time.
+        /// </summary>
+        /// <value>The received at.</value>
+        public DateTimeOffset ReceivedAt { get; set; }
+
+        /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>The source.</value>
+        public string Source { get; set; }
+
+        /// <summary>
+        /// Gets the content time stamp.
+        /// </summary>
+        /// <value>The time stamp.</value>
+        public DateTimeOffset TimeStamp { get; set; }
+
+        #endregion Public Properties
 
         #region Public Methods
 
         /// <summary>
-        /// This will be called every time a text product is published through the event aggregator.
-        /// Checks for any bulletins within the text product and publishes them out in parallel.
+        /// Creates the compressed.
         /// </summary>
-        /// <param name="product">The product.</param>
-        /// <param name="ctx">The CTX.</param>
-        public void Handle(TextProduct product, IEventAggregator ctx)
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <param name="source">The source.</param>
+        /// <returns>CompressedContent.</returns>
+        public static CompressedProduct Create(string filename, DateTimeOffset timeStamp, byte[] content,
+            DateTimeOffset receivedAt, string source)
         {
-            try
+            return new CompressedProduct
             {
-                var segments = product.ParseSegments(IncludeHeaderInBulletin).ToList();
-                if (segments.Count == 0) return;
-
-                ProcessorEventSource.Log.Info(nameof(TextProductSplitter), "Splitting product into " + segments.Count + " segments");
-                Parallel.ForEach(segments, segment => ctx.SendMessage(segment));
-            }
-            catch (Exception ex)
-            {
-                ProcessorEventSource.Log.Error(nameof(TextProductSplitter), ex.ToString());
-            }
+                Filename = filename,
+                TimeStamp = timeStamp,
+                Content = content,
+                ReceivedAt = receivedAt,
+                Source = source
+            };
         }
 
+        /// <summary>
+        /// Gets the stream.
+        /// </summary>
+        /// <returns>System.IO.Stream.</returns>
+        public Stream GetStream() => new MemoryStream(Content, false);
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString() =>
+            $"[{nameof(CompressedProduct)}] Filename={Filename} Date={TimeStamp:g}";
+
         #endregion Public Methods
+
     }
 }

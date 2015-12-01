@@ -23,7 +23,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseSegments().FirstOrDefault();
+            var bulletin = product.GetSegments().FirstOrDefault();
             var cap = bulletin.CreateAlert();
             var json = JsonConvert.SerializeObject(cap, new JsonSerializerSettings
             {
@@ -81,10 +81,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseSegments().FirstOrDefault();
-            Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
-
-            var polygon = bulletin.Polygon;
+            var polygon = product.GetPolygons().FirstOrDefault();
             Assert.IsNotNull(polygon, "Unable to parse polygon");
             Assert.AreEqual(5, polygon.Length, "Count");
             Assert.AreEqual(38.7, polygon[0].Latitude, "Latitude");
@@ -99,10 +96,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseSegments().FirstOrDefault();
-            Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
-
-            var trackingLine = bulletin.TrackingLine;
+            var trackingLine = product.GetTrackingLines().FirstOrDefault();
             Assert.IsNotNull(trackingLine, "Unable to parse tracking line");
             Assert.AreEqual(new TimeSpan(0, 55, 0), trackingLine.TimeStamp.TimeOfDay, "Time");
             Assert.AreEqual(227, trackingLine.DirectionDeg);
@@ -121,16 +115,14 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseSegments().FirstOrDefault();
-            Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
+            var geoCodes = product.GetGeoCodes();
 
-            var geoCodes = bulletin.GeoCodes.ToList();
             Assert.AreEqual(1, geoCodes.Count, "Count");
-            Assert.IsTrue(geoCodes[0].Counties.Contains(101), "County 101");
-            Assert.IsTrue(geoCodes[0].Counties.Contains(135), "County 135");
-            Assert.IsFalse(geoCodes[0].Zones.Any(), "Zones");
-            Assert.AreEqual("KS", geoCodes[0].State, "State");
-            Assert.AreEqual(new DateTimeOffset(2015, 6, 5, 1, 30, 00, TimeSpan.Zero), geoCodes[0].PurgeTime, "PurgeTime");
+            Assert.AreEqual("KS", geoCodes["KS"].State, "State");
+            Assert.IsFalse(geoCodes["KS"].Zones.Any(), "Zones");
+            Assert.IsTrue(geoCodes["KS"].Counties.Contains(101), "County 101");
+            Assert.IsTrue(geoCodes["KS"].Counties.Contains(135), "County 135");
+            Assert.AreEqual(new DateTimeOffset(2015, 6, 5, 1, 30, 00, TimeSpan.Zero), geoCodes["KS"].PurgeTime, "PurgeTime");
         }
 
         [TestMethod]
@@ -139,10 +131,7 @@ namespace Emwin.Tests
             var product = GetTornadoWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseSegments().FirstOrDefault();
-            Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
-
-            var vtec = bulletin.PrimaryVtec;
+            var vtec = product.GetPrimaryVtec().FirstOrDefault();
             Assert.IsNotNull(vtec, "Unable to parse primary VTEC");
             Assert.AreEqual(45, vtec.EventNumber, "VTEC EventNumber");
             Assert.AreEqual(new DateTimeOffset(2015, 6, 5, 00, 56, 00, TimeSpan.Zero), vtec.Begin, "VTEC Begin");
@@ -159,10 +148,7 @@ namespace Emwin.Tests
             var product = GetFloodWarning();
             Assert.IsNotNull(product, "Unable to create text product");
 
-            var bulletin = product.ParseSegments().FirstOrDefault();
-            Assert.IsNotNull(bulletin, "Unable to parse text product into bulletin");
-
-            var vtec = bulletin.HydrologicVtec;
+            var vtec = product.GetHydrologicVtec().FirstOrDefault();
             Assert.IsNotNull(vtec, "Unable to parse hydrologic VTEC");
             Assert.AreEqual("00000", vtec.LocationIdentifier, "Location");
             Assert.AreEqual('0', vtec.SeverityCode, "Severity");

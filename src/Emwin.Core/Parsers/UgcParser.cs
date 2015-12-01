@@ -38,32 +38,29 @@ namespace Emwin.Core.Parsers
     /// </summary>
     public static class UgcParser
     {
+
         #region Private Fields
 
         /// <summary>
         /// The Universal Geographic Code Pattern
         /// </summary>
-        private static readonly Regex UgcRegex = new Regex(@"[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+", RegexOptions.Compiled);
+        private static readonly Regex UgcRegex = new Regex(@"[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-\r\n", RegexOptions.Compiled);
 
         #endregion Private Fields
 
         #region Public Methods
 
-        public static IEnumerable<UniversalGeoCode> GetGeoCodes(this TextProduct product) => UgcRegex.Matches(product.Content.Body)
+        public static IDictionary<string, UniversalGeoCode> GetGeoCodes(this TextProduct product) => UgcRegex.Matches(product.Content.Body)
             .Cast<Match>()
             .SelectMany(ugcMatch => ParseUgcGroups(ugcMatch.Value, product.TimeStamp))
             .GroupBy(x => x.State)
-            .Select(st => new UniversalGeoCode
+            .ToDictionary(k => k.Key, st => new UniversalGeoCode
             {
                 State = st.Key,
                 PurgeTime = st.First().PurgeTime,
-                Zones = new HashSet<string>(st.Where(x => x.Type == 'Z').Select(z => z.Value)),
-                Counties = new HashSet<int>(st.Where(x => x.Type == 'C').Select(z => int.Parse(z.Value)))
+                Zones = new HashSet<int>(st.Where(x => x.Type == 'Z').Select(z => z.Value)),
+                Counties = new HashSet<int>(st.Where(x => x.Type == 'C').Select(z => z.Value))
             });
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         /// <summary>
         /// Parses the Universal Geographic Code string into groups.
@@ -71,7 +68,7 @@ namespace Emwin.Core.Parsers
         /// <param name="ugc">The Universal Geographic Code string.</param>
         /// <param name="referenceTime">The reference time used for dates.</param>
         /// <returns>IEnumerable&lt;UniversalGeographicCode&gt;.</returns>
-        private static IEnumerable<UgcGroup> ParseUgcGroups(string ugc, DateTimeOffset referenceTime)
+        public static IEnumerable<UgcGroup> ParseUgcGroups(string ugc, DateTimeOffset referenceTime)
         {
             // WIZ001-002-006>008-014>016-023>028-212300-
             string state = null;
@@ -93,7 +90,7 @@ namespace Emwin.Core.Parsers
                         State = state,
                         Type = type,
                         PurgeTime = purgeTime,
-                        Value = segment.PadLeft(3, '0')
+                        Value = segment == "ALL" ? 0 : int.Parse(segment)
                     };
                     continue;
                 }
@@ -108,7 +105,7 @@ namespace Emwin.Core.Parsers
                         State = state,
                         Type = type,
                         PurgeTime = purgeTime,
-                        Value = segment.Substring(3).PadLeft(3, '0')
+                        Value = int.Parse(segment.Substring(3))
                     };
                     continue;
                 }
@@ -127,7 +124,7 @@ namespace Emwin.Core.Parsers
                             State = state,
                             Type = type,
                             PurgeTime = purgeTime,
-                            Value = i.ToString("D3")
+                            Value = i
                         };
                     continue;
                 }
@@ -144,7 +141,7 @@ namespace Emwin.Core.Parsers
                             State = state,
                             Type = type,
                             PurgeTime = purgeTime,
-                            Value = i.ToString("D3")
+                            Value = i
                         };
                     continue;
                 }
@@ -152,6 +149,10 @@ namespace Emwin.Core.Parsers
                 throw new InvalidOperationException("Unable to parse segment '" + segment + "' from " + ugc);
             }
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         /// <summary>
         /// Removes the whitespace.
@@ -162,20 +163,23 @@ namespace Emwin.Core.Parsers
 
         #endregion Private Methods
 
-        #region Private Classes
+        #region Public Classes
 
-        private class UgcGroup
+        public class UgcGroup
         {
+
             #region Public Properties
 
             public DateTimeOffset PurgeTime { get; set; }
             public string State { get; set; }
             public char Type { get; set; }
-            public string Value { get; set; }
+            public int Value { get; set; }
 
             #endregion Public Properties
+
         }
 
-        #endregion Private Classes
+        #endregion Public Classes
+
     }
 }

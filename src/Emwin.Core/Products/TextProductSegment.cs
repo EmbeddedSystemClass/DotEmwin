@@ -25,55 +25,22 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Emwin.Core.DataObjects;
-using Emwin.Core.Parsers;
 
 namespace Emwin.Core.Products
 {
     /// <summary>
     /// Class TextProduct. Represents a received text file.
     /// </summary>
-    public class ProductSegment : TextProduct
+    public class TextProductSegment : TextProduct
     {
         #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the geo codes.
-        /// </summary>
-        /// <value>The geo codes.</value>
-        public IEnumerable<UniversalGeoCode> GeoCodes { get; set; }
-
-        /// <summary>
-        /// Gets or sets the polygons.
-        /// </summary>
-        /// <value>The polygons.</value>
-        public GeoPoint[] Polygon { get; set; }
-
-        /// <summary>
-        /// Gets the primary vtec.
-        /// </summary>
-        /// <value>The primary vtec.</value>
-        public PrimaryVtec PrimaryVtec { get; set; }
-
-        /// <summary>
-        /// Gets or sets the hydrologic vtec.
-        /// </summary>
-        /// <value>The hydrologic vtec.</value>
-        public HydrologicVtec HydrologicVtec { get; set; }
 
         /// <summary>
         /// Gets the sequence number with the text product.
         /// </summary>
         /// <value>The sequence number.</value>
         public int SequenceNumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets the tracking line.
-        /// </summary>
-        /// <value>The tracking line.</value>
-        public TrackingLine TrackingLine { get; set; }
 
         #endregion Public Properties
 
@@ -86,13 +53,12 @@ namespace Emwin.Core.Products
         /// <param name="timeStamp">The time stamp.</param>
         /// <param name="content">The content.</param>
         /// <param name="receivedAt">The received at.</param>
-        /// <param name="header">The header.</param>
         /// <param name="seq">The seq.</param>
         /// <param name="source">The source.</param>
         /// <returns>TextProduct.</returns>
-        public static ProductSegment Create(string filename, DateTimeOffset timeStamp, TextContent content, DateTimeOffset receivedAt, int seq, string source)
+        public static TextProductSegment Create(string filename, DateTimeOffset timeStamp, TextContent content, DateTimeOffset receivedAt, int seq, string source)
         {
-            var product = new ProductSegment
+            var product = new TextProductSegment
             {
                 Filename = filename,
                 TimeStamp = timeStamp,
@@ -102,12 +68,6 @@ namespace Emwin.Core.Products
                 Source = source
             };
 
-            product.GeoCodes = product.GetGeoCodes();
-            product.PrimaryVtec = product.GetPrimaryVtec().FirstOrDefault();
-            product.Polygon = product.GetPolygons().FirstOrDefault();
-            product.TrackingLine = product.GetTrackingLines().FirstOrDefault();
-            product.HydrologicVtec = product.GetHydrologicVtec().FirstOrDefault();
-
             return product;
         }
 
@@ -116,7 +76,7 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
-            $"[{nameof(ProductSegment)}] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber} {PrimaryVtec}";
+            $"[{nameof(TextProductSegment)}] Filename={Filename} Date={TimeStamp:g} Sequence={SequenceNumber}";
 
         #endregion Public Methods
 

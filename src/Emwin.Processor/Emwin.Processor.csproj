@@ -48,12 +48,11 @@
     <Compile Include="EventAggregator\IPipelineFilter.cs" />
     <Compile Include="EventAggregator\ObservableListener.cs" />
     <Compile Include="EventAggregator\Pipeline.cs" />
-    <Compile Include="Processor\AlertGenerator.cs" />
-    <Compile Include="Processor\XmlProductSplitter.cs" />
-    <Compile Include="Processor\ProductAssembler.cs" />
-    <Compile Include="Processor\BlockSegmentBundler.cs" />
-    <Compile Include="Processor\TextProductSplitter.cs" />
-    <Compile Include="Processor\ZipExtractor.cs" />
+    <Compile Include="CoreHandlers\XmlProductSplitter.cs" />
+    <Compile Include="CoreHandlers\ProductAssembler.cs" />
+    <Compile Include="CoreHandlers\BlockSegmentBundler.cs" />
+    <Compile Include="CoreHandlers\TextProductSplitter.cs" />
+    <Compile Include="CoreHandlers\ZipExtractor.cs" />
     <Compile Include="WeatherProductProcessor.cs" />
     <Compile Include="Instrumentation\ProcessorEventSource.cs" />
     <Compile Include="Instrumentation\PerformanceCounterCategoryInfo.cs" />

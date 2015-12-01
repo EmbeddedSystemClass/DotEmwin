@@ -78,14 +78,14 @@ namespace Emwin.Core.Extensions
         /// <param name="segments">The segments.</param>
         /// <returns>CompressedContent.</returns>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public static CompressedContent AsCompressedProduct(this QuickBlockTransferSegment[] segments)
+        public static CompressedProduct AsCompressedProduct(this QuickBlockTransferSegment[] segments)
         {
             if (segments == null) throw new ArgumentNullException(nameof(segments));
 
             var lastSegment = segments[segments.Length - 1];
             var content = segments.Select(b => b.Content).ToList().Combine();
 
-            return CompressedContent.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
+            return CompressedProduct.Create(lastSegment.Filename, lastSegment.TimeStamp, content, lastSegment.ReceivedAt, lastSegment.Source);
         }
 
         #endregion Public Methods

@@ -25,6 +25,7 @@
  */
 
 using System;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using Emwin.Core.Contracts;
@@ -38,6 +39,7 @@ namespace Emwin.Core.Products
     [DataContract]
     public class TextProduct : IEmwinContent<TextContent>
     {
+
         #region Public Properties
 
         /// <summary>
@@ -113,11 +115,17 @@ namespace Emwin.Core.Products
         }
 
         /// <summary>
+        /// Gets the body string reader.
+        /// </summary>
+        /// <returns>System.IO.StringReader.</returns>
+        public StringReader GetBodyReader() => new StringReader(Content.Body);
+
+        /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
-            $"[TextProduct] Filename={Filename} Date={TimeStamp:g} Header={Content.Header.Replace("\r\n", " ")}";
+            $"[{nameof(TextProduct)}] Filename={Filename} Date={TimeStamp:g} Header={Content.Header.Replace("\r\n", " ")}";
 
         #endregion Public Methods
     }

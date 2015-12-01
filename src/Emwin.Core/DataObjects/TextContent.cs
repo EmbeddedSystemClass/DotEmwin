@@ -67,6 +67,7 @@ namespace Emwin.Core.DataObjects
             }
             else
             {
+                Header = string.Empty;
                 Body = content;
             }
         }

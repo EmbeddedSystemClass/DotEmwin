@@ -48,9 +48,8 @@ namespace Emwin.Core.Parsers
         /// Parses the product.
         /// </summary>
         /// <param name="product">The product.</param>
-        /// <param name="includeHeader">if set to <c>true</c> [include header].</param>
         /// <returns>IEnumerable&lt;TextProduct&gt;.</returns>
-        public static IEnumerable<ProductSegment> ParseSegments(this TextProduct product, bool includeHeader = false)
+        public static IEnumerable<TextProductSegment> GetSegments(this TextProduct product)
         {
             var matches = SegmentRegex.Matches(product.Content.Body);
             var seq = 1;
@@ -61,7 +60,7 @@ namespace Emwin.Core.Parsers
                     '-', seq.ToString("00"),
                     Path.GetExtension(product.Filename));
 
-                yield return ProductSegment.Create(
+                yield return TextProductSegment.Create(
                     newFilename, 
                     product.TimeStamp,
                     new TextContent { Header = product.Content.Header, Body = segment },

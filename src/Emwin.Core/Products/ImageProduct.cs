@@ -86,6 +86,7 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <value>The time stamp.</value>
         public DateTimeOffset TimeStamp { get; set; }
+
         /// <summary>
         /// Gets or sets the width.
         /// </summary>
@@ -127,7 +128,7 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
-            $"[ImageProduct] Filename={Filename} Date={TimeStamp:g} Size={Content.Width}x{Content.Height}";
+            $"[{nameof(ImageProduct)}] Filename={Filename} Date={TimeStamp:g} Size={Content.Width}x{Content.Height}";
 
         #endregion Public Methods
     }

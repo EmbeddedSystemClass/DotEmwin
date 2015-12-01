@@ -28,6 +28,7 @@ using System;
 using System.Linq;
 using Emwin.Core.Contracts;
 using Emwin.Core.DataObjects;
+using Emwin.Core.Parsers;
 using Emwin.Core.Products;
 
 namespace Emwin.Core.Extensions
@@ -42,12 +43,12 @@ namespace Emwin.Core.Extensions
         /// </summary>
         /// <param name="segment">The bulletin.</param>
         /// <returns>alert.</returns>
-        public static alert CreateAlert(this ProductSegment segment) => new alert
+        public static alert CreateAlert(this TextProductSegment segment) => new alert
         {
             identifier = Guid.NewGuid().ToString("N"),
             //sender = $"{segment.Header.WmoHeading.WmoId}@NWS.NOAA.GOV",
             sent = segment.TimeStamp.DateTime,
-            status = GetAlertStatus(segment.PrimaryVtec),
+            status = GetAlertStatus(segment.GetPrimaryVtec().FirstOrDefault()),
             msgType = alertMsgType.Alert,
             scope = alertScope.Public,
             note = "",
@@ -59,24 +60,24 @@ namespace Emwin.Core.Extensions
         /// </summary>
         /// <param name="segment">The bulletin.</param>
         /// <returns>Emwin.Core.Contracts.alertInfo.</returns>
-        public static alertInfo GetAlertInfo(this ProductSegment segment) => new alertInfo
+        public static alertInfo GetAlertInfo(this TextProductSegment segment) => new alertInfo
         {
             category = new[] { alertInfoCategory.Met },
-            @event = "",
-            urgency = segment.PrimaryVtec.GetUrgency(),
-            severity = segment.PrimaryVtec.GetSeverity(),
-            certainty = segment.PrimaryVtec.GetCertainty(),
-            eventCode = new[] { segment.PrimaryVtec.GetEventCode() },
-            effectiveSpecified = true,
-            effective = segment.PrimaryVtec.Begin.DateTime,
-            expiresSpecified = true,
-            expires = segment.PrimaryVtec.End.DateTime,
-            senderName = "DotEmwin",
-            headline = "",
-            description = segment.Content.Body,
-            instruction = "",
-            parameter = GetParameters(segment),
-            area = GetAreas(segment)
+            //@event = "",
+            //urgency = segment.PrimaryVtec.GetUrgency(),
+            //severity = segment.PrimaryVtec.GetSeverity(),
+            //certainty = segment.PrimaryVtec.GetCertainty(),
+            //eventCode = new[] { segment.PrimaryVtec.GetEventCode() },
+            //effectiveSpecified = true,
+            //effective = segment.PrimaryVtec.Begin.DateTime,
+            //expiresSpecified = true,
+            //expires = segment.PrimaryVtec.End.DateTime,
+            //senderName = "DotEmwin",
+            //headline = "",
+            //description = segment.Content.Body,
+            //instruction = "",
+            //parameter = GetParameters(segment),
+            //area = GetAreas(segment)
         };
 
         /// <summary>
@@ -186,12 +187,12 @@ namespace Emwin.Core.Extensions
         /// </summary>
         /// <param name="segment">The bulletin.</param>
         /// <returns>Emwin.Core.Contracts.alertInfoArea[].</returns>
-        private static alertInfoArea[] GetAreas(ProductSegment segment) => new[]
+        private static alertInfoArea[] GetAreas(TextProductSegment segment) => new[]
         {
             new alertInfoArea
             {
                 //areaDesc = "",
-                polygon = new [] { segment.Polygon.GetPolygonText()},
+                polygon = segment.GetPolygons().Select(x => x.GetPolygonText()).ToArray(),
                 //geocode = new[]
                 //{
                 //    new alertInfoAreaGeocode {valueName = "FIPS6", value = ""},
@@ -205,20 +206,20 @@ namespace Emwin.Core.Extensions
         /// </summary>
         /// <param name="segment">The bulletin.</param>
         /// <returns>Emwin.Core.Contracts.alertInfoParameter[].</returns>
-        private static alertInfoParameter[] GetParameters(ProductSegment segment) => new[]
+        private static alertInfoParameter[] GetParameters(TextProductSegment segment) => new alertInfoParameter[]
         {
             //new alertInfoParameter {valueName = "WMOHEADER", value = ""},
             //new alertInfoParameter {valueName = "UGC", value = ""},
-            new alertInfoParameter
-            {
-                valueName = "VTEC",
-                value = string.Join(Environment.NewLine, segment.PrimaryVtec?.ToRaw(), segment.HydrologicVtec?.ToRaw())
-            },
-            segment.TrackingLine == null ? null : new alertInfoParameter
-            {
-                valueName = "TIME...MOT...LOC",
-                value = segment.TrackingLine?.ToString()
-            }
+            //new alertInfoParameter
+            //{
+            //    valueName = "VTEC",
+            //    value = string.Join(Environment.NewLine, segment.GetPrimaryVtec().First().ToRaw(), segment.HydrologicVtec?.ToRaw())
+            //},
+            //segment.TrackingLine == null ? null : new alertInfoParameter
+            //{
+            //    valueName = "TIME...MOT...LOC",
+            //    value = segment.TrackingLine?.ToString()
+            //}
         };
 
         #endregion Private Methods
