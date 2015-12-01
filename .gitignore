@@ -8,6 +8,8 @@
 *.sln.docstates
 *.sln.GhostDoc.xml
 
+*.cscfg
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
