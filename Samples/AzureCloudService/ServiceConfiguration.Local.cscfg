@@ -3,7 +3,7 @@
   <Role name="EmwinPublisherWorker">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="EventHubConnectionString" value="Endpoint=sb://emwindev.servicebus.windows.net/;SharedAccessKeyName=send;SharedAccessKey=C0aTjDCF9k+ft31CSTLDpRUWQdz4MYbMAG97vHTYghI=" />
+      <Setting name="EventHubConnectionString" value="" />
       <Setting name="EventHubName" value="blocks" />
       <Setting name="Email" value="jonathan@nrgup.net" />
       <Setting name="StorageConnectionString" value="UseDevelopmentStorage=true" />
