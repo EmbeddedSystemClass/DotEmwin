@@ -36,14 +36,8 @@ namespace EmwinTest
             var processor = new WeatherProductProcessor();
 
             // Can subscribe to Images, Text or Bulletin observables
-            processor.GetBulletinObservable().Subscribe(product =>
+            processor.GetTextObservable().Subscribe(product =>
             {
-                Console.WriteLine(product);
-                Console.WriteLine(product.Header);
-                product.GeoCodes.ToList().ForEach(Console.WriteLine);
-                product.VtecCodes.ToList().ForEach(Console.WriteLine);
-                product.Polygons.ToList().ForEach(Console.WriteLine);
-
                 using (var file = File.CreateText(@"C:\\Data\\" + product.Filename))
                     file.Write(product.Content);
             });
