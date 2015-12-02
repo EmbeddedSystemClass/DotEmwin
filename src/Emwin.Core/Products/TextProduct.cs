@@ -95,14 +95,8 @@ namespace Emwin.Core.Products
         /// <param name="receivedAt">The received at.</param>
         /// <param name="source">The source.</param>
         /// <returns>Emwin.Core.Contracts.TextProduct.</returns>
-        public static TextProduct Create(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt, string source)
-        {
-            var count = Array.LastIndexOf(content, (byte)03); // Trim to ETX
-            if (count < 0) count = content.Length;
-            var text = Encoding.ASCII.GetString(content, 0, count);
-
-            return Create(filename, timeStamp, text, receivedAt, source);
-        }
+        public static TextProduct Create(string filename, DateTimeOffset timeStamp, byte[] content, DateTimeOffset receivedAt, string source) => 
+            Create(filename, timeStamp, Encoding.ASCII.GetString(content), receivedAt, source);
 
         /// <summary>
         /// Creates the text product.
@@ -119,7 +113,7 @@ namespace Emwin.Core.Products
             TimeStamp = timeStamp,
             ReceivedAt = receivedAt,
             Source = source,
-            Content = new TextContent(content.Replace("\r\r\n", "\r\n")) // Normalize double <CR> with single <CR>)
+            Content = new TextContent(content.Replace("\r\r\n", "\r\n")) // Normalize double <CR> with single <CR>
         };
 
         /// <summary>
