@@ -99,8 +99,7 @@ namespace Emwin.Core.Products
         {
             var count = Array.LastIndexOf(content, (byte)03); // Trim to ETX
             if (count < 0) count = content.Length;
-            var text = Encoding.ASCII.GetString(content, 0, count)
-                .Replace("\r\r\n", "\r\n"); // Normalize double <CR> with single <CR>
+            var text = Encoding.ASCII.GetString(content, 0, count);
 
             return Create(filename, timeStamp, text, receivedAt, source);
         }
@@ -120,7 +119,7 @@ namespace Emwin.Core.Products
             TimeStamp = timeStamp,
             ReceivedAt = receivedAt,
             Source = source,
-            Content = new TextContent(content)
+            Content = new TextContent(content.Replace("\r\r\n", "\r\n")) // Normalize double <CR> with single <CR>)
         };
 
         /// <summary>
