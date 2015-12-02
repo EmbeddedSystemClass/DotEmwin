@@ -63,7 +63,7 @@ namespace Emwin.Core.Parsers
                 yield return TextProductSegment.Create(
                     newFilename, 
                     product.TimeStamp,
-                    new TextContent { Header = product.Content.Header, RawBody = segment },
+                    new TextContent { RawHeader = product.Content.RawHeader, RawBody = segment },
                     product.ReceivedAt,
                     seq++, 
                     product.Source);

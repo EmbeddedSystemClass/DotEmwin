@@ -40,7 +40,7 @@ namespace Emwin.Core.DataObjects
         /// TORDDC
         /// </summary>
         private static readonly Regex HeaderRegex = new Regex(
-            @"^[A-Z]{4}[0-9]{2}\s[A-Z]{4}\s[0-9]{6}(\s[A-Z]{3})?(\r\n[0-9A-Z ]{5,6})?",
+            @"^[A-Z]{4}[0-9]{2}\s[A-Z]{4}\s[0-9]{6}(\s[A-Z]{3})?(\r\n[0-9A-Z ]{5,6}\r\n)?",
             RegexOptions.ExplicitCapture | RegexOptions.Singleline | RegexOptions.Compiled);
 
         #endregion Private Fields
@@ -63,12 +63,12 @@ namespace Emwin.Core.DataObjects
             var match = HeaderRegex.Match(content);
             if (match.Success)
             {
-                Header = match.Value;
-                RawBody = content.Substring(match.Length + 2); // Skip CR-LF
+                RawHeader = match.Value;
+                RawBody = content.Substring(match.Length);
             }
             else
             {
-                Header = string.Empty;
+                RawHeader = string.Empty;
                 RawBody = content;
             }
         }
@@ -84,10 +84,10 @@ namespace Emwin.Core.DataObjects
         public string RawBody { get; set; }
 
         /// <summary>
-        /// Gets or sets the header.
+        /// Gets or sets the raw header.
         /// </summary>
         /// <value>The header.</value>
-        public string Header { get; set; }
+        public string RawHeader { get; set; }
 
         #endregion Public Properties
 
@@ -105,7 +105,7 @@ namespace Emwin.Core.DataObjects
         /// <returns>
         /// A string that represents the current object.
         /// </returns>
-        public override string ToString() => string.Concat(Header, "\r\n", RawBody);
+        public override string ToString() => string.Concat(RawHeader, RawBody);
 
         #endregion Public Methods
     }

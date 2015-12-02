@@ -41,7 +41,7 @@ namespace Emwin.Tests
             Assert.IsNotNull(product, "Unable to create text product");
             Assert.IsNotNull(product.Content, "Content != null");
 
-            Assert.AreEqual("WFUS53 KDDC 050056\r\nTORDDC", product.Content.Header, "Header");
+            Assert.AreEqual("WFUS53 KDDC 050056\r\nTORDDC", product.Content.RawHeader, "Header");
 
             var awips = product.GetAwipsIdentifier();
             Assert.AreEqual("TOR", awips.ProductCategory, "ProductCategory");

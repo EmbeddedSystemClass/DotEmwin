@@ -67,7 +67,7 @@ namespace Emwin.Core.Parsers
                 yield return XmlProduct.Create(
                     newFilename,
                     product.TimeStamp,
-                    new TextContent { Header = product.Content.Header, RawBody = xml },
+                    new TextContent { RawHeader = product.Content.RawHeader, RawBody = xml },
                     product.ReceivedAt,
                     seq++, 
                     product.Source);

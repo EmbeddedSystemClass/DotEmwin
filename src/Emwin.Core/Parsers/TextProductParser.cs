@@ -57,7 +57,7 @@ namespace Emwin.Core.Parsers
         /// <returns>AwipsIdentifier.</returns>
         public static AwipsIdentifier GetAwipsIdentifier(this TextProduct textProduct)
         {
-            var match = HeaderBlockRegex.Match(textProduct.Content.Header);
+            var match = HeaderBlockRegex.Match(textProduct.Content.RawHeader);
 
             return match.Groups["ai"].Success
                 ? new AwipsIdentifier(match.Groups["ai"].Value)
@@ -71,7 +71,7 @@ namespace Emwin.Core.Parsers
         /// <returns>WmoHeader.</returns>
         public static WmoHeader GetWmoHeader(this TextProduct textProduct)
         {
-            var match = HeaderBlockRegex.Match(textProduct.Content.Header);
+            var match = HeaderBlockRegex.Match(textProduct.Content.RawHeader);
             if (!match.Success) return new WmoHeader();
 
             return new WmoHeader

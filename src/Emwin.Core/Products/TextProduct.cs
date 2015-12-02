@@ -127,7 +127,7 @@ namespace Emwin.Core.Products
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() =>
-            $"[{nameof(TextProduct)}] Filename={Filename} Date={TimeStamp:g} Header={Content.Header.Replace("\r\n", " ")}";
+            $"[{nameof(TextProduct)}] Filename={Filename} Date={TimeStamp:g} Header={Content.RawHeader.Replace("\r\n", " ")}";
 
         #endregion Public Methods
 

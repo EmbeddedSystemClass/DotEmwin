@@ -166,7 +166,7 @@ namespace Emwin.ByteBlaster
             var index = 0;
             while (!_cancelSource.IsCancellationRequested)
             {
-                if (index > ServerList.Servers.Count) index = 0;
+                if (index >= ServerList.Servers.Count) index = 0;
                 var serverAddress = ServerList.Servers[index++];
                 ByteBlasterEventSource.Log.Connect(serverAddress.ToString());
 
