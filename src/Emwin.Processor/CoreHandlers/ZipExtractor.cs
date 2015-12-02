@@ -64,29 +64,32 @@ namespace Emwin.Processor.CoreHandlers
                 {
                     using (var fileStream = file.Open())
                     {
-                        var content = ReadAllBytes(fileStream);
                         var fileName = file.Name.ToUpperInvariant();
                         var contentType = ContentTypeParser.GetFileContentType(fileName);
                         switch (contentType)
                         {
                             case ContentFileType.Text:
-                                var textProduct = TextProduct.Create(
-                                    fileName, file.LastWriteTime, content, product.ReceivedAt, product.Source);
-                                ctx.SendMessage(textProduct);
-                                ProcessorEventSource.Log.Info(nameof(ZipExtractor), textProduct.ToString());
+                                using (var text = new StreamReader(fileStream))
+                                {
+                                    var textProduct = TextProduct.Create(fileName, file.LastWriteTime, text.ReadToEnd(),
+                                        product.ReceivedAt, product.Source);
+                                    ctx.SendMessage(textProduct);
+                                    ProcessorEventSource.Log.Info(nameof(ZipExtractor), textProduct.ToString());
+                                }
                                 break;
 
                             case ContentFileType.Image:
                                 var imageProduct = ImageProduct.Create(
-                                    fileName, file.LastWriteTime, content, product.ReceivedAt, product.Source);
+                                    fileName, file.LastWriteTime, ReadAllBytes(fileStream), product.ReceivedAt, product.Source);
                                 ctx.SendMessage(imageProduct);
                                 ProcessorEventSource.Log.Info(nameof(ZipExtractor), imageProduct.ToString());
                                 break;
-                            
+
                             // There are no zips within zips :-)
 
                             default:
-                                ProcessorEventSource.Log.Warning(nameof(ZipExtractor), "Unknown content file type: " + file.Name);
+                                ProcessorEventSource.Log.Warning(nameof(ZipExtractor),
+                                    "Unknown content file type: " + file.Name);
                                 return;
                         }
                     }

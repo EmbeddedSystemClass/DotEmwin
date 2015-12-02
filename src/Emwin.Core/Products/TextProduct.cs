@@ -39,7 +39,6 @@ namespace Emwin.Core.Products
     [DataContract]
     public class TextProduct : IEmwinContent<TextContent>
     {
-
         #region Public Properties
 
         /// <summary>
@@ -100,19 +99,29 @@ namespace Emwin.Core.Products
         {
             var count = Array.LastIndexOf(content, (byte)03); // Trim to ETX
             if (count < 0) count = content.Length;
-            var text = Encoding.ASCII
-                .GetString(content, 0, count)
+            var text = Encoding.ASCII.GetString(content, 0, count)
                 .Replace("\r\r\n", "\r\n"); // Normalize double <CR> with single <CR>
 
-            return new TextProduct
-            {
-                Filename = filename,
-                TimeStamp = timeStamp,
-                ReceivedAt = receivedAt,
-                Source = source,
-                Content = new TextContent(text)
-            };
+            return Create(filename, timeStamp, text, receivedAt, source);
         }
+
+        /// <summary>
+        /// Creates the text product.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="receivedAt">The received at.</param>
+        /// <param name="source">The source.</param>
+        /// <returns>Emwin.Core.Products.TextProduct.</returns>
+        public static TextProduct Create(string filename, DateTimeOffset timeStamp, string content, DateTimeOffset receivedAt, string source) => new TextProduct
+        {
+            Filename = filename,
+            TimeStamp = timeStamp,
+            ReceivedAt = receivedAt,
+            Source = source,
+            Content = new TextContent(content)
+        };
 
         /// <summary>
         /// Gets the body string reader.
