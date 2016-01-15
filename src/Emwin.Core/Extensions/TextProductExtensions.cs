@@ -24,53 +24,33 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
-using System.Collections.Generic;
-using System.IO;
-using System.Text.RegularExpressions;
 using System.Linq;
-using Emwin.Core.DataObjects;
+using Emwin.Core.Parsers;
 using Emwin.Core.Products;
 
-namespace Emwin.Core.Parsers
+namespace Emwin.Core.Extensions
 {
-    public static class ProductSegmentParser
+    /// <summary>
+    /// Text Product extensions.
+    /// </summary>
+    public static class TextProductExtensions
     {
-
-        #region Private Fields
-
-        private static readonly Regex SegmentRegex = new Regex(@"(?<segment>[A-Z]{2}[CZ][0-9AL]{3}([A-Z0-9\r\n>-]*?)[0-9]{6}-[\r\n]+.+?[\r\n]+\$\$)", RegexOptions.Singleline | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-
-        #endregion Private Fields
-
         #region Public Methods
 
         /// <summary>
-        /// Parses the product.
+        /// Determines whether the specified text product is resent.
         /// </summary>
-        /// <param name="product">The product.</param>
-        /// <returns>IEnumerable&lt;TextProduct&gt;.</returns>
-        public static IEnumerable<TextProductSegment> GetSegments(this TextProduct product)
-        {
-            var matches = SegmentRegex.Matches(product.Content.RawBody);
-            var seq = 1;
-            foreach (var segment in matches.Cast<Match>().Select(match => match.Groups["segment"].Value))
-            {
-                var newFilename = string.Concat(
-                    Path.GetFileNameWithoutExtension(product.Filename), 
-                    '-', seq.ToString("00"),
-                    Path.GetExtension(product.Filename));
+        /// <param name="textProduct">The text product.</param>
+        /// <returns><c>true</c> if the specified text product is resent; otherwise, <c>false</c>.</returns>
+        public static bool IsResent(this TextProduct textProduct) => textProduct?.Content?.RawBody.Contains("...RESENT") ?? false;
 
-                yield return TextProductSegment.Create(
-                    newFilename, 
-                    product.TimeStamp,
-                    new TextContent { RawHeader = product.Content.RawHeader, RawBody = segment },
-                    product.ReceivedAt,
-                    seq++, 
-                    product.Source);
-            }
-        }
+        /// <summary>
+        /// Gets the signature.
+        /// </summary>
+        /// <param name="textProduct">The text product.</param>
+        /// <returns>System.String (empty string if none found).</returns>
+        public static string GetSignature(this TextProduct textProduct) => textProduct?.GetSegments().LastOrDefault()?.Content.GetBodyText() ?? string.Empty;
 
         #endregion Public Methods
-
     }
 }

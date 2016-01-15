@@ -37,7 +37,6 @@ namespace Emwin.Core.Extensions
     /// </summary>
     public static class QuickBlockExtensions
     {
-
         #region Public Methods
 
         /// <summary>

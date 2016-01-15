@@ -24,7 +24,9 @@
  *     (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
  */
 
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Emwin.Core.DataObjects;
 using Emwin.Core.Products;
@@ -40,28 +42,63 @@ namespace Emwin.Core.Parsers
         #region Private Fields
 
         /// <summary>
+        /// The bullets in text product regex
+        /// </summary>
+        private static readonly Regex BulletsRegex = new Regex(@"\r\n\s*\*\s*(?<bullet>[^\*]+)", RegexOptions.Singleline | RegexOptions.Compiled);
+
+        /// <summary>
         /// The Header Block
         /// </summary>
         private static readonly Regex HeaderBlockRegex = new Regex(
-            @"^(?<dtl>[A-Z]{4}[0-9]{2})\s(?<station>[A-Z]{4})\s(?<time>[0-9]{6})(\s(?<indicator>[A-Z]{3}))?(\r\n(?<ai>[0-9A-Z ]{5,6}))?", 
+            @"^(?<dtl>[A-Z]{4}[0-9]{2})\s(?<station>[A-Z]{4})\s(?<time>[0-9]{6})(\s(?<indicator>[A-Z]{3}))?(\r\n(?<afos>[A-Z0-9\s]{4,6}))?", 
             RegexOptions.ExplicitCapture | RegexOptions.Singleline | RegexOptions.Compiled);
+
+        /// <summary>
+        /// The product segment split regex
+        /// </summary>
+        private static readonly Regex SegmentSplitRegex = new Regex(@"\r\n\$\$\s*\r\n", RegexOptions.Singleline | RegexOptions.Compiled);
 
         #endregion Private Fields
 
         #region Public Methods
 
         /// <summary>
-        /// Gets the awips identifier.
+        /// Gets the bullet content in the text.
         /// </summary>
-        /// <param name="textProduct">The text product.</param>
-        /// <returns>AwipsIdentifier.</returns>
-        public static AwipsIdentifier GetAwipsIdentifier(this TextProduct textProduct)
+        /// <param name="product">The product.</param>
+        /// <returns>IEnumerable&lt;System.String&gt;.</returns>
+        public static IEnumerable<string> GetBullets(this TextProduct product)
         {
-            var match = HeaderBlockRegex.Match(textProduct.Content.RawHeader);
+            return BulletsRegex
+                .Matches(product.Content.RawBody)
+                .Cast<Match>()
+                .Select(x => x.Groups["bullet"].Value);
+        } 
 
-            return match.Groups["ai"].Success
-                ? new AwipsIdentifier(match.Groups["ai"].Value)
-                : new AwipsIdentifier();
+        /// <summary>
+        /// Gets the segments in the text product.
+        /// </summary>
+        /// <param name="product">The product.</param>
+        /// <returns>IEnumerable&lt;TextProductSegment&gt;.</returns>
+        public static IEnumerable<TextProductSegment> GetSegments(this TextProduct product)
+        {
+            var matches = SegmentSplitRegex.Split(product.Content.RawBody);
+            var seq = 1;
+            foreach (var segment in matches)
+            {
+                var newFilename = string.Concat(
+                    Path.GetFileNameWithoutExtension(product.Filename),
+                    '-', seq.ToString("00"),
+                    Path.GetExtension(product.Filename));
+
+                yield return TextProductSegment.Create(
+                    newFilename,
+                    product.TimeStamp,
+                    new TextContent { RawHeader = product.Content.RawHeader, RawBody = segment.Trim() },
+                    product.ReceivedAt,
+                    seq++,
+                    product.Source);
+            }
         }
 
         /// <summary>
@@ -80,7 +117,9 @@ namespace Emwin.Core.Parsers
                 Distribution = match.Groups["dtl"].Value.Substring(2),
                 WmoId = match.Groups["station"].Value,
                 IssuedAt = TimeParser.ParseDayHourMinute(textProduct.TimeStamp, match.Groups["time"].Value),
-                Designator = match.Groups["indicator"].Success ? match.Groups["indicator"].Value : string.Empty
+                Designator = match.Groups["indicator"].Success ? match.Groups["indicator"].Value : string.Empty,
+                ProductCategory = match.Groups["afos"].Success ? match.Groups["afos"].Value.Substring(0,3) : string.Empty,
+                LocationIdentifier = match.Groups["afos"].Success ? match.Groups["afos"].Value.Substring(3).TrimEnd() : string.Empty
             };
         }
 

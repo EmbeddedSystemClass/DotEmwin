@@ -75,14 +75,16 @@ namespace Emwin.Core.Parsers
             int.TryParse(dayHourMinute.Substring(2, 2), out hour);
             int.TryParse(dayHourMinute.Substring(4, 2), out minute);
 
-            // Check for case when day of month rolls over to the next month
-            if (dayOfMonth == 1 && reference.Day > 1)
-                reference = reference.AddMonths(1);
+            if (dayOfMonth != reference.Day)
+            {
+                // Check for previous month
+                if (dayOfMonth > 25 && reference.Day < 5)
+                    reference = reference.AddMonths(-1);
 
-            // Check for case when day of month was at the end of previous month
-            var daysLastMonth = DateTime.DaysInMonth(reference.Year, reference.AddMonths(-1).Month);
-            if (dayOfMonth == daysLastMonth && reference.Day == 1)
-                reference = reference.AddMonths(-1);
+                // Next month
+                else if (dayOfMonth < 5 && reference.Day > 25)
+                    reference = reference.AddMonths(1);
+            }
 
             return new DateTimeOffset(reference.Year, reference.Month, dayOfMonth, hour, minute, 0, TimeSpan.Zero);
         }

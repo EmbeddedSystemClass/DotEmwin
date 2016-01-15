@@ -54,7 +54,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BulletinContent.cs" />
+    <Compile Include="TextProductTests.cs" />
+    <Compile Include="GeoTests.cs" />
+    <Compile Include="Content\WarningProducts.cs" />
     <Compile Include="BulletinTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

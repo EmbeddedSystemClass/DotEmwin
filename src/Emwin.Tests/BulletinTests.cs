@@ -6,6 +6,7 @@ using Emwin.Core.DataObjects;
 using Emwin.Core.Extensions;
 using Emwin.Core.Parsers;
 using Emwin.Core.Products;
+using Emwin.Tests.Content;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -32,47 +33,6 @@ namespace Emwin.Tests
                 Converters = new JsonConverter[]{new StringEnumConverter()}
             });
             Trace.WriteLine(json);
-        }
-
-        [TestMethod]
-        public void TornadoWarningHeaderTests()
-        {
-            var product = GetTornadoWarning();
-            Assert.IsNotNull(product, "Unable to create text product");
-            Assert.IsNotNull(product.Content, "Content != null");
-
-            Assert.AreEqual("WFUS53 KDDC 050056\r\nTORDDC", product.Content.RawHeader, "Header");
-
-            var awips = product.GetAwipsIdentifier();
-            Assert.AreEqual("TOR", awips.ProductCategory, "ProductCategory");
-            Assert.AreEqual("DDC", awips.LocationIdentifier, "LocationIdentifier");
-
-            var wmo = product.GetWmoHeader();
-            Assert.AreEqual("WF", wmo.DataType, "DataType");
-            Assert.AreEqual("US53", wmo.Distribution, "Distribution");
-            Assert.AreEqual("KDDC", wmo.WmoId, "WmoId");
-            Assert.AreEqual(string.Empty, wmo.Designator, "Designator");
-            Assert.AreEqual(new TimeSpan(0, 56, 0), wmo.IssuedAt.TimeOfDay);
-        }
-
-        [TestMethod]
-        public void GeoPointTests()
-        {
-            var actual = new GeoPoint("3870 10017");
-            Assert.AreEqual(38.70, actual.Latitude, "Latitude 1");
-            Assert.AreEqual(-100.17, actual.Longitude, "Longitude 1");
-            Assert.AreEqual("3870 10017", actual.ToRaw(), "Raw 1");
-
-            actual = new GeoPoint("9000 18000");
-            Assert.AreEqual(90, actual.Latitude, "Latitude 2");
-            Assert.AreEqual(-180, actual.Longitude, "Longitude 2");
-            Assert.AreEqual("9000 18000", actual.ToRaw(), "Raw 2");
-
-            actual = new GeoPoint("3870 28000");
-            Assert.AreEqual(38.70, actual.Latitude, "Latitude 3");
-            Assert.AreEqual(100, actual.Longitude, "Longitude 3");
-            Assert.AreEqual("3870 28000", actual.ToRaw(), "Raw 3");
-
         }
 
         [TestMethod]
@@ -166,13 +126,13 @@ namespace Emwin.Tests
         private static TextProduct GetTornadoWarning() => TextProduct.Create(
             "TORDDCXXXX.TXT",
             new DateTimeOffset(2015, 6, 5, 0, 56, 0, TimeSpan.Zero),
-            Encoding.ASCII.GetBytes(BulletinContent.TornadoWarning),
+            Encoding.ASCII.GetBytes(WarningProducts.TornadoWarning),
             DateTimeOffset.UtcNow, string.Empty);
 
         private static TextProduct GetFloodWarning() => TextProduct.Create(
             "FLWOAXXXXX.TXT",
             new DateTimeOffset(2015, 6, 5, 23, 45, 0, TimeSpan.Zero),
-            Encoding.ASCII.GetBytes(BulletinContent.FloodWarning),
+            Encoding.ASCII.GetBytes(WarningProducts.FloodWarning),
             DateTimeOffset.UtcNow, string.Empty);
 
         #endregion Private Methods

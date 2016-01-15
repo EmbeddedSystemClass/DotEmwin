@@ -1,6 +1,6 @@
-﻿namespace Emwin.Tests
+﻿namespace Emwin.Tests.Content
 {
-    internal static class BulletinContent
+    internal static class WarningProducts
     {
         public const string TornadoWarning = @"WFUS53 KDDC 050056
 TORDDC
@@ -55,8 +55,7 @@ $$
 
 FINCH";
 
-        public const string FloodWarning = @"
-WGUS43 KOAX 070445
+        public const string FloodWarning = @"WGUS43 KOAX 070445
 FLWOAX
 
 BULLETIN - IMMEDIATE BROADCAST REQUESTED

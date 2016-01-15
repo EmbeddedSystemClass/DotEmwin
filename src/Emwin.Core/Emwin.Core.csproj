@@ -43,15 +43,14 @@
     <Compile Include="Contracts\CAP12.cs">
       <DependentUpon>CAP12.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DataObjects\AwipsIdentifier.cs" />
     <Compile Include="DataObjects\HydrologicVtec.cs" />
     <Compile Include="DataObjects\GeoPoint.cs" />
     <Compile Include="DataObjects\WmoHeader.cs" />
     <Compile Include="Contracts\IEmwinContent.cs" />
     <Compile Include="DataObjects\TrackingLine.cs" />
     <Compile Include="Extensions\CapExtensions.cs" />
+    <Compile Include="Extensions\TextProductExtensions.cs" />
     <Compile Include="Parsers\XmlParser.cs" />
-    <Compile Include="Parsers\ProductSegmentParser.cs" />
     <Compile Include="Parsers\TrackingLineParser.cs" />
     <Compile Include="Products\TextProductSegment.cs" />
     <Compile Include="Extensions\QuickBlockExtensions.cs" />

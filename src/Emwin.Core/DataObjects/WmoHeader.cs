@@ -71,6 +71,20 @@ namespace Emwin.Core.DataObjects
         [DataMember]
         public DateTimeOffset IssuedAt { get; set; }
 
+        /// <summary>
+        /// Gets or sets the location identifier (up to 3 characters).
+        /// </summary>
+        /// <value>The location identifier.</value>
+        [DataMember]
+        public string LocationIdentifier { get; set; }
+
+        /// <summary>
+        /// Gets or sets the 3 character product category.
+        /// </summary>
+        /// <value>The product category.</value>
+        [DataMember]
+        public string ProductCategory { get; set; }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -79,19 +93,13 @@ namespace Emwin.Core.DataObjects
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() => $"{DataType}{WmoId}{IssuedAt:ddHHmm}";
-
-        /// <summary>
-        /// Determines whether this product is amended/update.
-        /// </summary>
-        /// <returns>System.Boolean.</returns>
-        public bool IsAmended() => Designator != null && Designator.StartsWith("AA");
+        public override string ToString() => $"{DataType} {WmoId} {IssuedAt:ddHHmm} {Designator}\r\n{ProductCategory}{LocationIdentifier}";
 
         /// <summary>
         /// Determines whether this product is a correction.
         /// </summary>
         /// <returns>System.Boolean.</returns>
-        public bool IsCorrection() => Designator != null && Designator.StartsWith("CC");
+        public bool IsCorrection() => Designator != null && (Designator.StartsWith("CC") || Designator.StartsWith("AA"));
 
         /// <summary>
         /// Determines whether this product is an re-issuance.

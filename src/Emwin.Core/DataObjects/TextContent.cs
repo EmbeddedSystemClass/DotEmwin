@@ -25,10 +25,12 @@
  */
 
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 
 namespace Emwin.Core.DataObjects
 {
+    [DataContract]
     public class TextContent
     {
 
@@ -40,7 +42,7 @@ namespace Emwin.Core.DataObjects
         /// TORDDC
         /// </summary>
         private static readonly Regex HeaderRegex = new Regex(
-            @"^[A-Z]{4}[0-9]{2}\s[A-Z]{4}\s[0-9]{6}(\s[A-Z]{3})?(\r\n[0-9A-Z ]{5,6}\r\n)?",
+            @"^[A-Z]{4}[0-9]{2}\s[A-Z]{4}\s[0-9]{6}(\s[A-Z]{3})?(\r\n[A-Z0-9\s]{4,6}\r\n)?",
             RegexOptions.ExplicitCapture | RegexOptions.Singleline | RegexOptions.Compiled);
 
         #endregion Private Fields
@@ -81,12 +83,14 @@ namespace Emwin.Core.DataObjects
         /// Gets or sets the body.
         /// </summary>
         /// <value>The body.</value>
+        [DataMember]
         public string RawBody { get; set; }
 
         /// <summary>
         /// Gets or sets the raw header.
         /// </summary>
         /// <value>The header.</value>
+        [DataMember]
         public string RawHeader { get; set; }
 
         #endregion Public Properties
